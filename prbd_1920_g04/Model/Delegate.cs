@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace prbd_1920_g04
+namespace prbd_1920_g04.Model
 {
-    public class Delegate : User
+    public class Delegate : Member
     {
     }
 }

@@ -12,10 +12,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace prbd_1920_g04
+namespace prbd_1920_g04.Model
 {
     public enum AppMessages {
-        MSG_DISPLAY_MEMBER,
+        //MSG_DISPLAY_MEMBER,
     }
 
     public partial class App : ApplicationBase {
@@ -23,7 +23,7 @@ namespace prbd_1920_g04
 
         public static readonly string IMAGE_PATH =
             Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/../../images");
-        public static Member CurrentUser { get; set; }
+        //public static Member CurrentUser { get; set; }
 
         public static void CancelChanges() {
             Model.Dispose(); // Retire de la mémoire le modèle actuel
@@ -31,11 +31,11 @@ namespace prbd_1920_g04
         }
         public App() {
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(Settings.Default.Culture);
-            ColdStart();
+            //ColdStart();
         }
 
-        private void ColdStart() {
+        /*private void ColdStart() {
             Model.SeedData();
-        }
+        }*/
     }
 }

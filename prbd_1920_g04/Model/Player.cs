@@ -4,17 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace prbd_1920_g04
+namespace prbd_1920_g04.Model
 {
-    public class Player : User
+    public enum Position {
+        GoalKeeper,
+        Defender,
+        Midfielder,
+        Forward
+    }
+
+    public class Player : Member
     {
-        public int Cut { get; set; }
+        public int Height { get; set; }
 
         public double Weight { get; set; }
 
         //Attribut intéressant ?
         public int JerseyNumber { get; set; }
 
-        public string Equipe { get; set; }
+        public Position PlayerPosition { get; set; }
+
+        public Team Team { get; set; }
+
+        public virtual ICollection<Sanction> Sanctions { get; set; } = new HashSet<Sanction>();
+        public virtual ICollection<Performance> Peformances { get; set; } = new HashSet<Performance>();
+        public virtual ICollection<Injury> Injuries { get; set; } = new HashSet<Injury>();
     }
 }

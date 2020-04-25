@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace prbd_1920_g04
 {
-    public partial class MembersView : UserControlBase {
+    public partial class MatchsView : UserControlBase {
 
         private ObservableCollection<Member> members;
         public ObservableCollection<Member> Members { get => members; set => SetProperty(ref members, value); }
