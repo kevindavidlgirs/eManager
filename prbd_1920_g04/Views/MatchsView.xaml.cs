@@ -6,29 +6,29 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 
-namespace prbd_1920_g04
+namespace prbd_1920_g04.Views
 {
     public partial class MatchsView : UserControlBase {
 
-        private ObservableCollection<Member> members;
-        public ObservableCollection<Member> Members { get => members; set => SetProperty(ref members, value); }
+        private ObservableCollection<Model.Match> matchs;
+        public ObservableCollection<Model.Match> Matchs { get => matchs; set => SetProperty(ref matchs, value); }
 
-        public ICommand DisplayMemberDetails { get; set; }
+        //public ICommand DisplayMemberDetails { get; set; }
 
-        public MembersView() {
+        public MatchsView() {
             InitializeComponent();
 
             DataContext = this;
-
+            /*
             DisplayMemberDetails = new RelayCommand<Member>(m => {
                 App.NotifyColleagues(AppMessages.MSG_DISPLAY_MEMBER, m);
-            });
+            });*/
 
             Refresh();
         }
 
         private void Refresh() {
-            Members = new ObservableCollection<Member>(App.Model.Members.OrderBy(m => m.Pseudo));
+            Matchs = new ObservableCollection<Model.Match>(App.Model.Matchs.OrderBy(m => m.Squad.Name));
         }
     }
 }

@@ -46,7 +46,7 @@
     
     mimetype: application/x-microsoft.net.object.binary.base64
     value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : System.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
@@ -60,7 +60,6 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -69,10 +68,9 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
               <xsd:attribute name="type" type="xsd:string" />
               <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
@@ -87,10 +85,9 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -112,63 +109,9 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Error_DoesNotExist" xml:space="preserve">
-    <value>does not exist</value>
-  </data>
-  <data name="Error_LengthGreaterEqual3" xml:space="preserve">
-    <value>length must be &gt;= 3</value>
-  </data>
-  <data name="Error_MustMatchConfirmPassword" xml:space="preserve">
-    <value>must match confirm password</value>
-  </data>
-  <data name="Error_MustMatchPassword" xml:space="preserve">
-    <value>must match password</value>
-  </data>
-  <data name="Error_NotAvailable" xml:space="preserve">
-    <value>not available</value>
-  </data>
-  <data name="Error_Required" xml:space="preserve">
-    <value>required</value>
-  </data>
-  <data name="Error_TooMuchFollowers" xml:space="preserve">
-    <value>You cannot follow this member because he has the maximum of followers</value>
-  </data>
-  <data name="Error_WrongPassword" xml:space="preserve">
-    <value>wrong password</value>
-  </data>
-  <data name="LoginView_Cancel" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="LoginView_Login" xml:space="preserve">
-    <value>Login</value>
-  </data>
-  <data name="LoginView_Message_1" xml:space="preserve">
-    <value>If your don't have a login and a password, click</value>
-  </data>
-  <data name="LoginView_Message_2" xml:space="preserve">
-    <value>here</value>
-  </data>
-  <data name="LoginView_Message_3" xml:space="preserve">
-    <value>to sign-up.</value>
-  </data>
-  <data name="LoginView_Password" xml:space="preserve">
-    <value>Password</value>
-  </data>
-  <data name="LoginView_Pseudo" xml:space="preserve">
-    <value>Pseudo</value>
-  </data>
-  <data name="LoginView_Title" xml:space="preserve">
-    <value>Login</value>
-  </data>
-  <data name="MembersTabName" xml:space="preserve">
-    <value>Members</value>
-  </data>
-  <data name="Menu_Logout" xml:space="preserve">
-    <value>Logout</value>
-  </data>
 </root>

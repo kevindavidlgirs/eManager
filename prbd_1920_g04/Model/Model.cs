@@ -5,19 +5,11 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Security.RightsManagement;
+
 using PRBD_Framework;
 
 namespace prbd_1920_g04.Model
 {
-    public enum Fonction
-    {
-        Admin = 1,
-        Secretary = 2,
-        Coach = 3,
-        Player = 4,
-        Delegate = 5
-    }
-
     public class Model : DbContext {
         public Model() : base("prbd_1920_g04") {
             Database.SetInitializer(
@@ -171,71 +163,5 @@ namespace prbd_1920_g04.Model
             }
         }
         */
-
-
-    }
-
-    class TestBD
-    {
-        static void Main(string[] args)
-        {
-                //model.Database.Log = Console.Write;
-                
-                // On commence par Désolidariser tous les équipes des matchs (c'est du bricolage mais ça fonctionne.)
-                foreach (var match in App.Model.Matchs)
-                {
-                    match.DeleteTeam();
-                }
-
-                App.Model.Matchs.RemoveRange(App.Model.Matchs); // On supprime les matchs
-                //model.Teams.RemoveRange(model.Teams); // On supprime les équipes
-                //App.Model.Members.RemoveRange(App.Model.Players);
-                App.Model.Members.RemoveRange(App.Model.Members);
-
-                App.Model.SaveChanges();
-
-                //model.CreateTeams(); //Toutes les équipes sont créées
-
-                //var adm = model.CreateAdmin("admin", "admin", "admin@gmail.com", "admin", 44, "Rue de l'administration", "/path", Fonction.Admin);
-                var sec = App.Model.CreateSecretary("secretaire", "secretaire", "secretaire@gmail.com", "secretaire", 30, "Rue du document", "/path", Fonction.Secretary);
-                var coach = App.Model.CreateCoach("coach", "coach", "coach@gmail.com", "coach", 30, "Rue du document", "/path", Fonction.Coach);
-
-                // Le secrétaire encode des nouveaux joueurs.
-                var player1 = sec.CreatePlayer("Dupont", "André", "player@gmail.com", "player", 20, "Avenue du ballon",175, 72.5, "/path", 10, Fonction.Player);
-                var player2 = sec.CreatePlayer("Tartine", "Martine", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 7, Fonction.Player);
-                var player3 = sec.CreatePlayer("Dubois", "Charles", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 9, Fonction.Player);
-                var player4 = sec.CreatePlayer("Noyce", "Robert", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 10, Fonction.Player);
-                var player5 = sec.CreatePlayer("Viton", "Cerf", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 7, Fonction.Player);
-                var player6 = sec.CreatePlayer("Robert", "Caillau", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 9, Fonction.Player);
-                Console.WriteLine(sec + "\n" + player1 + "\n" + player2 + "\n" + player3);
-
-                // Le secrétaire encode le match.
-                var match1 = sec.AddMatch(new DateTime(2020, 04, 28), "Epfc Stadium", "Epfc", "EPHEC", "A1");
-
-                //Le coach sélectionne des nouveaux joueurs pour le match avec l'équipe A1
-                coach.selectPlayer(match1, player1);
-                coach.selectPlayer(match1, player2);
-                coach.selectPlayer(match1, player3);
-
-
-                var match2 = sec.AddMatch(new DateTime(2020, 05, 12), "Epfc Stadium", "Epfc", "EPHEC", "U11");
-                //Console.WriteLine(match + " = {" + match.Date + "," + match.Place + "," + match.Home + "," + match.Adversary + "," + match.Squad);
-
-                //Le coach sélectionne des nouveaux joueurs pour le match avec l'équipe U11
-                coach.selectPlayer(match2, player4);
-                coach.selectPlayer(match2, player5);
-                coach.selectPlayer(match2, player6);
-
-                App.Model.SaveChanges();
-
-                
-                //var playerUpdate = sec.UpdatePlayer("Dubois", "Charles", "player@gmail.com", "player", 25, "Avenue du ballon", "A2", 175, 70.5, "/path", 11);
-
-                //Console.WriteLine("'Dubois' after update \n"+playerUpdate);
-                //sec.DeletePlayer("David");
-                //var playersList = new List<Player> { player1, player2, player3 };
-               
-                //Console.ReadLine();
-        }
     }
 }
