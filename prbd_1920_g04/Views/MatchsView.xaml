@@ -26,13 +26,12 @@
         <ListView x:Name="listView" 
                   ItemsSource="{Binding Matchs}" 
                   Grid.Row="2" BorderBrush="Transparent" SelectionMode="Single" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-            <!--<i:Interaction.Triggers>
-                Si le membre existe déjà, une autre fenêtre s'ouvre avec ses info
+            <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
-                    <i:InvokeCommandAction Command="{Binding DisplayMemberDetails}" 
+                    <i:InvokeCommandAction Command="{Binding DisplayMatchDetails}" 
                                            CommandParameter="{Binding ElementName=listView, Path=SelectedItem}"/>
                 </i:EventTrigger>
-            </i:Interaction.Triggers>-->
+            </i:Interaction.Triggers>
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel/>
@@ -41,13 +40,10 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <!--<Image Width="80" Height="80" 
-                               Source="{Binding AbsolutePicturePath, Converter={f:UriToCachedImageConverter}, TargetNullValue={StaticResource UnknownUser}}" 
-                               RenderOptions.BitmapScalingMode="Fant" Stretch="UniformToFill" />-->
                         <TextBlock FontSize="25" FontWeight="Bold" Height="60" Width="60" TextAlignment="Center" VerticalAlignment="Center" Text="{Binding Date,StringFormat=M/d}" />
-                        <TextBlock FontSize="25" FontWeight="Bold" Height="60" Width="100" TextAlignment="Center" VerticalAlignment="Center" Text="{Binding Home}" />
+                        <TextBlock FontSize="25" FontWeight="Bold" Height="60" Width="80" TextAlignment="Center" VerticalAlignment="Center" Text="{Binding Home}" />
                         <TextBlock FontSize="25" FontWeight="Bold" Height="60" Width="40" TextAlignment="Center"  VerticalAlignment="Center" Text="VS" />
-                        <TextBlock FontSize="25" FontWeight="Bold" Height="60" Width="100" TextAlignment="Center" VerticalAlignment="Center" Text="{Binding Adversary}" />
+                        <TextBlock FontSize="25" FontWeight="Bold" Height="60" Width="80" TextAlignment="Center" VerticalAlignment="Center" Text="{Binding Adversary}" />
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

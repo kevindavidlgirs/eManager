@@ -20,6 +20,12 @@ namespace prbd_1920_g04 {
         Player = 4,
         Delegate = 5
     }
+    public enum AppMessages {
+        MSG_NEW_MATCH,
+        MSG_EDIT_MATCH,
+        MSG_MATCH_CHANGED,
+        MSG_MATCH_DELETED,
+    }
 
     public partial class App : ApplicationBase {
         public static Model.Model Model { get; private set; } = new Model.Model();

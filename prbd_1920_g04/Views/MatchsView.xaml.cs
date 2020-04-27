@@ -13,10 +13,11 @@ namespace prbd_1920_g04.Views
         private ObservableCollection<Model.Match> matchs;
         public ObservableCollection<Model.Match> Matchs { get => matchs; set => SetProperty(ref matchs, value); }
 
-        //public ICommand DisplayMemberDetails { get; set; }
+        public ICommand DisplayMatchDetails { get; set; }
 
         public MatchsView() {
-            InitializeComponent();
+            DisplayMatchDetails = new RelayCommand<Model.Match>((m) => { App.NotifyColleagues(AppMessages.MSG_EDIT_MEMBER, m); });
+           
 
             DataContext = this;
             /*
@@ -25,10 +26,11 @@ namespace prbd_1920_g04.Views
             });*/
 
             Refresh();
+            InitializeComponent();
         }
 
         private void Refresh() {
-            Matchs = new ObservableCollection<Model.Match>(App.Model.Matchs.OrderBy(m => m.Squad.Name));
+            Matchs = new ObservableCollection<Model.Match>(App.Model.Matchs.OrderBy(m => m.Date));
         }
     }
 }
