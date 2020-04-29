@@ -16,7 +16,25 @@ namespace prbd_1920_g04.Views {
     public partial class MainView : Window {
         public MainView() {
             InitializeComponent();
+            DataContext = this;
+
+            App.Register<Model.Match>(this, AppMessages.MSG_SHOW_MATCH, (m) => {
+                foreach (TabItem t in tabControl.Items) {
+                    if (t.Header.ToString().Equals(m.Date)) {
+                        Dispatcher.InvokeAsync(() => t.Focus());
+                        return;
+                    }
+                }
+
+                var tab = new TabItem() {
+                    Header = m.Home +"vs"+m.Adversary,
+                    Content = new MatchDetailView(m)
+                };
+                tabControl.Items.Add(tab);
+                Dispatcher.InvokeAsync(() => tab.Focus());
+            });
         }
+        /*
         private void tabOfMember(Model.Match m, bool isNew) {
             foreach (TabItem t in tabControl.Items) {
                 if (t.Header.ToString().Equals(m.Date)) {
@@ -25,8 +43,8 @@ namespace prbd_1920_g04.Views {
                 }
             }
             var tab = new TabItem() {
-                Header = isNew ? "<new member>" : m.Pseudo,
-                Content = new MemberDetailView(m, isNew)
+                Header = isNew ? "<new match>" : m.Adversary,
+                Content = new MatchDetailView(m, isNew)
             };
             tabControl.Items.Add(tab);
             tab.MouseDown += (o, e) => {
@@ -44,6 +62,6 @@ namespace prbd_1920_g04.Views {
             };
             // exécute la méthode Focus() de l'onglet pour lui donner le focus (càd l'activer)
             Dispatcher.InvokeAsync(() => tab.Focus());
-        }
+        }*/
     }
 }

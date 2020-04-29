@@ -10,58 +10,20 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
     </UserControl.Resources>
-    <Grid ShowGridLines="True" Margin="10">
+    <Grid HorizontalAlignment="Left" Height="430" Margin="0,10,0,0" VerticalAlignment="Top" Width="790">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="138*"/>
+            <ColumnDefinition Width="153*"/>
+            <ColumnDefinition Width="208*"/>
+            <ColumnDefinition Width="153*"/>
+            <ColumnDefinition Width="138*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
+            <RowDefinition Height="117*"/>
+            <RowDefinition Height="174*"/>
+            <RowDefinition Height="139*"/>
         </Grid.RowDefinitions>
-        <!-- ROW #1 -->
-        <Label Content="Pseudo :" />
-        <TextBox x:Name="txtPseudo" Grid.Column="1" 
-                 Text="ROW #1" 
-                 VerticalAlignment="Center" />
-        <!-- ROW #2 -->
-        <Label Content="Profile :" Grid.Row="1" />
-        <TextBox Text="ROW #2" Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" MinLines="3" AcceptsReturn="True" MaxLines="10" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top" />
-        <!-- ROW #3 -->
-        <Label Content="Picture :" Grid.Row="2" />
-        <Grid Grid.Row="2" Grid.Column="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" MinWidth="50" MaxWidth="250" MaxHeight="250" VerticalAlignment="Top"
-                   Source="ROW #3" 
-                   RenderOptions.BitmapScalingMode="Fant" Margin="0,5,5,0" Height="201" />
-            <StackPanel Grid.Column="1" Orientation="Vertical">
-                <DockPanel>
-                    <StackPanel Margin="5" Grid.Column="2" HorizontalAlignment="Center" RenderTransformOrigin="0.432,1.795">
-                        <TextBlock Text="ROW #3" TextWrapping="Wrap" FontSize="16" FontWeight="Bold" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" >
-                            <TextBlock.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform AngleX="-3.731"/>
-                                    <RotateTransform/>
-                                    <TranslateTransform X="-0.685"/>
-                                </TransformGroup>
-                            </TextBlock.RenderTransform>
-                        </TextBlock>
-                    </StackPanel>
-                </DockPanel>
-            </StackPanel>
-        </Grid>
-        <!-- ROW #4 -->
-        <WrapPanel Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Width="166">
-            <Button x:Name="btnCancel" Content="Cancel" Command="{Binding}" Width="auto" Padding="5,1"/>
-            <Button x:Name="btnSave" Content="Save" Command="{Binding}" Width="auto" Margin="10,0,0,0" Padding="5,1"/>
-            <Button x:Name="btnDelete" Content="Delete" Command="{Binding}" Width="auto" Margin="10,0,0,0" Padding="5,1"/>
-        </WrapPanel>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="0,41,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Home}" VerticalAlignment="Top" Height="78" Width="153"/>
+        <TextBlock Grid.Column="3" HorizontalAlignment="Left" Margin="0,41,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Adversary}" VerticalAlignment="Top" Height="78" Width="153"/>
     </Grid>
 </f:UserControlBase>

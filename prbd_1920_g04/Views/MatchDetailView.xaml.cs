@@ -17,7 +17,54 @@ using PRBD_Framework;
 namespace prbd_1920_g04.Views {
 
     public partial class MatchDetailView : UserControlBase {
-        public MatchDetailView() {
+        public Model.Match Match { get; set; }
+
+        private bool isNew;
+        public bool IsNew {
+            get { return isNew; }
+            set {
+                isNew = value;
+                RaisePropertyChanged(nameof(IsNew));
+            }
+        }
+
+        public bool IsExisting {
+            get { return !isNew; }
+        }
+
+        public string Home {
+            get {
+                return Match.Home;
+            }
+
+            set {
+                RaisePropertyChanged(nameof(Match.Home));
+            }
+        }
+
+        public string Adversary {
+            get {
+                return Match.Adversary;
+            }
+             set {
+                RaisePropertyChanged(nameof(Match.Adversary));
+            }
+        }
+
+        public DateTime Date {
+            get {
+                return Match.Date;
+            }
+
+            set {
+                RaisePropertyChanged(nameof(Match.Date));
+            }
+        }
+
+        public MatchDetailView(Model.Match match) {
+            DataContext = this;
+            Match = match;
+
             InitializeComponent();
         }
     }

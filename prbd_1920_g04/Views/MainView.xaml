@@ -20,7 +20,7 @@
             </MenuItem>
         </Menu>-->
         <TabControl x:Name="tabControl" Margin="10" Grid.Row="1">
-            <TabItem x:Name="membersTab" Header="Members">
+            <TabItem x:Name="matchsTab" Header="Matchs">
                 <ContentControl>
                     <local:MatchsView/>
                 </ContentControl>

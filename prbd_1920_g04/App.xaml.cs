@@ -21,6 +21,7 @@ namespace prbd_1920_g04 {
         Delegate = 5
     }
     public enum AppMessages {
+        MSG_SHOW_MATCH,
         MSG_NEW_MATCH,
         MSG_EDIT_MATCH,
         MSG_MATCH_CHANGED,

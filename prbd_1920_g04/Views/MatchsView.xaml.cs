@@ -16,14 +16,12 @@ namespace prbd_1920_g04.Views
         public ICommand DisplayMatchDetails { get; set; }
 
         public MatchsView() {
-            DisplayMatchDetails = new RelayCommand<Model.Match>((m) => { App.NotifyColleagues(AppMessages.MSG_EDIT_MEMBER, m); });
-           
 
             DataContext = this;
-            /*
-            DisplayMemberDetails = new RelayCommand<Member>(m => {
-                App.NotifyColleagues(AppMessages.MSG_DISPLAY_MEMBER, m);
-            });*/
+            
+            DisplayMatchDetails = new RelayCommand<Model.Match>(m => {
+                App.NotifyColleagues(AppMessages.MSG_SHOW_MATCH, m);
+            });
 
             Refresh();
             InitializeComponent();
