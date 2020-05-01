@@ -45,6 +45,10 @@ namespace prbd_1920_g04 {
             //Thread.CurrentThread.CurrentUICulture = new CultureInfo(Settings.Default.Culture);
             //ColdStart();
             TestDB();
+
+            foreach (var team in App.Model.Teams) {
+                Console.WriteLine(team.Name +" as "+ team.NumberOfPlayers() +"players");
+            }
         }
         /*
                 private void ColdStart() {
@@ -63,9 +67,12 @@ namespace prbd_1920_g04 {
                                                             //App.Model.Members.RemoveRange(App.Model.Players);
             App.Model.Members.RemoveRange(App.Model.Members);
 
-            App.Model.SaveChanges();
+            App.Model.Teams.RemoveRange(App.Model.Teams);
 
-            //model.CreateTeams(); //Toutes les équipes sont créées
+            App.Model.SaveChanges();
+            
+            App.Model.CreateTeams(); //Toutes les équipes sont créées
+
 
             //var adm = model.CreateAdmin("admin", "admin", "admin@gmail.com", "admin", 44, "Rue de l'administration", "/path", Fonction.Admin);
             var sec = App.Model.CreateSecretary("secretaire", "secretaire", "secretaire@gmail.com", "secretaire", 30, "Rue du document", "/path", Fonction.Secretary);
@@ -117,19 +124,8 @@ namespace prbd_1920_g04 {
             coach.selectPlayer(match6, player5);
             coach.selectPlayer(match6, player6);
 
-
-
-
-
             App.Model.SaveChanges();
-
-
-            //var playerUpdate = sec.UpdatePlayer("Dubois", "Charles", "player@gmail.com", "player", 25, "Avenue du ballon", "A2", 175, 70.5, "/path", 11);
-
-            //Console.WriteLine("'Dubois' after update \n"+playerUpdate);
-            //sec.DeletePlayer("David");
-            //var playersList = new List<Player> { player1, player2, player3 };
-
+           
             //Console.ReadLine();
         }
     }

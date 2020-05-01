@@ -14,15 +14,15 @@ namespace prbd_1920_g04.Model {
         public string Place { get; set; }
 
 
-        public virtual Team Squad { get; set; }
+        public virtual Team TeamPlaying { get; set; }
 
         public void DeleteTeam() {
-            Model m = new Model();
            
-            if (Squad != null) {
-                Squad = null;
+            if (TeamPlaying != null) {
+                TeamPlaying = null;
             }
-            //m.Matchs.Remove(this);
+
+            App.Model.Matchs.Remove(this);
         }
     }
 }

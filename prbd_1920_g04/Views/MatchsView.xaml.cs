@@ -14,6 +14,7 @@ namespace prbd_1920_g04.Views
         public ObservableCollection<Model.Match> Matchs { get => matchs; set => SetProperty(ref matchs, value); }
 
         public ICommand DisplayMatchDetails { get; set; }
+        public ICommand NewMatch { get; set; }
 
         public MatchsView() {
 
@@ -22,6 +23,8 @@ namespace prbd_1920_g04.Views
             DisplayMatchDetails = new RelayCommand<Model.Match>(m => {
                 App.NotifyColleagues(AppMessages.MSG_SHOW_MATCH, m);
             });
+
+            NewMatch = new RelayCommand(() => { App.NotifyColleagues(AppMessages.MSG_NEW_MATCH); });
 
             Refresh();
             InitializeComponent();

@@ -11,15 +11,21 @@ namespace prbd_1920_g04.Model
         protected Coach() { }
 
         public bool selectPlayer(Match match, Player player) {
-            if (!match.Squad.Players.Contains(player)) {
-                match.Squad.Players.Add(player);
+            if (!match.TeamPlaying.Players.Contains(player)) {
+                //var p = App.Model.Players.Find(player.Id);
+                //p.Team = match.TeamPlaying;
+                match.TeamPlaying.Players.Add(player);
+
+                App.Model.SaveChanges();
+                return true;
             }
             return false;
         }
 
         public bool removePlayer(Match match, Player player) {
-            if (match.Squad.Players.Contains(player)) {
-                match.Squad.Players.Remove(player);
+            if (match.TeamPlaying.Players.Contains(player)) {
+                match.TeamPlaying.Players.Remove(player);
+                App.Model.SaveChanges();
             }
             return false;
         }

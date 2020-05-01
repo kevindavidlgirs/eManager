@@ -15,14 +15,6 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
-        <Grid Margin="10" Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-            <TextBox Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" FontSize="14" />
-            <Button Content="Clear" Grid.Column="1" Command="{Binding ClearFilter}" Margin="5,0,0,0" />
-        </Grid>
         <ListView x:Name="listView" 
                   ItemsSource="{Binding Matchs}" 
                   Grid.Row="2" BorderBrush="Transparent" SelectionMode="Single" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
@@ -48,5 +40,11 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <DockPanel HorizontalAlignment="Center" Height="20" LastChildFill="False" Margin="20,10,0,0" VerticalAlignment="Center">
+            <Button Content="Browse" Height="20" VerticalAlignment="Top" Width="75"/>
+            <Button Content="Button" Height="20" VerticalAlignment="Top" Width="75"/>
+            <Button Content="Button" Height="20" VerticalAlignment="Top" Width="75"/>
+            <Button x:Name="btnCreateMatch" Command="{Binding NewMatch}" Content="Create match" Height="20" VerticalAlignment="Top" Width="75"/>
+        </DockPanel>
     </Grid>
 </f:UserControlBase>

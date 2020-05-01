@@ -118,7 +118,7 @@ namespace prbd_1920_g04.Model
             match.Place = place;
             match.Home = home;
             match.Adversary = adversary;
-            match.Squad = team; //pose problème
+            match.TeamPlaying = team; //pose problème
 
             Matchs.Add(match);
 

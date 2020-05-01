@@ -19,19 +19,6 @@ namespace prbd_1920_g04.Views {
     public partial class MatchDetailView : UserControlBase {
         public Model.Match Match { get; set; }
 
-        private bool isNew;
-        public bool IsNew {
-            get { return isNew; }
-            set {
-                isNew = value;
-                RaisePropertyChanged(nameof(IsNew));
-            }
-        }
-
-        public bool IsExisting {
-            get { return !isNew; }
-        }
-
         public string Home {
             get {
                 return Match.Home;
@@ -64,7 +51,6 @@ namespace prbd_1920_g04.Views {
         public MatchDetailView(Model.Match match) {
             DataContext = this;
             Match = match;
-
             InitializeComponent();
         }
     }

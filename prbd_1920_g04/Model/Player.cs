@@ -24,7 +24,9 @@ namespace prbd_1920_g04.Model
 
         public Position PlayerPosition { get; set; }
 
-        public Team Team { get; set; }
+        public virtual Team Team { get; set; }
+
+        protected Player() { }
 
         public virtual ICollection<Sanction> Sanctions { get; set; } = new HashSet<Sanction>();
         public virtual ICollection<Performance> Peformances { get; set; } = new HashSet<Performance>();

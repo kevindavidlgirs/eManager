@@ -6,7 +6,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DAA25074-8EC2-40D8-BD5A-992ED298AAB7}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>prbd_1920_g04</RootNamespace>
     <AssemblyName>prbd_1920_g04</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -78,6 +78,9 @@
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MatchDetailAdd.xaml.cs">
+      <DependentUpon>MatchDetailAdd.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MatchDetailView.xaml.cs">
       <DependentUpon>MatchDetailView.xaml</DependentUpon>
     </Compile>
@@ -132,6 +135,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MatchDetailAdd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
