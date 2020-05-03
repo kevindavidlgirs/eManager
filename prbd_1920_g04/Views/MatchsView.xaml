@@ -32,7 +32,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock FontSize="25" FontWeight="Bold" Height="60" Width="60" TextAlignment="Center" VerticalAlignment="Center" Text="{Binding Date,StringFormat=M/d}" />
+                        <TextBlock FontSize="25" FontWeight="Bold" Height="60" Width="60" TextAlignment="Center" VerticalAlignment="Center" Text="{Binding DateMatch,StringFormat=M/d}" />
                         <TextBlock FontSize="25" FontWeight="Bold" Height="60" Width="80" TextAlignment="Center" VerticalAlignment="Center" Text="{Binding Home}" />
                         <TextBlock FontSize="25" FontWeight="Bold" Height="60" Width="40" TextAlignment="Center"  VerticalAlignment="Center" Text="VS" />
                         <TextBlock FontSize="25" FontWeight="Bold" Height="60" Width="80" TextAlignment="Center" VerticalAlignment="Center" Text="{Binding Adversary}" />

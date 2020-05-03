@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace prbd_1920_g04.Model {
     public class Match {
         [Key]
-        public DateTime Date { get; set; }
+        public DateTime DateMatch { get; set; }
         public string Home { get; set; }
         public string Adversary { get; set; }
         public string Place { get; set; }
@@ -16,6 +16,9 @@ namespace prbd_1920_g04.Model {
 
         public virtual Team TeamPlaying { get; set; }
 
+        public Match() {
+            DateMatch = DateTime.Now;
+        }
         public void DeleteTeam() {
            
             if (TeamPlaying != null) {

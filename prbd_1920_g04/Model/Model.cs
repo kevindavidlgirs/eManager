@@ -114,7 +114,7 @@ namespace prbd_1920_g04.Model
 
         public Match CreateMatch(DateTime date, string place, string home, string adversary, Team team) {
             var match = Matchs.Create();
-            match.Date = date; // Temporaire.
+            match.DateMatch = date; // Temporaire.
             match.Place = place;
             match.Home = home;
             match.Adversary = adversary;

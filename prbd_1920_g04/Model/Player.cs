@@ -24,6 +24,7 @@ namespace prbd_1920_g04.Model
 
         public Position PlayerPosition { get; set; }
 
+        public string TeamName { get; set; } // Astuce pour évite le conflit lié de 
         public virtual Team Team { get; set; }
 
         protected Player() { }

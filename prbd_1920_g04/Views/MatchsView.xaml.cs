@@ -19,19 +19,20 @@ namespace prbd_1920_g04.Views
         public MatchsView() {
 
             DataContext = this;
-            
+
             DisplayMatchDetails = new RelayCommand<Model.Match>(m => {
                 App.NotifyColleagues(AppMessages.MSG_SHOW_MATCH, m);
             });
 
             NewMatch = new RelayCommand(() => { App.NotifyColleagues(AppMessages.MSG_NEW_MATCH); });
 
+            App.Register<Model.Match>(this, AppMessages.MSG_MATCH_CHANGED, match =>{ Refresh(); }); 
             Refresh();
             InitializeComponent();
         }
 
         private void Refresh() {
-            Matchs = new ObservableCollection<Model.Match>(App.Model.Matchs.OrderBy(m => m.Date));
+            Matchs = new ObservableCollection<Model.Match>(App.Model.Matchs.OrderBy(m => m.DateMatch));
         }
     }
 }

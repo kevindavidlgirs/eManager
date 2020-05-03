@@ -25,7 +25,7 @@ namespace prbd_1920_g04 {
         MSG_NEW_MATCH,
         MSG_EDIT_MATCH,
         MSG_MATCH_CHANGED,
-        MSG_MATCH_DELETED,
+        MSG_MATCH_DELETED
     }
 
     public partial class App : ApplicationBase {
@@ -34,7 +34,7 @@ namespace prbd_1920_g04 {
         public static readonly string IMAGE_PATH =
             Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/../../images");
 
-        //public static Member CurrentUser { get; set; }
+        public static Model.Member CurrentUser { get; set; } // Le user connecté
 
         public static void CancelChanges() {
             //Model.Dispose(); // Retire de la mémoire le modèle actuel
@@ -105,24 +105,6 @@ namespace prbd_1920_g04 {
             coach.selectPlayer(match3, player4);
             coach.selectPlayer(match3, player5);
             coach.selectPlayer(match3, player6);
-
-            var match4 = sec.AddMatch(new DateTime(2020, 05, 3), "Epfc Stadium", "EPFC", "EPHEC", "U7");
-            //Le coach sélectionne des nouveaux joueurs pour le match avec l'équipe U11
-            coach.selectPlayer(match4, player4);
-            coach.selectPlayer(match4, player5);
-            coach.selectPlayer(match4, player6);
-
-            var match5 = sec.AddMatch(new DateTime(2020, 05, 5), "Epfc Stadium", "EPFC", "EPHEC", "U13");
-            //Le coach sélectionne des nouveaux joueurs pour le match avec l'équipe U11
-            coach.selectPlayer(match5, player4);
-            coach.selectPlayer(match5, player5);
-            coach.selectPlayer(match5, player6);
-
-            var match6 = sec.AddMatch(new DateTime(2020, 05, 7), "Epfc Stadium", "EPFC", "EPHEC", "U9");
-            //Le coach sélectionne des nouveaux joueurs pour le match avec l'équipe U11
-            coach.selectPlayer(match6, player4);
-            coach.selectPlayer(match6, player5);
-            coach.selectPlayer(match6, player6);
 
             App.Model.SaveChanges();
            

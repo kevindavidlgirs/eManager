@@ -14,10 +14,8 @@ namespace prbd_1920_g04.Model
         public Player CreatePlayer(string firstName, string lastname, string email, string password, int age, string adresse, int height, double weight, string picturePath, int jerseyNumber, Fonction fonction = Fonction.Player)
         {
 
-            Model m = new Model();
-
-            var player = m.CreatePlayer(firstName, lastname,email, password, age, adresse, height, weight, picturePath, jerseyNumber, fonction);
-            m.SaveChanges();
+            var player = App.Model.CreatePlayer(firstName, lastname,email, password, age, adresse, height, weight, picturePath, jerseyNumber, fonction);
+            App.Model.SaveChanges();
             return player;
         }
         /*
@@ -45,11 +43,10 @@ namespace prbd_1920_g04.Model
         //var res = m.Players.SingleOrDefault(u => u.FristName == firstName);
         public bool DeletePlayer(string name)
         {
-            Model m = new Model();
-            var user = m.Members.Find(name);
+            var user = App.Model.Members.Find(name);
             if (user != null)
             {
-                m.Members.Remove(user);
+                App.Model.Members.Remove(user);
                // m.SaveChanges();
                 return true;
             }
@@ -58,12 +55,11 @@ namespace prbd_1920_g04.Model
         }
 
         public Match AddMatch(DateTime date, string place, string home, string adversary, string categorie) { 
-            Model m = new Model();
             Match match = null;
-            var team = m.Teams.Find(categorie); // On récupère la catégorie.
+            var team = App.Model.Teams.Find(categorie); // On récupère la catégorie.
             if (team != null) {
-                match = m.CreateMatch(date, place, home, adversary, team);
-                m.SaveChanges();
+                match = App.Model.CreateMatch(date, place, home, adversary, team);
+                App.Model.SaveChanges();
                 return match;
             }
 

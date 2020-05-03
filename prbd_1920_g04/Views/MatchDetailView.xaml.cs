@@ -40,11 +40,11 @@ namespace prbd_1920_g04.Views {
 
         public DateTime Date {
             get {
-                return Match.Date;
+                return Match.DateMatch;
             }
 
             set {
-                RaisePropertyChanged(nameof(Match.Date));
+                RaisePropertyChanged(nameof(Match.DateMatch));
             }
         }
 

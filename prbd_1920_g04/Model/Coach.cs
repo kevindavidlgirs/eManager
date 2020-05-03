@@ -12,8 +12,9 @@ namespace prbd_1920_g04.Model
 
         public bool selectPlayer(Match match, Player player) {
             if (!match.TeamPlaying.Players.Contains(player)) {
-                //var p = App.Model.Players.Find(player.Id);
-                //p.Team = match.TeamPlaying;
+                //player.TeamName = match.TeamPlaying.Name;
+                var p = App.Model.Players.Find(player.Id);
+                p.TeamName = match.TeamPlaying.Name;
                 match.TeamPlaying.Players.Add(player);
 
                 App.Model.SaveChanges();
