@@ -87,6 +87,7 @@ namespace prbd_1920_g04 {
             var player6 = sec.CreatePlayer("Robert", "Caillau", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 9, Fonction.Player);
             Console.WriteLine(sec + "\n" + player1 + "\n" + player2 + "\n" + player3);
 
+            /*
             // Le secrétaire encode le match.
             var match1 = sec.AddMatch(new DateTime(2020, 04, 28), "Epfc Stadium", "EPFC", "EPHEC", "A1");
             //Le coach sélectionne des nouveaux joueurs pour le match avec l'équipe A1
@@ -104,7 +105,7 @@ namespace prbd_1920_g04 {
             //Le coach sélectionne des nouveaux joueurs pour le match avec l'équipe U11
             coach.selectPlayer(match3, player4);
             coach.selectPlayer(match3, player5);
-            coach.selectPlayer(match3, player6);
+            coach.selectPlayer(match3, player6);*/
 
             App.Model.SaveChanges();
            
