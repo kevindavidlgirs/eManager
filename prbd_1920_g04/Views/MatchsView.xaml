@@ -41,10 +41,11 @@
             </ListView.ItemTemplate>
         </ListView>
         <DockPanel HorizontalAlignment="Center" Height="20" LastChildFill="False" Margin="20,10,0,0" VerticalAlignment="Center">
-            <Button Content="Browse" Height="20" VerticalAlignment="Top" Width="75"/>
-            <Button Content="Button" Height="20" VerticalAlignment="Top" Width="75"/>
-            <Button Content="Button" Height="20" VerticalAlignment="Top" Width="75"/>
-            <Button x:Name="btnCreateMatch" Command="{Binding NewMatch}" Content="Create match" Height="20" VerticalAlignment="Top" Width="75"/>
+            <Button Content="Browse" Height="20" VerticalAlignment="Top" Width="120"/>
+            <Button x:Name="btnCreateMatch" Command="{Binding NewMatch}" Content="Create match" Height="20" VerticalAlignment="Top" Width="120"/>
+            <Button x:Name="btnCreatePlayer" Command="{Binding NewPlayer}" Content="Create Player" Height="20" VerticalAlignment="Top" Width="120"/>
+            <Button Content="Create Team" Height="20" VerticalAlignment="Top" Width="120"/>
+            <Button Command="{Binding AddPlayerToATeam}" Content="Add Player to a Team" Height="20" VerticalAlignment="Top" Width="120"/>
         </DockPanel>
     </Grid>
 </f:UserControlBase>

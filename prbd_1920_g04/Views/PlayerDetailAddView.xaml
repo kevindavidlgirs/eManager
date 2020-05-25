@@ -1,0 +1,33 @@
+﻿<f:UserControlBase  x:Class="prbd_1920_g04.Views.PlayerDetailAddView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:f="clr-namespace:PRBD_Framework;assembly=PRBD_Framework"
+             xmlns:local="clr-namespace:prbd_1920_g04.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <TextBox Text="{Binding FirstName}" HorizontalAlignment="Left" Height="23" Margin="146,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="198"/>
+        <TextBox Text="{Binding LastName}" HorizontalAlignment="Left" Height="23" Margin="146,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="198"/>
+        <TextBox Text="{Binding Age}" HorizontalAlignment="Left" Height="23" Margin="146,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="198"/>
+        <TextBox Text="{Binding Email}" HorizontalAlignment="Left" Height="23" Margin="146,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="198"/>
+        <TextBox Text="{Binding Adresse}" HorizontalAlignment="Left" Height="23" Margin="146,267,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="198"/>
+        <TextBox Text="{Binding Heigth}" HorizontalAlignment="Left" Height="23" Margin="146,312,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="198"/>
+        <TextBox Text="{Binding Password}" HorizontalAlignment="Left" Height="23" Margin="459,312,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195"/>
+        <TextBox Text="{Binding JerseyNumber}" HorizontalAlignment="Left" Height="23" Margin="459,267,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195"/>
+        <TextBox Text="{Binding Weight}" HorizontalAlignment="Left" Height="23" Margin="459,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195"/>
+        <Label Content="Firstname :" HorizontalAlignment="Left" Margin="52,86,0,0" VerticalAlignment="Top"/>
+        <Label Content="LastName : " HorizontalAlignment="Left" Margin="52,130,0,0" VerticalAlignment="Top"/>
+        <Label Content="Age :" HorizontalAlignment="Left" Margin="52,175,0,0" VerticalAlignment="Top"/>
+        <Label Content="Email : " HorizontalAlignment="Left" Margin="52,219,0,0" VerticalAlignment="Top"/>
+        <Label Content="Adresse :" HorizontalAlignment="Left" Margin="52,264,0,0" VerticalAlignment="Top"/>
+        <Label Content="Height :" HorizontalAlignment="Left" Margin="52,309,0,0" VerticalAlignment="Top"/>
+        <Label Content="JerseyNumber :" HorizontalAlignment="Left" Margin="359,264,0,0" VerticalAlignment="Top"/>
+        <Label Content="Weight :" HorizontalAlignment="Left" Margin="388,219,0,0" VerticalAlignment="Top"/>
+        <Label Content="Password :" HorizontalAlignment="Left" Margin="377,312,0,0" VerticalAlignment="Top"/>
+        <Image HorizontalAlignment="Left" Height="100" Margin="511,86,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button Command="{Binding Cancel}" Content="Cancel" HorizontalAlignment="Left" Margin="297,387,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Command="{Binding Save}" Content="Save" HorizontalAlignment="Left" Margin="439,387,0,0" VerticalAlignment="Top" Width="75"/>
+    </Grid>
+</f:UserControlBase>

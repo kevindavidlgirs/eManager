@@ -30,7 +30,7 @@ namespace prbd_1920_g04.Views {
                     }
                 }
                 var tab = new TabItem() {
-                    Header = match.Home + "vs" + match.Adversary,
+                    Header = match.Home + " vs " + match.Adversary,
                     Content = new MatchDetailView(match),
                 };
                 tabControl.Items.Add(tab);
@@ -48,10 +48,39 @@ namespace prbd_1920_g04.Views {
                     }
                 }
                 var tab = new TabItem() {
+                    //Mise à jour de l'onglet lors de la sauvegarde (à implémenter)
                     Header = "<new match>",
                     Content = new MatchDetailAddView()
                 };
 
+                tabControl.Items.Add(tab);
+                Dispatcher.InvokeAsync(() => tab.Focus());
+            });
+
+            App.Register(this, AppMessages.MSG_NEW_PLAYER, () =>
+            {
+                var tab = new TabItem()
+                {
+                    //Mise à jour de l'onglet lors de la sauvegarde (à implémenter)
+                    Header = "<new player>",
+                    Content = new PlayerDetailAddView()
+                };
+                tabControl.Items.Add(tab);
+                Dispatcher.InvokeAsync(() => tab.Focus());
+            });
+
+            App.Register(this, AppMessages.MSG_CANCEL_ADD_PLAYER, () => {
+                //tabControl.Items.Remove(...);
+            });
+
+            App.Register(this, AppMessages.MSG_ADD_PLAYER_TO_A_TEAM, () =>
+            {
+                var tab = new TabItem()
+                {
+                    //Mise à jour de l'onglet lors de la sauvegarde (à implémenter)
+                    Header = "<Add player into a team>",
+                    Content = new AddPlayerIntoATeamView()
+                };
                 tabControl.Items.Add(tab);
                 Dispatcher.InvokeAsync(() => tab.Focus());
             });

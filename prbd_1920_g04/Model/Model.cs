@@ -26,24 +26,6 @@ namespace prbd_1920_g04.Model
         public DbSet<Player> Players { get; set; }
         public DbSet<Match> Matchs { get; set; }
         public DbSet<Team> Teams { get; set; }
-        //Déclarer DbSet<Staff> (User est une classe abstraite) et les autres permet d'indiquer à EF qu'il y a de l'héritage
-
-        //public object Staff { get; internal set; }
-/*      
-        public Admin CreateAdmin(string firstName, string lastName, string email, string password, int age, string adresse, string picturePath, Fonction fonction = Fonction.Admin)
-        {
-            var admin = Admins.Create(); 
-            admin.FristName = firstName;
-            admin.LastName  = lastName;
-            admin.Email = email;
-            admin.Password = password;
-            admin.Age = age;
-            admin.Adresse = adresse;
-            admin.PicturePath = picturePath;
-            admin.Fonction = fonction;
-            Admins.Add(admin);
-            return admin;
-        }*/
 
         public Secretary CreateSecretary(string firstName, string lastName, string email, string password, int age, string adresse, string picturePath, Fonction fonction = Fonction.Secretary)
         {
@@ -59,22 +41,6 @@ namespace prbd_1920_g04.Model
             Secretaries.Add(secretary);
             return secretary;
         }
-
-        /*     public Delegate CreateDelegate(string firstName, string lastName, string email, string password, int age, string adresse, string picturePath, Fonction fonction = Fonction.Secretary)
-             {
-                 var dlg = Delegates.Create();
-                 dlg.FristName = firstName;
-                 dlg.LastName = lastName;
-                 dlg.Email = email;
-                 dlg.Password = password;
-                 dlg.Age = age;
-                 dlg.Adresse = adresse;
-                 dlg.PicturePath = picturePath;
-                 dlg.Fonction = fonction;
-                 Delegates.Add(dlg);
-                 return dlg;
-             }
-             */
 
         public Coach CreateCoach(string firstName, string lastName, string email, string password, int age, string adresse, string picturePath, Fonction fonction = Fonction.Coach)
         {
@@ -132,7 +98,7 @@ namespace prbd_1920_g04.Model
 
             return team;
         }
-        
+
         public void CreateTeams() {
             App.Model.CreateTeam("U7");
             App.Model.CreateTeam("U8");
@@ -149,19 +115,5 @@ namespace prbd_1920_g04.Model
             App.Model.SaveChanges();
         }
 
-        /*public void SeedData()
-        {
-            if (Administrator.Count() == 0 && Secretary.Count() == 0 && Players.Count() == 0)
-            {
-                Console.Write("Seeding users... ");
-                var admin = CreateAdmin("admin", "admin", "admin@gmail.com", "admin", 44, "Rue de l'administration", "/path", Fonction.Admin);
-                var secretary = CreateSecretary("secretaire", "secretaire", "secretaire@gmail.com", "secretaire", 30, "Rue du document", "/path", Fonction.Secretary);
-                var player1 = CreatePlayer("Mbilo", "Hervé", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 10, Fonction.Player);
-                var player2 = CreatePlayer("Girs", "Kevin", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 7, Fonction.Player);
-                SaveChanges();
-                Console.WriteLine("ok");
-            }
-        }
-        */
     }
 }

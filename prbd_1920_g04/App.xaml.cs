@@ -1,16 +1,7 @@
 ﻿using PRBD_Framework;
-using prbd_1920_g04.Properties;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace prbd_1920_g04 {
     public enum Fonction {
@@ -25,7 +16,12 @@ namespace prbd_1920_g04 {
         MSG_NEW_MATCH,
         MSG_EDIT_MATCH,
         MSG_MATCH_CHANGED,
-        MSG_MATCH_DELETED
+        MSG_MATCH_DELETED,
+        MSG_NEW_PLAYER,
+        MSG_EDIT_PLAYER,
+        MSG_PLAYER_DELETED,
+        MSG_CANCEL_ADD_PLAYER,
+        MSG_ADD_PLAYER_TO_A_TEAM
     }
 
     public partial class App : ApplicationBase {
@@ -45,9 +41,8 @@ namespace prbd_1920_g04 {
             //Thread.CurrentThread.CurrentUICulture = new CultureInfo(Settings.Default.Culture);
             //ColdStart();
             TestDB();
-
             foreach (var team in App.Model.Teams) {
-                Console.WriteLine(team.Name +" as "+ team.NumberOfPlayers() +"players");
+                Console.WriteLine(team.Name +" as "+ team.NumberOfPlayers() +" players");
             }
         }
         /*
@@ -86,6 +81,8 @@ namespace prbd_1920_g04 {
             var player5 = sec.CreatePlayer("Viton", "Cerf", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 7, Fonction.Player);
             var player6 = sec.CreatePlayer("Robert", "Caillau", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 9, Fonction.Player);
             Console.WriteLine(sec + "\n" + player1 + "\n" + player2 + "\n" + player3);
+            
+            
 
             /*
             // Le secrétaire encode le match.

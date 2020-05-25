@@ -16,7 +16,6 @@ namespace prbd_1920_g04.Model
                 var p = App.Model.Players.Find(player.Id);
                 p.TeamName = match.TeamPlaying.Name;
                 match.TeamPlaying.Players.Add(player);
-
                 App.Model.SaveChanges();
                 return true;
             }
@@ -27,8 +26,22 @@ namespace prbd_1920_g04.Model
             if (match.TeamPlaying.Players.Contains(player)) {
                 match.TeamPlaying.Players.Remove(player);
                 App.Model.SaveChanges();
+                return true;
             }
             return false;
         }
+
+        /*
+        public bool AddPlayerInTeam(Player p, Team t)
+        {
+            if (!t.Players.Contains(p))
+            {
+                t.Players.Add(p);
+                App.Model.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+        */
     }
 }

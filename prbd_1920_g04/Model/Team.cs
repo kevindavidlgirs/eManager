@@ -20,5 +20,10 @@ namespace prbd_1920_g04.Model
         public int NumberOfPlayers() {
             return Players.Count();
         }
+
+        public bool IsComplete()
+        {
+            return Players.Count() >= 11;
+        }
     }
 }
