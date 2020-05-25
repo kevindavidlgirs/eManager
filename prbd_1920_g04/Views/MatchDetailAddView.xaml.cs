@@ -140,6 +140,7 @@ namespace prbd_1920_g04.Views {
 
 
 
+
         public MatchDetailAddView() {
             DataContext = this;
             IsNew = true;
@@ -148,6 +149,7 @@ namespace prbd_1920_g04.Views {
             Save = new RelayCommand(SaveAction, CanSaveOrCancelAction);
             Delete = new RelayCommand(DeleteAction);
             InitializeComponent();
+            App.Register<Model.Match>(this, AppMessages.MSG_TEAM_CHANGED, match => { Refresh(); });
         }
     }
 }

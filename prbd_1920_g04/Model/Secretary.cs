@@ -68,12 +68,14 @@ namespace prbd_1920_g04.Model
 
         //Cette méthode est déjà présente dans la classe "Coach" (considérons que c'est un coach qui fait ce choix)
         //A voir si le temps de l'implémenter.
-        public bool AddPlayerInTeam(Player p, Team t)
+        public bool AddPlayerInTeam(int id, string categorie)
         {
-            if (!t.Players.Contains(p))
+            var team = App.Model.Teams.Find(categorie);
+            var player = App.Model.Players.Find(id);
+            if(player.TeamName == null && !team.Players.Contains(player))
             {
-                t.Players.Add(p);
-                App.Model.SaveChanges();
+                team.Players.Add(player);
+                player.TeamName = categorie;
                 return true;
             }
             return false;

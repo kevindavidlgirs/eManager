@@ -18,10 +18,12 @@ namespace prbd_1920_g04 {
         MSG_MATCH_CHANGED,
         MSG_MATCH_DELETED,
         MSG_NEW_PLAYER,
+        MSG_PLAYER_ADDED,
         MSG_EDIT_PLAYER,
         MSG_PLAYER_DELETED,
         MSG_CANCEL_ADD_PLAYER,
-        MSG_ADD_PLAYER_TO_A_TEAM
+        MSG_ADD_PLAYER_TO_A_TEAM,
+        MSG_TEAM_CHANGED
     }
 
     public partial class App : ApplicationBase {

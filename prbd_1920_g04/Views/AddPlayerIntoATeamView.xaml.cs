@@ -23,7 +23,7 @@ namespace prbd_1920_g04.Views
     /// </summary>
     public partial class AddPlayerIntoATeamView : UserControlBase
     {
-        //Le coach ici ?
+        public Model.Team Team { get; set; }
         public Model.Secretary Secretary { get; set; }
 
         private ObservableCollection<Model.Player> players;
@@ -32,25 +32,25 @@ namespace prbd_1920_g04.Views
         private ObservableCollection<Model.Team> teams;
         public ObservableCollection<Model.Team> Teams { get => teams; set => SetProperty(ref teams, value); }
 
-        private string player;
-        public string Player
+        private int id;
+        public int Id
         {
-            get { return player; }
+            get { return id; }
             set
             {
-                player = value;
-                RaisePropertyChanged(value);
+                id = value;
+                //RaisePropertyChanged(value);
             }
         }
 
-        private string team;
-        public String Team
+        private string tm;
+        public string Tm
         {
-            get { return team; }
+            get { return tm; }
             set
             {
-                team = value;
-                RaisePropertyChanged(nameof(Team));
+                tm = value;
+                RaisePropertyChanged(nameof(Tm));
             }
         }
         public ICommand Save { get; set; }
@@ -59,7 +59,13 @@ namespace prbd_1920_g04.Views
 
         private void SaveAction()
         {
-            
+            if(Secretary.AddPlayerInTeam(id, tm))
+            {
+                IsNew = false;
+                ComboBoxTeams();
+                ComboBoxPlayers();
+                App.NotifyColleagues(AppMessages.MSG_TEAM_CHANGED);
+            }
         }
 
         private void CancelAction()
@@ -76,16 +82,56 @@ namespace prbd_1920_g04.Views
                 RaisePropertyChanged(nameof(IsNew));
             }
         }
+
+        private bool CanSaveOrCancelAction()
+        {
+            if (IsNew)
+            {
+                return !(Players.Count() == 0 && Teams.Count() == 0 && HasErrors);
+            }
+            //var change = (from c in App.Model.ChangeTracker.Entries<Model.Match>()
+            //              where c.Entity == Match
+            //              select c).FirstOrDefault();                             //Je dois comprendre cette partie (kevin)
+            //return change != null && change.State != EntityState.Unchanged;
+            return false; 
+        }
+
+        private void ComboBoxTeams()
+        {
+            var Tms = new ObservableCollection<Model.Team>(App.Model.Teams.OrderBy(m => m.Name));
+            Teams = new ObservableCollection<Model.Team>();
+            foreach (var t in Tms)
+            {
+                if (!t.IsComplete())
+                {
+                    Teams.Add(t);
+                }
+            }
+        }
+
+        private void ComboBoxPlayers()
+        {
+            var Plys = new ObservableCollection<Model.Player>(App.Model.Players.OrderBy(p => p.LastName));
+            Players = new ObservableCollection<Model.Player>();
+            foreach (var p in Plys)
+            {
+                if(p.TeamName == null)
+                {
+                    Players.Add(p);
+                }
+            }
+        } 
         public AddPlayerIntoATeamView()
         {
             DataContext = this;
             IsNew = true;
             Secretary = (Model.Secretary)App.CurrentUser;
-            Teams = new ObservableCollection<Model.Team>(App.Model.Teams.OrderBy(m => m.Name));
-            Players = new ObservableCollection<Model.Player>(App.Model.Players.OrderBy(p => p.LastName)); 
-            //Save = new RelayCommand(SaveAction, CanSaveOrCancelAction);
+            ComboBoxTeams();
+            ComboBoxPlayers();
+            Save = new RelayCommand(SaveAction, CanSaveOrCancelAction);
             //Cancel = new RelayCommand(CancelAction);
             InitializeComponent();
+            App.Register<Model.Match>(this, AppMessages.MSG_PLAYER_ADDED, player => { ComboBoxPlayers(); });
         }
     }
 }
