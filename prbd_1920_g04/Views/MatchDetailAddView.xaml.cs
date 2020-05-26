@@ -123,15 +123,7 @@ namespace prbd_1920_g04.Views {
 
         //Il faut ajouter des joueurs au team pour que la liste soit remplie. (condition ajouté, IsComplete() dans secretary)
         private void Refresh() {
-            var tmp = new ObservableCollection<Model.Team>(App.Model.Teams.OrderBy(m => m.Name));
-            Teams = new ObservableCollection<Model.Team>();
-            foreach (var t in tmp)
-            {
-                if (t.IsComplete())
-                {
-                    Teams.Add(t);
-                }
-            }
+            Teams = new ObservableCollection<Model.Team>(App.Model.Teams.OrderBy(m => m.Name));
             foreach (var t in Teams) {
                 Console.WriteLine(t.Name);
             }
