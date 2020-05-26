@@ -69,7 +69,7 @@ namespace prbd_1920_g04.Views {
         }
 
         private string team;
-        public String Team {
+        public string Team {
             get {
                 return team;
             }

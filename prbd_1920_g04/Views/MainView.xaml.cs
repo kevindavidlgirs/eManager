@@ -79,7 +79,7 @@ namespace prbd_1920_g04.Views {
                 {
                     //Mise à jour de l'onglet lors de la sauvegarde (à implémenter)
                     Header = "<Add player into a team>",
-                    Content = new AddPlayerIntoATeamView()
+                    Content = new AddPlayerIntoAMatchView()
                 };
                 tabControl.Items.Add(tab);
                 Dispatcher.InvokeAsync(() => tab.Focus());

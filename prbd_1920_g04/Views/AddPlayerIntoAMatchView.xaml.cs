@@ -21,16 +21,15 @@ namespace prbd_1920_g04.Views
     /// <summary>
     /// Logique d'interaction pour AddPlayerIntoATeamView.xaml
     /// </summary>
-    public partial class AddPlayerIntoATeamView : UserControlBase
+    public partial class AddPlayerIntoAMatchView : UserControlBase
     {
-        public Model.Team Team { get; set; }
         public Model.Secretary Secretary { get; set; }
 
         private ObservableCollection<Model.Player> players;
         public ObservableCollection<Model.Player> Players { get => players; set => SetProperty(ref players, value); }
         
-        private ObservableCollection<Model.Team> teams;
-        public ObservableCollection<Model.Team> Teams { get => teams; set => SetProperty(ref teams, value); }
+        private ObservableCollection<Model.Match> matchs;
+        public ObservableCollection<Model.Match> Matchs { get => matchs; set => SetProperty(ref matchs, value); }
 
         private int id;
         public int Id
@@ -43,14 +42,14 @@ namespace prbd_1920_g04.Views
             }
         }
 
-        private string tm;
-        public string Tm
+        private string mtchs;
+        public string Mtchs
         {
-            get { return tm; }
+            get { return mtchs; }
             set
             {
-                tm = value;
-                RaisePropertyChanged(nameof(Tm));
+                mtchs = value;
+                RaisePropertyChanged(nameof(Mtchs));
             }
         }
         public ICommand Save { get; set; }
@@ -59,10 +58,10 @@ namespace prbd_1920_g04.Views
 
         private void SaveAction()
         {
-            if(Secretary.AddPlayerInTeam(id, tm))
+            if(Secretary.AddPlayerInMatchs(id, mtchs))
             {
                 IsNew = false;
-                ComboBoxTeams();
+                ComboBoxMatchs();
                 ComboBoxPlayers();
                 App.NotifyColleagues(AppMessages.MSG_TEAM_CHANGED);
             }
@@ -87,7 +86,7 @@ namespace prbd_1920_g04.Views
         {
             if (IsNew)
             {
-                return !(Players.Count() == 0 && Teams.Count() == 0 && HasErrors);
+                return !(Players.Count() == 0 && Matchs.Count() == 0 && HasErrors);
             }
             //var change = (from c in App.Model.ChangeTracker.Entries<Model.Match>()
             //              where c.Entity == Match
@@ -96,17 +95,10 @@ namespace prbd_1920_g04.Views
             return false; 
         }
 
-        private void ComboBoxTeams()
+        private void ComboBoxMatchs()
         {
-            var Tms = new ObservableCollection<Model.Team>(App.Model.Teams.OrderBy(m => m.Name));
-            Teams = new ObservableCollection<Model.Team>();
-            foreach (var t in Tms)
-            {
-                if (!t.IsComplete())
-                {
-                    Teams.Add(t);
-                }
-            }
+            Matchs = new ObservableCollection<Model.Match>(App.Model.Matchs);
+            Console.WriteLine(Matchs);
         }
 
         private void ComboBoxPlayers()
@@ -121,17 +113,17 @@ namespace prbd_1920_g04.Views
                 }
             }
         } 
-        public AddPlayerIntoATeamView()
+        public AddPlayerIntoAMatchView()
         {
             DataContext = this;
             IsNew = true;
             Secretary = (Model.Secretary)App.CurrentUser;
-            ComboBoxTeams();
+            ComboBoxMatchs();
             ComboBoxPlayers();
             Save = new RelayCommand(SaveAction, CanSaveOrCancelAction);
             //Cancel = new RelayCommand(CancelAction);
             InitializeComponent();
-            App.Register<Model.Match>(this, AppMessages.MSG_PLAYER_ADDED, player => { ComboBoxPlayers(); });
+            App.Register<Model.Match>(this, AppMessages.MSG_MATCH_CHANGED, player => { ComboBoxPlayers(); ComboBoxMatchs();});
         }
     }
 }

@@ -54,11 +54,10 @@ namespace prbd_1920_g04.Model
             
         }
 
-        //IMPOSSIBLE D'AJOUTER PLUS D'UN MATCH!
         public Match AddMatch(DateTime date, string place, string home, string adversary, string categorie) { 
             Match match = null;
             var team = App.Model.Teams.Find(categorie); // On récupère la catégorie.
-            if (team.IsComplete()) {
+            if (team != null) {
                 match = App.Model.CreateMatch(date, place, home, adversary, team);
                 App.Model.SaveChanges();
                 return match;
@@ -66,16 +65,14 @@ namespace prbd_1920_g04.Model
             return match;
         }
 
-        //Cette méthode est déjà présente dans la classe "Coach" (considérons que c'est un coach qui fait ce choix)
-        //A voir si le temps de l'implémenter.
-        public bool AddPlayerInTeam(int id, string categorie)
+        public bool AddPlayerInMatchs(int id, string mtch)
         {
-            var team = App.Model.Teams.Find(categorie);
+            var match = App.Model.Matchs.Find(mtch);
             var player = App.Model.Players.Find(id);
-            if(player.TeamName == null && !team.Players.Contains(player))
+            if(player.TeamName == null && !match.TeamPlaying.Players.Contains(player))
             {
-                team.Players.Add(player);
-                player.TeamName = categorie;
+                match.TeamPlaying.Players.Add(player);
+                player.TeamName = match.TeamPlaying.Name;
                 return true;
             }
             return false;
