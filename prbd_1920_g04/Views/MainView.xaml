@@ -6,14 +6,14 @@
         xmlns:local="clr-namespace:prbd_1920_g04.Views"
         mc:Ignorable="d"
         Title="E-Club Manager" 
-        Height="450" Width="800"
+        Height="564.407" Width="861.017"
          WindowStartupLocation="CenterScreen">
-    <Grid>
+    <Grid Margin="0,0,2,5">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-       <!-- <Menu>
+        <!-- <Menu>
             <MenuItem Header="{x:Static p:Resources.Menu_SandBox}">
                 <MenuItem Header="{x:Static p:Resources.Menu_SandBox_DataGrid}" Command="{Binding SandBox}" CommandParameter="TestDataGridReadOnly" />
                 <MenuItem Header="{x:Static p:Resources.Menu_SandBox_MasterDetail}" Command="{Binding SandBox}" CommandParameter="TestMasterDetail" />

@@ -13,7 +13,6 @@ namespace prbd_1920_g04.Model {
         public string Adversary { get; set; }
         public string Place { get; set; }
 
-
         public virtual Team TeamPlaying { get; set; }
 
         public Match() {
