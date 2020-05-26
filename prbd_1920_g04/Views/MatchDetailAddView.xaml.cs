@@ -104,6 +104,7 @@ namespace prbd_1920_g04.Views {
         private void SaveAction() {
             Match = Secretary.AddMatch(DateMatch, Place, Home, Adversary, Team);
             App.NotifyColleagues(AppMessages.MSG_MATCH_CHANGED, Match);
+            App.NotifyColleagues(AppMessages.MSG_MATCH_SAVED, Home + "vs"+ Adversary);
             IsNew = false;
         }
 

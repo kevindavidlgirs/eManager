@@ -38,7 +38,7 @@ namespace prbd_1920_g04.Views {
             });
 
             App.Register(this, AppMessages.MSG_NEW_MATCH, () => {
-                // Nous récupérons un secrétaire pour les tests, à terme une condition devra vérifier que le user connecté est un sectétaire
+                // Nous récupérons un secrétaire pour les tests, à terme une condition devra vérifier que le user connecté est un secrétaire
                 var sec = App.Model.Secretaries.Find(113); 
                 var match = App.Model.Matchs.Create();
                 foreach (TabItem t in tabControl.Items) {
@@ -56,6 +56,9 @@ namespace prbd_1920_g04.Views {
                 Dispatcher.InvokeAsync(() => tab.Focus());
             });
 
+            App.Register<string>(this, AppMessages.MSG_MATCH_SAVED, (s) => {
+                (tabControl.SelectedItem as TabItem).Header = s;
+            });
         }
           /*  
             private void tabOfMember(Model.Match m, bool isNew) {

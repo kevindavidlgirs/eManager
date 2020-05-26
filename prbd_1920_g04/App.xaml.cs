@@ -25,6 +25,7 @@ namespace prbd_1920_g04 {
         MSG_NEW_MATCH,
         MSG_EDIT_MATCH,
         MSG_MATCH_CHANGED,
+        MSG_MATCH_SAVED,
         MSG_MATCH_DELETED
     }
 
