@@ -57,7 +57,7 @@ namespace prbd_1920_g04 {
             //model.Database.Log = Console.Write;
 
             // On commence par Désolidariser tous les équipes des matchs (c'est du bricolage mais ça fonctionne.)
-            foreach (var match in App.Model.Matchs) {
+            /*foreach (var match in App.Model.Matchs) {
                 match.DeleteTeam();
             }
 
@@ -68,9 +68,9 @@ namespace prbd_1920_g04 {
 
             App.Model.Teams.RemoveRange(App.Model.Teams);
 
-            App.Model.SaveChanges();
-            
-            App.Model.CreateTeams(); //Toutes les équipes sont créées
+            App.Model.SaveChanges();*/
+
+            //App.Model.CreateTeams(); //Toutes les équipes sont créées
 
 
             //var adm = model.CreateAdmin("admin", "admin", "admin@gmail.com", "admin", 44, "Rue de l'administration", "/path", Fonction.Admin);
@@ -90,7 +90,7 @@ namespace prbd_1920_g04 {
 
             
             // Le secrétaire encode le match.
-            var match1 = sec.AddMatch(new DateTime(2020, 04, 28), "Epfc Stadium", "EPFC", "EPHEC", "A1");
+            //var match1 = sec.AddMatch(new DateTime(2020, 04, 28), "Epfc Stadium", "EPFC", "EPHEC", "A1");
             //Le coach sélectionne des nouveaux joueurs pour le match avec l'équipe A1
             /*
             coach.selectPlayer(match1, player1);
@@ -109,7 +109,7 @@ namespace prbd_1920_g04 {
             coach.selectPlayer(match3, player5);
             coach.selectPlayer(match3, player6);*/
 
-            App.Model.SaveChanges();
+            //App.Model.SaveChanges();
            
             //Console.ReadLine();
         }

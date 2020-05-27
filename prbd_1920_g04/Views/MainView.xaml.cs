@@ -52,6 +52,9 @@ namespace prbd_1920_g04.Views {
 
             App.Register(this, AppMessages.MSG_NEW_PLAYER, () =>
             {
+
+
+
                 var tab = new TabItem()
                 {
                     //Mise à jour de l'onglet lors de la sauvegarde (à implémenter)
