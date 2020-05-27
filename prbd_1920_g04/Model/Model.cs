@@ -30,7 +30,7 @@ namespace prbd_1920_g04.Model
         public Secretary CreateSecretary(string firstName, string lastName, string email, string password, int age, string adresse, string picturePath, Fonction fonction = Fonction.Secretary)
         {
             var secretary = Secretaries.Create();
-            secretary.FristName = firstName;
+            secretary.FirstName = firstName;
             secretary.LastName = lastName;
             secretary.Email = email;
             secretary.Password = password;
@@ -45,7 +45,7 @@ namespace prbd_1920_g04.Model
         public Coach CreateCoach(string firstName, string lastName, string email, string password, int age, string adresse, string picturePath, Fonction fonction = Fonction.Coach)
         {
             var coach = Coaches.Create();
-            coach.FristName = firstName;
+            coach.FirstName = firstName;
             coach.LastName = lastName;
             coach.Email = email;
             coach.Password = password;
@@ -62,7 +62,7 @@ namespace prbd_1920_g04.Model
                                    int cut, double weight, string picturePath, int jerseyNumber,
                                    Fonction fonction = Fonction.Player){
             var player = Players.Create();
-            player.FristName = firstName;
+            player.FirstName = firstName;
             player.LastName = lastName;
             player.Email = email;
             player.Password = password;

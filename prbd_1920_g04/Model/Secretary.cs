@@ -14,7 +14,7 @@ namespace prbd_1920_g04.Model
         public Player CreatePlayer(string firstName, string lastname, string email, string password, int age, string adresse, int height, double weight, string picturePath, int jerseyNumber, Fonction fonction = Fonction.Player)
         {
 
-            var player = App.Model.CreatePlayer(firstName, lastname,email, password, age, adresse, height, weight, picturePath, jerseyNumber, fonction);
+            var player = App.Model.CreatePlayer(firstName, lastname, email, password, age, adresse, height, weight, picturePath, jerseyNumber, fonction);
             App.Model.SaveChanges();
             return player;
         }

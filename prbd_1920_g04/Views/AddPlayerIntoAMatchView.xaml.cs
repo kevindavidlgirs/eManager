@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -59,13 +60,10 @@ namespace prbd_1920_g04.Views
 
         private void SaveAction()
         {
-            if(Secretary.AddPlayerInMatchs(id, mtchs))
+            foreach(var i in checkListBox.SelectedItems)
             {
-                IsNew = false;
-                ComboBoxMatchs();
-                //ComboBoxPlayers();
-                App.NotifyColleagues(AppMessages.MSG_TEAM_CHANGED);
-            }
+                Console.WriteLine(i);
+            }            
         }
 
         private void CancelAction()
@@ -122,7 +120,7 @@ namespace prbd_1920_g04.Views
 
         private void ComboBoxPlayers(Model.Team t)
         {
-            var Plys = new ObservableCollection<Model.Player>(App.Model.Players.OrderBy(p => p.LastName));
+            var Plys = new ObservableCollection<Model.Player>(App.Model.Players);
             Players = new ObservableCollection<Model.Player>();
             foreach (var p in Plys)
             {
