@@ -24,7 +24,8 @@ namespace prbd_1920_g04 {
         MSG_CANCEL_ADD_PLAYER,
         MSG_ADD_PLAYER_TO_A_TEAM,
         MSG_TEAM_CHANGED,
-        MSG_MATCH_SAVED
+        MSG_MATCH_SAVED,
+        MSG_ADD_SCORE_TO_MATCH
     }
 
     public partial class App : ApplicationBase {

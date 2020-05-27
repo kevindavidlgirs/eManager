@@ -16,6 +16,8 @@ namespace prbd_1920_g04.Views
         public ICommand NewMatch { get; set; }
         public ICommand NewPlayer { get; set; }
         public ICommand AddPlayerToATeam { get; set; }
+        public ICommand AddScoreToMatch { get; set; }
+
         public MatchsView() {
 
             DataContext = this;
@@ -30,7 +32,9 @@ namespace prbd_1920_g04.Views
 
             AddPlayerToATeam = new RelayCommand(() => { App.NotifyColleagues(AppMessages.MSG_ADD_PLAYER_TO_A_TEAM); });
 
-            App.Register<Model.Match>(this, AppMessages.MSG_MATCH_CHANGED, match =>{ Refresh(); }); 
+            AddScoreToMatch = new RelayCommand(() => { App.NotifyColleagues(AppMessages.MSG_ADD_SCORE_TO_MATCH); });
+
+            App.Register<Model.Match>(this, AppMessages.MSG_MATCH_CHANGED, match =>{ Refresh();  }); 
             Refresh();
             InitializeComponent();
         }

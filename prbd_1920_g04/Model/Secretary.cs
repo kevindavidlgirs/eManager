@@ -54,15 +54,15 @@ namespace prbd_1920_g04.Model
             
         }
 
-        //IMPOSSIBLE D'AJOUTER PLUS D'UN MATCH!
-        public Match AddMatch(DateTime date, string place, string home, string adversary, string categorie) { 
+        public Match AddMatch(DateTime date, string place, string home, string adversary, string categorie) {
             Match match = null;
             var team = App.Model.Teams.Find(categorie); // On récupère la catégorie.
-            if (team.IsComplete()) {
+            if (team != null) {
                 match = App.Model.CreateMatch(date, place, home, adversary, team);
                 App.Model.SaveChanges();
                 return match;
             }
+
             return match;
         }
 

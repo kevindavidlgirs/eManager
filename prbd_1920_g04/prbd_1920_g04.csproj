@@ -85,6 +85,9 @@
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MatchAddScore.xaml.cs">
+      <DependentUpon>MatchAddScore.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MatchDetailAddView.xaml.cs">
       <DependentUpon>MatchDetailAddView.xaml</DependentUpon>
     </Compile>
@@ -96,6 +99,12 @@
     </Compile>
     <Compile Include="Views\PlayerDetailAddView.xaml.cs">
       <DependentUpon>PlayerDetailAddView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControl1.Designer.cs">
+      <DependentUpon>UserControl1.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +158,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MatchAddScore.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
