@@ -25,7 +25,7 @@ namespace prbd_1920_g04 {
         MSG_ADD_PLAYER_TO_A_TEAM,
         MSG_TEAM_CHANGED,
         MSG_MATCH_SAVED,
-        MSG_ADD_SCORE_TO_MATCH
+        MSG_ADD_RESULT_TO_MATCH
     }
 
     public partial class App : ApplicationBase {
@@ -70,9 +70,9 @@ namespace prbd_1920_g04 {
 
             App.Model.SaveChanges();*/
 
-            //App.Model.CreateTeams(); //Toutes les équipes sont créées
+            /*App.Model.CreateTeams(); //Toutes les équipes sont créées
 
-
+      
             //var adm = model.CreateAdmin("admin", "admin", "admin@gmail.com", "admin", 44, "Rue de l'administration", "/path", Fonction.Admin);
             var sec = App.Model.CreateSecretary("secretaire", "secretaire", "secretaire@gmail.com", "secretaire", 30, "Rue du document", "/path", Fonction.Secretary);
             var coach = App.Model.CreateCoach("coach", "coach", "coach@gmail.com", "coach", 30, "Rue du document", "/path", Fonction.Coach);
@@ -84,7 +84,7 @@ namespace prbd_1920_g04 {
             var player4 = sec.CreatePlayer("Noyce", "Robert", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 10, Fonction.Player);
             var player5 = sec.CreatePlayer("Viton", "Cerf", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 7, Fonction.Player);
             var player6 = sec.CreatePlayer("Robert", "Caillau", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 9, Fonction.Player);
-            Console.WriteLine(sec + "\n" + player1 + "\n" + player2 + "\n" + player3);
+            Console.WriteLine(sec + "\n" + player1 + "\n" + player2 + "\n" + player3);*/
             
             
 

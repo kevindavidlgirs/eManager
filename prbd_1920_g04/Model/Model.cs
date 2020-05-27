@@ -101,7 +101,7 @@ namespace prbd_1920_g04.Model
             return team;
         }
 
-        /*public void CreateTeams() {
+        public void CreateTeams() {
             App.Model.CreateTeam("U7", 7, 7);
             App.Model.CreateTeam("U8", 8, 8);
             App.Model.CreateTeam("U9", 9, 9);
@@ -115,7 +115,7 @@ namespace prbd_1920_g04.Model
             App.Model.CreateTeam("A2", 21, 50);
 
             App.Model.SaveChanges();
-        }*/
+        }
 
     }
 }

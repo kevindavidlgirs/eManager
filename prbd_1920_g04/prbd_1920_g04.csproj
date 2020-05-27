@@ -100,8 +100,8 @@
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MatchAddScore.xaml.cs">
-      <DependentUpon>MatchAddScore.xaml</DependentUpon>
+    <Compile Include="Views\MatchAddResult.xaml.cs">
+      <DependentUpon>MatchAddResult.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MatchDetailAddView.xaml.cs">
       <DependentUpon>MatchDetailAddView.xaml</DependentUpon>
@@ -176,7 +176,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MatchAddScore.xaml">
+    <Page Include="Views\MatchAddResult.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

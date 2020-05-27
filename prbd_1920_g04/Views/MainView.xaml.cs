@@ -52,9 +52,6 @@ namespace prbd_1920_g04.Views {
 
             App.Register(this, AppMessages.MSG_NEW_PLAYER, () =>
             {
-
-
-
                 var tab = new TabItem()
                 {
                     //Mise à jour de l'onglet lors de la sauvegarde (à implémenter)
@@ -81,11 +78,10 @@ namespace prbd_1920_g04.Views {
                 Dispatcher.InvokeAsync(() => tab.Focus());
             });
 
-            App.Register<Match>(this, AppMessages.MSG_ADD_SCORE_TO_MATCH, (match) => {
+            App.Register(this, AppMessages.MSG_ADD_RESULT_TO_MATCH, () => {
                 var tab = new TabItem() {
-                    //Mise à jour de l'onglet lors de la sauvegarde (à implémenter)
-                    Header = match.Home+"vs"+match.Adversary,
-                    Content = new MatchAddScore(match)
+                    Header = "Result",
+                    Content = new MatchAddResult()
                 };
                 tabControl.Items.Add(tab);
                 Dispatcher.InvokeAsync(() => tab.Focus());
