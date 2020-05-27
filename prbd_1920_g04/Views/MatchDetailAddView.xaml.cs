@@ -119,9 +119,6 @@ namespace prbd_1920_g04.Views {
             return change != null && change.State != EntityState.Unchanged;
         }
 
-
-
-        //Il faut ajouter des joueurs au team pour que la liste soit remplie. (condition ajouté, IsComplete() dans secretary)
         private void Refresh() {
             Teams = new ObservableCollection<Model.Team>(App.Model.Teams.OrderBy(m => m.Name));
             foreach (var t in Teams) {
@@ -129,10 +126,6 @@ namespace prbd_1920_g04.Views {
             }
             Console.WriteLine("Count of teams : " + Teams.Count());
         }
-        //Il faut ajouter des joueurs au team pour que la liste soit remplie. (condition ajouté, IsComplete() dans secretary)
-
-
-
 
         public MatchDetailAddView() {
             DataContext = this;

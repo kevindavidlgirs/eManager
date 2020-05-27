@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -38,7 +39,7 @@ namespace prbd_1920_g04.Views
             set
             {
                 id = value;
-                //RaisePropertyChanged(value);
+                //RaisePropertyChanged(Id);
             }
         }
 
@@ -62,7 +63,7 @@ namespace prbd_1920_g04.Views
             {
                 IsNew = false;
                 ComboBoxMatchs();
-                ComboBoxPlayers();
+                //ComboBoxPlayers();
                 App.NotifyColleagues(AppMessages.MSG_TEAM_CHANGED);
             }
         }
@@ -86,7 +87,7 @@ namespace prbd_1920_g04.Views
         {
             if (IsNew)
             {
-                return !(Players.Count() == 0 && Matchs.Count() == 0 && HasErrors);
+                return !(Matchs.Count() == 0 && HasErrors);
             }
             //var change = (from c in App.Model.ChangeTracker.Entries<Model.Match>()
             //              where c.Entity == Match
@@ -95,19 +96,37 @@ namespace prbd_1920_g04.Views
             return false; 
         }
 
-        private void ComboBoxMatchs()
+        private void ComboBox_SelectionChanged(object sender, EventArgs e)
         {
-            Matchs = new ObservableCollection<Model.Match>(App.Model.Matchs);
-            Console.WriteLine(Matchs);
+            foreach(var m in Matchs)
+            {
+                if (m.Equals((Model.Match)Mc.SelectedItem))
+                {
+                    ComboBoxPlayers(m.TeamPlaying);
+                }
+            }
         }
 
-        private void ComboBoxPlayers()
+        private void ComboBoxMatchs()
+        {
+            var tmp  = new ObservableCollection<Model.Match>(App.Model.Matchs);
+            Matchs = new ObservableCollection<Model.Match>();
+            foreach (var match in tmp)
+            {
+                if (!match.TeamPlaying.IsComplete())
+                {
+                    Matchs.Add(match);
+                }
+            }
+        }
+
+        private void ComboBoxPlayers(Model.Team t)
         {
             var Plys = new ObservableCollection<Model.Player>(App.Model.Players.OrderBy(p => p.LastName));
             Players = new ObservableCollection<Model.Player>();
             foreach (var p in Plys)
             {
-                if(p.TeamName == null)
+                if(p.TeamName == null && p.Age >= t.MinAge && p.Age <= t.MaxAge)
                 {
                     Players.Add(p);
                 }
@@ -119,11 +138,10 @@ namespace prbd_1920_g04.Views
             IsNew = true;
             Secretary = (Model.Secretary)App.CurrentUser;
             ComboBoxMatchs();
-            ComboBoxPlayers();
             Save = new RelayCommand(SaveAction, CanSaveOrCancelAction);
             //Cancel = new RelayCommand(CancelAction);
             InitializeComponent();
-            App.Register<Model.Match>(this, AppMessages.MSG_MATCH_CHANGED, player => { ComboBoxPlayers(); ComboBoxMatchs();});
+            App.Register<Model.Match>(this, AppMessages.MSG_MATCH_CHANGED, player => { ComboBoxMatchs();});
         }
     }
 }

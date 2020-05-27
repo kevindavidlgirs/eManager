@@ -15,6 +15,10 @@ namespace prbd_1920_g04.Model
         [Key]
         public string Name { get; set; }
 
+        public int MinAge { get; set; }
+
+        public int MaxAge { get; set; }
+
         public virtual ICollection<Player> Players { get; set; } = new HashSet<Player>();
 
         public int NumberOfPlayers() {

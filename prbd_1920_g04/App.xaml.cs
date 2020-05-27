@@ -87,10 +87,11 @@ namespace prbd_1920_g04 {
             
             
 
-            /*
+            
             // Le secrétaire encode le match.
             var match1 = sec.AddMatch(new DateTime(2020, 04, 28), "Epfc Stadium", "EPFC", "EPHEC", "A1");
             //Le coach sélectionne des nouveaux joueurs pour le match avec l'équipe A1
+            /*
             coach.selectPlayer(match1, player1);
             coach.selectPlayer(match1, player2);
             coach.selectPlayer(match1, player3);

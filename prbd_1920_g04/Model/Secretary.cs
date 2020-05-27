@@ -56,7 +56,7 @@ namespace prbd_1920_g04.Model
 
         public Match AddMatch(DateTime date, string place, string home, string adversary, string categorie) { 
             Match match = null;
-            var team = App.Model.Teams.Find(categorie); // On récupère la catégorie.
+            var team = App.Model.Teams.Find(categorie); 
             if (team != null) {
                 match = App.Model.CreateMatch(date, place, home, adversary, team);
                 App.Model.SaveChanges();
