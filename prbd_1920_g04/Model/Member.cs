@@ -13,7 +13,7 @@ namespace prbd_1920_g04.Model {
        
        [Key]
        public int Id { get; set; }
-       public string FristName { get; set; }
+       public string FirstName { get; set; }
        public string LastName { get; set; }
        public string Email { get; set; }
        public string Password { get; set; }
@@ -23,7 +23,7 @@ namespace prbd_1920_g04.Model {
        public Fonction Fonction { get; set; }
 
         public override string ToString() {
-            return $"<User: Name={FristName}, FirstName={FristName}, Email={Email}, Age={Age}, Adresse={Adresse}, Role={Fonction.ToString()}>";
+            return $"<User: Name={LastName}, FirstName={FirstName}, Email={Email}, Age={Age}, Adresse={Adresse}, Role={Fonction.ToString()}>";
         }
     }
 }

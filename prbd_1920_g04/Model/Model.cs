@@ -30,7 +30,7 @@ namespace prbd_1920_g04.Model
         public Secretary CreateSecretary(string firstName, string lastName, string email, string password, int age, string adresse, string picturePath, Fonction fonction = Fonction.Secretary)
         {
             var secretary = Secretaries.Create();
-            secretary.FristName = firstName;
+            secretary.FirstName = firstName;
             secretary.LastName = lastName;
             secretary.Email = email;
             secretary.Password = password;
@@ -45,7 +45,7 @@ namespace prbd_1920_g04.Model
         public Coach CreateCoach(string firstName, string lastName, string email, string password, int age, string adresse, string picturePath, Fonction fonction = Fonction.Coach)
         {
             var coach = Coaches.Create();
-            coach.FristName = firstName;
+            coach.FirstName = firstName;
             coach.LastName = lastName;
             coach.Email = email;
             coach.Password = password;
@@ -62,7 +62,7 @@ namespace prbd_1920_g04.Model
                                    int cut, double weight, string picturePath, int jerseyNumber,
                                    Fonction fonction = Fonction.Player){
             var player = Players.Create();
-            player.FristName = firstName;
+            player.FirstName = firstName;
             player.LastName = lastName;
             player.Email = email;
             player.Password = password;
@@ -91,26 +91,28 @@ namespace prbd_1920_g04.Model
             return match;
         }
 
-        public Team CreateTeam(string name) {
+        public Team CreateTeam(string name, int MinAge, int MaxAge) {
             var team = Teams.Create();
             team.Name = name;
+            team.MinAge = MinAge;
+            team.MaxAge = MaxAge;
             Teams.Add(team);
 
             return team;
         }
 
         public void CreateTeams() {
-            App.Model.CreateTeam("U7");
-            App.Model.CreateTeam("U8");
-            App.Model.CreateTeam("U9");
-            App.Model.CreateTeam("U10");
-            App.Model.CreateTeam("U11");
-            App.Model.CreateTeam("U13");
-            App.Model.CreateTeam("U15");
-            App.Model.CreateTeam("U17");
-            App.Model.CreateTeam("U21");
-            App.Model.CreateTeam("A1");
-            App.Model.CreateTeam("A2");
+            App.Model.CreateTeam("U7", 7, 7);
+            App.Model.CreateTeam("U8", 8, 8);
+            App.Model.CreateTeam("U9", 9, 9);
+            App.Model.CreateTeam("U10", 10, 10);
+            App.Model.CreateTeam("U11", 11, 12);
+            App.Model.CreateTeam("U13", 13, 14);
+            App.Model.CreateTeam("U15", 15, 16);
+            App.Model.CreateTeam("U17", 17, 20);
+            App.Model.CreateTeam("U21", 21, 50);
+            App.Model.CreateTeam("A1", 21, 50);
+            App.Model.CreateTeam("A2", 21, 50);
 
             App.Model.SaveChanges();
         }
