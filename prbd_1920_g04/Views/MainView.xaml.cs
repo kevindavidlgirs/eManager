@@ -1,18 +1,10 @@
 ﻿using PRBD_Framework;
+using prbd_1920_g04.Model;
 using System;
-using System.Collections.Generic;
-using System.Data.Linq;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+using System.Reflection;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System.Linq;
 
 namespace prbd_1920_g04.Views {
     public partial class MainView : WindowBase {
@@ -50,7 +42,6 @@ namespace prbd_1920_g04.Views {
                     }
                 }
                 var tab = new TabItem() {
-                    //Mise à jour de l'onglet lors de la sauvegarde (à implémenter)
                     Header = "<new match>",
                     Content = new MatchDetailAddView()
                 };
@@ -87,10 +78,50 @@ namespace prbd_1920_g04.Views {
                 Dispatcher.InvokeAsync(() => tab.Focus());
             });
 
+            App.Register(this, AppMessages.MSG_ADD_RESULT_TO_MATCH, () => {
+                var tab = new TabItem() {
+                    Header = "Result",
+                    Content = new MatchAddResult()
+                };
+                tabControl.Items.Add(tab);
+                Dispatcher.InvokeAsync(() => tab.Focus());
+            });
+
+            App.Register<string>(this, AppMessages.MSG_MATCH_SAVED, (s) => {
+                (tabControl.SelectedItem as TabItem).Header = s;
+            });
         }
+        
+           /* private void tabOfMatch(Model.Match m, bool isNew) {
+                foreach (TabItem t in tabControl.Items) {
+                    if (t.Header.ToString().Equals(m.DateMatch)) {
+                        Dispatcher.InvokeAsync(() => t.Focus());
+                        return;
+                    }
+                }
 
-        private void MatchsView_Loaded(object sender, RoutedEventArgs e) {
+                var tab = new TabItem() {
+                    Header = isNew ? "<new match>" : m.Adversary+"vs"+m.Home,
+                    Content = new MatchDetailView(m)
+                };
 
+                tabControl.Items.Add(tab);
+                tab.MouseDown += (o, e) => {
+                    if (e.ChangedButton == MouseButton.Middle &&
+                        e.ButtonState == MouseButtonState.Pressed) {
+                        tabControl.Items.Remove(o);
+                        (tab.Content as UserControlBase).Dispose();
+                    }
+                };
+                tab.PreviewKeyDown += (o, e) => {
+                    if (e.Key == Key.W && Keyboard.IsKeyDown(Key.LeftCtrl)) {
+                        tabControl.Items.Remove(o);
+                        (tab.Content as UserControlBase).Dispose();
+                    }
+                };
+                // exécute la méthode Focus() de l'onglet pour lui donner le focus (càd l'activer)
+                Dispatcher.InvokeAsync(() => tab.Focus());
+            }*/
         }
         /*  
  private void tabOfMember(Model.Match m, bool isNew) {

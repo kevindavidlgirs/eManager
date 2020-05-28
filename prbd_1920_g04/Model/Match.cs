@@ -13,9 +13,14 @@ namespace prbd_1920_g04.Model {
         public string Adversary { get; set; }
         public string Place { get; set; }
 
+        public int GoalsHome { get; set; }
+        public int GoalsAdversary { get; set; }
+        public bool IsOver { get; set; }
+
         public virtual Team TeamPlaying { get; set; }
 
         public Match() {
+            IsOver = false;
             DateMatch = DateTime.Now;
         }
         public void DeleteTeam() {

@@ -24,11 +24,6 @@
                                            CommandParameter="{Binding ElementName=listView, Path=SelectedItem}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel/>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -43,7 +38,8 @@
         <DockPanel HorizontalAlignment="Center" Height="20" LastChildFill="False" Margin="20,10,0,0" VerticalAlignment="Center">
             <Button Content="Browse" Height="20" VerticalAlignment="Top" Width="120"/>
             <Button x:Name="btnCreateMatch" Command="{Binding NewMatch}" Content="Create match" Height="20" VerticalAlignment="Top" Width="120"/>
-            <Button x:Name="btnCreatePlayer" Command="{Binding NewPlayer}" Content="Create Player" Height="20" VerticalAlignment="Top" Width="120"/>
+            <Button x:Name="btnCreatePlayer" Command="{Binding NewPlayer}" Content="Create player" Height="20" VerticalAlignment="Top" Width="120"/>
+            <Button x:Name="btnAddScore" Command="{Binding AddResultToMatch}" Content="Add results" Height="20" VerticalAlignment="Top" Width="120"/>
             <Button Command="{Binding AddPlayerToAMatch}" Content="Add player to a match" Height="20" VerticalAlignment="Top" Width="120"/>
         </DockPanel>
     </Grid>
