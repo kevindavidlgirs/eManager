@@ -25,7 +25,8 @@ namespace prbd_1920_g04 {
         MSG_ADD_PLAYER_TO_A_TEAM,
         MSG_TEAM_CHANGED,
         MSG_MATCH_SAVED,
-        MSG_ADD_RESULT_TO_MATCH
+        MSG_ADD_RESULT_TO_MATCH,
+        MSG_UPDATE_MATCH
     }
 
     public partial class App : ApplicationBase {
@@ -57,7 +58,7 @@ namespace prbd_1920_g04 {
             //model.Database.Log = Console.Write;
 
             // On commence par Désolidariser tous les équipes des matchs (c'est du bricolage mais ça fonctionne.)
-            /*foreach (var match in App.Model.Matchs) {
+            foreach (var match in App.Model.Matchs) {
                 match.DeleteTeam();
             }
 
@@ -68,9 +69,9 @@ namespace prbd_1920_g04 {
 
             App.Model.Teams.RemoveRange(App.Model.Teams);
 
-            App.Model.SaveChanges();*/
+            App.Model.SaveChanges();
 
-            /*App.Model.CreateTeams(); //Toutes les équipes sont créées
+            App.Model.CreateTeams(); //Toutes les équipes sont créées
 
       
             //var adm = model.CreateAdmin("admin", "admin", "admin@gmail.com", "admin", 44, "Rue de l'administration", "/path", Fonction.Admin);
@@ -83,14 +84,29 @@ namespace prbd_1920_g04 {
             var player3 = sec.CreatePlayer("Dubois", "Charles", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 9, Fonction.Player);
             var player4 = sec.CreatePlayer("Noyce", "Robert", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 10, Fonction.Player);
             var player5 = sec.CreatePlayer("Viton", "Cerf", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 7, Fonction.Player);
-            var player6 = sec.CreatePlayer("Robert", "Caillau", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 9, Fonction.Player);
-            Console.WriteLine(sec + "\n" + player1 + "\n" + player2 + "\n" + player3);*/
+            var player7 = sec.CreatePlayer("Arthur", "Borus", "player@gmail.com", "player", 17, "Avenue du ballon", 175, 72.5, "/path", 3, Fonction.Player);
+            var player8 = sec.CreatePlayer("Marc", "Ddodo", "player@gmail.com", "player", 17, "Avenue du ballon", 175, 72.5, "/path", 4, Fonction.Player);
+            var player9 = sec.CreatePlayer("Clarence", "Moto", "player@gmail.com", "player", 15, "Avenue du ballon", 175, 72.5, "/path", 5, Fonction.Player);
+            var player10 = sec.CreatePlayer("Riddick", "Khan", "player@gmail.com", "player", 15, "Avenue du ballon", 175, 72.5, "/path", 6, Fonction.Player);
+            var player11 = sec.CreatePlayer("Albert", "Romano", "player@gmail.com", "player", 12, "Avenue du ballon", 175, 72.5, "/path", 2, Fonction.Player);
+            var player12 = sec.CreatePlayer("Dimitri", "Rogan", "player@gmail.com", "player", 12, "Avenue du ballon", 175, 72.5, "/path", 1, Fonction.Player);
+            Console.WriteLine(sec + "\n" + player1 + "\n" + player2 + "\n" + player3);
             
             
 
             
             // Le secrétaire encode le match.
-            //var match1 = sec.AddMatch(new DateTime(2020, 04, 28), "Epfc Stadium", "EPFC", "EPHEC", "A1");
+            var match1 = sec.AddMatch(new DateTime(2020, 04, 28), "Epfc Stadium", "EPFC", "SUPINFO", "A1");
+            var match2 = sec.AddMatch(new DateTime(2020, 05, 05), "Epfc Stadium", "EPFC", "HE2B", "A1");
+            var match3 = sec.AddMatch(new DateTime(2020, 07, 13), "Epfc Stadium", "EPFC", "EPHEC", "U11");
+            var match4 = sec.AddMatch(new DateTime(2020, 03, 18), "Epfc Stadium", "EPFC", "ESMO", "U17");
+            var match5 = sec.AddMatch(new DateTime(2020, 02, 29), "Epfc Stadium", "EPFC", "HELB", "A1");
+            var match6 = sec.AddMatch(new DateTime(2020, 12, 04), "Epfc Stadium", "EPFC", "UCLOUVAIN", "U13");
+            var match7 = sec.AddMatch(new DateTime(2020, 05, 07), "Epfc Stadium", "EPFC", "ESI", "U15");
+            var match8 = sec.AddMatch(new DateTime(2020, 03, 12), "Epfc Stadium", "EPFC", "INRACI", "A2");
+            var match9 = sec.AddMatch(new DateTime(2020, 08, 21), "Epfc Stadium", "EPFC", "ESA", "A7");
+            var match10 = sec.AddMatch(new DateTime(2020, 07, 06), "Epfc Stadium", "EPFC", "ICT", "U13");
+            var match11 = sec.AddMatch(new DateTime(2020, 05, 28), "Epfc Stadium", "EPFC", "ULB", "");
             //Le coach sélectionne des nouveaux joueurs pour le match avec l'équipe A1
             /*
             coach.selectPlayer(match1, player1);
@@ -109,7 +125,7 @@ namespace prbd_1920_g04 {
             coach.selectPlayer(match3, player5);
             coach.selectPlayer(match3, player6);*/
 
-            //App.Model.SaveChanges();
+            App.Model.SaveChanges();
            
             //Console.ReadLine();
         }

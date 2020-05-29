@@ -90,37 +90,42 @@ namespace prbd_1920_g04.Views {
             App.Register<string>(this, AppMessages.MSG_MATCH_SAVED, (s) => {
                 (tabControl.SelectedItem as TabItem).Header = s;
             });
-        }
-        
-           /* private void tabOfMatch(Model.Match m, bool isNew) {
-                foreach (TabItem t in tabControl.Items) {
-                    if (t.Header.ToString().Equals(m.DateMatch)) {
-                        Dispatcher.InvokeAsync(() => t.Focus());
-                        return;
-                    }
-                }
 
-                var tab = new TabItem() {
-                    Header = isNew ? "<new match>" : m.Adversary+"vs"+m.Home,
-                    Content = new MatchDetailView(m)
-                };
+            App.Register<Match>(this, AppMessages.MSG_UPDATE_MATCH, (m) => {
+                Console.WriteLine(m.Home +"vs"+m.Adversary);
+            });
 
-                tabControl.Items.Add(tab);
-                tab.MouseDown += (o, e) => {
-                    if (e.ChangedButton == MouseButton.Middle &&
-                        e.ButtonState == MouseButtonState.Pressed) {
-                        tabControl.Items.Remove(o);
-                        (tab.Content as UserControlBase).Dispose();
-                    }
-                };
-                tab.PreviewKeyDown += (o, e) => {
-                    if (e.Key == Key.W && Keyboard.IsKeyDown(Key.LeftCtrl)) {
-                        tabControl.Items.Remove(o);
-                        (tab.Content as UserControlBase).Dispose();
-                    }
-                };
-                // exécute la méthode Focus() de l'onglet pour lui donner le focus (càd l'activer)
-                Dispatcher.InvokeAsync(() => tab.Focus());
-            }*/
+            /* private void tabOfMatch(Model.Match m, bool isNew) {
+                 foreach (TabItem t in tabControl.Items) {
+                     if (t.Header.ToString().Equals(m.DateMatch)) {
+                         Dispatcher.InvokeAsync(() => t.Focus());
+                         return;
+                     }
+                 }
+
+                 var tab = new TabItem() {
+                     Header = isNew ? "<new match>" : m.Adversary+"vs"+m.Home,
+                     Content = new MatchDetailView(m)
+                 };
+
+                 tabControl.Items.Add(tab);
+                 tab.MouseDown += (o, e) => {
+                     if (e.ChangedButton == MouseButton.Middle &&
+                         e.ButtonState == MouseButtonState.Pressed) {
+                         tabControl.Items.Remove(o);
+                         (tab.Content as UserControlBase).Dispose();
+                     }
+                 };
+                 tab.PreviewKeyDown += (o, e) => {
+                     if (e.Key == Key.W && Keyboard.IsKeyDown(Key.LeftCtrl)) {
+                         tabControl.Items.Remove(o);
+                         (tab.Content as UserControlBase).Dispose();
+                     }
+                 };
+                 // exécute la méthode Focus() de l'onglet pour lui donner le focus (càd l'activer)
+                 Dispatcher.InvokeAsync(() => tab.Focus());
+             }*/
         }
+    }
 }
+
