@@ -36,16 +36,20 @@ namespace prbd_1920_g04.Views {
 
         private void UpdateAction(Match m) {
             Console.WriteLine(m.Home + "vs" + m.Adversary);
+            m.IsOver = true;
             App.Model.SaveChanges();
-            //App.NotifyColleagues(AppMessages.MSG_MEMBER_CHANGED, Member);
+            Refresh();
+        }
+        private void Refresh() {
+            PlayedMatchs = new ObservableCollection<Match>(App.Model.Matchs.Where(m => m.IsOver != true).OrderBy(m => m.DateMatch));
         }
 
         public MatchAddResult() {
             DataContext = this;
             // On recupère tous les matchs qui ne sont pas joués
-            PlayedMatchs = new ObservableCollection<Match>(App.Model.Matchs.Where(m => m.IsOver != true).OrderBy(m => m.DateMatch));
             //UpdateMatch = new RelayCommand<Match>((m) => { App.NotifyColleagues(AppMessages.MSG_UPDATE_MATCH, m); });
             UpdateMatch = new RelayCommand<Match>((m) => { UpdateAction(m); });
+            Refresh();
             InitializeComponent();
         }
     }

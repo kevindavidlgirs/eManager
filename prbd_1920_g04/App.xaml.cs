@@ -106,7 +106,7 @@ namespace prbd_1920_g04 {
             var match8 = sec.AddMatch(new DateTime(2020, 03, 12), "Epfc Stadium", "EPFC", "INRACI", "A2");
             var match9 = sec.AddMatch(new DateTime(2020, 08, 21), "Epfc Stadium", "EPFC", "ESA", "A7");
             var match10 = sec.AddMatch(new DateTime(2020, 07, 06), "Epfc Stadium", "EPFC", "ICT", "U13");
-            var match11 = sec.AddMatch(new DateTime(2020, 05, 28), "Epfc Stadium", "EPFC", "ULB", "");
+            var match11 = sec.AddMatch(new DateTime(2020, 05, 28), "Epfc Stadium", "EPFC", "HELB", "A2");
             //Le coach sélectionne des nouveaux joueurs pour le match avec l'équipe A1
             /*
             coach.selectPlayer(match1, player1);
