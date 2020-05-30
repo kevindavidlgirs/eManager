@@ -29,6 +29,22 @@ namespace prbd_1920_g04.Views {
                 };
                 tabControl.Items.Add(tab);
                 Dispatcher.InvokeAsync(() => tab.Focus());
+
+                tab.MouseDown += (o, e) => {
+                    if (e.ChangedButton == MouseButton.Middle &&
+                        e.ButtonState == MouseButtonState.Pressed)
+                    {
+                        tabControl.Items.Remove(o);
+                        (tab.Content as UserControlBase).Dispose();
+                    }
+                };
+                tab.PreviewKeyDown += (o, e) => {
+                    if (e.Key == Key.W && Keyboard.IsKeyDown(Key.LeftCtrl))
+                    {
+                        tabControl.Items.Remove(o);
+                        (tab.Content as UserControlBase).Dispose();
+                    }
+                };
             });
 
             App.Register(this, AppMessages.MSG_NEW_MATCH, () => {
@@ -48,6 +64,22 @@ namespace prbd_1920_g04.Views {
 
                 tabControl.Items.Add(tab);
                 Dispatcher.InvokeAsync(() => tab.Focus());
+
+                tab.MouseDown += (o, e) => {
+                    if (e.ChangedButton == MouseButton.Middle &&
+                        e.ButtonState == MouseButtonState.Pressed)
+                    {
+                        tabControl.Items.Remove(o);
+                        (tab.Content as UserControlBase).Dispose();
+                    }
+                };
+                tab.PreviewKeyDown += (o, e) => {
+                    if (e.Key == Key.W && Keyboard.IsKeyDown(Key.LeftCtrl))
+                    {
+                        tabControl.Items.Remove(o);
+                        (tab.Content as UserControlBase).Dispose();
+                    }
+                };
             });
 
             App.Register(this, AppMessages.MSG_NEW_PLAYER, () =>
@@ -60,10 +92,22 @@ namespace prbd_1920_g04.Views {
                 };
                 tabControl.Items.Add(tab);
                 Dispatcher.InvokeAsync(() => tab.Focus());
-            });
 
-            App.Register(this, AppMessages.MSG_CANCEL_ADD_PLAYER, () => {
-                //tabControl.Items.Remove(...);
+                tab.MouseDown += (o, e) => {
+                    if (e.ChangedButton == MouseButton.Middle &&
+                        e.ButtonState == MouseButtonState.Pressed)
+                    {
+                        tabControl.Items.Remove(o);
+                        (tab.Content as UserControlBase).Dispose();
+                    }
+                };
+                tab.PreviewKeyDown += (o, e) => {
+                    if (e.Key == Key.W && Keyboard.IsKeyDown(Key.LeftCtrl))
+                    {
+                        tabControl.Items.Remove(o);
+                        (tab.Content as UserControlBase).Dispose();
+                    }
+                };
             });
 
             App.Register(this, AppMessages.MSG_ADD_PLAYER_TO_A_TEAM, () =>
@@ -76,6 +120,22 @@ namespace prbd_1920_g04.Views {
                 };
                 tabControl.Items.Add(tab);
                 Dispatcher.InvokeAsync(() => tab.Focus());
+
+                tab.MouseDown += (o, e) => {
+                    if (e.ChangedButton == MouseButton.Middle &&
+                        e.ButtonState == MouseButtonState.Pressed)
+                    {
+                        tabControl.Items.Remove(o);
+                        (tab.Content as UserControlBase).Dispose();
+                    }
+                };
+                tab.PreviewKeyDown += (o, e) => {
+                    if (e.Key == Key.W && Keyboard.IsKeyDown(Key.LeftCtrl))
+                    {
+                        tabControl.Items.Remove(o);
+                        (tab.Content as UserControlBase).Dispose();
+                    }
+                };
             });
 
             App.Register(this, AppMessages.MSG_ADD_RESULT_TO_MATCH, () => {
@@ -85,6 +145,22 @@ namespace prbd_1920_g04.Views {
                 };
                 tabControl.Items.Add(tab);
                 Dispatcher.InvokeAsync(() => tab.Focus());
+
+                tab.MouseDown += (o, e) => {
+                    if (e.ChangedButton == MouseButton.Middle &&
+                        e.ButtonState == MouseButtonState.Pressed)
+                    {
+                        tabControl.Items.Remove(o);
+                        (tab.Content as UserControlBase).Dispose();
+                    }
+                };
+                tab.PreviewKeyDown += (o, e) => {
+                    if (e.Key == Key.W && Keyboard.IsKeyDown(Key.LeftCtrl))
+                    {
+                        tabControl.Items.Remove(o);
+                        (tab.Content as UserControlBase).Dispose();
+                    }
+                };
             });
 
             App.Register<string>(this, AppMessages.MSG_MATCH_SAVED, (s) => {

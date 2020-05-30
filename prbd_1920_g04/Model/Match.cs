@@ -12,12 +12,19 @@ namespace prbd_1920_g04.Model {
         public string Home { get; set; }
         public string Adversary { get; set; }
         public string Place { get; set; }
-
         public int GoalsHome { get; set; }
         public int GoalsAdversary { get; set; }
         public bool IsOver { get; set; }
-
         public virtual Team TeamPlaying { get; set; }
+        public List<int> PlayersId { get; set; } = new List<int>();
+        public int NumberOfPlayers()
+        {
+            return PlayersId.Count();
+        }
+        public bool IsComplete()
+        {
+            return PlayersId.Count() >= 11;
+        }
 
         public Match() {
             IsOver = false;

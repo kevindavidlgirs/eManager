@@ -1,22 +1,9 @@
-﻿using PRBD_Framework;
+﻿using prbd_1920_g04.Model;
+using PRBD_Framework;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data.Entity;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace prbd_1920_g04.Views
 {
@@ -37,11 +24,7 @@ namespace prbd_1920_g04.Views
         public int Id
         {
             get { return id; }
-            set
-            {
-                id = value;
-                //RaisePropertyChanged(Id);
-            }
+            set { id = value; }
         }
 
         private string mtchs;
@@ -56,29 +39,22 @@ namespace prbd_1920_g04.Views
         }
         public ICommand Save { get; set; }
 
-        public ICommand Cancel { get; set; }
-
         private void SaveAction()
         {
-            foreach(var i in checkListBox.SelectedItems)
+            foreach(var player in checkListBox.SelectedItems)
             {
-                Console.WriteLine(i);
-            }            
-        }
-
-        private void CancelAction()
-        {
+                Player p = (Player)player;
+                Secretary.AddPlayerInMatchs(p.Id, matchSelected);
+            }
+            ComboBoxPlayers(matchSelected.TeamPlaying);
+            SetLabelPlaceAvalaible();
         }
 
         private bool isNew;
         public bool IsNew
         {
             get { return isNew; }
-            set
-            {
-                isNew = value;
-                RaisePropertyChanged(nameof(IsNew));
-            }
+            set { isNew = value; }
         }
 
         private bool CanSaveOrCancelAction()
@@ -87,11 +63,14 @@ namespace prbd_1920_g04.Views
             {
                 return !(Matchs.Count() == 0 && HasErrors);
             }
-            //var change = (from c in App.Model.ChangeTracker.Entries<Model.Match>()
-            //              where c.Entity == Match
-            //              select c).FirstOrDefault();                             //Je dois comprendre cette partie (kevin)
-            //return change != null && change.State != EntityState.Unchanged;
             return false; 
+        }
+
+        private Match matchSelected;
+        public Match MatchSelected
+        {
+            get { return matchSelected; }
+            set { matchSelected = value; }
         }
 
         private void ComboBox_SelectionChanged(object sender, EventArgs e)
@@ -100,7 +79,11 @@ namespace prbd_1920_g04.Views
             {
                 if (m.Equals((Model.Match)Mc.SelectedItem))
                 {
-                    ComboBoxPlayers(m.TeamPlaying);
+                    matchSelected = m;
+                    ComboBoxPlayers(matchSelected.TeamPlaying);
+                    SetLabelPlaceAvalaible();
+                    equipeAdverse.Content = "VS " + matchSelected.Adversary + ". Date of meeting : " + matchSelected.DateMatch.Day+" /" + matchSelected.DateMatch.Month;
+                    return;
                 }
             }
         }
@@ -111,7 +94,7 @@ namespace prbd_1920_g04.Views
             Matchs = new ObservableCollection<Model.Match>();
             foreach (var match in tmp)
             {
-                if (!match.TeamPlaying.IsComplete())
+                if (!match.IsComplete())
                 {
                     Matchs.Add(match);
                 }
@@ -124,22 +107,37 @@ namespace prbd_1920_g04.Views
             Players = new ObservableCollection<Model.Player>();
             foreach (var p in Plys)
             {
-                if(p.TeamName == null && p.Age >= t.MinAge && p.Age <= t.MaxAge)
+                if (!matchSelected.PlayersId.Contains(p.Id) && p.Age >= t.MinAge && p.Age <= t.MaxAge)
                 {
                     Players.Add(p);
                 }
             }
+            isNew = Players.Count > 0;
+            checkListBox.SelectedItems.Clear();
         } 
+
+        private void SetLabelPlaceAvalaible()
+        {
+            int placeAvalaible = 11 - matchSelected.NumberOfPlayers();
+            if(placeAvalaible < 1)
+            {
+                teamIsComplete.Content = "The team is complete !";
+            }
+            else
+            {
+                teamIsComplete.Content = "This team still has at least " + placeAvalaible + " places.";
+            }
+        }
+
         public AddPlayerIntoAMatchView()
         {
             DataContext = this;
-            IsNew = true;
             Secretary = (Model.Secretary)App.CurrentUser;
             ComboBoxMatchs();
             Save = new RelayCommand(SaveAction, CanSaveOrCancelAction);
-            //Cancel = new RelayCommand(CancelAction);
+            App.Register<Model.Match>(this, AppMessages.MSG_MATCH_CHANGED, match => { ComboBoxMatchs(); Players = null; equipeAdverse.Content = "Please select a team."; teamIsComplete.Content = ""; });
+            App.Register<Model.Match>(this, AppMessages.MSG_PLAYER_ADDED, player => { ComboBoxMatchs(); Players = null; equipeAdverse.Content = "Please select a team."; teamIsComplete.Content = ""; });
             InitializeComponent();
-            App.Register<Model.Match>(this, AppMessages.MSG_MATCH_CHANGED, player => { ComboBoxMatchs();});
         }
     }
 }

@@ -32,8 +32,8 @@ namespace prbd_1920_g04 {
     public partial class App : ApplicationBase {
         public static Model.Model Model { get; private set; } = new Model.Model();
 
-        public static readonly string IMAGE_PATH =
-            Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/../../images");
+        //public static readonly string IMAGE_PATH =
+        //     Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/../../images");
 
         public static Model.Member CurrentUser { get; set; } // Le user connecté
 
@@ -46,34 +46,23 @@ namespace prbd_1920_g04 {
             //Thread.CurrentThread.CurrentUICulture = new CultureInfo(Settings.Default.Culture);
             //ColdStart();
             TestDB();
-            foreach (var team in App.Model.Teams) {
-                Console.WriteLine(team.Name +" as "+ team.NumberOfPlayers() +" players");
-            }
+            
         }
         /*
                 private void ColdStart() {
                     Model.SeedData();
                 }*/
         private void TestDB() {
-            //model.Database.Log = Console.Write;
 
-            // On commence par Désolidariser tous les équipes des matchs (c'est du bricolage mais ça fonctionne.)
             foreach (var match in App.Model.Matchs) {
                 match.DeleteTeam();
             }
-
-            App.Model.Matchs.RemoveRange(App.Model.Matchs); // On supprime les matchs
-                                                            //model.Teams.RemoveRange(model.Teams); // On supprime les équipes
-                                                            //App.Model.Members.RemoveRange(App.Model.Players);
+            App.Model.Matchs.RemoveRange(App.Model.Matchs); 
             App.Model.Members.RemoveRange(App.Model.Members);
-
             App.Model.Teams.RemoveRange(App.Model.Teams);
-
             App.Model.SaveChanges();
+            App.Model.CreateTeams(); 
 
-            App.Model.CreateTeams(); //Toutes les équipes sont créées
-
-      
             //var adm = model.CreateAdmin("admin", "admin", "admin@gmail.com", "admin", 44, "Rue de l'administration", "/path", Fonction.Admin);
             var sec = App.Model.CreateSecretary("secretaire", "secretaire", "secretaire@gmail.com", "secretaire", 30, "Rue du document", "/path", Fonction.Secretary);
             var coach = App.Model.CreateCoach("coach", "coach", "coach@gmail.com", "coach", 30, "Rue du document", "/path", Fonction.Coach);
@@ -84,6 +73,7 @@ namespace prbd_1920_g04 {
             var player3 = sec.CreatePlayer("Dubois", "Charles", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 9, Fonction.Player);
             var player4 = sec.CreatePlayer("Noyce", "Robert", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 10, Fonction.Player);
             var player5 = sec.CreatePlayer("Viton", "Cerf", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 7, Fonction.Player);
+
             var player7 = sec.CreatePlayer("Arthur", "Borus", "player@gmail.com", "player", 17, "Avenue du ballon", 175, 72.5, "/path", 3, Fonction.Player);
             var player8 = sec.CreatePlayer("Marc", "Ddodo", "player@gmail.com", "player", 17, "Avenue du ballon", 175, 72.5, "/path", 4, Fonction.Player);
             var player9 = sec.CreatePlayer("Clarence", "Moto", "player@gmail.com", "player", 15, "Avenue du ballon", 175, 72.5, "/path", 5, Fonction.Player);
