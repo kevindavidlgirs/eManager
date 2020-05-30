@@ -94,8 +94,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\AddPlayerIntoAMatchView.xaml.cs">
-      <DependentUpon>AddPlayerIntoAMatchView.xaml</DependentUpon>
+    <Compile Include="Views\AddPlayerIntoATeamView.xaml.cs">
+      <DependentUpon>AddPlayerIntoATeamView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -114,12 +114,6 @@
     </Compile>
     <Compile Include="Views\PlayerDetailAddView.xaml.cs">
       <DependentUpon>PlayerDetailAddView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\UserControl1.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Views\UserControl1.Designer.cs">
-      <DependentUpon>UserControl1.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -168,7 +162,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\AddPlayerIntoAMatchView.xaml">
+    <Page Include="Views\AddPlayerIntoATeamView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

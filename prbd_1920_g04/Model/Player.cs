@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System; 
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,18 +19,17 @@ namespace prbd_1920_g04.Model
 
         public double Weight { get; set; }
 
-        //Attribut intéressant ?
         public int JerseyNumber { get; set; }
 
         public Position PlayerPosition { get; set; }
 
-        public string TeamName { get; set; } // Astuce pour évite le conflit lié de 
-        public virtual Team Team { get; set; }
+        public string TeamName { get; set; } 
 
         protected Player() { }
 
         public virtual ICollection<Sanction> Sanctions { get; set; } = new HashSet<Sanction>();
         public virtual ICollection<Performance> Peformances { get; set; } = new HashSet<Performance>();
         public virtual ICollection<Injury> Injuries { get; set; } = new HashSet<Injury>();
+
     }
 }

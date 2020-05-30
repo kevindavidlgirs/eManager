@@ -172,7 +172,7 @@ namespace prbd_1920_g04.Views
             IsNew = false;
             var Players = new ObservableCollection<Model.Player>(App.Model.Players);
             Console.WriteLine("Vous avez ajoutez un joueur, vous êtes à : "+ Players.Count()+" joueurs.");
-            App.NotifyColleagues(AppMessages.MSG_PLAYER_ADDED);
+            App.NotifyColleagues(AppMessages.MSG_PLAYER_ADDED, Player);
         }
 
         private void CancelAction()

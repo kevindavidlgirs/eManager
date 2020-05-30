@@ -18,41 +18,6 @@ namespace prbd_1920_g04.Model
             App.Model.SaveChanges();
             return player;
         }
-        /*
-                public Player UpdatePlayer(string firstName,string lastname, string email, string password, int age, string adresse, Team team, int cut, double weight, string picturePath, int jerseyNumber)
-                {
-                    Model m = new Model();
-                    if(res != null)
-                    {
-                        res.FristName = firstName;
-                        res.LastName = lastname;
-                        res.Email = email;
-                        res.Password = password;
-                        res.Age = age;
-                        res.Adresse = adresse;
-                        res.Team = team;
-                        res.Cut = cut;
-                        res.Weight = weight;
-                        res.PicturePath = picturePath;
-                        res.JerseyNumber = jerseyNumber;
-                        m.SaveChanges();
-                    }
-                    return res;
-                }
-        */
-        //var res = m.Players.SingleOrDefault(u => u.FristName == firstName);
-        public bool DeletePlayer(string name)
-        {
-            var user = App.Model.Members.Find(name);
-            if (user != null)
-            {
-                App.Model.Members.Remove(user);
-               // m.SaveChanges();
-                return true;
-            }
-            return false;
-            
-        }
 
         public Match AddMatch(DateTime date, string place, string home, string adversary, string categorie) { 
             Match match = null;
@@ -65,17 +30,17 @@ namespace prbd_1920_g04.Model
             return match;
         }
 
-        public bool AddPlayerInMatchs(int id, string mtch)
+        public Player AddPlayerInMatchs(int id, Match mtch)
         {
-            var match = App.Model.Matchs.Find(mtch);
+            var match = App.Model.Matchs.Find(mtch.DateMatch);
             var player = App.Model.Players.Find(id);
-            if(player.TeamName == null && !match.TeamPlaying.Players.Contains(player))
+            if(!match.PlayersId.Contains(player.Id))
             {
-                match.TeamPlaying.Players.Add(player);
-                player.TeamName = match.TeamPlaying.Name;
-                return true;
+                match.PlayersId.Add(player.Id);
+                Console.WriteLine("Player : "+ player.FirstName +" "+ player.LastName + " added in -> " + match.Home);
+                return player;
             }
-            return false;
+            return player;
         }
     }
 }

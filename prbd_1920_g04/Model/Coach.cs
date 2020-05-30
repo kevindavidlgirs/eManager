@@ -9,13 +9,13 @@ namespace prbd_1920_g04.Model
     public class Coach : Member
     {
         protected Coach() { }
-
+        /*
         public bool selectPlayer(Match match, Player player) {
-            if (!match.TeamPlaying.Players.Contains(player)) {
+            if (!match.Players.Contains(player)) {
                 //player.TeamName = match.TeamPlaying.Name;
                 var p = App.Model.Players.Find(player.Id);
                 p.TeamName = match.TeamPlaying.Name;
-                match.TeamPlaying.Players.Add(player);
+                match.Players.Add(player);
                 App.Model.SaveChanges();
                 return true;
             }
@@ -23,15 +23,15 @@ namespace prbd_1920_g04.Model
         }
 
         public bool removePlayer(Match match, Player player) {
-            if (match.TeamPlaying.Players.Contains(player)) {
-                match.TeamPlaying.Players.Remove(player);
+            if (match.Players.Contains(player)) {
+                match.Players.Remove(player);
                 App.Model.SaveChanges();
                 return true;
             }
             return false;
         }
 
-        /*
+        
         public bool AddPlayerInTeam(Player p, Team t)
         {
             if (!t.Players.Contains(p))
