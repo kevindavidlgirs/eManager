@@ -104,28 +104,101 @@ namespace prbd_1920_g04.Views {
             }
         }
 
+        public int lossesAdversary;
+        public int LossesAdversary {
+            get {
+                return lossesAdversary;
+            }
 
-        private void getNumberOfVictory(string squad) {
-            var nbVictory = (from match in App.Model.Matchs
-                             where match.Home.Equals(squad) && match.GoalsHome > match.GoalsAdversary
-                             select match).Count();
-            WinsHome = nbVictory;
+            set {
+                lossesAdversary = value;
+                RaisePropertyChanged(nameof(LossesAdversary));
+            }
         }
 
-        private void getNumberOfDefeat(string squad) {
-            var nbDefeat = (from match in App.Model.Matchs
-                             where match.Home.Equals(squad) && match.GoalsHome < match.GoalsAdversary
+               public int drawsHome;
+               public int DrawsHome {
+                   get {
+                       return drawsHome;
+                   }
+
+                   set {
+                       drawsHome = value;
+                       RaisePropertyChanged(nameof(DrawsHome));
+                   }
+               }
+
+               public int drawsAdversary;
+               public int DrawsAdversary {
+                   get {
+                       return drawsAdversary;
+                   }
+
+                   set {
+                       drawsAdversary = value;
+                       RaisePropertyChanged(nameof(DrawsAdversary));
+                   }
+               }
+        
+       private void getNumberOfHomeVictories() {
+           var nbVictory = (from match in App.Model.Matchs
+                            where match.Home.Equals(Home) && match.GoalsHome > match.GoalsAdversary
+                            && match.IsOver == true
+                            select match).Count();
+           WinsHome = nbVictory;
+       }
+
+       private void getNumberOfAdversaryVictories() {
+           var nbVictory = (from match in App.Model.Matchs
+                            where match.Adversary.Equals(Adversary) && match.GoalsAdversary > match.GoalsHome
+                            && match.IsOver == true
+                            select match).Count();
+           WinsAdversary = nbVictory;
+       }
+
+
+       private void getNumberOfHomeDefeats() {
+           var nbDefeat = (from match in App.Model.Matchs
+                            where match.Home.Equals(Home) && match.GoalsHome < match.GoalsAdversary
+                            && match.IsOver == true
+                           select match).Count();
+           LossesHome = nbDefeat;
+       }
+
+
+       private void getNumberOfAdversaryDefeats() {
+           var nbDefeat = (from match in App.Model.Matchs
+                           where match.Adversary.Equals(Adversary) && match.GoalsAdversary < match.GoalsHome
+                           && match.IsOver == true
+                           select match).Count();
+           LossesAdversary = nbDefeat;
+       }
+
+           private void getNumberOfHomeDraws() {
+               var nbDraws = (from match in App.Model.Matchs
+                               where match.Home.Equals(Home) && match.GoalsAdversary == match.GoalsHome
+                               && match.IsOver == true
+                              select match).Count();
+               DrawsHome = nbDraws;
+           }
+
+          private void getNumberOfAdversaryDraws() {
+              var nbDraws = (from match in App.Model.Matchs
+                              where match.Adversary.Equals(Adversary) && match.GoalsAdversary == match.GoalsHome
+                              && match.IsOver == true
                              select match).Count();
-            LossesHome = nbDefeat;
-        }
+           DrawsAdversary = nbDraws;
+          }
 
         public MatchDetailView(Model.Match match) {
             DataContext = this;
             Match = match;
-            getNumberOfVictory(Match.Home);
-            getNumberOfDefeat(Match.Home);
-
-            //getNumberOfVictory(Match.Adversary);
+            getNumberOfHomeVictories();
+            getNumberOfAdversaryVictories();
+            getNumberOfHomeDefeats();
+            getNumberOfAdversaryDefeats();
+            getNumberOfHomeDraws();
+            getNumberOfAdversaryDraws();
             InitializeComponent();
         }
     }

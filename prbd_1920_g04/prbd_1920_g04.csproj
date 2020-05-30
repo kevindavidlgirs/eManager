@@ -115,6 +115,9 @@
     <Compile Include="Views\PlayerDetailAddView.xaml.cs">
       <DependentUpon>PlayerDetailAddView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MatchDetailListView.xaml.cs">
+      <DependentUpon>MatchDetailListView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Admin.cs" />
@@ -187,6 +190,10 @@
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Views\PlayerDetailAddView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MatchDetailListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

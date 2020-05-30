@@ -36,6 +36,7 @@ namespace prbd_1920_g04.Views {
 
         private void UpdateAction(Match m) {
             Console.WriteLine(m.Home + "vs" + m.Adversary);
+            Console.WriteLine(m.GoalsHome + "vs" + m.GoalsAdversary);
             m.IsOver = true;
             App.Model.SaveChanges();
             Refresh();
