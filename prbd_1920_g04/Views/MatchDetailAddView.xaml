@@ -34,9 +34,8 @@
         <DatePicker Grid.Column="1" SelectedDate="{Binding DateMatch}" HorizontalAlignment="Left" Margin="72,3,0,0" Grid.Row="5" VerticalAlignment="Top" Width="169" Grid.ColumnSpan="2"/>
         <TextBox Grid.Column="3" HorizontalAlignment="Left"  MinLines="3" MaxLines="10" Height="23" Margin="96,4,0,0" Grid.Row="5" TextWrapping="Wrap" Text="{Binding Place}" VerticalAlignment="Top" Width="150" Grid.ColumnSpan="2"/>
         <Label Content="Place : " Grid.Column="3" HorizontalAlignment="Left" Grid.Row="5" VerticalAlignment="Top" Height="32" Width="93"/>
-        <WrapPanel Grid.Column="2" HorizontalAlignment="Left" Height="37" Margin="0,48,0,0" Grid.Row="8" VerticalAlignment="Top" Width="166">
+        <WrapPanel Grid.Column="2" HorizontalAlignment="Left" Height="36" Margin="59,42,0,0" Grid.Row="8" VerticalAlignment="Top" Width="166" Grid.ColumnSpan="2">
             <Button Content="Save" Command="{Binding Save}" Width="75"/>
-            <Button Content="Delete" Command="{Binding Delete}" Width="75"/>
         </WrapPanel>
         <ComboBox Grid.Column="1" HorizontalAlignment="Left" Margin="72,0,0,0" Grid.Row="7" VerticalAlignment="Top" Width="180" 
                   ItemsSource="{Binding Teams}"

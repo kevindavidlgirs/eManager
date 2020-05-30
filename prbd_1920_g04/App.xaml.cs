@@ -26,7 +26,8 @@ namespace prbd_1920_g04 {
         MSG_TEAM_CHANGED,
         MSG_MATCH_SAVED,
         MSG_ADD_RESULT_TO_MATCH,
-        MSG_UPDATE_MATCH
+        MSG_UPDATE_MATCH,
+        MSG_TEAM_COMPLET
     }
 
     public partial class App : ApplicationBase {
@@ -74,12 +75,12 @@ namespace prbd_1920_g04 {
             var player4 = sec.CreatePlayer("Noyce", "Robert", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 10, Fonction.Player);
             var player5 = sec.CreatePlayer("Viton", "Cerf", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 7, Fonction.Player);
 
-            var player7 = sec.CreatePlayer("Arthur", "Borus", "player@gmail.com", "player", 17, "Avenue du ballon", 175, 72.5, "/path", 3, Fonction.Player);
-            var player8 = sec.CreatePlayer("Marc", "Ddodo", "player@gmail.com", "player", 17, "Avenue du ballon", 175, 72.5, "/path", 4, Fonction.Player);
-            var player9 = sec.CreatePlayer("Clarence", "Moto", "player@gmail.com", "player", 15, "Avenue du ballon", 175, 72.5, "/path", 5, Fonction.Player);
-            var player10 = sec.CreatePlayer("Riddick", "Khan", "player@gmail.com", "player", 15, "Avenue du ballon", 175, 72.5, "/path", 6, Fonction.Player);
-            var player11 = sec.CreatePlayer("Albert", "Romano", "player@gmail.com", "player", 12, "Avenue du ballon", 175, 72.5, "/path", 2, Fonction.Player);
-            var player12 = sec.CreatePlayer("Dimitri", "Rogan", "player@gmail.com", "player", 12, "Avenue du ballon", 175, 72.5, "/path", 1, Fonction.Player);
+            var player7 = sec.CreatePlayer("Arthur", "Borus", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 3, Fonction.Player);
+            var player8 = sec.CreatePlayer("Marc", "Ddodo", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 4, Fonction.Player);
+            var player9 = sec.CreatePlayer("Clarence", "Moto", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 5, Fonction.Player);
+            var player10 = sec.CreatePlayer("Riddick", "Khan", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 6, Fonction.Player);
+            var player11 = sec.CreatePlayer("Albert", "Romano", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 2, Fonction.Player);
+            var player12 = sec.CreatePlayer("Dimitri", "Rogan", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 1, Fonction.Player);
             Console.WriteLine(sec + "\n" + player1 + "\n" + player2 + "\n" + player3);
             
             

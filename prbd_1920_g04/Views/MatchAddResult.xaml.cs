@@ -36,12 +36,21 @@ namespace prbd_1920_g04.Views {
 
         private void UpdateAction(Match m) {
             Console.WriteLine(m.Home + "vs" + m.Adversary);
+            Console.WriteLine(m.GoalsHome + "vs" + m.GoalsAdversary);
             m.IsOver = true;
             App.Model.SaveChanges();
             Refresh();
         }
         private void Refresh() {
-            PlayedMatchs = new ObservableCollection<Match>(App.Model.Matchs.Where(m => m.IsOver != true).OrderBy(m => m.DateMatch));
+            var matchs = new ObservableCollection<Match>(App.Model.Matchs);
+            PlayedMatchs = new ObservableCollection<Match>();
+            foreach (var m in matchs)
+            {
+                if (m.IsComplete && !m.IsOver)
+                {
+                    PlayedMatchs.Add(m);
+                }
+            }
         }
 
         public MatchAddResult() {
@@ -51,6 +60,7 @@ namespace prbd_1920_g04.Views {
             UpdateMatch = new RelayCommand<Match>((m) => { UpdateAction(m); });
             Refresh();
             InitializeComponent();
+
         }
     }
 }

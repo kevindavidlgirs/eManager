@@ -46,8 +46,14 @@ namespace prbd_1920_g04.Views
                 Player p = (Player)player;
                 Secretary.AddPlayerInMatchs(p.Id, matchSelected);
             }
+            if (matchSelected.PlayersId.Count >= 11)
+            {
+                matchSelected.IsComplete = true;
+                App.NotifyColleagues(AppMessages.MSG_TEAM_COMPLET);
+            }
             ComboBoxPlayers(matchSelected.TeamPlaying);
             SetLabelPlaceAvalaible();
+
         }
 
         private bool isNew;
@@ -90,15 +96,7 @@ namespace prbd_1920_g04.Views
 
         private void ComboBoxMatchs()
         {
-            var tmp  = new ObservableCollection<Model.Match>(App.Model.Matchs);
-            Matchs = new ObservableCollection<Model.Match>();
-            foreach (var match in tmp)
-            {
-                if (!match.IsComplete())
-                {
-                    Matchs.Add(match);
-                }
-            }
+            Matchs = new ObservableCollection<Match>(App.Model.Matchs.Where(m => m.IsComplete != true ).OrderBy(m => m.DateMatch));
         }
 
         private void ComboBoxPlayers(Model.Team t)
