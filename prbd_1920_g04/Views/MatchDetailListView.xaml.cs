@@ -26,7 +26,10 @@ namespace prbd_1920_g04.Views {
             get {
 
                 //listMatchs = new ObservableCollection<Match>(App.Model.Matchs.Where(m => m.Home.Equals(Match.Home) && m.Adversary.Equals(Match.Adversary)).OrderBy(m => m.DateMatch));
-                listMatchs = new ObservableCollection<Model.Match>(App.Model.Matchs.OrderBy(m => m.DateMatch));
+                if (listMatchs == null) {
+                    listMatchs = new ObservableCollection<Match>(ListOfSameMatches(Match));
+                }
+               
                 return listMatchs;
             }
             set {
@@ -44,13 +47,30 @@ namespace prbd_1920_g04.Views {
             }
         }
 
+        private static ICollection<Match> ListOfSameMatches(Match match) {
+            var query = (from m in App.Model.Matchs
+                             where m.Home.Equals(match.Home) && m.Adversary.Equals(match.Adversary)
+                             orderby m.DateMatch descending
+                         select m);
+
+            foreach (var m in query) {
+                Console.WriteLine(m.Home + " vs " +m.Adversary);
+            }
+            return query.ToList();
+        }
+
 
         public MatchDetailListView() {
             InitializeComponent();
             DataContext = this;
             if (DesignerProperties.GetIsInDesignMode(this)) return;
-            ListMatchs = new ObservableCollection<Match>(App.Model.Matchs.OrderBy(m => m.DateMatch));
-           
+
+            if (Match != null) {
+                ListMatchs = new ObservableCollection<Match>(ListOfSameMatches(Match));
+            }
+            
+            RaisePropertyChanged(nameof(ListMatchsView));
+            //Console.WriteLine("listMatchsView : " + listMatchsView.Count);
         }
     }
 }
