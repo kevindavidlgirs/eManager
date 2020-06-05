@@ -34,8 +34,8 @@ namespace prbd_1920_g04.Views {
             }
             set {
                 listMatchs = value;
-                RaisePropertyChanged(nameof(listMatchs));
-                RaisePropertyChanged(nameof(listMatchsView));
+                //RaisePropertyChanged(nameof(listMatchs));
+                RaisePropertyChanged(nameof(ListMatchsView));
             }
         }
 
@@ -43,6 +43,7 @@ namespace prbd_1920_g04.Views {
         public CollectionView ListMatchsView {
             get {
                 listMatchsView = (CollectionView)CollectionViewSource.GetDefaultView(ListMatchs);
+                Console.WriteLine("listMatchsView : " + listMatchsView.Count);
                 return listMatchsView;
             }
         }
@@ -68,7 +69,7 @@ namespace prbd_1920_g04.Views {
             if (Match != null) {
                 ListMatchs = new ObservableCollection<Match>(ListOfSameMatches(Match));
             }
-            
+
             RaisePropertyChanged(nameof(ListMatchsView));
             //Console.WriteLine("listMatchsView : " + listMatchsView.Count);
         }
