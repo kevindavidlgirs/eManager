@@ -25,7 +25,6 @@ namespace prbd_1920_g04.Views {
         public ObservableCollection<Match> ListMatchs {
             get {
 
-                //listMatchs = new ObservableCollection<Match>(App.Model.Matchs.Where(m => m.Home.Equals(Match.Home) && m.Adversary.Equals(Match.Adversary)).OrderBy(m => m.DateMatch));
                 if (listMatchs == null) {
                     listMatchs = new ObservableCollection<Match>(ListOfSameMatches(Match));
                 }
@@ -43,20 +42,17 @@ namespace prbd_1920_g04.Views {
         public CollectionView ListMatchsView {
             get {
                 listMatchsView = (CollectionView)CollectionViewSource.GetDefaultView(ListMatchs);
-                Console.WriteLine("listMatchsView : " + listMatchsView.Count);
                 return listMatchsView;
             }
         }
 
         private static ICollection<Match> ListOfSameMatches(Match match) {
             var query = (from m in App.Model.Matchs
-                             where m.Home.Equals(match.Home) && m.Adversary.Equals(match.Adversary)
+                             where m.Home.Equals(match.Home) && 
+                             m.Adversary.Equals(match.Adversary) &&
+                             match.DateMatch != m.DateMatch
                              orderby m.DateMatch descending
                          select m);
-
-            foreach (var m in query) {
-                Console.WriteLine(m.Home + " vs " +m.Adversary);
-            }
             return query.ToList();
         }
 
@@ -71,7 +67,6 @@ namespace prbd_1920_g04.Views {
             }
 
             RaisePropertyChanged(nameof(ListMatchsView));
-            //Console.WriteLine("listMatchsView : " + listMatchsView.Count);
         }
     }
 }

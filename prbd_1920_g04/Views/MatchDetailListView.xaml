@@ -7,15 +7,14 @@
              xmlns:local="clr-namespace:prbd_1920_g04.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel>
-        <DataGrid x:Name="dataGrid" ItemsSource="{Binding ListMatchsView}" HorizontalAlignment="Left" AutoGenerateColumns="False" Height="400" VerticalAlignment="Top" Width="800" Margin="0,9,0,0" IsReadOnly="True" SelectionMode="Single">
+    <DataGrid x:Name="dataGrid" ItemsSource="{Binding ListMatchsView}" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Date" Binding="{Binding Path=DateMatch, StringFormat=\{0:dd/MM/yyyy\}}" SortDirection="Descending"/>
-                <DataGridTextColumn Header="Home" Binding="{Binding Path=Home}" Width="40" />
-                <DataGridTextColumn Header="Home results" Binding="{Binding Path=GoalsHome}" />
-                <DataGridTextColumn Header="Adversary results" Binding="{Binding Path=GoalsAdversary}" />
-                <DataGridTextColumn Header="Adversary" Binding="{Binding Path=Adversary}" Width="40" />
-            </DataGrid.Columns>
+            <DataGridTextColumn Header="Date" Binding="{Binding Path=DateMatch, StringFormat=\{0:dd/MM/yyyy\}}" SortDirection="Descending"  Width="auto"/>
+            <DataGridTextColumn Header="Home" Binding="{Binding Path=Home}" Width="auto" />
+            <DataGridTextColumn Header="-" Binding="{Binding Path=GoalsHome}" Width="auto"/>
+            <DataGridTextColumn Header="-" Binding="{Binding Path=GoalsAdversary}" Width="auto"/>
+            <DataGridTextColumn Header="Adversary" Binding="{Binding Path=Adversary}" Width="auto" />
+            <DataGridTextColumn Header="Place" Binding="{Binding Path=Place}" Width="auto" />
+        </DataGrid.Columns>
         </DataGrid>
-    </StackPanel>
 </f:UserControlBase>
