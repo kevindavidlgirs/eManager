@@ -16,13 +16,14 @@
         </Grid.RowDefinitions>
         <ScrollViewer  Grid.Row="2" VerticalScrollBarVisibility="Auto">
             <ItemsControl x:Name="MyItemsControl" 
-                  ItemsSource="{Binding listOfPlayers}" 
+                  ItemsSource="{Binding ListOfPlayers}" 
                   Grid.Row="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Center" >
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontSize="18" FontWeight="Bold" Height="20" Width="Auto" TextAlignment="Center" Margin="10" VerticalAlignment="Center" Text="{Binding FirstName}" />
                             <TextBlock FontSize="18" FontWeight="Bold" Height="20" Width="Auto" TextAlignment="Right" Margin="10" VerticalAlignment="Center" Text="{Binding LastName}" />
+                            <TextBlock FontSize="18" FontWeight="Bold" Height="20" Width="Auto" TextAlignment="Right" Margin="10" VerticalAlignment="Center" Text="{Binding Stats.GoalsScored}" />
                         </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

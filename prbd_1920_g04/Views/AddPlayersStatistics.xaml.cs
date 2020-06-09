@@ -25,21 +25,35 @@ namespace prbd_1920_g04.Views {
         private ObservableCollection<Player> listOfPlayers;
         public ObservableCollection<Player> ListOfPlayers { get => listOfPlayers; set => SetProperty(ref listOfPlayers, value); }
 
+        /*
+        public int FirstName {
+            set {
+                RaisePropertyChanged(nameof(FirstName));
+            }
+        }
+
+        public int Lasr {
+            set {
+                RaisePropertyChanged(nameof(GoalsAdversary));
+            }
+        }*/
+
         private ICollection<Player> QualifiedPlayers(Match match) {
             var query = from p in App.Model.Players
                         where match.PlayersId.Contains(p.Id)
                         select p;
-
                 return query.ToList();
         }
 
         public AddPlayersStatistics(Match match) {
+            DataContext = this;
             Match = match;
             InitializeComponent();
-            listOfPlayers = new ObservableCollection<Player>(QualifiedPlayers(match));
 
-            foreach(var m in listOfPlayers) {
-                Console.WriteLine(m);
+            ListOfPlayers = new ObservableCollection<Player>(QualifiedPlayers(match));
+
+            foreach(var m in ListOfPlayers) {
+                Console.WriteLine(m.Stats.Injuries);
             }
         }
     }

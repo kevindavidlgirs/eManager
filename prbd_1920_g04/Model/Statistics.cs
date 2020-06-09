@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace prbd_1920_g04.Model {
     public class Statistics {
-        [Key]
+        [ForeignKey("Player")]
+        public int StatisticsId { get; set; }
         public int GoalsScored { get; set; }
         public int OwnGoals { get; set; }
         public int GoalsConceced { get; set; }
@@ -16,5 +18,6 @@ namespace prbd_1920_g04.Model {
         public int Fouls { get; set; }
         public int YellowCards { get; set; }
         public int RedCards { get; set; }
+        public virtual Player Player { get; set; }
     }
 }

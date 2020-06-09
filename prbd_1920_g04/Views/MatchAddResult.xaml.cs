@@ -56,8 +56,6 @@ namespace prbd_1920_g04.Views {
 
         public MatchAddResult() {
             DataContext = this;
-            // On recupère tous les matchs qui ne sont pas joués
-            //UpdateMatch = new RelayCommand<Match>((m) => { App.NotifyColleagues(AppMessages.MSG_UPDATE_MATCH, m); });
             UpdateMatch = new RelayCommand<Match>((m) => { UpdateAction(m); });
             Refresh();
             InitializeComponent();

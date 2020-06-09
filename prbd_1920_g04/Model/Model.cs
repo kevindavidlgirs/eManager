@@ -26,6 +26,7 @@ namespace prbd_1920_g04.Model
         public DbSet<Player> Players { get; set; }
         public DbSet<Match> Matchs { get; set; }
         public DbSet<Team> Teams { get; set; }
+        public DbSet<Statistics> Stats { get; set; }
 
         public Secretary CreateSecretary(string firstName, string lastName, string email, string password, int age, string adresse, string picturePath, Fonction fonction = Fonction.Secretary)
         {
@@ -62,6 +63,7 @@ namespace prbd_1920_g04.Model
                                    int cut, double weight, string picturePath, int jerseyNumber,
                                    Fonction fonction = Fonction.Player){
             var player = Players.Create();
+            var statistics = Stats.Create();
             player.FirstName = firstName;
             player.LastName = lastName;
             player.Email = email;
@@ -73,7 +75,7 @@ namespace prbd_1920_g04.Model
             player.PicturePath = picturePath;
             player.JerseyNumber = jerseyNumber;
             player.Fonction = fonction;
-
+            player.Stats = statistics;
             Players.Add(player);
             return player;
         }

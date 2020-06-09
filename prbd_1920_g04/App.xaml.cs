@@ -59,7 +59,8 @@ namespace prbd_1920_g04 {
             foreach (var match in App.Model.Matchs) {
                 match.DeleteTeam();
             }
-            App.Model.Matchs.RemoveRange(App.Model.Matchs); 
+            App.Model.Matchs.RemoveRange(App.Model.Matchs);
+            App.Model.Stats.RemoveRange(App.Model.Stats);
             App.Model.Members.RemoveRange(App.Model.Members);
             App.Model.Teams.RemoveRange(App.Model.Teams);
             App.Model.SaveChanges();
