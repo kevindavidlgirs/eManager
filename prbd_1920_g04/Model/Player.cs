@@ -23,7 +23,9 @@ namespace prbd_1920_g04.Model
 
         public Position PlayerPosition { get; set; }
 
-        public string TeamName { get; set; } 
+        public string TeamName { get; set; }
+
+        public virtual Statistics stats { get; set; }
 
         protected Player() { }
 

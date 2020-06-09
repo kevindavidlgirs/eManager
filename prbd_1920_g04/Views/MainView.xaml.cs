@@ -47,14 +47,12 @@ namespace prbd_1920_g04.Views {
                 };
             });
 
-            App.Register(this, AppMessages.MSG_DISPLAY_BUTTON, () => {
-                Console.WriteLine("Count of teams : Ok");
+            App.Register<Model.Match>(this, AppMessages.MSG_ADD_STATS_TO_PLAYER, (match) => {
                 var tab = new TabItem() {
-                    Header = "Result",
-                    Content = new MatchAddResult()
+                    Header ="Stats",
+                    Content = new AddPlayersStatistics(match),
                 };
                 tabControl.Items.Add(tab);
-                Dispatcher.InvokeAsync(() => tab.Focus());
             });
 
             App.Register(this, AppMessages.MSG_NEW_MATCH, () => {
@@ -150,7 +148,7 @@ namespace prbd_1920_g04.Views {
 
             App.Register(this, AppMessages.MSG_ADD_RESULT_TO_MATCH, () => {
                 var tab = new TabItem() {
-                    Header = "Result",
+                    Header = "Results",
                     Content = new MatchAddResult()
                 };
                 tabControl.Items.Add(tab);
