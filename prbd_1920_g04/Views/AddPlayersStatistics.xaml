@@ -21,9 +21,30 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock FontSize="18" FontWeight="Bold" Height="20" Width="Auto" TextAlignment="Center" Margin="10" VerticalAlignment="Center" Text="{Binding FirstName}" />
-                            <TextBlock FontSize="18" FontWeight="Bold" Height="20" Width="Auto" TextAlignment="Right" Margin="10" VerticalAlignment="Center" Text="{Binding LastName}" />
-                            <TextBlock FontSize="18" FontWeight="Bold" Height="20" Width="Auto" TextAlignment="Right" Margin="10" VerticalAlignment="Center" Text="{Binding Stats.GoalsScored}" />
+                            <TextBlock FontSize="18" FontWeight="Bold" Height="30" Width="Auto" TextAlignment="Center" Margin="10" VerticalAlignment="Center" Text="{Binding FirstName}" />
+                            <TextBlock FontSize="18" FontWeight="Bold" Height="30" Width="Auto" TextAlignment="Right" Margin="10" VerticalAlignment="Center" Text="{Binding LastName}" />
+                            <TextBlock FontSize="18" FontWeight="Bold" Height="30" Width="Auto" TextAlignment="Right" Margin="5,0,0,0" VerticalAlignment="Center" Text="[" />
+                            <Image HorizontalAlignment="Center" Height="25" Width="25" VerticalAlignment="Center" Source="/images/goals.png"/>
+                            <TextBox  Grid.Column="1" Text="{Binding GoalsScored}" Height="20" Width="30" VerticalAlignment="Center" />
+                            <TextBlock FontSize="18" FontWeight="Bold" Height="30" Width="Auto" TextAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" Text="]" />
+                            <TextBlock FontSize="18" FontWeight="Bold" Height="30" Width="Auto" TextAlignment="Right" Margin="5,0,0,0" VerticalAlignment="Center" Text="[" />
+                            <Image HorizontalAlignment="Center" Height="25" Width="25" VerticalAlignment="Center" Source="/images/GoalsConceced.png"/>
+                            <TextBox Grid.Column="1" Text="{Binding GoalsConceced}" Height="20" Width="30" VerticalAlignment="Center" />
+                            <TextBlock FontSize="18" FontWeight="Bold" Height="30" Width="Auto" TextAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" Text="]" />
+                            <TextBlock FontSize="18" FontWeight="Bold" Height="30" Width="Auto" TextAlignment="Right" Margin="5,0,0,0" VerticalAlignment="Center" Text="[" />
+                            <Image HorizontalAlignment="Center" Height="25" Width="25" VerticalAlignment="Center" Source="/images/Assists.png"/>
+                            <TextBox Grid.Column="1" Text="{Binding Assists}" Height="20" Width="30" VerticalAlignment="Center" />
+                            <TextBlock FontSize="18" FontWeight="Bold" Height="30" Width="Auto" TextAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" Text="]" />
+                            <TextBlock FontSize="18" FontWeight="Bold" Height="30" Width="Auto" TextAlignment="Right" Margin="5,0,0,0" VerticalAlignment="Center" Text="[" />
+                            <Image HorizontalAlignment="Center" Height="25" Width="25" VerticalAlignment="Center" Source="/images/Injuries.png"/>
+                            <TextBox Grid.Column="1" Text="{Binding Injuries}" Height="20" Margin="10" Width="30" VerticalAlignment="Center" />
+                            <TextBlock FontSize="18" FontWeight="Bold" Height="30" Width="Auto" TextAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" Text="]" />
+                            <TextBlock FontSize="18" FontWeight="Bold" Height="30" Width="Auto" TextAlignment="Right" Margin="5,0,0,0" VerticalAlignment="Center" Text="[" />
+                            <Image HorizontalAlignment="Center" Height="25" Width="25" VerticalAlignment="Center" Source="/images/Fauls.png"/>
+                            <TextBox Grid.Column="1" Text="{Binding Fauls}" Height="20" Margin="10" Width="30" VerticalAlignment="Center" />
+                            <TextBlock FontSize="18" FontWeight="Bold" Height="30" Width="Auto" TextAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" Text="]" />
+                            <Button x:Name="btnUpdate" Content="Update" Width="50" VerticalAlignment="Center" Margin="10" HorizontalAlignment="Right" 
+                                    Command="{Binding ElementName=MyItemsControl, Path=DataContext.UpdateMatch}" CommandParameter="{Binding}"/>
                         </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

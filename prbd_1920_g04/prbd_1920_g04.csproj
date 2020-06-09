@@ -207,7 +207,22 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="images\" />
+    <Resource Include="images\ownGoals.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\goals.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\GoalsConceced.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Assists.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Fauls.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Injuries.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

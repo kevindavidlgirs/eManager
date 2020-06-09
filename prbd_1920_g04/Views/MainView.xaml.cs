@@ -49,7 +49,7 @@ namespace prbd_1920_g04.Views {
 
             App.Register<Model.Match>(this, AppMessages.MSG_ADD_STATS_TO_PLAYER, (match) => {
                 var tab = new TabItem() {
-                    Header ="Stats",
+                    Header ="Stats:"+ match.Home + " vs " + match.Adversary,
                     Content = new AddPlayersStatistics(match),
                 };
                 tabControl.Items.Add(tab);
