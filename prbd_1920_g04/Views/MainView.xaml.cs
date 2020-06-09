@@ -18,7 +18,7 @@ namespace prbd_1920_g04.Views {
 
             App.Register<Model.Match>(this, AppMessages.MSG_SHOW_MATCH, (match) => {
                 foreach (TabItem t in tabControl.Items) {
-                    if (t.Header.ToString().Equals(match.DateMatch)) {
+                    if (t.Header.ToString().Equals(match.Home + " vs " + match.Adversary)) {
                         Dispatcher.InvokeAsync(() => t.Focus());
                         return;
                     }
@@ -45,6 +45,16 @@ namespace prbd_1920_g04.Views {
                         (tab.Content as UserControlBase).Dispose();
                     }
                 };
+            });
+
+            App.Register(this, AppMessages.MSG_DISPLAY_BUTTON, () => {
+                Console.WriteLine("Count of teams : Ok");
+                var tab = new TabItem() {
+                    Header = "Result",
+                    Content = new MatchAddResult()
+                };
+                tabControl.Items.Add(tab);
+                Dispatcher.InvokeAsync(() => tab.Focus());
             });
 
             App.Register(this, AppMessages.MSG_NEW_MATCH, () => {
@@ -166,6 +176,8 @@ namespace prbd_1920_g04.Views {
             App.Register<string>(this, AppMessages.MSG_MATCH_SAVED, (s) => {
                 (tabControl.SelectedItem as TabItem).Header = s;
             });
+
+           
 
             App.Register<Match>(this, AppMessages.MSG_UPDATE_MATCH, (m) => {
                 Console.WriteLine(m.Home +"vs"+m.Adversary);

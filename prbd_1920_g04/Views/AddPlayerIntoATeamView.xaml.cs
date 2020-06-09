@@ -50,6 +50,7 @@ namespace prbd_1920_g04.Views
             {
                 matchSelected.IsComplete = true;
                 App.NotifyColleagues(AppMessages.MSG_TEAM_COMPLET);
+                App.NotifyColleagues(AppMessages.MSG_ADD_RESULT_TO_MATCH);
             }
             ComboBoxPlayers(matchSelected.TeamPlaying);
             SetLabelPlaceAvalaible();
