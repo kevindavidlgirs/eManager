@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using PRBD_Framework;
 using prbd_1920_g04.Model;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 
 namespace prbd_1920_g04.Views {
     /// <summary>
@@ -24,25 +25,58 @@ namespace prbd_1920_g04.Views {
         public Match Match { get; set; }
         private ObservableCollection<Player> listOfPlayers;
         public ObservableCollection<Player> ListOfPlayers { get => listOfPlayers; set => SetProperty(ref listOfPlayers, value); }
+        public ICommand UpdateStats { get; set; }
 
-        /*
-        public int FirstName {
+        private int goalsScored {get; set;}
+        public int GoalsScored {
+            get {
+                return goalsScored;
+            }
+
             set {
-                RaisePropertyChanged(nameof(FirstName));
+                goalsScored = value;
+                RaisePropertyChanged(nameof(GoalsScored));
             }
         }
 
-        public int Lasr {
+        public int GoalsConceced {
             set {
-                RaisePropertyChanged(nameof(GoalsAdversary));
+                RaisePropertyChanged(nameof(GoalsConceced));
             }
-        }*/
+        }
+
+        public int Assists {
+            set {
+                RaisePropertyChanged(nameof(Assists));
+            }
+        }
+
+        public int Injuries {
+            set {
+                RaisePropertyChanged(nameof(Injuries));
+            }
+        }
+
+        public int Fouls {
+            set {
+                RaisePropertyChanged(nameof(Fouls));
+            }
+        }
 
         private ICollection<Player> QualifiedPlayers(Match match) {
             var query = from p in App.Model.Players
                         where match.PlayersId.Contains(p.Id)
                         select p;
                 return query.ToList();
+        }
+
+        private void UpdateAction() {
+            App.Model.SaveChanges();
+        }
+
+        private bool CanSaveOrCancelAction() {
+            //TODO : Faire en sorte que le bouton s'active et se désactive au bon moment.
+            return true;
         }
 
         public AddPlayersStatistics(Match match) {
@@ -55,6 +89,7 @@ namespace prbd_1920_g04.Views {
             foreach(var m in ListOfPlayers) {
                 Console.WriteLine(m.Stats.Injuries);
             }
+            UpdateStats = new RelayCommand<Player>((p) => { UpdateAction(); }, (p) => CanSaveOrCancelAction());
         }
     }
 }

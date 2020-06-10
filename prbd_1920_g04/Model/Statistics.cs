@@ -16,8 +16,6 @@ namespace prbd_1920_g04.Model {
         public int Assists { get; set; }
         public int Injuries { get; set; }
         public int Fouls { get; set; }
-        public int YellowCards { get; set; }
-        public int RedCards { get; set; }
         public virtual Player Player { get; set; }
     }
 }

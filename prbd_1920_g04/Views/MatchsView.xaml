@@ -40,7 +40,7 @@
             <Button x:Name="btnCreateMatch" Command="{Binding NewMatch}" Content="Create match" Height="20" VerticalAlignment="Top" Width="120"/>
             <Button x:Name="btnCreatePlayer" Command="{Binding NewPlayer}" Content="Create player" Height="20" VerticalAlignment="Top" Width="120"/>
             <Button Command="{Binding AddPlayerToAMatch}" Content="Add player to a match" Height="20" VerticalAlignment="Top" Width="120"/>
-            <Button x:Name="btnAddScore" Command="{Binding AddResultToMatch}" Content="Add results" Height="20" VerticalAlignment="Top" Width="120"/>
+            <Button x:Name="btnAddScore" Command="{Binding AddResultToMatch}" Content="Add results" Height="20" VerticalAlignment="Top" Width="120" Visibility="Hidden"/>
         </DockPanel>
     </Grid>
 </f:UserControlBase>
