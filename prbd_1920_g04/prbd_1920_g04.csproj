@@ -122,6 +122,9 @@
     <Compile Include="Views\MatchDetailListView.xaml.cs">
       <DependentUpon>MatchDetailListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PlayersStatisticsView.xaml.cs">
+      <DependentUpon>PlayersStatisticsView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Admin.cs" />
@@ -202,6 +205,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MatchDetailListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlayersStatisticsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
