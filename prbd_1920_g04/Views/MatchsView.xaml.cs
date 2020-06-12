@@ -8,7 +8,8 @@ using System.Windows.Input;
 
 namespace prbd_1920_g04.Views
 {
-    public partial class MatchsView : UserControlBase {
+    public partial class MatchsView : UserControlBase
+    {
 
         private ObservableCollection<Model.Match> matchs;
         public ObservableCollection<Model.Match> Matchs { get => matchs; set => SetProperty(ref matchs, value); }
@@ -18,7 +19,8 @@ namespace prbd_1920_g04.Views
             Matchs = new ObservableCollection<Model.Match>(App.Model.Matchs.OrderBy(m => m.DateMatch));
         }
 
-        public MatchsView() {
+        public MatchsView()
+        {
             DataContext = this;
             Refresh();
 

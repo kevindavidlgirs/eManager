@@ -25,6 +25,7 @@
             <RowDefinition Height="8*"/>
             <RowDefinition Height="23*"/>
         </Grid.RowDefinitions>
+        <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="1" TextAlignment="Center" TextWrapping="Wrap" Text="{Binding Date, StringFormat='dd MMMM yyyy'}" VerticalAlignment="Top" Width="160" Height="40" FontSize="16" FontWeight="Bold"/>
         <TextBlock  FontSize="36" TextAlignment="Right" TextWrapping="Wrap" Text="{Binding Home}" VerticalAlignment="Top" Height="58" Margin="0,22,80,0" Grid.Row="2" Width="160"/>
         <TextBlock Grid.Column="4" TextAlignment="Left" FontSize="36" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Adversary}" Width="160" Margin="80,22,0,0" Grid.Row="2" Height="58" VerticalAlignment="Top"/>
         <Label Content="Total Wins" Grid.Row="2" HorizontalAlignment="Right" Width="79" Margin="0,0,1,0" Grid.Column="1" Height="41" VerticalAlignment="Top"/>
@@ -41,8 +42,13 @@
         <Label Content="Total Draws" Grid.Column="3" Grid.Row="3" HorizontalAlignment="Left" Width="80" Height="41" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Right" Margin="0,1,1,0" Grid.Row="3" TextWrapping="Wrap" Text="{Binding DrawsHome}" VerticalAlignment="Top" Height="39" Width="24"/>
         <TextBlock x:Name="AdversaryDraws" HorizontalAlignment="Left" Grid.Row="3" TextWrapping="Wrap"  Text="{Binding DrawsAdversary}" VerticalAlignment="Center" Height="41" Width="25" Grid.Column="4" Margin="0,0,0,190"/>
-        <StackPanel HorizontalAlignment="Left" Height="auto" Margin="160,40,0,0" Grid.Row="3" VerticalAlignment="Top" Width="480" Grid.ColumnSpan="5">
-            <local:MatchDetailListView Match="{Binding Match, ElementName=win}" Margin="-80,0"/>
+        <StackPanel HorizontalAlignment="Center" Height="auto" Grid.Row="3" Margin="0,40,0,0" Width="auto" Grid.ColumnSpan="5">
+            <Label Content="Others Meetings" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
+            <local:MatchDetailListView Match="{Binding Match, ElementName=win}"/>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Left" Height="auto" Grid.Row="3" Margin="10,40,0,0" Width="auto" Grid.ColumnSpan="5">
+            <Label Content="Players Stats" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
+            <local:PlayersStatisticsView Match="{Binding Match, ElementName=win}"/>
         </StackPanel>
     </Grid>
 </f:UserControlBase>

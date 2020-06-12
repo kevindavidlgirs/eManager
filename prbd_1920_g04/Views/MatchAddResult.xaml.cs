@@ -21,7 +21,6 @@ namespace prbd_1920_g04.Views {
 
         private ObservableCollection<Match> playedMatchs;
         public ObservableCollection<Match> PlayedMatchs { get => playedMatchs; set => SetProperty(ref playedMatchs, value); }
-
         public int GoalsHome {
             set {
                 RaisePropertyChanged(nameof(GoalsHome));
@@ -42,6 +41,7 @@ namespace prbd_1920_g04.Views {
             Console.WriteLine(m.GoalsHome + "vs" + m.GoalsAdversary);
             m.IsOver = true;
             App.Model.SaveChanges();
+            App.NotifyColleagues(AppMessages.MSG_ADD_STATS_TO_PLAYER, m);
             Refresh();
         }
 
@@ -59,8 +59,6 @@ namespace prbd_1920_g04.Views {
 
         public MatchAddResult() {
             DataContext = this;
-            // On recupère tous les matchs qui ne sont pas joués
-            //UpdateMatch = new RelayCommand<Match>((m) => { App.NotifyColleagues(AppMessages.MSG_UPDATE_MATCH, m); });
             UpdateMatch = new RelayCommand<Match>((m) => { UpdateAction(m); });
             Refresh();
             InitializeComponent();

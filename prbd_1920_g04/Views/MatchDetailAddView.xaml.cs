@@ -94,8 +94,6 @@ namespace prbd_1920_g04.Views {
 
         public ICommand Save { get; set; }
 
-        public ICommand Delete { get; set; }
-
         private void SaveAction() {
             var query = from match in Matchs
                         where match.Home.Equals(this.Home) && match.Adversary.Equals(this.adversary)
@@ -104,17 +102,11 @@ namespace prbd_1920_g04.Views {
             {
                 Match = Secretary.AddMatch(DateMatch, Place, Home, Adversary, Team);
                 App.NotifyColleagues(AppMessages.MSG_MATCH_CHANGED);
-                App.NotifyColleagues(AppMessages.MSG_MATCH_SAVED, Home + "vs" + Adversary);
+                App.NotifyColleagues(AppMessages.MSG_MATCH_SAVED, Home + " vs " + Adversary);
                 IsNew = false;
                 Console.WriteLine("Count of Matchs : " + Matchs.Count());
             }
             
-        }
-
-        private void DeleteAction() {
-            App.Model.Matchs.Remove(Match);
-            App.Model.SaveChanges();
-            App.NotifyColleagues(AppMessages.MSG_MATCH_DELETED);
         }
 
         private bool CanSaveOrCancelAction() {
@@ -142,9 +134,9 @@ namespace prbd_1920_g04.Views {
             Matchs = new ObservableCollection<Model.Match>(App.Model.Matchs);
             Refresh();
             Save = new RelayCommand(SaveAction, CanSaveOrCancelAction);
-            Delete = new RelayCommand(DeleteAction);
-            InitializeComponent();
             App.Register<Model.Match>(this, AppMessages.MSG_TEAM_CHANGED, match => { Refresh(); });
+            InitializeComponent();
         }
     }
 }
+

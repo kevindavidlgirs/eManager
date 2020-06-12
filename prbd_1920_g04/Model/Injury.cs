@@ -19,7 +19,5 @@ namespace prbd_1920_g04.Model {
         [Key]
         public InjuryPlace Place { get; set; }
         public int NumberDayAway { get; set; }
-
-        public virtual Player Player { get; set; }
     }
 }

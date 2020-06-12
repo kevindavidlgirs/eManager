@@ -31,13 +31,15 @@ namespace prbd_1920_g04.Model
                 }
             }
             foreach(var t in App.Model.Teams)
-            {
-                if (age >= t.MinAge && age <= t.MaxAge && !playerExiste)
+            { 
+                if (age >= t.MinAge && age <= t.MaxAge && !playerExiste 
+                    && firstName.Length >= 3 && LastName.Length >= 3 && email.Length >= 8 && password.Length >= 8
+                    && adresse.Length >= 10 && (jerseyNumber > 0 && jerseyNumber < 100)
+                    && (height >= 165 && height <= 210) && (weight >= 60 && weight <= 110))
                 {
                     player = App.Model.CreatePlayer(firstName, lastname, email, password, age, adresse, height, weight, picturePath, jerseyNumber, fonction);
                     t.Players.Add(player);
                     player.Teams.Add(t);
-
                 }
             }
             App.Model.SaveChanges();

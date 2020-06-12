@@ -16,11 +16,11 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <DockPanel HorizontalAlignment="Center" Height="20" LastChildFill="False" Margin="185,19,165,16" VerticalAlignment="Center" Width="600">
-            <Button Content="Browse" Height="20" VerticalAlignment="Top" Width="120"/>
+            <Button Command="{Binding Browse}" Content="Browse" Height="20" VerticalAlignment="Top" Width="114"/>
             <Button x:Name="btnCreateMatch" Command="{Binding NewMatch}" Content="Create match" Height="20" VerticalAlignment="Top" Width="120"/>
             <Button x:Name="btnCreatePlayer" Command="{Binding NewPlayer}" Content="Create player" Height="20" VerticalAlignment="Top" Width="120"/>
-            <Button x:Name="btnAddScore" Command="{Binding AddResultToMatch}" Content="Add results" Height="20" VerticalAlignment="Top" Width="120"/>
             <Button Command="{Binding AddPlayerToAMatch}" Content="Add player to a match" Height="20" VerticalAlignment="Top" Width="121"/>
+            <Button x:Name="btnAddScore" Command="{Binding AddResultToMatch}" Content="Add results" Height="20" VerticalAlignment="Top" Width="123"/>
         </DockPanel>
         <TabControl x:Name="tabControl" Margin="10,10,10,130" Grid.Row="1">
             <TabItem x:Name="matchsTab" Header="Matchs">

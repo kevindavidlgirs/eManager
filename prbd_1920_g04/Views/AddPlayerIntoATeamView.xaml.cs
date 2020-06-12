@@ -12,7 +12,7 @@ namespace prbd_1920_g04.Views
     /// </summary>
     public partial class AddPlayerIntoAMatchView : UserControlBase
     {
-        public Model.Secretary Secretary { get; set; }
+        public Secretary Secretary { get; set; }
 
         private ObservableCollection<Player> players;
         public ObservableCollection<Player> Players { get => players; set => SetProperty(ref players, value); }
@@ -61,6 +61,7 @@ namespace prbd_1920_g04.Views
             {
                 matchSelected.TeamPlaying.IsComplete = true;
                 App.NotifyColleagues(AppMessages.MSG_TEAM_COMPLET);
+                App.NotifyColleagues(AppMessages.MSG_ADD_RESULT_TO_MATCH);
             }
             CheckedListBoxPlayers(matchSelected.TeamPlaying);
             SetLabelPlaceAvalaible();

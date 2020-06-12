@@ -20,119 +20,65 @@ namespace prbd_1920_g04.Views
         private string firstName;
         public string FirstName
         {
-            get
-            {
-                return firstName;
-            }
-            set
-            {
-                firstName = value;
-            }
+            get => firstName;
+            set => SetProperty<string>(ref firstName, value, () => Validate());
         }
 
         private string lastName;
         public string LastName
         {
-            get
-            {
-                return lastName;
-            }
-            set
-            {
-                lastName = value;
-            }
+            get => lastName;
+            set => SetProperty<string>(ref lastName, value, () => Validate());
         }
 
         private int age;
         public int Age
         {
-            get
-            {
-                return age;
-            }
-            set
-            {
-                age = value;
-            }
+            get => age;
+            set => SetProperty<int>(ref age, value, () => Validate());
         }
 
         private string email;
         public string Email
         {
-            get
-            {
-                return email;
-            }
-            set
-            {
-                email = value;
-            }
+            get => email;
+            set => SetProperty<string>(ref email, value, () => Validate());
         }
 
         private string adresse;
         public string Adresse
         {
-            get
-            {
-                return adresse;
-            }
-            set
-            {
-                adresse = value;
-            }
+            get => adresse;
+            set => SetProperty<string>(ref adresse, value, () => Validate());
         }
 
         private string password;
         public string Password
         {
-            get
-            {
-                return password;
-            }
-            set
-            {
-                password = value;
-            }
+            get => password;
+            set => SetProperty<string>(ref password, value, () => Validate());
         }
 
 
         private int hght;
         public int Hght
         {
-            get
-            {
-                return hght;
-            }
-            set
-            {
-                hght = value;
-            }
+            get => hght;
+            set => SetProperty<int>(ref hght, value, () => Validate());
         }
 
         private double weight;
         public double Weight
         {
-            get
-            {
-                return weight;
-            }
-            set
-            {
-                weight = value;
-            }
+            get => weight;
+            set => SetProperty<double>(ref weight, value, () => Validate());
         }
 
         private int jerseyNumber;
         public int JerseyNumber
         {
-            get
-            {
-                return jerseyNumber;
-            }
-            set
-            {
-                jerseyNumber = value;
-            }
+            get => jerseyNumber;
+            set => SetProperty<int>(ref jerseyNumber, value, () => Validate());
         }
         //Binding TextBox (end)
 
@@ -149,38 +95,18 @@ namespace prbd_1920_g04.Views
         private bool CanSaveOrCancelAction()
 
         {
-            //Changer en requête Linq 
-            var plysList= new ObservableCollection<Model.Player>(App.Model.Players);
-            var playerExiste = false;
             try
             {
-                foreach (var p in plysList)
-                {
-                    if (p.FirstName == firstNameTextBox.Text && p.LastName == lastNameTextBox.Text)
-                    {
-                        playerExiste = true;
-                    }
-                    else
-                    { 
-                        foreach(var t in p.Teams)
-                        {
-                            if (t.MinAge <= Int32.Parse(ageTextBox.Text) && t.MaxAge >= Int32.Parse(ageTextBox.Text)
-                                && p.JerseyNumber.Equals(Int32.Parse(jerseyNumberTextBox.Text)))
-                            {
-                               playerExiste = true;
-                            }
-                                
-                        }
-                    }
-                }
-
-                if (!string.IsNullOrEmpty(firstNameTextBox.Text) && !string.IsNullOrEmpty(lastNameTextBox.Text)
-                    && !string.IsNullOrEmpty(passwordTextBox.Text) && (Int32.Parse(ageTextBox.Text) >= 7 && Int32.Parse(ageTextBox.Text) <= 50) 
-                    && !string.IsNullOrEmpty(emailTextBox.Text) && !string.IsNullOrEmpty(adresseTextBox.Text)
+                if (!string.IsNullOrEmpty(firstNameTextBox.Text) && firstNameTextBox.Text.Length >= 3
+                    && !string.IsNullOrEmpty(lastNameTextBox.Text) && lastNameTextBox.Text.Length >= 3
+                    && !string.IsNullOrEmpty(passwordTextBox.Text) && passwordTextBox.Text.Length >= 8
+                    && (Int32.Parse(ageTextBox.Text) >= 7 && Int32.Parse(ageTextBox.Text) <= 50) 
+                    && !string.IsNullOrEmpty(emailTextBox.Text) && emailTextBox.Text.Length >= 8
+                    && !string.IsNullOrEmpty(adresseTextBox.Text) && adresseTextBox.Text.Length >= 10
                     && (Int32.Parse(jerseyNumberTextBox.Text) > 0 && Int32.Parse(jerseyNumberTextBox.Text) < 100)
                     && (Int32.Parse(heightTextBox.Text) >= 165 && Int32.Parse(heightTextBox.Text) <= 210)
                     && (Int32.Parse(weightTextBox.Text) >= 60 && Int32.Parse(weightTextBox.Text) <= 110)
-                    && !playerExiste)
+                    && !LastNameAndFirstNameExists() && !JerseyNumberExiste())
                 {
                     return true;
                 }
@@ -192,6 +118,132 @@ namespace prbd_1920_g04.Views
             }
             return false;
         }
+
+        private bool LastNameAndFirstNameExists()
+        {
+            //Changer en requête Linq 
+            var plysList = new ObservableCollection<Model.Player>(App.Model.Players);
+            var playerExiste = false;
+            foreach (var p in plysList)
+            {
+                if (p.FirstName == firstNameTextBox.Text && p.LastName == lastNameTextBox.Text)
+                {
+                    playerExiste = true;
+                }
+            }
+            return playerExiste;
+        }
+
+        private bool JerseyNumberExiste()
+        {
+            //Changer en requête Linq 
+            var plysList = new ObservableCollection<Model.Player>(App.Model.Players);
+            var playerExiste = false;
+            foreach (var p in plysList)
+            {
+                foreach (var t in p.Teams)
+                {
+                    try
+                    {
+                        if (t.MinAge <= Int32.Parse(ageTextBox.Text) && t.MaxAge >= Int32.Parse(ageTextBox.Text)
+                                                && p.JerseyNumber.Equals(Int32.Parse(jerseyNumberTextBox.Text)))
+                        {
+                            playerExiste = true;
+                        }
+                    }catch(Exception ex)
+                    {
+                        Console.WriteLine(ex);
+                    }
+                    
+
+                }
+            
+            }
+            return playerExiste;
+        }
+
+        //TODO : Affichage à peaufiner
+        public override bool Validate()
+        {
+            ClearErrors();
+
+            //FirstName
+            if (string.IsNullOrEmpty(FirstName) || FirstName.Length < 3)
+            {
+                AddError("FirstName", Properties.Resources.Error_LengthGreaterEqual3);
+            }
+
+            //LastName
+            if (string.IsNullOrEmpty(LastName) || LastName.Length < 3)
+            {
+                AddError("LastName", Properties.Resources.Error_LengthGreaterEqual3);
+            }
+
+            //email
+            if (string.IsNullOrEmpty(email) || email.Length < 8)
+            {
+                AddError("Email", Properties.Resources.Error_LengthGreaterEqual8);
+            }
+
+            //password
+            if (string.IsNullOrEmpty(password) || password.Length < 8)
+            {
+                AddError("Password", Properties.Resources.Error_LengthGreaterEqual8);
+            }
+
+            //adresse
+            if (string.IsNullOrEmpty(adresse) || adresse.Length < 10)
+            {
+                AddError("Adresse", Properties.Resources.Error_LengthGreaterEqual8);
+            }
+
+            //JerseyNumber
+            if (jerseyNumber < 1)
+            {
+                AddError("JerseyNumber", Properties.Resources.Error_NumberGreaterEqual1);
+            }else if(jerseyNumber > 99)
+            {
+                AddError("JerseyNumber", Properties.Resources.Error_NumberInferiorEqual99);
+            }else if (JerseyNumberExiste())
+            {
+                AddError("JerseyNumber", Properties.Resources.Error_CombinationAgeAndJerseyNumber);
+            }
+
+            //Age
+            if (age < 7)
+            {
+                AddError("Age", Properties.Resources.Error_NumberGreaterEqual7);
+            }
+            else if (age > 50)
+            {
+                AddError("Age", Properties.Resources.Error_NumberInferiorEqual50);
+            }
+            
+
+            //Weight
+            if (weight < 60)
+            {
+                AddError("Weight", Properties.Resources.Error_NumberGreaterEqual60);
+            }
+            else if (weight > 110)
+            {
+                AddError("Weight", Properties.Resources.Error_NumberInferiorEqual110);
+
+            }
+
+            //Height
+            if (hght < 165)
+            {
+                AddError("Hght", Properties.Resources.Error_NumberGreaterEqual165);
+            }
+            else if (hght > 210)
+            {
+                AddError("Hght", Properties.Resources.Error_NumberInferiorEqual210);
+            }
+            RaiseErrors();
+            return !HasErrors;
+        }
+
 
         public PlayerDetailAddView()
         {

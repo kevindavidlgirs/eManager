@@ -1,0 +1,54 @@
+﻿<f:UserControlBase x:Class="prbd_1920_g04.Views.AddPlayersStatistics"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+              xmlns:f="clr-namespace:PRBD_Framework;assembly=PRBD_Framework"
+             xmlns:local="clr-namespace:prbd_1920_g04.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid ShowGridLines="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer  Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="MyItemsControl" 
+                  ItemsSource="{Binding ListOfPlayers}" 
+                  Grid.Row="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Center" >
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontSize="18" FontWeight="Bold" Height="30" Width="Auto" TextAlignment="Center" Margin="10" VerticalAlignment="Center" Text="{Binding FirstName}" />
+                            <TextBlock FontSize="18" FontWeight="Bold" Height="30" Width="Auto" TextAlignment="Right" Margin="10" VerticalAlignment="Center" Text="{Binding LastName}" />
+                            <TextBlock FontSize="18" FontWeight="Bold" Height="30" Width="Auto" TextAlignment="Right" Margin="5,0,0,0" VerticalAlignment="Center" Text="[" />
+                            <Image HorizontalAlignment="Center" Height="25" Width="25" VerticalAlignment="Center" Source="/images/goals.png"/>
+                            <TextBox  Grid.Column="1" Text="{Binding Stats.GoalsScored, UpdateSourceTrigger=PropertyChanged}" Height="20" Width="30" VerticalAlignment="Center" />
+                            <TextBlock FontSize="18" FontWeight="Bold" Height="30" Width="Auto" TextAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" Text="]" />
+                            <TextBlock FontSize="18" FontWeight="Bold" Height="30" Width="Auto" TextAlignment="Right" Margin="5,0,0,0" VerticalAlignment="Center" Text="[" />
+                            <Image HorizontalAlignment="Center" Height="25" Width="25" VerticalAlignment="Center" Source="/images/GoalsConceced.png"/>
+                            <TextBox Grid.Column="1" Text="{Binding Stats.GoalsConceced}" Height="20" Width="30" VerticalAlignment="Center" />
+                            <TextBlock FontSize="18" FontWeight="Bold" Height="30" Width="Auto" TextAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" Text="]" />
+                            <TextBlock FontSize="18" FontWeight="Bold" Height="30" Width="Auto" TextAlignment="Right" Margin="5,0,0,0" VerticalAlignment="Center" Text="[" />
+                            <Image HorizontalAlignment="Center" Height="25" Width="25" VerticalAlignment="Center" Source="/images/Assists.png"/>
+                            <TextBox Grid.Column="1" Text="{Binding Stats.Assists}" Height="20" Width="30" VerticalAlignment="Center" />
+                            <TextBlock FontSize="18" FontWeight="Bold" Height="30" Width="Auto" TextAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" Text="]" />
+                            <TextBlock FontSize="18" FontWeight="Bold" Height="30" Width="Auto" TextAlignment="Right" Margin="5,0,0,0" VerticalAlignment="Center" Text="[" />
+                            <Image HorizontalAlignment="Center" Height="25" Width="25" VerticalAlignment="Center" Source="/images/Injuries.png"/>
+                            <TextBox Grid.Column="1" Text="{Binding Stats.Injuries}" Height="20" Margin="10" Width="30" VerticalAlignment="Center" />
+                            <TextBlock FontSize="18" FontWeight="Bold" Height="30" Width="Auto" TextAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" Text="]" />
+                            <TextBlock FontSize="18" FontWeight="Bold" Height="30" Width="Auto" TextAlignment="Right" Margin="5,0,0,0" VerticalAlignment="Center" Text="[" />
+                            <Image HorizontalAlignment="Center" Height="25" Width="25" VerticalAlignment="Center" Source="/images/Fauls.png"/>
+                            <TextBox Grid.Column="1" Text="{Binding Stats.Fouls}" Height="20" Margin="10" Width="30" VerticalAlignment="Center" />
+                            <TextBlock FontSize="18" FontWeight="Bold" Height="30" Width="Auto" TextAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" Text="]" />
+                            <Button x:Name="btnUpdate" Content="Update" Width="50" VerticalAlignment="Center" Margin="10" HorizontalAlignment="Right" 
+                                    Command="{Binding ElementName=MyItemsControl, Path=DataContext.UpdateStats}" CommandParameter="{Binding}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</f:UserControlBase>
