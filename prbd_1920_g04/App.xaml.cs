@@ -19,9 +19,7 @@ namespace prbd_1920_g04 {
         MSG_MATCH_DELETED,
         MSG_NEW_PLAYER,
         MSG_PLAYER_ADDED,
-        MSG_EDIT_PLAYER,
-        MSG_PLAYER_DELETED,
-        MSG_CANCEL_ADD_PLAYER,
+        MSG_ADD_PLAYER_TO_A_TEAMS,
         MSG_ADD_PLAYER_TO_A_TEAM,
         MSG_TEAM_CHANGED,
         MSG_MATCH_SAVED,
@@ -69,23 +67,32 @@ namespace prbd_1920_g04 {
             var coach = App.Model.CreateCoach("coach", "coach", "coach@gmail.com", "coach", 30, "Rue du document", "/path", Fonction.Coach);
 
             // Le secrétaire encode des nouveaux joueurs.
-            var player1 = sec.CreatePlayer("Dupont", "André", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 10, Fonction.Player);
-            var player2 = sec.CreatePlayer("Tartine", "Martine", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 7, Fonction.Player);
-            var player3 = sec.CreatePlayer("Dubois", "Charles", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 9, Fonction.Player);
-            var player4 = sec.CreatePlayer("Noyce", "Robert", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 10, Fonction.Player);
-            var player5 = sec.CreatePlayer("Viton", "Cerf", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 7, Fonction.Player);
+            var player1 = sec.CreatePlayer("Dupont", "André", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 1, Fonction.Player);
+            var player2 = sec.CreatePlayer("Jean-François", "Gillet", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 2, Fonction.Player);
+            var player3 = sec.CreatePlayer("Dubois", "Charles", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 3, Fonction.Player);
+            var player4 = sec.CreatePlayer("Noyce", "Robert", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 4, Fonction.Player);
+            var player5 = sec.CreatePlayer("Viton", "Cerf", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 5, Fonction.Player);
+            var player6 = sec.CreatePlayer("Dimitri", "Rogan", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 6, Fonction.Player);
 
-            var player7 = sec.CreatePlayer("Arthur", "Borus", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 3, Fonction.Player);
-            var player8 = sec.CreatePlayer("Marc", "Ddodo", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 4, Fonction.Player);
-            var player9 = sec.CreatePlayer("Clarence", "Moto", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 5, Fonction.Player);
-            var player10 = sec.CreatePlayer("Riddick", "Khan", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 6, Fonction.Player);
-            var player11 = sec.CreatePlayer("Albert", "Romano", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 2, Fonction.Player);
-            var player12 = sec.CreatePlayer("Dimitri", "Rogan", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 1, Fonction.Player);
-            Console.WriteLine(sec + "\n" + player1 + "\n" + player2 + "\n" + player3);
-            
-            
+            var player7 = sec.CreatePlayer("Arthur", "Borus", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 7, Fonction.Player);
+            var player8 = sec.CreatePlayer("Marc", "Ddodo", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 8, Fonction.Player);
+            var player9 = sec.CreatePlayer("Clarence", "Moto", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 9, Fonction.Player);
+            var player10 = sec.CreatePlayer("Riddick", "Khan", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 10, Fonction.Player);
+            var player11 = sec.CreatePlayer("Albert", "Romano", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 11, Fonction.Player);
+            var player12 = sec.CreatePlayer("Roberto", "Firmino", "player@gmail.com", "player", 20, "Avenue du ballon", 175, 72.5, "/path", 12, Fonction.Player);
 
-            
+            var player13 = sec.CreatePlayer("Zinho", "Vanheusden", "player@gmail.com", "player", 16, "Avenue du ballon", 175, 72.5, "/path", 1, Fonction.Player);
+            var player14 = sec.CreatePlayer("Dimitri", "Lavalée", "player@gmail.com", "player", 16, "Avenue du ballon", 175, 72.5, "/path", 2, Fonction.Player);
+            var player15 = sec.CreatePlayer("Moussa", "Sissako", "player@gmail.com", "player", 16, "Avenue du ballon", 175, 72.5, "/path", 3, Fonction.Player);
+            var player16 = sec.CreatePlayer("Noë", "Dussenne", "player@gmail.com", "player", 16, "Avenue du ballon", 175, 72.5, "/path", 4, Fonction.Player);
+            var player17 = sec.CreatePlayer("Duje", "Cop", "player@gmail.com", "player", 16, "Avenue du ballon", 175, 72.5, "/path", 5, Fonction.Player);
+
+            var player18 = sec.CreatePlayer("Gojko", "Cimirot", "player@gmail.com", "player", 16, "Avenue du ballon", 175, 72.5, "/path", 6, Fonction.Player);
+            var player19 = sec.CreatePlayer("Mehdi", "Carcela", "player@gmail.com", "player", 16, "Avenue du ballon", 175, 72.5, "/path", 7, Fonction.Player);
+            var player20 = sec.CreatePlayer("Denis", "Dragus", "player@gmail.com", "player", 16, "Avenue du ballon", 175, 72.5, "/path", 8, Fonction.Player);
+            var player21 = sec.CreatePlayer("John", "Nekadio", "player@gmail.com", "player", 16, "Avenue du ballon", 175, 72.5, "/path", 9, Fonction.Player);
+            var player22 = sec.CreatePlayer("Eden", "Hazard", "player@gmail.com", "player", 16, "Avenue du ballon", 175, 72.5, "/path", 10, Fonction.Player);
+
             // Le secrétaire encode le match.
             var match1 = sec.AddMatch(new DateTime(2020, 04, 28), "Epfc Stadium", "EPFC", "SUPINFO", "A1");
             var match2 = sec.AddMatch(new DateTime(2020, 05, 05), "Epfc Stadium", "EPFC", "HE2B", "A1");

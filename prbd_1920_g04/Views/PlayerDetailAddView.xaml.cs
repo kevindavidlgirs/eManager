@@ -16,7 +16,6 @@ namespace prbd_1920_g04.Views
         public Model.Player Player { get; set; }
         public Model.Secretary Secretary { get; set; }
 
-
         //Binding textBox (start)
         private string firstName;
         public string FirstName
@@ -28,7 +27,6 @@ namespace prbd_1920_g04.Views
             set
             {
                 firstName = value;
-                RaisePropertyChanged(nameof(FirstName));
             }
         }
 
@@ -42,7 +40,6 @@ namespace prbd_1920_g04.Views
             set
             {
                 lastName = value;
-                RaisePropertyChanged(nameof(LastName));
             }
         }
 
@@ -56,7 +53,6 @@ namespace prbd_1920_g04.Views
             set
             {
                 age = value;
-                RaisePropertyChanged(nameof(Age));
             }
         }
 
@@ -70,7 +66,6 @@ namespace prbd_1920_g04.Views
             set
             {
                 email = value;
-                RaiseErrorsChanged(nameof(Email));
             }
         }
 
@@ -84,7 +79,6 @@ namespace prbd_1920_g04.Views
             set
             {
                 adresse = value;
-                RaiseErrorsChanged(nameof(Adresse));
             }
         }
 
@@ -98,23 +92,20 @@ namespace prbd_1920_g04.Views
             set
             {
                 password = value;
-                RaiseErrorsChanged(nameof(Password));
             }
         }
 
-        //Utilisation de new car nous effectuons un masquage nous devrions utiliser un autre mot pour rester dans la  
-        //bonne pratique.
-        private int height;
-        public new int Height
+
+        private int hght;
+        public int Hght
         {
             get
             {
-                return height;
+                return hght;
             }
             set
             {
-                height = value;
-                RaiseErrorsChanged(nameof(Height));
+                hght = value;
             }
         }
 
@@ -128,7 +119,6 @@ namespace prbd_1920_g04.Views
             set
             {
                 weight = value;
-                RaisePropertyChanged(nameof(Weight));
             }
         }
 
@@ -142,71 +132,76 @@ namespace prbd_1920_g04.Views
             set
             {
                 jerseyNumber = value;
-                RaisePropertyChanged(nameof(JerseyNumber));
             }
         }
         //Binding TextBox (end)
 
-        //Bouton save
-        private bool isNew;
-        public bool IsNew
-        {
-            get { return isNew; }
-            set
-            {
-                isNew = value;
-                RaisePropertyChanged(nameof(IsNew));
-            }
-        }
-
         public ICommand Save { get; set; }
-        //Bouton save
-
-        //Devrait fermer l'onglet
-        public ICommand Cancel { get; set; }
-        //Devrait fermer l'onglet
 
         private void SaveAction()
         {
-            Player = Secretary.CreatePlayer(firstName, lastName, email, password, age, adresse, height, weight, null, jerseyNumber);
-            IsNew = false;
+            Player = Secretary.CreatePlayer(firstName, lastName, email, password, age, adresse, hght, weight, null, jerseyNumber);
             var Players = new ObservableCollection<Model.Player>(App.Model.Players);
+            App.NotifyColleagues(AppMessages.MSG_PLAYER_ADDED);
             Console.WriteLine("Vous avez ajoutez un joueur, vous êtes à : "+ Players.Count()+" joueurs.");
-            App.NotifyColleagues(AppMessages.MSG_PLAYER_ADDED, Player);
-        }
-
-        private void CancelAction()
-        {
-            
         }
 
         private bool CanSaveOrCancelAction()
+
         {
-            if (IsNew)
+            //Changer en requête Linq 
+            var plysList= new ObservableCollection<Model.Player>(App.Model.Players);
+            var playerExiste = false;
+            try
             {
-                return !(string.IsNullOrEmpty(firstName) && string.IsNullOrEmpty(lastName) 
-                    && (age == 0) && string.IsNullOrEmpty(password) && (jerseyNumber == 0) && HasErrors);
+                foreach (var p in plysList)
+                {
+                    if (p.FirstName == firstNameTextBox.Text && p.LastName == lastNameTextBox.Text)
+                    {
+                        playerExiste = true;
+                    }
+                    else
+                    { 
+                        foreach(var t in p.Teams)
+                        {
+                            if (t.MinAge <= Int32.Parse(ageTextBox.Text) && t.MaxAge >= Int32.Parse(ageTextBox.Text)
+                                && p.JerseyNumber.Equals(Int32.Parse(jerseyNumberTextBox.Text)))
+                            {
+                               playerExiste = true;
+                            }
+                                
+                        }
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(firstNameTextBox.Text) && !string.IsNullOrEmpty(lastNameTextBox.Text)
+                    && !string.IsNullOrEmpty(passwordTextBox.Text) && (Int32.Parse(ageTextBox.Text) >= 7 && Int32.Parse(ageTextBox.Text) <= 50) 
+                    && !string.IsNullOrEmpty(emailTextBox.Text) && !string.IsNullOrEmpty(adresseTextBox.Text)
+                    && (Int32.Parse(jerseyNumberTextBox.Text) > 0 && Int32.Parse(jerseyNumberTextBox.Text) < 100)
+                    && (Int32.Parse(heightTextBox.Text) >= 165 && Int32.Parse(heightTextBox.Text) <= 210)
+                    && (Int32.Parse(weightTextBox.Text) >= 60 && Int32.Parse(weightTextBox.Text) <= 110)
+                    && !playerExiste)
+                {
+                    return true;
+                }
+                
             }
-            var change = (from c in App.Model.ChangeTracker.Entries<Model.Player>()
-                          where c.Entity == Player
-                          select c).FirstOrDefault();
-            return change != null && change.State != EntityState.Unchanged;
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return false;
         }
 
         public PlayerDetailAddView()
         {
             DataContext = this;
-            IsNew = true;
             Secretary = (Model.Secretary)App.CurrentUser;
             Save = new RelayCommand(SaveAction, CanSaveOrCancelAction);
-            //Cancel = new RelayCommand(CancelAction);
             var Players = new ObservableCollection<Model.Player>(App.Model.Players);
             Console.WriteLine("Vous êtes à : " + Players.Count() + " joueurs.");
             InitializeComponent();
         }
 
-        /*
-         * NOTE : Nous devrions ajouter une photo.
-         */
     } 
 }

@@ -10,14 +10,10 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid ShowGridLines="True">
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="450"/>
         </Grid.RowDefinitions>
         <ListView x:Name="listView" 
-                  ItemsSource="{Binding Matchs}" 
-                  Grid.Row="2" BorderBrush="Transparent" SelectionMode="Single" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                  ItemsSource="{Binding Matchs}" BorderBrush="Transparent" SelectionMode="Single" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="156,105,119,149">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
                     <i:InvokeCommandAction Command="{Binding DisplayMatchDetails}" 
@@ -35,12 +31,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <DockPanel HorizontalAlignment="Center" Height="20" LastChildFill="False" Margin="20,10,0,0" VerticalAlignment="Center">
-            <Button Content="Browse" Height="20" VerticalAlignment="Top" Width="120"/>
-            <Button x:Name="btnCreateMatch" Command="{Binding NewMatch}" Content="Create match" Height="20" VerticalAlignment="Top" Width="120"/>
-            <Button x:Name="btnCreatePlayer" Command="{Binding NewPlayer}" Content="Create player" Height="20" VerticalAlignment="Top" Width="120"/>
-            <Button x:Name="btnAddScore" Command="{Binding AddResultToMatch}" Content="Add results" Height="20" VerticalAlignment="Top" Width="120"/>
-            <Button Command="{Binding AddPlayerToAMatch}" Content="Add player to a match" Height="20" VerticalAlignment="Top" Width="120"/>
-        </DockPanel>
+
     </Grid>
 </f:UserControlBase>

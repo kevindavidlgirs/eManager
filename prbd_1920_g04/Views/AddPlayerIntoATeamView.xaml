@@ -13,7 +13,7 @@
         <Label Content="Team :" HorizontalAlignment="Left" Margin="255,66,0,0" VerticalAlignment="Top" FontSize="20"/>
         <Button Command="{Binding Save}" Content="Save" HorizontalAlignment="Left" Margin="389,304,0,0" VerticalAlignment="Top" Width="76"/>
         <xctk:CheckListBox Name="checkListBox" ItemsSource="{Binding Players}" DisplayMemberPath="FirstName" HorizontalAlignment="Left" Height="100" Margin="170,161,0,0" VerticalAlignment="Top" Width="502"/>
-        <Label Name="teamIsComplete" Content="" HorizontalAlignment="Left" Margin="310,112,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.2,-0.051" Width="218"/>
+        <Label Name="teamIsComplete" Content="" HorizontalAlignment="Left" Margin="255,120,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.2,-0.051" Width="340"/>
         <Label Name="equipeAdverse" Content="Please select a team." HorizontalAlignment="Left" Margin="476,72,0,0" VerticalAlignment="Top" Height="26"/>
     </Grid>
 </f:UserControlBase>

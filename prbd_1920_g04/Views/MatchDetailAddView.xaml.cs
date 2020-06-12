@@ -14,9 +14,11 @@ namespace prbd_1920_g04.Views {
         public Model.Match Match { get; set; }
         public Model.Secretary Secretary {get; set;}
 
+        private ObservableCollection<Model.Match> matchs;
+        public ObservableCollection<Model.Match> Matchs { get => matchs; set => SetProperty(ref matchs, value); }
+
         private ObservableCollection<Model.Team> teams;
         public ObservableCollection<Model.Team> Teams { get => teams; set => SetProperty(ref teams, value); }
-
 
         //Binding des TextBox START
         private string home;
@@ -95,12 +97,18 @@ namespace prbd_1920_g04.Views {
         public ICommand Delete { get; set; }
 
         private void SaveAction() {
-            Match = Secretary.AddMatch(DateMatch, Place, Home, Adversary, Team);
-            App.NotifyColleagues(AppMessages.MSG_MATCH_CHANGED, Match);
-            App.NotifyColleagues(AppMessages.MSG_MATCH_SAVED, Home + "vs"+ Adversary);
-            IsNew = false;
-            var Matchs = new ObservableCollection<Model.Match>(App.Model.Matchs);
-            Console.WriteLine("Count of Matchs : " + Matchs.Count());
+            var query = from match in Matchs
+                        where match.Home.Equals(this.Home) && match.Adversary.Equals(this.adversary)
+                        select match;
+            if(query.Count() == 0)
+            {
+                Match = Secretary.AddMatch(DateMatch, Place, Home, Adversary, Team);
+                App.NotifyColleagues(AppMessages.MSG_MATCH_CHANGED);
+                App.NotifyColleagues(AppMessages.MSG_MATCH_SAVED, Home + "vs" + Adversary);
+                IsNew = false;
+                Console.WriteLine("Count of Matchs : " + Matchs.Count());
+            }
+            
         }
 
         private void DeleteAction() {
@@ -131,6 +139,7 @@ namespace prbd_1920_g04.Views {
             DataContext = this;
             IsNew = true;
             Secretary = (Model.Secretary) App.CurrentUser;
+            Matchs = new ObservableCollection<Model.Match>(App.Model.Matchs);
             Refresh();
             Save = new RelayCommand(SaveAction, CanSaveOrCancelAction);
             Delete = new RelayCommand(DeleteAction);

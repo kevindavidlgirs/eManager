@@ -18,9 +18,9 @@ using System.Collections.ObjectModel;
 
 namespace prbd_1920_g04.Views {
     public partial class MatchAddResult : UserControlBase {
+
         private ObservableCollection<Match> playedMatchs;
         public ObservableCollection<Match> PlayedMatchs { get => playedMatchs; set => SetProperty(ref playedMatchs, value); }
-        public ICommand UpdateMatch { get; set; }
 
         public int GoalsHome {
             set {
@@ -34,6 +34,9 @@ namespace prbd_1920_g04.Views {
             }
         }
 
+        public ICommand UpdateMatch { get; set; }
+
+
         private void UpdateAction(Match m) {
             Console.WriteLine(m.Home + "vs" + m.Adversary);
             Console.WriteLine(m.GoalsHome + "vs" + m.GoalsAdversary);
@@ -41,12 +44,13 @@ namespace prbd_1920_g04.Views {
             App.Model.SaveChanges();
             Refresh();
         }
+
         private void Refresh() {
             var matchs = new ObservableCollection<Match>(App.Model.Matchs);
             PlayedMatchs = new ObservableCollection<Match>();
             foreach (var m in matchs)
             {
-                if (m.IsComplete && !m.IsOver)
+                if (m.Players.Count >= 11 && !m.IsOver)
                 {
                     PlayedMatchs.Add(m);
                 }
