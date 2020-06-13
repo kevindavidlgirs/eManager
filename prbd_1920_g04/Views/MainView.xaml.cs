@@ -150,6 +150,8 @@ namespace prbd_1920_g04.Views {
             });
             //TODO: Peaufiner cette partie
 
+
+
             NewPlayer = new RelayCommand(() => 
             {
                 foreach (TabItem t in tabControl.Items)
