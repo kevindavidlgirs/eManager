@@ -23,13 +23,10 @@ namespace prbd_1920_g04.Views
         {
             DataContext = this;
             Refresh();
-
             DisplayMatchDetails = new RelayCommand<Model.Match>(m => {
                 App.NotifyColleagues(AppMessages.MSG_SHOW_MATCH, m);
             });
-
-            App.Register(this, AppMessages.MSG_MATCH_CHANGED, () => { Refresh(); });
-
+            App.Register(this, AppMessages.MSG_MATCH_ADDED, () => { Refresh(); });
             InitializeComponent();
         }
     }

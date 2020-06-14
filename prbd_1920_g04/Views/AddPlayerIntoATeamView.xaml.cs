@@ -3,6 +3,7 @@ using PRBD_Framework;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace prbd_1920_g04.Views
@@ -57,26 +58,26 @@ namespace prbd_1920_g04.Views
                 Player p = (Player)player;
                 Secretary.AddPlayerInMatchs(p.Id, matchSelected);
             }
-            if (matchSelected.NumberOfPlayers() == 99 || matchSelected.NumberOfPlayers() >= 11)
+            if (matchSelected.NumberOfPlayers() >= 11)
             {
-                matchSelected.TeamPlaying.IsComplete = true;
-                App.NotifyColleagues(AppMessages.MSG_TEAM_COMPLET);
-                App.NotifyColleagues(AppMessages.MSG_ADD_RESULT_TO_MATCH);
+                matchSelected.IsComplete = true;
+                App.Model.SaveChanges();
             }
             CheckedListBoxPlayers(matchSelected.TeamPlaying);
             SetLabelPlaceAvalaible();
-            App.NotifyColleagues(AppMessages.MSG_ADD_PLAYER_TO_A_TEAM, matchSelected.NumberOfPlayers() >= 11);
+            App.NotifyColleagues(AppMessages.MSG_ADD_PLAYER_TO_A_TEAM, new ObservableCollection<Match>(App.Model.Matchs.Where(m => (m.IsComplete))).Count > 0);
         }
 
         private void ComboBox_SelectionChanged(object sender, EventArgs e)
         {
             foreach(var m in Matchs)
             {
-                if (m.Equals((Match)Mc.SelectedItem))
+                if (m.Equals((Match)comboboxMatchs.SelectedItem))
                 {
                     matchSelected = m;
                     CheckedListBoxPlayers(matchSelected.TeamPlaying);
                     SetLabelPlaceAvalaible();
+                    categorie.Content = "Catégorie "+ matchSelected.TeamPlaying.Name;
                     equipeAdverse.Content = "VS " + matchSelected.Adversary + ". Date of meeting : " + matchSelected.DateMatch.Day+" /" + matchSelected.DateMatch.Month;
                     return;
                 }
@@ -85,7 +86,7 @@ namespace prbd_1920_g04.Views
 
         private void ComboBoxMatchs()
         {
-            Matchs = new ObservableCollection<Match>(App.Model.Matchs.Where(m => m.Players.Count < 99).OrderBy(m => m.DateMatch));
+            Matchs = new ObservableCollection<Match>(App.Model.Matchs.Where(m => (m.Players.Count < 99 && !m.IsOver)).OrderBy(m => m.DateMatch));
         }
 
         private void CheckedListBoxPlayers(Team t)
@@ -126,8 +127,9 @@ namespace prbd_1920_g04.Views
             Secretary = (Secretary)App.CurrentUser;
             ComboBoxMatchs();
             Save = new RelayCommand(SaveAction, CanSaveOrCancelAction);
-            App.Register(this, AppMessages.MSG_MATCH_CHANGED, () => { ComboBoxMatchs(); Players = null; equipeAdverse.Content = "Please select a team."; teamIsComplete.Content = ""; });
-            App.Register(this, AppMessages.MSG_PLAYER_ADDED, () => { CheckedListBoxPlayers(matchSelected.TeamPlaying); });
+            App.Register(this, AppMessages.MSG_MATCH_IS_OVER, () => { ComboBoxMatchs(); Players = null; equipeAdverse.Content = "Please select a team."; teamIsComplete.Content = ""; categorie.Content = ""; comboboxMatchs.SelectedIndex = -1; });
+            App.Register(this, AppMessages.MSG_MATCH_ADDED, () => { ComboBoxMatchs(); Players = null; equipeAdverse.Content = "Please select a team."; teamIsComplete.Content = ""; categorie.Content = ""; comboboxMatchs.SelectedIndex = -1; });
+            App.Register(this, AppMessages.MSG_PLAYER_ADDED, () => { if(matchSelected != null)CheckedListBoxPlayers(matchSelected.TeamPlaying); });
             InitializeComponent();
         }
     }

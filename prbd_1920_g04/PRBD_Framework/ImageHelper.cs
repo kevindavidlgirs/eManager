@@ -166,10 +166,13 @@ namespace PRBD_Framework {
             if (file == null) {
                 return;
             }
+            /*
+             * CAUSE PROBLEME ! 
             var path = Path.Combine(basePath, file);
             if (File.Exists(path)) {
                 File.Delete(path);
             }
+            */
         }
 
         private void RenameTempFile(string targetFileWithoutExtension) {

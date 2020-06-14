@@ -101,7 +101,7 @@ namespace prbd_1920_g04.Views {
             if(query.Count() == 0)
             {
                 Match = Secretary.AddMatch(DateMatch, Place, Home, Adversary, Team);
-                App.NotifyColleagues(AppMessages.MSG_MATCH_CHANGED);
+                App.NotifyColleagues(AppMessages.MSG_MATCH_ADDED);
                 App.NotifyColleagues(AppMessages.MSG_MATCH_SAVED, Home + " vs " + Adversary);
                 IsNew = false;
                 Console.WriteLine("Count of Matchs : " + Matchs.Count());

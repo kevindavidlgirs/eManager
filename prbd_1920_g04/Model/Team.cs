@@ -18,8 +18,7 @@ namespace prbd_1920_g04.Model
         public int MinAge { get; set; }
 
         public int MaxAge { get; set; }
-        public bool IsComplete { get; set; }
-
+        
         public virtual ICollection<Player> Players { get; set; } = new HashSet<Player>();
 
     }

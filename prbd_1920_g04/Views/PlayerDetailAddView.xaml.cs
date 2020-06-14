@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
+using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Media;
+using prbd_1920_g04.Model;
 using PRBD_Framework;
 
 namespace prbd_1920_g04.Views
@@ -12,11 +16,14 @@ namespace prbd_1920_g04.Views
     /// </summary>
     public partial class PlayerDetailAddView : UserControlBase
     {
+        //Devrait être enlever ou être utilisé de facon plus approfondie !
+        public Player Player { get; set; }
+        //Devrait être enlever ou être utilisé de facon plus approfondie !
 
-        public Model.Player Player { get; set; }
-        public Model.Secretary Secretary { get; set; }
+        public Secretary Secretary { get; set; }
+        
+        private ImageHelper imageHelper;
 
-        //Binding textBox (start)
         private string firstName;
         public string FirstName
         {
@@ -80,20 +87,29 @@ namespace prbd_1920_g04.Views
             get => jerseyNumber;
             set => SetProperty<int>(ref jerseyNumber, value, () => Validate());
         }
-        //Binding TextBox (end)
-
+        public string PicturePath
+        {
+            get { return Player.AbsolutePicturePath; }
+            set
+            {
+                Player.PicturePath = value;
+                RaisePropertyChanged(nameof(PicturePath));
+            }
+        }
         public ICommand Save { get; set; }
-
+        public ICommand ClearImage { get; set; }
+        public ICommand LoadImage { get; set; }
         private void SaveAction()
         {
-            Player = Secretary.CreatePlayer(firstName, lastName, email, password, age, adresse, hght, weight, null, jerseyNumber);
-            var Players = new ObservableCollection<Model.Player>(App.Model.Players);
-            App.NotifyColleagues(AppMessages.MSG_PLAYER_ADDED);
-            Console.WriteLine("Vous avez ajoutez un joueur, vous êtes à : "+ Players.Count()+" joueurs.");
+            if(!LastNameAndFirstNameExists() && !JerseyNumberExiste() && Validate())
+            {
+                Secretary.CreatePlayer(firstName, lastName, email, password, age, adresse, hght, weight, PicturePath, jerseyNumber);
+                App.NotifyColleagues(AppMessages.MSG_PLAYER_ADDED);
+                Console.WriteLine("Vous avez ajoutez un joueur, vous êtes à : " + new ObservableCollection<Player>(App.Model.Players).Count() + " joueurs.");
+            }
         }
 
         private bool CanSaveOrCancelAction()
-
         {
             try
             {
@@ -118,27 +134,40 @@ namespace prbd_1920_g04.Views
             }
             return false;
         }
-
+        private void ClearImageAction()
+        {
+            imageHelper.Clear();
+            PicturePath = null;
+        }
+        private void LoadImageAction()
+        {
+            var fd = new OpenFileDialog();
+            if (fd.ShowDialog().ToString().Equals("OK"))
+            {
+                var filename = fd.FileName;
+                if (filename != null && File.Exists(filename))
+                {
+                    imageHelper.Load(fd.FileName);
+                    PicturePath = imageHelper.CurrentFile;
+                }
+            }
+        }
         private bool LastNameAndFirstNameExists()
         {
-            //Changer en requête Linq 
-            var plysList = new ObservableCollection<Model.Player>(App.Model.Players);
-            var playerExiste = false;
+            var plysList = new ObservableCollection<Player>(App.Model.Players);
             foreach (var p in plysList)
             {
                 if (p.FirstName == firstNameTextBox.Text && p.LastName == lastNameTextBox.Text)
                 {
-                    playerExiste = true;
+                    return true;
                 }
             }
-            return playerExiste;
+            return false;
         }
 
         private bool JerseyNumberExiste()
         {
-            //Changer en requête Linq 
-            var plysList = new ObservableCollection<Model.Player>(App.Model.Players);
-            var playerExiste = false;
+            var plysList = new ObservableCollection<Player>(App.Model.Players);
             foreach (var p in plysList)
             {
                 foreach (var t in p.Teams)
@@ -148,18 +177,15 @@ namespace prbd_1920_g04.Views
                         if (t.MinAge <= Int32.Parse(ageTextBox.Text) && t.MaxAge >= Int32.Parse(ageTextBox.Text)
                                                 && p.JerseyNumber.Equals(Int32.Parse(jerseyNumberTextBox.Text)))
                         {
-                            playerExiste = true;
+                            return true;
                         }
                     }catch(Exception ex)
                     {
                         Console.WriteLine(ex);
                     }
-                    
-
                 }
-            
             }
-            return playerExiste;
+            return false;
         }
 
         //TODO : Affichage à peaufiner
@@ -248,8 +274,12 @@ namespace prbd_1920_g04.Views
         public PlayerDetailAddView()
         {
             DataContext = this;
-            Secretary = (Model.Secretary)App.CurrentUser;
+            Player = App.Model.Players.Create();
+            Secretary = (Secretary)App.CurrentUser;
             Save = new RelayCommand(SaveAction, CanSaveOrCancelAction);
+            ClearImage = new RelayCommand(ClearImageAction);
+            LoadImage = new RelayCommand(LoadImageAction);
+            imageHelper = new ImageHelper(App.IMAGE_PATH, Player.PicturePath);
             var Players = new ObservableCollection<Model.Player>(App.Model.Players);
             Console.WriteLine("Vous êtes à : " + Players.Count() + " joueurs.");
             InitializeComponent();

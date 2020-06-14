@@ -30,7 +30,7 @@ namespace prbd_1920_g04.Model
                     }
                 }
             }
-            foreach(var t in App.Model.Teams)
+            foreach(var t in teams)
             { 
                 if (age >= t.MinAge && age <= t.MaxAge && !playerExiste 
                     && firstName.Length >= 3 && LastName.Length >= 3 && email.Length >= 8 && password.Length >= 8

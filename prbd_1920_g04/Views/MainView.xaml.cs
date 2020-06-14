@@ -21,10 +21,7 @@ namespace prbd_1920_g04.Views {
             get { return textHeaderTab; }
             set { textHeaderTab = value; }
         }
-        private bool CanSaveOrCancelAction()
-        {
-            return activeAddResultButton;
-        }
+
         private bool activeAddResultButton;
         public bool ActiveAddResultButton
         {
@@ -35,7 +32,11 @@ namespace prbd_1920_g04.Views {
                 RaisePropertyChanged(nameof(activeAddResultButton));
             }
         }
-
+        private bool CanSaveOrCancelAction()
+        {
+            return activeAddResultButton;
+        }
+        
         public MainView() {
 
             InitializeComponent();
@@ -160,6 +161,7 @@ namespace prbd_1920_g04.Views {
                         return;
                     }
                 }
+                var player = App.Model.Players.Create();
                 var tab = new TabItem()
                 {
                     Header = "<create players>",
