@@ -29,7 +29,6 @@ namespace prbd_1920_g04.Views
             });
 
             App.Register(this, AppMessages.MSG_MATCH_CHANGED, () => { Refresh(); });
-
             InitializeComponent();
         }
     }
