@@ -8,29 +8,56 @@
              xmlns:local="clr-namespace:prbd_1920_g04"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <f:UserControlBase.Resources>
+        <CollectionViewSource x:Key='src' 
+                      Source="{Binding Matchs}">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="DateMatch.Year" />
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+        <Style x:Key="myHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="Visibility" Value="Collapsed" />
+        </Style>
+    </f:UserControlBase.Resources>
     <Grid ShowGridLines="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="450"/>
         </Grid.RowDefinitions>
         <ListView x:Name="listView" 
-                  ItemsSource="{Binding Matchs}" BorderBrush="Transparent" SelectionMode="Single" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="156,105,119,149">
+                  ItemsSource="{Binding Source={StaticResource src}}" BorderBrush="Transparent" SelectionMode="Single" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="85,40,80,70">
+            <ListView.Resources>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Home}" Value="EPFC">
+                            <Setter Property="Height" Value="50" />
+                            <Setter Property="FontSize" Value="20" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.Resources>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
                     <i:InvokeCommandAction Command="{Binding DisplayMatchDetails}" 
                                            CommandParameter="{Binding ElementName=listView, Path=SelectedItem}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <TextBlock FontSize="25" FontWeight="Bold" Height="60" Width="60" TextAlignment="Center" VerticalAlignment="Center" Text="{Binding DateMatch,StringFormat=d/M}" />
-                        <TextBlock FontSize="25" FontWeight="Bold" Height="60" Width="80" TextAlignment="Center" VerticalAlignment="Center" Text="{Binding Home}" />
-                        <TextBlock FontSize="25" FontWeight="Bold" Height="60" Width="40" TextAlignment="Center"  VerticalAlignment="Center" Text="VS" />
-                        <TextBlock FontSize="25" FontWeight="Bold" Height="60" Width="80" TextAlignment="Center" VerticalAlignment="Center" Text="{Binding Adversary}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+            <ListView.View>
+                <GridView ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}">
+                    <GridViewColumn Header="Date" Width="60" DisplayMemberBinding="{Binding DateMatch,StringFormat=d/M}" />
+                    <GridViewColumn Header="Home" Width="60" DisplayMemberBinding="{Binding Home}" />
+                    <GridViewColumn Header="Opponent" Width="auto" DisplayMemberBinding="{Binding Adversary}" />
+                    <GridViewColumn Header="Opponent" Width="auto" DisplayMemberBinding="{Binding Categorie}" />
+                </GridView>
+            </ListView.View>
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock FontSize="25" FontWeight="Bold" Background="#FAFAFA"  HorizontalAlignment="Left" Height="30" Width="60" TextAlignment="Left" VerticalAlignment="Center" Text="{Binding Path=Name}"/>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListView.GroupStyle>
         </ListView>
-
     </Grid>
 </f:UserControlBase>

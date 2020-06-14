@@ -25,10 +25,6 @@ namespace prbd_1920_g04.Model
 
         public string TeamName { get; set; }
 
-
-        public virtual ICollection<Sanction> Sanctions { get; set; } = new HashSet<Sanction>();
-        public virtual ICollection<Performance> Peformances { get; set; } = new HashSet<Performance>();
-        public virtual ICollection<Injury> Injuries { get; set; } = new HashSet<Injury>();
         public virtual ICollection<Match> Matchs { get; set; } = new HashSet<Match>();
         public virtual ICollection<Team> Teams  { get; set; } = new HashSet<Team>();
         public virtual Statistics Stats { get; set; }
