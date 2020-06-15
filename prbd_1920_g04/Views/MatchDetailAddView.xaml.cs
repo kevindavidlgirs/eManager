@@ -109,9 +109,9 @@ namespace prbd_1920_g04.Views {
             
         }
 
-        private bool CanSaveOrCancelAction() {
+       /* private bool CanSaveOrCancelAction() {
             if()
-        }
+        }*/
 
         private void Refresh() {
             Teams = new ObservableCollection<Model.Team>(App.Model.Teams.OrderBy(m => m.Name));
@@ -127,7 +127,8 @@ namespace prbd_1920_g04.Views {
             Secretary = (Model.Secretary) App.CurrentUser;
             Matchs = new ObservableCollection<Model.Match>(App.Model.Matchs);
             Refresh();
-            Save = new RelayCommand(SaveAction, CanSaveOrCancelAction);
+            //Save = new RelayCommand(SaveAction, CanSaveOrCancelAction);
+            Save = new RelayCommand(SaveAction);
             App.Register<Model.Match>(this, AppMessages.MSG_TEAM_CHANGED, match => { Refresh(); });
             InitializeComponent();
         }

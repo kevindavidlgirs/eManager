@@ -45,15 +45,36 @@
                 <GridView ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}">
                     <GridViewColumn Header="Date" Width="60" DisplayMemberBinding="{Binding DateMatch,StringFormat=d/M}" />
                     <GridViewColumn Header="Home" Width="60" DisplayMemberBinding="{Binding Home}" />
-                    <GridViewColumn Header="Opponent" Width="auto" DisplayMemberBinding="{Binding Adversary}" />
-                    <GridViewColumn Header="Opponent" Width="auto" DisplayMemberBinding="{Binding Categorie}" />
+                    <GridViewColumn Header="Adversary" Width="auto" DisplayMemberBinding="{Binding Adversary}" />
+                    <GridViewColumn Header="GoalsHome" Width="40" DisplayMemberBinding="{Binding GoalsHome}" />
+                    <GridViewColumn Header="GoalsAdversary" Width="40" DisplayMemberBinding="{Binding GoalsAdversary}" />
+                    <GridViewColumn Header="GoalsAdversary" Width="60" DisplayMemberBinding="{Binding TeamPlaying.Name}" />
+                    <GridViewColumn Header="GoalsAdversary" Width="160" DisplayMemberBinding="{Binding Place}" /> 
+                    <GridViewColumn Header="Status"  Width="auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Text" Value="Not started yet !" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsOver}" Value="true">
+                                                    <Setter Property="Text" Value="" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
             <ListView.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock FontSize="25" FontWeight="Bold" Background="#FAFAFA"  HorizontalAlignment="Left" Height="30" Width="60" TextAlignment="Left" VerticalAlignment="Center" Text="{Binding Path=Name}"/>
+                            <TextBlock FontSize="25" FontWeight="Bold" HorizontalAlignment="Left" Height="30" Width="60" TextAlignment="Left" VerticalAlignment="Center" Text="{Binding Path=Name}"/>
                         </DataTemplate>
                     </GroupStyle.HeaderTemplate>
                 </GroupStyle>

@@ -74,6 +74,7 @@ namespace prbd_1920_g04.Views {
         }
 
         private void TransfertAction() {
+            App.NotifyColleagues(AppMessages.MSG_MATCH_ADDED); // Pour rafraichir la liste des joueurs !
             App.NotifyColleagues(AppMessages.MSG_SHOW_MATCH, Match);
         }
 
