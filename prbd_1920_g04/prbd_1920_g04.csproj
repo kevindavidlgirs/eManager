@@ -130,13 +130,10 @@
     <Compile Include="Model\Admin.cs" />
     <Compile Include="Model\Coach.cs" />
     <Compile Include="Model\Delegate.cs" />
-    <Compile Include="Model\Injury.cs" />
     <Compile Include="Model\Match.cs" />
     <Compile Include="Model\Member.cs" />
     <Compile Include="Model\Model.cs" />
-    <Compile Include="Model\Performance.cs" />
     <Compile Include="Model\Player.cs" />
-    <Compile Include="Model\Sanction.cs" />
     <Compile Include="Model\Secretary.cs" />
     <Compile Include="Model\Team.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

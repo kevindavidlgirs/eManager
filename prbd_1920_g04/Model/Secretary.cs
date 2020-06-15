@@ -49,10 +49,17 @@ namespace prbd_1920_g04.Model
         public Match AddMatch(DateTime date, string place, string home, string adversary, string categorie) { 
             Match match = null;
             var team = App.Model.Teams.Find(categorie);
+
+            /* Pourquoi interdire la création de rencontres identiques à partir du moment où elles n'ont pas lieu au même moment.
+             * Dans la réalité ça se produit tout le temps : match aller / match retour.
+             * De plus cela supprime une fonctionnalité dans détail match.
+             * On en parle au tel si tu veux ?
             var q = from m in App.Model.Matchs
                     where m.Home.Equals(home) && m.Adversary.Equals(adversary)
                     select m;
-            if (team != null && q.Count() == 0) {
+            */
+
+            if (team != null) {
                 match = App.Model.CreateMatch(date, place, home, adversary, team);
                 App.Model.SaveChanges();
                 return match;
