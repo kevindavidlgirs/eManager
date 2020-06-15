@@ -110,13 +110,7 @@ namespace prbd_1920_g04.Views {
         }
 
         private bool CanSaveOrCancelAction() {
-            if (IsNew) {
-                return !(DateMatch == null && HasErrors);
-            }
-            var change = (from c in App.Model.ChangeTracker.Entries<Model.Match>()
-                          where c.Entity == Match
-                          select c).FirstOrDefault();
-            return change != null && change.State != EntityState.Unchanged;
+            if()
         }
 
         private void Refresh() {

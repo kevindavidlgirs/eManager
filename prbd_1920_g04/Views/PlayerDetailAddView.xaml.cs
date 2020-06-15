@@ -136,8 +136,8 @@ namespace prbd_1920_g04.Views
         }
         private void ClearImageAction()
         {
-            imageHelper.Clear();
             PicturePath = null;
+            imageHelper.Clear();
         }
         private void LoadImageAction()
         {
@@ -280,7 +280,7 @@ namespace prbd_1920_g04.Views
             ClearImage = new RelayCommand(ClearImageAction);
             LoadImage = new RelayCommand(LoadImageAction);
             imageHelper = new ImageHelper(App.IMAGE_PATH, Player.PicturePath);
-            var Players = new ObservableCollection<Model.Player>(App.Model.Players);
+            var Players = new ObservableCollection<Player>(App.Model.Players);
             Console.WriteLine("Vous êtes à : " + Players.Count() + " joueurs.");
             InitializeComponent();
         }

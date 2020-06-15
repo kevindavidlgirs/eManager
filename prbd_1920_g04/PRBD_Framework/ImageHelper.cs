@@ -167,7 +167,7 @@ namespace PRBD_Framework {
                 return;
             }
             /*
-             * CAUSE PROBLEME ! 
+             * Ne Fonctionne pas
             var path = Path.Combine(basePath, file);
             if (File.Exists(path)) {
                 File.Delete(path);

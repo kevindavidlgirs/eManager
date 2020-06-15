@@ -58,7 +58,7 @@ namespace prbd_1920_g04.Views {
             App.Register<Model.Match>(this, AppMessages.MSG_SHOW_MATCH, (match) => {
                 foreach (TabItem t in tabControl.Items)
                 {
-                    if (t.Header.ToString().Equals(match.Home + " vs "+ match.Adversary))
+                    if (t.Header.ToString().Equals("Show: " + match.Home + " vs "+ match.Adversary))
                     {
                         Dispatcher.InvokeAsync(() => t.Focus());
                         return;
@@ -130,7 +130,7 @@ namespace prbd_1920_g04.Views {
 
             App.Register<string>(this, AppMessages.MSG_MATCH_SAVED, (s) => {
                 (tabControl.SelectedItem as TabItem).Header = "Creation: " + s;
-                textHeaderTab = s;
+                textHeaderTab = "Creation: " + s;
             });
 
             NewMatch = new RelayCommand(() =>
