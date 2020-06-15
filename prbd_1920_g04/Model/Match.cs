@@ -25,11 +25,9 @@ namespace prbd_1920_g04.Model {
         {
             return Players.Count();
         }
-        
         public Match() {
             DateMatch = DateTime.Now;
         }
-
         public void DeleteTeam() {
            
             if (TeamPlaying != null) {

@@ -7,15 +7,49 @@
              xmlns:local="clr-namespace:prbd_1920_g04.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-
-    <DataGrid x:Name="dataGrid" ItemsSource="{Binding ListPlayersView}" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
-        <DataGrid.Columns>
-            <DataGridTextColumn Header="FirstName" Binding="{Binding Path=FirstName}" Width="auto" />
-            <DataGridTextColumn Header="LastName" Binding="{Binding Path=LastName}" Width="auto"/>
-            <DataGridTextColumn Header="-" Binding="{Binding Path=Stats.GoalsScored}" Width="auto"/>
-            <DataGridTextColumn Header="-" Binding="{Binding Path=Stats.GoalsConceced}" Width="auto" />
-            <DataGridTextColumn Header="-" Binding="{Binding Path=Stats.Assists}" Width="auto" />
-            <DataGridTextColumn Header="-" Binding="{Binding Path=Stats.Fouls}" Width="auto" />
-        </DataGrid.Columns>
-    </DataGrid>
+    <f:UserControlBase.Resources>
+        <DataTemplate x:Key="MyHeaderGoals">
+            <Grid>
+                <Image Source="/images/goals.png" Width="20" Height="20"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="MyHeaderGoalsConceced">
+            <Grid>
+                <Image Source="/images/GoalsConceced.png" Width="20" Height="20"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="MyHeaderAssists">
+            <Grid>
+                <Image Source="/images/Assists.png" Width="20" Height="20"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="MyHeaderInjuries">
+            <Grid>
+                <Image Source="/images/Injuries.png" Width="20" Height="20"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="MyHeaderFauls">
+            <Grid>
+                <Image Source="/images/Fauls.png" Width="20" Height="20"/>
+            </Grid>
+        </DataTemplate>
+    </f:UserControlBase.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <ToolBar />
+        <DataGrid x:Name="dataGrid" ItemsSource="{Binding ListPlayersView}" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Height="120">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="FirstName" Binding="{Binding Path=FirstName}" Width="auto" />
+                <DataGridTextColumn Header="LastName" Binding="{Binding Path=LastName}" Width="auto"/>
+                <DataGridTextColumn HeaderTemplate="{StaticResource MyHeaderGoals}" Binding="{Binding Path=Stats.GoalsScored}" Width="auto"/>
+                <DataGridTextColumn HeaderTemplate="{StaticResource MyHeaderGoalsConceced}" Binding="{Binding Path=Stats.GoalsConceced}" Width="auto"/>
+                <DataGridTextColumn HeaderTemplate="{StaticResource MyHeaderAssists}" Binding="{Binding Path=Stats.Assists}" Width="auto"/>
+                <DataGridTextColumn HeaderTemplate="{StaticResource MyHeaderInjuries}" Binding="{Binding Path=Stats.Injuries}" Width="auto"/>
+                <DataGridTextColumn HeaderTemplate="{StaticResource MyHeaderFauls}" Binding="{Binding Path=Stats.Fouls}" Width="auto"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
 </f:UserControlBase>

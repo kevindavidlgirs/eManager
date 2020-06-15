@@ -93,6 +93,41 @@ namespace prbd_1920_g04.Views {
                 activeAddResultButton = activeButton;
             });
 
+            App.Register<bool>(this, AppMessages.MSG_MATCH_IS_OVER, activeButton => {
+                activeAddResultButton = activeButton;
+                if (!activeAddResultButton)
+                {
+                    foreach (TabItem t0 in tabControl.Items)
+                    {
+                        if (t0.Header.ToString().Equals("Results"))
+                        {
+                            tabControl.Items.Remove(t0);
+                            foreach (TabItem t1 in tabControl.Items)
+                            {
+                                Dispatcher.InvokeAsync(() => t1.Focus());
+                                return;
+                            }
+                        }
+                    }
+                }
+            });
+
+            App.Register<bool>(this, AppMessages.MSG_REMOVE_PLAYER_TO_A_TEAM, activeButton =>
+            {
+                activeAddResultButton = activeButton;
+                if (!activeAddResultButton)
+                {
+                    foreach (TabItem t in tabControl.Items)
+                    {
+                        if (t.Header.ToString().Equals("Results"))
+                        {
+                            tabControl.Items.Remove(t);
+                            return;
+                        }
+                    }
+                }
+            });
+
             App.Register<string>(this, AppMessages.MSG_MATCH_SAVED, (s) => {
                 (tabControl.SelectedItem as TabItem).Header = "Creation: " + s;
                 textHeaderTab = s;
@@ -145,11 +180,13 @@ namespace prbd_1920_g04.Views {
             {
                 foreach (TabItem t in tabControl.Items)
                 {
-                   Dispatcher.InvokeAsync(() => t.Focus());
-                   return;
+                    Dispatcher.InvokeAsync(() => t.Focus());
+                    return;
                 }
             });
             //TODO: Peaufiner cette partie
+
+
 
             NewPlayer = new RelayCommand(() => 
             {
@@ -223,6 +260,14 @@ namespace prbd_1920_g04.Views {
 
             AddResultToMatch = new RelayCommand(() =>
             {
+                foreach (TabItem t in tabControl.Items)
+                {
+                    if (t.Header.ToString().Equals("Results"))
+                    {
+                        Dispatcher.InvokeAsync(() => t.Focus());
+                        return;
+                    }
+                }
                 var tab = new TabItem()
                 {
                     Header = "Results",

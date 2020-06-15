@@ -21,6 +21,7 @@ namespace prbd_1920_g04 {
         MSG_NEW_PLAYER,
         MSG_PLAYER_ADDED,
         MSG_ADD_PLAYER_TO_A_TEAMS,
+        MSG_REMOVE_PLAYER_TO_A_TEAM,
         MSG_ADD_PLAYER_TO_A_TEAM,
         MSG_TEAM_CHANGED,
         MSG_MATCH_SAVED,
@@ -87,17 +88,16 @@ namespace prbd_1920_g04 {
             var player24 = sec.CreatePlayer("Keylor", "Navas", "player@gmail.com", "FootBallplayer", 16, "Avenue du ballon", 175, 72.5, "/path", 12);
 
             // Le secrétaire encode le match.
-            var match1 = sec.AddMatch(new DateTime(2020, 04, 28), "Epfc Stadium", "EPFC", "SUPINFO", "A1");
-            var match2 = sec.AddMatch(new DateTime(2020, 05, 05), "Epfc Stadium", "EPFC", "HE2B", "A1");
+            var match1 = sec.AddMatch(new DateTime(2020, 04, 28), "Epfc Stadium", "EPFC", "SUPINFO", "U8");
+            var match2 = sec.AddMatch(new DateTime(2020, 05, 05), "Epfc Stadium", "EPFC", "HE2B", "U9");
             var match3 = sec.AddMatch(new DateTime(2020, 07, 13), "Epfc Stadium", "EPFC", "EPHEC", "U11");
             var match4 = sec.AddMatch(new DateTime(2020, 03, 18), "Epfc Stadium", "EPFC", "ESMO", "U17");
-            var match5 = sec.AddMatch(new DateTime(2020, 02, 29), "Epfc Stadium", "EPFC", "HELB", "A1");
+            var match5 = sec.AddMatch(new DateTime(2020, 02, 29), "Epfc Stadium", "EPFC", "HELB", "U21");
             var match6 = sec.AddMatch(new DateTime(2020, 12, 04), "Epfc Stadium", "EPFC", "UCLOUVAIN", "U13");
             var match7 = sec.AddMatch(new DateTime(2020, 05, 07), "Epfc Stadium", "EPFC", "ESI", "U15");
-            var match8 = sec.AddMatch(new DateTime(2020, 03, 12), "Epfc Stadium", "EPFC", "INRACI", "A2");
-            var match9 = sec.AddMatch(new DateTime(2020, 08, 21), "Epfc Stadium", "EPFC", "ESA", "A7");
+            var match8 = sec.AddMatch(new DateTime(2020, 03, 12), "Epfc Stadium", "EPFC", "INRACI", "U7");
+            var match9 = sec.AddMatch(new DateTime(2020, 08, 21), "Epfc Stadium", "EPFC", "ESA", "U10");
             var match10 = sec.AddMatch(new DateTime(2020, 07, 06), "Epfc Stadium", "EPFC", "ICT", "U13");
-            var match11 = sec.AddMatch(new DateTime(2020, 05, 28), "Epfc Stadium", "EPFC", "HELB", "A2");
 
             App.Model.SaveChanges();
 

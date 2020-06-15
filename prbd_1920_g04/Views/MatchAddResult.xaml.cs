@@ -41,7 +41,8 @@ namespace prbd_1920_g04.Views {
             Console.WriteLine(m.GoalsHome + "vs" + m.GoalsAdversary);
             m.IsOver = true;
             App.Model.SaveChanges();
-            App.NotifyColleagues(AppMessages.MSG_MATCH_IS_OVER);
+            playedMatchs.Remove(m);
+            App.NotifyColleagues(AppMessages.MSG_MATCH_IS_OVER, playedMatchs.Count != 0);
             App.NotifyColleagues(AppMessages.MSG_ADD_STATS_TO_PLAYER, m);
             Refresh();
         }
@@ -63,7 +64,7 @@ namespace prbd_1920_g04.Views {
             UpdateMatch = new RelayCommand<Match>((m) => { UpdateAction(m); });
             Refresh();
             InitializeComponent();
-
+            App.Register<bool>(this, AppMessages.MSG_REMOVE_PLAYER_TO_A_TEAM, matchsAvalaible => { Refresh(); });
         }
     }
 }

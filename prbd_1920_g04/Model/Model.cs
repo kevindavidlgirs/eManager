@@ -113,8 +113,8 @@ namespace prbd_1920_g04.Model
             App.Model.CreateTeam("U15", 15, 16);
             App.Model.CreateTeam("U17", 17, 20);
             App.Model.CreateTeam("U21", 21, 50);
-            App.Model.CreateTeam("A1", 21, 50);
-            App.Model.CreateTeam("A2", 21, 50);
+            //App.Model.CreateTeam("A1", 21, 50);
+            //App.Model.CreateTeam("A2", 21, 50);
 
             App.Model.SaveChanges();
         }

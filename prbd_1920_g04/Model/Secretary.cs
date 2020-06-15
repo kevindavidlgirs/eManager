@@ -64,10 +64,23 @@ namespace prbd_1920_g04.Model
         {
             var match = App.Model.Matchs.Find(mtch.DateMatch);
             var player = App.Model.Players.Find(id);
-            if(!match.Players.Contains(player))
+            if(!match.Players.Contains(player) && match.Players.Count < 11 && !match.IsOver)
             {
                 match.Players.Add(player);
                 Console.WriteLine("Player : "+ player.FirstName +" "+ player.LastName + " added in -> " + match.Home);
+                return player;
+            }
+            return player;
+        }
+
+        public Player RemovePlayerInMatchs(int id, Match mtch)
+        {
+            var match = App.Model.Matchs.Find(mtch.DateMatch);
+            var player = App.Model.Players.Find(id);
+            if (match.Players.Contains(player) && !match.IsOver)
+            {
+                match.Players.Remove(player);
+                Console.WriteLine("Player : " + player.FirstName + " " + player.LastName + " is removed from -> " + match.Home);
                 return player;
             }
             return player;

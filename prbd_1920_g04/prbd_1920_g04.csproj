@@ -214,22 +214,16 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\ownGoals.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\goals.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\GoalsConceced.png" />
+    <Resource Include="images\logo-epfc.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\Assists.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <Resource Include="images\check-circle.png" />
     <Resource Include="images\Fauls.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <Resource Include="images\goals.png" />
+    <Resource Include="images\GoalsConceced.png" />
     <Resource Include="images\Injuries.png" />
+    <Resource Include="images\ownGoals.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\ballonDeFoot.jpg" />

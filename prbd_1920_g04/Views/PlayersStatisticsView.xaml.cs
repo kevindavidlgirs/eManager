@@ -55,10 +55,9 @@ namespace prbd_1920_g04.Views {
         }
 
         private static ICollection<Player> ListOfPlayers(Match match) {
-            var query = from p in App.Model.Players
-                        where match.Players.Contains(p)
-                        select p;
-            return query.ToList();
+            var query = from p in match.Players
+                       select p;
+           return query.ToList();
         }
 
         public PlayersStatisticsView() {
