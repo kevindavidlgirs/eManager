@@ -136,6 +136,9 @@
   <data name="CreateMatchView_Place" xml:space="preserve">
     <value>Place :</value>
     <comment>MatchDetailAddView</comment>
+   </data>
+  <data name="BrowseMatch_Status" xml:space="preserve">
+    <value>Not kicked off</value>
   </data>
   <data name="CreatePlayersView_Adresse" xml:space="preserve">
     <value>Adresse :</value>

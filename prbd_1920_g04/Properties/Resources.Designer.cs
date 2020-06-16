@@ -61,6 +61,15 @@ namespace prbd_1920_g04.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Not kicked off.
+        /// </summary>
+        public static string BrowseMatch_Status {
+            get {
+                return ResourceManager.GetString("BrowseMatch_Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Visit team :.
         /// </summary>
         public static string CreateMatchView_Adversary {

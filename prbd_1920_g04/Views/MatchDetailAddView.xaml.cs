@@ -212,6 +212,7 @@ namespace prbd_1920_g04.Views {
             Secretary = (Model.Secretary) App.CurrentUser;
             Match = App.Model.Matchs.Create();
             Matchs = new ObservableCollection<Model.Match>(App.Model.Matchs);
+
             ClearImageHome = new RelayCommand(ClearImageActionHome);
             LoadImageHome = new RelayCommand(LoadImageHomeAction);
             ClearImageAdversary = new RelayCommand(ClearImageActionAdversary);

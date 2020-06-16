@@ -47,12 +47,34 @@ namespace prbd_1920_g04.Views {
             App.CurrentUser = member; 
 
             App.Register<Model.Match>(this, AppMessages.MSG_ADD_STATS_TO_PLAYER, (match) => {
+                foreach (TabItem t in tabControl.Items) {
+                    if (t.Header.ToString().Equals("Stats: " + match.Home + " vs " + match.Adversary)) {
+                        Dispatcher.InvokeAsync(() => t.Focus());
+                        return;
+                    }
+                }
+
                 var tab = new TabItem()
                 {
                     Header = "Stats: " + match.Home + " vs " + match.Adversary,
                     Content = new AddPlayersStatistics(match),
                 };
                 tabControl.Items.Add(tab);
+                Dispatcher.InvokeAsync(() => tab.Focus());
+
+                tab.MouseDown += (o, e) => {
+                    if (e.ChangedButton == MouseButton.Middle &&
+                        e.ButtonState == MouseButtonState.Pressed) {
+                        tabControl.Items.Remove(o);
+                        (tab.Content as UserControlBase).Dispose();
+                    }
+                };
+                tab.PreviewKeyDown += (o, e) => {
+                    if (e.Key == Key.W && Keyboard.IsKeyDown(Key.LeftCtrl)) {
+                        tabControl.Items.Remove(o);
+                        (tab.Content as UserControlBase).Dispose();
+                    }
+                };
             });
 
             App.Register<Model.Match>(this, AppMessages.MSG_SHOW_MATCH, (match) => {
