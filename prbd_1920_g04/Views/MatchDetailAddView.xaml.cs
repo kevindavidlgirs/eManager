@@ -129,10 +129,7 @@ namespace prbd_1920_g04.Views {
         }
 
         private void SaveAction() {
-            var query = from match in Matchs
-                        where match.Home.Equals(Home) && match.Adversary.Equals(adversary)
-                        select match;
-            if(query.Count() == 0 && Secretary.Fonction.ToString().Equals("Secretary"))
+            if(Secretary.Fonction.ToString().Equals("Secretary"))
             {
                 Match.Home = home;
                 Match.Adversary = adversary;
