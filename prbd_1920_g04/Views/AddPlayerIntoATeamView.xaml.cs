@@ -81,13 +81,13 @@ namespace prbd_1920_g04.Views
             }
             if (matchSelected.NumberOfPlayers() >= 11)
             {
-                matchSelected.IsComplete = true;
+                matchSelected.teamIsComplete = true;
                 App.Model.SaveChanges();
             }
-            CheckedListBoxPlayersAvalaible(matchSelected.TeamPlaying);
-            CheckedListBoxPlayersAdded(matchSelected.TeamPlaying);
+            CheckedListBoxPlayersAvalaible(matchSelected.Category);
+            CheckedListBoxPlayersAdded(matchSelected.Category);
             SetLabels(0);
-            App.NotifyColleagues(AppMessages.MSG_ADD_PLAYER_TO_A_TEAM, new ObservableCollection<Match>(App.Model.Matchs.Where(m => (m.IsComplete && !m.IsOver))).Count > 0);
+            App.NotifyColleagues(AppMessages.MSG_ADD_PLAYER_TO_A_TEAM, new ObservableCollection<Match>(App.Model.Matchs.Where(m => (m.teamIsComplete && !m.IsOver))).Count > 0);
         }
 
         private void RemoveAction()
@@ -99,13 +99,13 @@ namespace prbd_1920_g04.Views
             }
             if (matchSelected.NumberOfPlayers() < 11)
             {
-                matchSelected.IsComplete = false;
+                matchSelected.teamIsComplete = false;
                 App.Model.SaveChanges();
             }
-            CheckedListBoxPlayersAdded(matchSelected.TeamPlaying);
-            CheckedListBoxPlayersAvalaible(matchSelected.TeamPlaying);
+            CheckedListBoxPlayersAdded(matchSelected.Category);
+            CheckedListBoxPlayersAvalaible(matchSelected.Category);
             SetLabels(0);
-            App.NotifyColleagues(AppMessages.MSG_REMOVE_PLAYER_TO_A_TEAM, new ObservableCollection<Match>(App.Model.Matchs.Where(m => (m.IsComplete && !m.IsOver))).Count > 0);
+            App.NotifyColleagues(AppMessages.MSG_REMOVE_PLAYER_TO_A_TEAM, new ObservableCollection<Match>(App.Model.Matchs.Where(m => (m.teamIsComplete && !m.IsOver))).Count > 0);
         }
 
         private void ComboBoxMatchs()
@@ -113,31 +113,30 @@ namespace prbd_1920_g04.Views
             Matchs = new ObservableCollection<Match>(App.Model.Matchs.Where(m => (!m.IsOver)).OrderBy(m => m.DateMatch));
         }
 
-        private void CheckedListBoxPlayersAvalaible(Team t)
+        private void CheckedListBoxPlayersAvalaible(Category t)
         {
             var players = new ObservableCollection<Player>(App.Model.Players);
             PlayersAvalaible = new ObservableCollection<Player>();
             foreach(var p in players)
             {
    
-                if(matchSelected.TeamPlaying.Players.Contains(p) && !matchSelected.Players.Contains(p))
+                if(matchSelected.Category.Players.Contains(p) && !matchSelected.Teams.Contains(p))
                 {
                     PlayersAvalaible.Add(p);
                 }
             }
-            Console.WriteLine("ok");
-            activeButtonSave = PlayersAvalaible.Count > 0 && !matchSelected.IsComplete;
+            activeButtonSave = PlayersAvalaible.Count > 0 && !matchSelected.teamIsComplete;
             checkListBoxAddPlayer.SelectedItems.Clear();
         }
 
-        private void CheckedListBoxPlayersAdded(Team t)
+        private void CheckedListBoxPlayersAdded(Category t)
         {
             var players = new ObservableCollection<Player>(App.Model.Players);
             PlayersAdded = new ObservableCollection<Player>();
             foreach (var p in players)
             {
 
-                if (matchSelected.TeamPlaying.Players.Contains(p) && matchSelected.Players.Contains(p))
+                if (matchSelected.Category.Players.Contains(p) && matchSelected.Teams.Contains(p))
                 {
                     PlayersAdded.Add(p);
                 }
@@ -153,8 +152,8 @@ namespace prbd_1920_g04.Views
                 if (m.Equals((Match)comboboxMatchs.SelectedItem))
                 {
                     matchSelected = m;
-                    CheckedListBoxPlayersAvalaible(matchSelected.TeamPlaying);
-                    CheckedListBoxPlayersAdded(matchSelected.TeamPlaying);
+                    CheckedListBoxPlayersAvalaible(matchSelected.Category);
+                    CheckedListBoxPlayersAdded(matchSelected.Category);
                     SetLabels(0);
                     return;
                 }
@@ -164,7 +163,7 @@ namespace prbd_1920_g04.Views
         private void CheckedListBox_ItemSelectionChanged(object sender, Xceed.Wpf.Toolkit.Primitives.ItemSelectionChangedEventArgs e)
         {
             SetLabels(checkListBoxAddPlayer.SelectedItems.Count);
-            if (checkListBoxAddPlayer.SelectedItems.Count > 11 || matchSelected.Players.Count > 11 || (checkListBoxAddPlayer.SelectedItems.Count + matchSelected.Players.Count) > 11)
+            if (checkListBoxAddPlayer.SelectedItems.Count > 11 || matchSelected.Teams.Count > 11 || (checkListBoxAddPlayer.SelectedItems.Count + matchSelected.Teams.Count) > 11)
             {
                 foreach (var p in checkListBoxAddPlayer.SelectedItems)
                 {
@@ -180,7 +179,7 @@ namespace prbd_1920_g04.Views
 
         private void SetLabels(int playerSelected)
         {
-            if (matchSelected.NumberOfPlayers() == 11)
+            if (matchSelected != null && matchSelected.NumberOfPlayers() == 11)
             {
                 teamIsComplete.Content = "The match is complete !";
             }
@@ -188,15 +187,16 @@ namespace prbd_1920_g04.Views
             {
                 teamIsComplete.Content = "This match still has at least " + (11 - matchSelected.NumberOfPlayers()) + " places -  you have selected " + playerSelected + " players.";
             }
-            categorie.Content = "Catégorie " + matchSelected.TeamPlaying.Name + " players avalaible : " + (matchSelected.TeamPlaying.Players.Count - matchSelected.NumberOfPlayers());
+            categorie.Content = "Catégorie " + matchSelected.Category.Name + " players avalaible : " + (matchSelected.Category.Players.Count - matchSelected.NumberOfPlayers());
             equipeAdverse.Content = "VS " + matchSelected.Adversary + ". Date of meeting : " + matchSelected.DateMatch.Day + " /" + matchSelected.DateMatch.Month;
         }
 
-        private void resetLabels()
+        private void resetAll()
         {
             teamIsComplete.Content = "";
             categorie.Content = "";
             equipeAdverse.Content = "Please select a team.";
+            PlayersAvalaible = null; PlayersAdded = null; activeButtonSave = false; activeButtonRemove = false;
         }
 
         public AddPlayerIntoAMatchView()
@@ -206,9 +206,9 @@ namespace prbd_1920_g04.Views
             ComboBoxMatchs();
             Save = new RelayCommand(SaveAction, CanSaveOrCancelAction);
             Remove = new RelayCommand(RemoveAction, CanRemoveOrCancelAction);
-            App.Register<bool>(this, AppMessages.MSG_MATCH_IS_OVER, o => { ComboBoxMatchs(); PlayersAvalaible = null; PlayersAdded = null; activeButtonRemove = false; resetLabels(); comboboxMatchs.SelectedIndex = -1; });
-            App.Register(this, AppMessages.MSG_MATCH_ADDED, () => { ComboBoxMatchs(); PlayersAvalaible = null; PlayersAdded = null; activeButtonRemove = false; resetLabels(); comboboxMatchs.SelectedIndex = -1; });
-            App.Register(this, AppMessages.MSG_PLAYER_ADDED, () => { if(matchSelected != null)CheckedListBoxPlayersAvalaible(matchSelected.TeamPlaying); SetLabels(0); });
+            App.Register<bool>(this, AppMessages.MSG_MATCH_IS_OVER, o => { ComboBoxMatchs(); resetAll(); comboboxMatchs.SelectedIndex = -1; });
+            App.Register(this, AppMessages.MSG_MATCH_ADDED, () => { ComboBoxMatchs(); resetAll(); comboboxMatchs.SelectedIndex = -1; });
+            App.Register(this, AppMessages.MSG_PLAYER_ADDED, () => { if(matchSelected != null)CheckedListBoxPlayersAvalaible(matchSelected.Category); SetLabels(0); });
             InitializeComponent();
         }
     }

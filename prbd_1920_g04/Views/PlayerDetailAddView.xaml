@@ -13,8 +13,8 @@
         <BitmapImage x:Key="UnknownUser" UriSource="/images/ballonDeFoot.jpg"/>
     </UserControl.Resources>
     <Grid>
-        <f:ValidatedField Grid.Row="1" Grid.Column="1">
-            <TextBox x:Name="firstNameTextBox" Text="{Binding FirstName}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="146,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="198"/>
+        <f:ValidatedField >
+            <TextBox x:Name="firstNameTextBox" Text="{Binding FirstName}" HorizontalAlignment="Left" Height="23" Margin="146,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="198"/>
         </f:ValidatedField>
 
         <f:ValidatedField>

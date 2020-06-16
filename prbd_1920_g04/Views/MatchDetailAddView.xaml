@@ -4,44 +4,43 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:f="clr-namespace:PRBD_Framework;assembly=PRBD_Framework"
+             xmlns:p="clr-namespace:prbd_1920_g04.Properties"
              xmlns:local="clr-namespace:prbd_1920_g04.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <BitmapImage x:Key="UnknownUser" UriSource="/images/ballonDeFoot.jpg"/>
+    </UserControl.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="77*"/>
-            <ColumnDefinition Width="240*"/>
-            <ColumnDefinition Width="166*"/>
-            <ColumnDefinition Width="240*"/>
-            <ColumnDefinition Width="77*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="41*"/>
-            <RowDefinition Height="26*"/>
-            <RowDefinition Height="94*"/>
-            <RowDefinition Height="27*"/>
-            <RowDefinition Height="38*"/>
-            <RowDefinition Height="32*"/>
-            <RowDefinition Height="28*"/>
-            <RowDefinition Height="28*"/>
-            <RowDefinition Height="136*"/>
-        </Grid.RowDefinitions>
-        <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="94,0,0,0" Grid.Row="3" TextWrapping="Wrap" Text="{Binding Home}" VerticalAlignment="Top" Width="146"/>
-        <TextBox Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="96,4,0,0" Grid.Row="3" TextWrapping="Wrap" Text="{Binding Adversary}" VerticalAlignment="Top" Width="144"/>
-        <Label Content="Home team : " Grid.Column="1" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Top"  Height="27" Width="83"/>
-        <Label Content="Visit team :" Grid.Column="3" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Top"   Height="27" Width="83"/>
-        <Label Content="Date :" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="5" VerticalAlignment="Top" Width="67" Height="32"/>
-        <DatePicker Grid.Column="1" SelectedDate="{Binding DateMatch}" HorizontalAlignment="Left" Margin="72,3,0,0" Grid.Row="5" VerticalAlignment="Top" Width="169" Grid.ColumnSpan="2"/>
-        <TextBox Grid.Column="3" HorizontalAlignment="Left"  MinLines="3" MaxLines="10" Height="23" Margin="96,4,0,0" Grid.Row="5" TextWrapping="Wrap" Text="{Binding Place}" VerticalAlignment="Top" Width="150" Grid.ColumnSpan="2"/>
-        <Label Content="Place : " Grid.Column="3" HorizontalAlignment="Left" Grid.Row="5" VerticalAlignment="Top" Height="32" Width="93"/>
-        <WrapPanel Grid.Column="2" HorizontalAlignment="Left" Height="36" Margin="59,42,0,0" Grid.Row="8" VerticalAlignment="Top" Width="166" Grid.ColumnSpan="2">
-            <Button Content="Save" Command="{Binding Save}" Width="75"/>
-        </WrapPanel>
-        <ComboBox Grid.Column="1" HorizontalAlignment="Left" Margin="72,0,0,0" Grid.Row="7" VerticalAlignment="Top" Width="180" 
-                  ItemsSource="{Binding Teams}"
+        <f:ValidatedField Margin="-8,0,8,0" >
+            <TextBox x:Name="homeTextBox" Text="{Binding Home}" HorizontalAlignment="Left" Height="23" Margin="214,184,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="144"/>
+        </f:ValidatedField >
+        <f:ValidatedField Margin="-8,0,8,0" >
+            <TextBox x:Name="adversaryTextBox" Text="{Binding Adversary}" HorizontalAlignment="Left" Height="23" Margin="527,184,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="144" RenderTransformOrigin="0.729,1.565"/>
+        </f:ValidatedField >
+        <f:ValidatedField Margin="-8,0,8,0" >
+            <TextBox x:Name="placeTextBox" Text="{Binding Place}" HorizontalAlignment="Left" Height="23" Margin="527,253,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="144"/>
+        </f:ValidatedField >
+        <f:ValidatedField Margin="0,2,0,-2" >
+            <DatePicker SelectedDate="{Binding DateMatch}" HorizontalAlignment="Left" Margin="214,252,0,0" VerticalAlignment="Top" Width="144"/>
+        </f:ValidatedField >
+
+        <Button Content="Save" Command="{Binding Save}"  HorizontalAlignment="Left" Margin="403,365,0,0" VerticalAlignment="Top" Width="75"/>
+        <ComboBox x:Name="comboBoxCategory" HorizontalAlignment="Left" Margin="367,322,0,0" VerticalAlignment="Top" Width="144" 
+                  ItemsSource="{Binding Categories}"
                   DisplayMemberPath="Name"
                   SelectedValuePath="Name"
-                  SelectedValue="{Binding Team}"/>
-        <Label Content="Division :" Grid.Column="1" HorizontalAlignment="Left" Margin="5,7,0,0" Grid.Row="7" VerticalAlignment="Top" Height="23" Width="73"/>
+                  SelectedValue="{Binding Category}"/>
+        <Label Content="{x:Static p:Resources.CreateMatchView_Home}" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="27" Width="83" Margin="126,184,0,0" RenderTransformOrigin="0.578,1.37"/>
+        <Label Content="{x:Static p:Resources.CreateMatchView_Adversary}" HorizontalAlignment="Left" VerticalAlignment="Top"   Height="27" Width="83" Margin="439,180,0,0"/>
+        <Label Content="{x:Static p:Resources.CreateMatchView_Date}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="43" Height="32" Margin="151,252,0,0"/>
+        <Label Content="{x:Static p:Resources.CreateMatchView_Place}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Width="64" Margin="458,253,0,0"/>
+        <Label Content="{x:Static p:Resources.CreateMatchView_Division}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="73" Margin="294,321,0,0"/>
+        <Image Source="{Binding PicturePathHome, FallbackValue={StaticResource UnknownUser}, TargetNullValue={StaticResource UnknownUser}}" HorizontalAlignment="Left" Width="179" Margin="188,41,0,281"/>
+        <Image Source="{Binding PicturePathAdversary, FallbackValue={StaticResource UnknownUser}, TargetNullValue={StaticResource UnknownUser}}" HorizontalAlignment="Left" Width="171" Margin="539,41,0,281"/>
+        <Button Command="{Binding LoadImageHome}" Content="Load" HorizontalAlignment="Left" Margin="108,41,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Command="{Binding ClearImageHome}" Content="Clear" HorizontalAlignment="Left" Margin="108,121,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Command="{Binding LoadImageAdversary}" Content="Load" HorizontalAlignment="Left" Margin="715,41,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Command="{Binding ClearImageAdversary}" Content="Clear" HorizontalAlignment="Left" Margin="715,121,0,0" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </f:UserControlBase>

@@ -66,7 +66,7 @@ namespace prbd_1920_g04.Views {
         }
 
         private ICollection<Player> QualifiedPlayers(Match match) {
-            return match.Players;
+            return match.Teams;
         }
 
         private void UpdateAction() {

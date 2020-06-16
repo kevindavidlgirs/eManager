@@ -55,7 +55,7 @@ namespace prbd_1920_g04.Views {
         }
 
         private static ICollection<Player> ListOfPlayers(Match match) {
-            var query = from p in match.Players
+            var query = from p in match.Teams
                        select p;
            return query.ToList();
         }

@@ -18,10 +18,6 @@ namespace prbd_1920_g04.Model
 
         public int JerseyNumber { get; set; }
 
-        public Position PlayerPosition { get; set; }
-
-        public string TeamName { get; set; }
-
         [NotMapped]
         public string AbsolutePicturePath
         {
@@ -36,7 +32,7 @@ namespace prbd_1920_g04.Model
         }
 
         public virtual ICollection<Match> Matchs { get; set; } = new HashSet<Match>();
-        public virtual ICollection<Team> Teams  { get; set; } = new HashSet<Team>();
+        public virtual ICollection<Category> Categories { get; set; } = new HashSet<Category>();
         public virtual Statistics Stats { get; set; }
         protected Player() { }
     }

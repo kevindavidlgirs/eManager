@@ -25,7 +25,7 @@ namespace prbd_1920_g04.Model
         public DbSet<Coach> Coaches { get; set; }
         public DbSet<Player> Players { get; set; }
         public DbSet<Match> Matchs { get; set; }
-        public DbSet<Team> Teams { get; set; }
+        public DbSet<Category> Category { get; set; }
         public DbSet<Statistics> Stats { get; set; }
 
         public Secretary CreateSecretary(string firstName, string lastName, string email, string password, int age, string adresse, string picturePath, Fonction fonction = Fonction.Secretary)
@@ -80,39 +80,37 @@ namespace prbd_1920_g04.Model
             return player;
         }
 
-        public Match CreateMatch(DateTime date, string place, string home, string adversary, Team team) {
+        public Match CreateMatch(DateTime date, string place, string home, string adversary, Category category) {
             var match = Matchs.Create();
-            match.DateMatch = date; // Temporaire.
+            match.DateMatch = date;
             match.Place = place;
             match.Home = home;
             match.Adversary = adversary;
-            match.TeamPlaying = team; //pose problème
-
+            match.Category = category; 
             Matchs.Add(match);
-
             return match;
         }
 
-        public Team CreateTeam(string name, int MinAge, int MaxAge) {
-            var team = Teams.Create();
-            team.Name = name;
-            team.MinAge = MinAge;
-            team.MaxAge = MaxAge;
-            Teams.Add(team);
+        public Category CreateCategory(string name, int MinAge, int MaxAge) {
+            var cat = Category.Create();
+            cat.Name = name;
+            cat.MinAge = MinAge;
+            cat.MaxAge = MaxAge;
+            Category.Add(cat);
 
-            return team;
+            return cat;
         }
 
-        public void CreateTeams() {
-            App.Model.CreateTeam("U7", 7, 7);
-            App.Model.CreateTeam("U8", 8, 8);
-            App.Model.CreateTeam("U9", 9, 9);
-            App.Model.CreateTeam("U10", 10, 10);
-            App.Model.CreateTeam("U11", 11, 12);
-            App.Model.CreateTeam("U13", 13, 14);
-            App.Model.CreateTeam("U15", 15, 16);
-            App.Model.CreateTeam("U17", 17, 20);
-            App.Model.CreateTeam("U21", 21, 50);
+        public void CreateCategories() {
+            App.Model.CreateCategory("U7", 7, 7);
+            App.Model.CreateCategory("U8", 8, 8);
+            App.Model.CreateCategory("U9", 9, 9);
+            App.Model.CreateCategory("U10", 10, 10);
+            App.Model.CreateCategory("U11", 11, 12);
+            App.Model.CreateCategory("U13", 13, 14);
+            App.Model.CreateCategory("U15", 15, 16);
+            App.Model.CreateCategory("U17", 17, 20);
+            App.Model.CreateCategory("U21", 21, 50);
             //App.Model.CreateTeam("A1", 21, 50);
             //App.Model.CreateTeam("A2", 21, 50);
 

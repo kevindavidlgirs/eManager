@@ -135,7 +135,7 @@
     <Compile Include="Model\Model.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\Secretary.cs" />
-    <Compile Include="Model\Team.cs" />
+    <Compile Include="Model\Category.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

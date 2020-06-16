@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Media;
 using prbd_1920_g04.Model;
 using PRBD_Framework;
 
@@ -16,9 +14,7 @@ namespace prbd_1920_g04.Views
     /// </summary>
     public partial class PlayerDetailAddView : UserControlBase
     {
-        //Devrait être enlever ou être utilisé de facon plus approfondie !
         public Player Player { get; set; }
-        //Devrait être enlever ou être utilisé de facon plus approfondie !
 
         public Secretary Secretary { get; set; }
         
@@ -101,9 +97,34 @@ namespace prbd_1920_g04.Views
         public ICommand LoadImage { get; set; }
         private void SaveAction()
         {
-            if(!LastNameAndFirstNameExists() && !JerseyNumberExiste() && Validate())
+            if(!LastNameAndFirstNameExists() && !JerseyNumberExiste() && Validate() && Secretary.Fonction.ToString().Equals("Secretary"))
             {
-                Secretary.CreatePlayer(firstName, lastName, email, password, age, adresse, hght, weight, PicturePath, jerseyNumber);
+                
+                Player.FirstName = firstName;
+                Player.LastName = lastName;
+                Player.Email = email;
+                Player.Password = password;
+                Player.Age = age;
+                Player.Adresse = adresse;
+                Player.Height = hght;
+                Player.Weight = weight;
+                Player.PicturePath = PicturePath;
+                Player.JerseyNumber = jerseyNumber;
+                Player.Fonction = Fonction.Player;
+                Secretary.CreatePlayer(Player);
+                Player = App.Model.Players.Create();
+
+                firstNameTextBox.Text = null;
+                lastNameTextBox.Text = null;
+                passwordTextBox.Text = null;
+                emailTextBox.Text = null;
+                adresseTextBox.Text = null;
+                PicturePath = null;
+                ageTextBox.Text = "0";
+                heightTextBox.Text = "0";
+                jerseyNumberTextBox.Text = "0";
+                weightTextBox.Text = "0";
+
                 App.NotifyColleagues(AppMessages.MSG_PLAYER_ADDED);
                 Console.WriteLine("Vous avez ajoutez un joueur, vous êtes à : " + new ObservableCollection<Player>(App.Model.Players).Count() + " joueurs.");
             }
@@ -113,16 +134,16 @@ namespace prbd_1920_g04.Views
         {
             try
             {
-                if (!string.IsNullOrEmpty(firstNameTextBox.Text) && firstNameTextBox.Text.Length >= 3
-                    && !string.IsNullOrEmpty(lastNameTextBox.Text) && lastNameTextBox.Text.Length >= 3
-                    && !string.IsNullOrEmpty(passwordTextBox.Text) && passwordTextBox.Text.Length >= 8
-                    && (Int32.Parse(ageTextBox.Text) >= 7 && Int32.Parse(ageTextBox.Text) <= 50) 
-                    && !string.IsNullOrEmpty(emailTextBox.Text) && emailTextBox.Text.Length >= 8
-                    && !string.IsNullOrEmpty(adresseTextBox.Text) && adresseTextBox.Text.Length >= 10
-                    && (Int32.Parse(jerseyNumberTextBox.Text) > 0 && Int32.Parse(jerseyNumberTextBox.Text) < 100)
+                if (!string.IsNullOrEmpty(firstNameTextBox.Text) && firstNameTextBox.Text.Length >= 3 && firstNameTextBox.Text.Length <= 20
+                    && !string.IsNullOrEmpty(lastNameTextBox.Text) && lastNameTextBox.Text.Length >= 3 && lastNameTextBox.Text.Length <= 20
+                    && !string.IsNullOrEmpty(passwordTextBox.Text) && passwordTextBox.Text.Length >= 8 
+                    && !string.IsNullOrEmpty(emailTextBox.Text) && emailTextBox.Text.Length >= 8 && emailTextBox.Text.Length <= 40
+                    && !string.IsNullOrEmpty(adresseTextBox.Text) && adresseTextBox.Text.Length >= 10 && adresseTextBox.Text.Length <= 100
+                    && (Int32.Parse(ageTextBox.Text) >= 7 && Int32.Parse(ageTextBox.Text) <= 50)
+                    && (Int32.Parse(jerseyNumberTextBox.Text) >= 1 && Int32.Parse(jerseyNumberTextBox.Text) <= 99)
                     && (Int32.Parse(heightTextBox.Text) >= 165 && Int32.Parse(heightTextBox.Text) <= 210)
                     && (Int32.Parse(weightTextBox.Text) >= 60 && Int32.Parse(weightTextBox.Text) <= 110)
-                    && !LastNameAndFirstNameExists() && !JerseyNumberExiste())
+                    && !LastNameAndFirstNameExists() && !JerseyNumberExiste() && Secretary.Fonction.ToString().Equals("Secretary"))
                 {
                     return true;
                 }
@@ -170,7 +191,7 @@ namespace prbd_1920_g04.Views
             var plysList = new ObservableCollection<Player>(App.Model.Players);
             foreach (var p in plysList)
             {
-                foreach (var t in p.Teams)
+                foreach (var t in p.Categories)
                 {
                     try
                     {
@@ -197,30 +218,45 @@ namespace prbd_1920_g04.Views
             if (string.IsNullOrEmpty(FirstName) || FirstName.Length < 3)
             {
                 AddError("FirstName", Properties.Resources.Error_LengthGreaterEqual3);
+            }else if (FirstName.Length > 20)
+            {
+                AddError("FirstName", Properties.Resources.Error_LengthInferiorEqual20);
             }
 
             //LastName
             if (string.IsNullOrEmpty(LastName) || LastName.Length < 3)
             {
                 AddError("LastName", Properties.Resources.Error_LengthGreaterEqual3);
+            }else if (LastName.Length > 20)
+            {
+                AddError("LastName", Properties.Resources.Error_LengthInferiorEqual20);
             }
 
             //email
             if (string.IsNullOrEmpty(email) || email.Length < 8)
             {
                 AddError("Email", Properties.Resources.Error_LengthGreaterEqual8);
+            }else if (email.Length > 40)
+            {
+                AddError("Email", Properties.Resources.Error_LengthInferiorEqual40);
             }
 
             //password
             if (string.IsNullOrEmpty(password) || password.Length < 8)
             {
                 AddError("Password", Properties.Resources.Error_LengthGreaterEqual8);
+            }else if (password.Length > 40)
+            {
+                AddError("Password", Properties.Resources.Error_LengthInferiorEqual40);
             }
 
             //adresse
             if (string.IsNullOrEmpty(adresse) || adresse.Length < 10)
             {
                 AddError("Adresse", Properties.Resources.Error_LengthGreaterEqual8);
+            }else if (adresse.Length > 100)
+            {
+                AddError("Adresse", Properties.Resources.Error_LengthInferiorEqual100);
             }
 
             //JerseyNumber

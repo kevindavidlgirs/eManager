@@ -61,6 +61,51 @@ namespace prbd_1920_g04.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Visit team :.
+        /// </summary>
+        public static string CreateMatchView_Adversary {
+            get {
+                return ResourceManager.GetString("CreateMatchView_Adversary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Date :.
+        /// </summary>
+        public static string CreateMatchView_Date {
+            get {
+                return ResourceManager.GetString("CreateMatchView_Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Division :.
+        /// </summary>
+        public static string CreateMatchView_Division {
+            get {
+                return ResourceManager.GetString("CreateMatchView_Division", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Home team :.
+        /// </summary>
+        public static string CreateMatchView_Home {
+            get {
+                return ResourceManager.GetString("CreateMatchView_Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Place :.
+        /// </summary>
+        public static string CreateMatchView_Place {
+            get {
+                return ResourceManager.GetString("CreateMatchView_Place", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Adresse :.
         /// </summary>
         public static string CreatePlayersView_Adresse {
@@ -160,11 +205,29 @@ namespace prbd_1920_g04.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à This date match existe, please select other.
+        /// </summary>
+        public static string Error_DateMatchExiste {
+            get {
+                return ResourceManager.GetString("Error_DateMatchExiste", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à length must be &gt;= 10.
         /// </summary>
         public static string Error_LengthGreaterEqual10 {
             get {
                 return ResourceManager.GetString("Error_LengthGreaterEqual10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à number must be &gt;= 2.
+        /// </summary>
+        public static string Error_LengthGreaterEqual2 {
+            get {
+                return ResourceManager.GetString("Error_LengthGreaterEqual2", resourceCulture);
             }
         }
         
@@ -183,6 +246,42 @@ namespace prbd_1920_g04.Properties {
         public static string Error_LengthGreaterEqual8 {
             get {
                 return ResourceManager.GetString("Error_LengthGreaterEqual8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à length must be &lt;= 10.
+        /// </summary>
+        public static string Error_LengthInferiorEqual10 {
+            get {
+                return ResourceManager.GetString("Error_LengthInferiorEqual10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à length must be &lt;= 100.
+        /// </summary>
+        public static string Error_LengthInferiorEqual100 {
+            get {
+                return ResourceManager.GetString("Error_LengthInferiorEqual100", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à length must be &lt;= 20.
+        /// </summary>
+        public static string Error_LengthInferiorEqual20 {
+            get {
+                return ResourceManager.GetString("Error_LengthInferiorEqual20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à length must be &lt;= 40.
+        /// </summary>
+        public static string Error_LengthInferiorEqual40 {
+            get {
+                return ResourceManager.GetString("Error_LengthInferiorEqual40", resourceCulture);
             }
         }
         

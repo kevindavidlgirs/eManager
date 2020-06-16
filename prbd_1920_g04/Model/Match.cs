@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,24 +17,40 @@ namespace prbd_1920_g04.Model {
         public int GoalsHome { get; set; }
         public int GoalsAdversary { get; set; }
         public bool IsOver { get; set; }
-        public bool IsComplete { get; set; }
+        public bool teamIsComplete { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual ICollection<Player> Teams { get; set; } = new HashSet<Player>();
         public string PicturePathHome { get; set; }
         public string PicturePathAdversary { get; set; }
-        public virtual Team TeamPlaying { get; set; }
-        public virtual ICollection<Player> Players { get; set; } = new HashSet<Player>();
+        [NotMapped]
+        public string AbsolutePicturePathHome
+        {
+            get
+            {
+                return PicturePathHome != null ? App.IMAGE_PATH + "\\" + PicturePathHome : null;
+            }
+        }
+        [NotMapped]
+        public string AbsolutePicturePathAdversary
+        {
+            get
+            {
+                return PicturePathAdversary != null ? App.IMAGE_PATH + "\\" + PicturePathAdversary : null;
+            }
+        }
+
         public int NumberOfPlayers()
         {
-            return Players.Count();
+            return Teams.Count();
         }
         public Match() {
             DateMatch = DateTime.Now;
         }
-        public void DeleteTeam() {
+        public void DeleteCategorie() {
            
-            if (TeamPlaying != null) {
-                TeamPlaying = null;
+            if (Category != null) {
+                Category = null;
             }
-
             App.Model.Matchs.Remove(this);
         }
 

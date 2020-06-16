@@ -52,7 +52,7 @@ namespace prbd_1920_g04.Views {
             PlayedMatchs = new ObservableCollection<Match>();
             foreach (var m in matchs)
             {
-                if (m.Players.Count >= 11 && !m.IsOver)
+                if (m.Teams.Count >= 11 && !m.IsOver)
                 {
                     PlayedMatchs.Add(m);
                 }

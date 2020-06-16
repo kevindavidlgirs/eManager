@@ -48,14 +48,14 @@ namespace prbd_1920_g04 {
         private void TestDB() {
 
             foreach (var match in App.Model.Matchs) {
-                match.DeleteTeam();
+                match.DeleteCategorie();
             }
             App.Model.Matchs.RemoveRange(App.Model.Matchs);
             App.Model.Stats.RemoveRange(App.Model.Stats);
             App.Model.Members.RemoveRange(App.Model.Members);
-            App.Model.Teams.RemoveRange(App.Model.Teams);
+            App.Model.Category.RemoveRange(App.Model.Category);
             App.Model.SaveChanges();
-            App.Model.CreateTeams(); 
+            App.Model.CreateCategories(); 
 
             var sec = App.Model.CreateSecretary("secretaire", "secretaire", "secretaire@gmail.com", "secretaire", 30, "Rue du document", "/path", Fonction.Secretary);
             var coach = App.Model.CreateCoach("coach", "coach", "coach@gmail.com", "coach", 30, "Rue du document", "/path", Fonction.Coach);
