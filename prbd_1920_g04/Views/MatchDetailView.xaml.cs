@@ -13,11 +13,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PRBD_Framework;
+using prbd_1920_g04.Model;
 
 namespace prbd_1920_g04.Views {
 
     public partial class MatchDetailView : UserControlBase {
-        public Model.Match Match { get; set; }
+        public Match Match { get; set; }
 
         public string Home {
             get {

@@ -27,12 +27,8 @@
                   ItemsSource="{Binding Source={StaticResource src}}" BorderBrush="Transparent" SelectionMode="Single" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="85,40,80,70">
             <ListView.Resources>
                 <Style TargetType="{x:Type ListViewItem}">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Home}" Value="EPFC">
-                            <Setter Property="Height" Value="50" />
-                            <Setter Property="FontSize" Value="20" />
-                        </DataTrigger>
-                    </Style.Triggers>
+                    <Setter Property="Height" Value="50" />
+                    <Setter Property="FontSize" Value="20" />
                 </Style>
             </ListView.Resources>
             <i:Interaction.Triggers>
@@ -48,8 +44,9 @@
                     <GridViewColumn Header="Adversary" Width="auto" DisplayMemberBinding="{Binding Adversary}" />
                     <GridViewColumn Header="GoalsHome" Width="40" DisplayMemberBinding="{Binding GoalsHome}" />
                     <GridViewColumn Header="GoalsAdversary" Width="40" DisplayMemberBinding="{Binding GoalsAdversary}" />
-                    <GridViewColumn Header="GoalsAdversary" Width="60" DisplayMemberBinding="{Binding TeamPlaying.Name}" />
+                    <GridViewColumn Header="GoalsAdversary" Width="60" DisplayMemberBinding="{Binding Category.Name}" />
                     <GridViewColumn Header="GoalsAdversary" Width="160" DisplayMemberBinding="{Binding Place}" /> 
+
                     <GridViewColumn Header="Status"  Width="auto">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>

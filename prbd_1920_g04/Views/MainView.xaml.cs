@@ -80,7 +80,7 @@ namespace prbd_1920_g04.Views {
             App.Register<Model.Match>(this, AppMessages.MSG_SHOW_MATCH, (match) => {
                 foreach (TabItem t in tabControl.Items)
                 {
-                    if (t.Header.ToString().Equals("Show: " + match.Home + " vs "+ match.Adversary))
+                    if (t.Header.ToString().Equals(match.DateMatch.ToString("dd/MM/yyyy") + " : " + match.Home + " vs "+ match.Adversary))
                     {
                         Dispatcher.InvokeAsync(() => t.Focus());
                         return;
@@ -88,7 +88,7 @@ namespace prbd_1920_g04.Views {
                 }
                 var tab = new TabItem()
                 {
-                    Header = "Show: " + match.Home + " vs " + match.Adversary,
+                    Header = match.DateMatch.ToString("dd/MM/yyyy") + " : " + match.Home + " vs " + match.Adversary,
                     Content = new MatchDetailView(match),
                 };
                 tabControl.Items.Add(tab);
@@ -316,6 +316,16 @@ namespace prbd_1920_g04.Views {
                     }
                 };
             }, CanSaveOrCancelAction);
+
+            App.Register<Match>(this, AppMessages.MSG_REMOVE_STATS_PLAYERS_TAB, (match) => {
+                foreach (TabItem t in tabControl.Items) {
+                    if (t.Header.ToString().Equals("Stats: " + match.Home + " vs " + match.Adversary)) {
+                        tabControl.Items.Remove(t);
+                        return;
+                    }
+                }
+            });
+
         }
     }
 }

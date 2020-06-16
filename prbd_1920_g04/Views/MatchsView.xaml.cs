@@ -6,6 +6,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using prbd_1920_g04.Model;
+using System.Windows.Data;
+using System.Globalization;
 
 namespace prbd_1920_g04.Views
 {
@@ -31,6 +33,17 @@ namespace prbd_1920_g04.Views
             });
             App.Register(this, AppMessages.MSG_MATCH_ADDED, () => { Refresh(); });
             InitializeComponent();
+        }
+    }
+
+    public class ToUpperValueConverter : IValueConverter {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
+            var str = value as string;
+            return string.IsNullOrEmpty(str) ? string.Empty : str.ToUpper();
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
+            return null;
         }
     }
 }

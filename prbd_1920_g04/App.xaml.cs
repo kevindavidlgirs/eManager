@@ -28,7 +28,8 @@ namespace prbd_1920_g04 {
         MSG_ADD_RESULT_TO_MATCH,
         MSG_UPDATE_MATCH,
         MSG_TEAM_COMPLET,
-        MSG_ADD_STATS_TO_PLAYER
+        MSG_ADD_STATS_TO_PLAYER,
+        MSG_REMOVE_STATS_PLAYERS_TAB
     }
 
     public partial class App : ApplicationBase {
@@ -92,10 +93,7 @@ namespace prbd_1920_g04 {
             var match2 = sec.AddMatch(new DateTime(2020, 05, 05), "Epfc Stadium", "EPFC", "HE2B", "U9");
             var match3 = sec.AddMatch(new DateTime(2020, 07, 13), "Epfc Stadium", "EPFC", "EPHEC", "U11");
             var match4 = sec.AddMatch(new DateTime(2020, 03, 18), "Epfc Stadium", "EPFC", "ESMO", "U17");
-            var match5 = sec.AddMatch(new DateTime(2020, 02, 29), "Epfc Stadium", "EPFC", "HELB", "U21");
-            var match6 = sec.AddMatch(new DateTime(2020, 12, 04), "Epfc Stadium", "EPFC", "UCLOUVAIN", "U13");
-            var match7 = sec.AddMatch(new DateTime(2020, 05, 07), "Epfc Stadium", "EPFC", "ESI", "U15");
-            var match8 = sec.AddMatch(new DateTime(2020, 03, 12), "Epfc Stadium", "EPFC", "INRACI", "U7");
+            var match8 = sec.AddMatch(new DateTime(2021, 03, 12), "Epfc Stadium", "EPFC", "ESMO", "U17");
             var match9 = sec.AddMatch(new DateTime(2020, 08, 21), "Epfc Stadium", "EPFC", "ESA", "U10");
             var match10 = sec.AddMatch(new DateTime(2020, 07, 06), "Epfc Stadium", "EPFC", "ICT", "U13");
 
