@@ -32,7 +32,12 @@ namespace prbd_1920_g04.Model
         }
 
         public virtual ICollection<Match> Matchs { get; set; } = new HashSet<Match>();
+
+        //Devrait changer
         public virtual ICollection<Category> Categories { get; set; } = new HashSet<Category>();
+        //Devrait changer
+
+        public virtual ICollection<Statistics> StatsList { get; set; } = new HashSet<Statistics>();
         public virtual Statistics Stats { get; set; }
         protected Player() { }
     }

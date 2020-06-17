@@ -69,8 +69,28 @@ namespace prbd_1920_g04.Views {
             return match.Teams;
         }
 
-        private void UpdateAction() {
-            App.Model.SaveChanges();
+        private bool statsExiste(Player p)
+        {
+            foreach (var stats in p.StatsList)
+            {
+                if (stats.Match.Equals(p.Stats.Match))
+                {
+                    //A voir si laisser là
+                    stats.copyAttr(p.Stats);
+                    //A voir si laisser là
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void UpdateAction(Player p) {
+            p.Stats.Match = Match;
+            if (!statsExiste(p))
+            {
+                Statistics s = new Statistics(p.Stats);
+                p.StatsList.Add(s);
+            }
         }
 
         private void TransfertAction() {
@@ -80,23 +100,14 @@ namespace prbd_1920_g04.Views {
         }
 
         private bool CanSaveOrCancelAction(Player p) {
-
-            if (p == null) {
-                return true;
-            }
-
-            var change = (from c in App.Model.ChangeTracker.Entries<Statistics>()
-                          where c.Entity.StatisticsId == p.Id
-                          select c).FirstOrDefault();
-            return change != null && change.State != EntityState.Unchanged;
+            return true;
         }
 
         public AddPlayersStatistics(Match match) {
             DataContext = this;
             Match = match;
-
             ListOfPlayers = new ObservableCollection<Player>(QualifiedPlayers(match));
-            UpdateStats = new RelayCommand<Player>((p) => { UpdateAction(); }, (p) => CanSaveOrCancelAction(p));
+            UpdateStats = new RelayCommand<Player>((p) => { UpdateAction(p); }, (p) => CanSaveOrCancelAction(p));
             GoToMatch = new RelayCommand(TransfertAction);
             InitializeComponent();
         }

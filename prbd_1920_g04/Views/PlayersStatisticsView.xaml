@@ -42,7 +42,7 @@
         <ToolBar />
         <DataGrid x:Name="dataGrid" ItemsSource="{Binding ListPlayersView}" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Height="120">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="FirstName" Binding="{Binding Path=FirstName}" Width="auto" />
+                <DataGridTextColumn Header="FirstName" Binding="{Binding Path=FirstName}" Width="auto"/>
                 <DataGridTextColumn Header="LastName" Binding="{Binding Path=LastName}" Width="auto"/>
                 <DataGridTextColumn HeaderTemplate="{StaticResource MyHeaderGoals}" Binding="{Binding Path=Stats.GoalsScored}" Width="auto"/>
                 <DataGridTextColumn HeaderTemplate="{StaticResource MyHeaderGoalsConceced}" Binding="{Binding Path=Stats.GoalsConceced}" Width="auto"/>

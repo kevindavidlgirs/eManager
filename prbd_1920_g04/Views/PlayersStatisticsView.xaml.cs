@@ -16,6 +16,7 @@ using PRBD_Framework;
 using prbd_1920_g04.Model;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace prbd_1920_g04.Views {
     /// <summary>
@@ -60,15 +61,27 @@ namespace prbd_1920_g04.Views {
            return query.ToList();
         }
 
+        public void eventGestion()
+        {
+            Style rowStyle = new Style(typeof(DataGridRow));
+            rowStyle.Setters.Add(new EventSetter(DataGridRow.MouseDoubleClickEvent, new MouseButtonEventHandler(Row_DoubleClick)));
+            dataGrid.RowStyle = rowStyle;
+        }
+        
+        private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DataGridRow row = sender as DataGridRow;
+            App.NotifyColleagues(AppMessages.MSG_VIEW_PLAYER, (Player)row.Item);
+        }
+
         public PlayersStatisticsView() {
             InitializeComponent();
             DataContext = this;
+            eventGestion();
             if (DesignerProperties.GetIsInDesignMode(this)) return;
-
             if (Match != null) {
                 ListPlayers = new ObservableCollection<Player>(ListOfPlayers(Match));
             }
-
             RaisePropertyChanged(nameof(ListPlayersView));
         }
     }

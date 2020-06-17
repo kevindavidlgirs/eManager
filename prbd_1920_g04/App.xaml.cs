@@ -14,7 +14,6 @@ namespace prbd_1920_g04 {
     public enum AppMessages {
         MSG_SHOW_MATCH,
         MSG_NEW_MATCH,
-        MSG_EDIT_MATCH,
         MSG_MATCH_ADDED,
         MSG_MATCH_DELETED,
         MSG_MATCH_IS_OVER,
@@ -29,7 +28,8 @@ namespace prbd_1920_g04 {
         MSG_UPDATE_MATCH,
         MSG_TEAM_COMPLET,
         MSG_ADD_STATS_TO_PLAYER,
-        MSG_REMOVE_STATS_PLAYERS_TAB
+        MSG_REMOVE_STATS_PLAYERS_TAB, 
+        MSG_VIEW_PLAYER
     }
 
     public partial class App : ApplicationBase {
@@ -41,9 +41,6 @@ namespace prbd_1920_g04 {
 
         public static void CancelChanges() {
             Model = new Model.Model(); 
-        }
-        public App() {
-            TestDB();
         }
 
         private void TestDB() {
@@ -100,5 +97,11 @@ namespace prbd_1920_g04 {
             App.Model.SaveChanges();
 
         }
+        public App()
+        {
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjczMDQ4QDMxMzgyZTMxMmUzMEZRNWNvS3lMeU42UjcrS2MzNmo3bm0wUmJrOFNrbExSTVk2bDI2dUtJT289");
+            TestDB();
+        }
+
     }
 }

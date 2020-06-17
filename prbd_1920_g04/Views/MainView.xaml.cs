@@ -43,8 +43,7 @@ namespace prbd_1920_g04.Views {
             DataContext = this;
             activeAddResultButton = false;
 
-            var member = App.Model.Members.SingleOrDefault(s => s.Fonction == Fonction.Secretary); 
-            App.CurrentUser = member; 
+            App.CurrentUser = App.Model.Members.SingleOrDefault(s => s.Fonction == Fonction.Secretary);
 
             App.Register<Model.Match>(this, AppMessages.MSG_ADD_STATS_TO_PLAYER, (match) => {
                 foreach (TabItem t in tabControl.Items) {
@@ -153,6 +152,35 @@ namespace prbd_1920_g04.Views {
             App.Register<string>(this, AppMessages.MSG_MATCH_SAVED, (s) => {
                 (tabControl.SelectedItem as TabItem).Header = "Creation: " + s;
                 textHeaderTab = "Creation: " + s;
+            });
+
+            App.Register<Player>(this, AppMessages.MSG_VIEW_PLAYER, player =>
+            {
+                var tab = new TabItem()
+                {
+                    Header = player.FirstName + " " + player.LastName,
+                    Content = new PlayerDetailView(player)
+                };
+                
+                tabControl.Items.Add(tab);
+                Dispatcher.InvokeAsync(() => tab.Focus());
+
+                tab.MouseDown += (o, e) => {
+                    if (e.ChangedButton == MouseButton.Middle &&
+                        e.ButtonState == MouseButtonState.Pressed)
+                    {
+                        tabControl.Items.Remove(o);
+                        (tab.Content as UserControlBase).Dispose();
+                    }
+                };
+                tab.PreviewKeyDown += (o, e) => {
+                    if (e.Key == Key.W && Keyboard.IsKeyDown(Key.LeftCtrl))
+                    {
+                        tabControl.Items.Remove(o);
+                        (tab.Content as UserControlBase).Dispose();
+                    }
+                };
+
             });
 
             NewMatch = new RelayCommand(() =>
