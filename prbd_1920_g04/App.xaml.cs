@@ -56,7 +56,6 @@ namespace prbd_1920_g04 {
             App.Model.CreateCategories(); 
 
             var sec = App.Model.CreateSecretary("secretaire", "secretaire", "secretaire@gmail.com", "secretaire", 30, "Rue du document", "/path", Fonction.Secretary);
-            var coach = App.Model.CreateCoach("coach", "coach", "coach@gmail.com", "coach", 30, "Rue du document", "/path", Fonction.Coach);
 
             //U17
             var player1 = sec.CreatePlayer("Dupont", "André", "player@gmail.com", "FootBallplayer", 20, "Avenue du ballon", 175, 72.5, "/path", 1);

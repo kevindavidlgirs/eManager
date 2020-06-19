@@ -44,11 +44,11 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="FirstName" Binding="{Binding Path=FirstName}" Width="auto"/>
                 <DataGridTextColumn Header="LastName" Binding="{Binding Path=LastName}" Width="auto"/>
-                <DataGridTextColumn HeaderTemplate="{StaticResource MyHeaderGoals}" Binding="{Binding Path=Stats.GoalsScored}" Width="auto"/>
-                <DataGridTextColumn HeaderTemplate="{StaticResource MyHeaderGoalsConceced}" Binding="{Binding Path=Stats.GoalsConceced}" Width="auto"/>
-                <DataGridTextColumn HeaderTemplate="{StaticResource MyHeaderAssists}" Binding="{Binding Path=Stats.Assists}" Width="auto"/>
-                <DataGridTextColumn HeaderTemplate="{StaticResource MyHeaderInjuries}" Binding="{Binding Path=Stats.Injuries}" Width="auto"/>
-                <DataGridTextColumn HeaderTemplate="{StaticResource MyHeaderFauls}" Binding="{Binding Path=Stats.Fouls}" Width="auto"/>
+                <DataGridTextColumn HeaderTemplate="{StaticResource MyHeaderGoals}" Binding="{Binding Path=Statistics.GoalsScored}" Width="auto"/>
+                <DataGridTextColumn HeaderTemplate="{StaticResource MyHeaderGoalsConceced}" Binding="{Binding Path=Statistics.GoalsConceced}" Width="auto"/>
+                <DataGridTextColumn HeaderTemplate="{StaticResource MyHeaderAssists}" Binding="{Binding Path=Statistics.Assists}" Width="auto"/>
+                <DataGridTextColumn HeaderTemplate="{StaticResource MyHeaderInjuries}" Binding="{Binding Path=Statistics.Injuries}" Width="auto"/>
+                <DataGridTextColumn HeaderTemplate="{StaticResource MyHeaderFauls}" Binding="{Binding Path=Statistics.Fouls}" Width="auto"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

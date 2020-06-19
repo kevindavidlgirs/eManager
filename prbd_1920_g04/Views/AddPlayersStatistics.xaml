@@ -49,13 +49,13 @@
                             <Image HorizontalAlignment="Center" Height="25" Width="25" VerticalAlignment="Center" Source="/images/Fauls.png"/>
                             <TextBox Grid.Column="1" Text="{Binding Stats.Fouls, UpdateSourceTrigger=PropertyChanged}" Height="20" Margin="10" Width="30" VerticalAlignment="Center" />
                             <TextBlock FontSize="18" FontWeight="Bold" Height="30" Width="10" TextAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" Text="]" />
-                            <Button x:Name="btnUpdate" Content="Update" Width="50" VerticalAlignment="Center" Margin="10,0,0,0" HorizontalAlignment="Right" 
+                            <Button x:Name="btnUpdate" Content="Update" Width="50" VerticalAlignment="Center" Margin="10,0,0,0" HorizontalAlignment="Right"  Background="#FF363636" Foreground="White" BorderBrush="#FF999999"
                                     Command="{Binding ElementName=MyItemsControl, UpdateSourceTrigger=PropertyChanged, Path=DataContext.UpdateStats}" CommandParameter="{Binding}"/>
                         </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
-        <Button x:Name="btnTransert" Content="Finish" Command="{Binding GoToMatch}" Margin="16,10,14,0" Grid.Row="3" VerticalAlignment="Top" RenderTransformOrigin="-0.6,1" Grid.Column="1" Height="20"/>
+        <Button x:Name="btnTransert" Content="Finish" Command="{Binding GoToMatch}" Margin="16,10,14,0" Grid.Row="3" VerticalAlignment="Top" RenderTransformOrigin="-0.6,1" Grid.Column="1" Height="20"  Background="#FF363636" Foreground="White" BorderBrush="#FF999999"/>
     </Grid>
 </f:UserControlBase>

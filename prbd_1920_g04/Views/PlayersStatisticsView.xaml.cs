@@ -34,7 +34,11 @@ namespace prbd_1920_g04.Views {
             get {
 
                 if (listPlayers == null) {
-                    listPlayers = new ObservableCollection<Player>(ListOfPlayers(Match));
+                    listPlayers = new ObservableCollection<Player>(Match.Teams);
+                    foreach(var p in listPlayers)
+                    {
+                        p.MatchForCreatePlayersStatsView = Match;
+                    }
                 }
 
                 return listPlayers;
@@ -53,12 +57,6 @@ namespace prbd_1920_g04.Views {
                 listPlayersView = (CollectionView)CollectionViewSource.GetDefaultView(ListPlayers);
                 return listPlayersView;
             }
-        }
-
-        private static ICollection<Player> ListOfPlayers(Match match) {
-            var query = from p in match.Teams
-                       select p;
-           return query.ToList();
         }
 
         public void eventGestion()
@@ -80,7 +78,7 @@ namespace prbd_1920_g04.Views {
             eventGestion();
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             if (Match != null) {
-                ListPlayers = new ObservableCollection<Player>(ListOfPlayers(Match));
+                ListPlayers = new ObservableCollection<Player>(Match.Teams);
             }
             RaisePropertyChanged(nameof(ListPlayersView));
         }

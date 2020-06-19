@@ -1,4 +1,4 @@
-﻿using prbd_1920_g04.Model;
+﻿using prbd_1920_g04.Model; 
 using PRBD_Framework;
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ namespace prbd_1920_g04.Views
         public List<Statistics> Data { get; set; }
         public Player Player { get; set; }
         
-        public string Firstname
+        public string FirstName
         {
             get { return Player.FirstName; }
         }
@@ -53,8 +53,12 @@ namespace prbd_1920_g04.Views
         {
             get { return Player.JerseyNumber; }
         }
+        public string PicturePath
+        {
+            get { return Player.AbsolutePicturePath; }
+        }
 
-        private void createStats()
+        private void CreateStats()
         {
             foreach (var stats in Player.StatsList)
             {
@@ -65,8 +69,9 @@ namespace prbd_1920_g04.Views
         {
             DataContext = this;
             Player = p;
+            Console.WriteLine(Player.PicturePath+"  "+Player.AbsolutePicturePath);
             Data = new List<Statistics>();
-            createStats();
+            CreateStats();
             InitializeComponent();
         }
     }

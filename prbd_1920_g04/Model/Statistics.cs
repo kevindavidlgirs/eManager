@@ -23,9 +23,18 @@ namespace prbd_1920_g04.Model {
 
         public Statistics()
         {
-
         }
-
+        public Statistics(Player p, Match m)
+        {
+            Player = p;
+            GoalsScored = 0;
+            GoalsConceced = 0;
+            Assists = 0;
+            Injuries = 0;
+            Fouls = 0;
+            Match = m;
+            
+        }
         public Statistics(Statistics s)
         {
             StatisticsId = s.StatisticsId;

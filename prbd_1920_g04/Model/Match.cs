@@ -13,6 +13,7 @@ namespace prbd_1920_g04.Model {
         public DateTime DateMatch { get; set; }
         public string Home { get; set; }
         public string Adversary { get; set; }
+        public string HomeVsAdversary { get; set; }
         public string Place { get; set; }
         public int GoalsHome { get; set; }
         public int GoalsAdversary { get; set; }
@@ -43,9 +44,7 @@ namespace prbd_1920_g04.Model {
         {
             return Teams.Count();
         }
-        public Match() {
-            DateMatch = DateTime.Now;
-        }
+
         public void DeleteCategorie() {
            
             if (Category != null) {
@@ -53,6 +52,9 @@ namespace prbd_1920_g04.Model {
             }
             App.Model.Matchs.Remove(this);
         }
-
+        public Match()
+        {
+            DateMatch = DateTime.Now;
+        }
     }
 }

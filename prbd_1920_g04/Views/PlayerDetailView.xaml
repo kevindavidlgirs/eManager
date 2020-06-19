@@ -8,8 +8,19 @@
              xmlns:chart="http://schemas.syncfusion.com/wpf" x:Class="prbd_1920_g04.Views.PlayerDetailView"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <BitmapImage x:Key="UnknownUser" UriSource="/images/ballonDeFoot.jpg"/>
+    </UserControl.Resources>
     <Grid>
-        <chart:SfChart Header="Good and bad actions for all matchs." HorizontalAlignment="Center" Margin="187,10,10,10" VerticalAlignment="Center" Width="603">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="299"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="271*"/>
+            <ColumnDefinition Width="529*"/>
+        </Grid.ColumnDefinitions>
+        <chart:SfChart Header="Good and bad actions for all matchs." HorizontalAlignment="Center" Margin="134,4,6,16" VerticalAlignment="Center" Width="660" Grid.ColumnSpan="2" Height="430" Grid.RowSpan="2">
             <chart:SfChart.PrimaryAxis>
                 <chart:CategoryAxis/>
             </chart:SfChart.PrimaryAxis>
@@ -19,25 +30,27 @@
             <chart:SfChart.Legend>
                 <chart:ChartLegend/>
             </chart:SfChart.Legend>
-            <chart:ColumnSeries Palette="Pineapple" ShowTooltip="True" Label="Good" ItemsSource="{Binding Data}" XBindingPath="Date" YBindingPath="SumGoodActions">
-                <chart:ColumnSeries.AdornmentsInfo>
-                    <chart:ChartAdornmentInfo ShowLabel="True"/>
-                </chart:ColumnSeries.AdornmentsInfo>
+            <chart:ColumnSeries Palette="Pineapple" Label="Good" ItemsSource="{Binding Data}" XBindingPath="Date" YBindingPath="SumGoodActions">
             </chart:ColumnSeries>
-            <chart:ColumnSeries Palette="FloraHues" ShowTooltip="True" Label="Bad" ItemsSource="{Binding Data}" XBindingPath="Date" YBindingPath="SumBadActions">
-                <chart:ColumnSeries.AdornmentsInfo>
-                    <chart:ChartAdornmentInfo ShowLabel="True"/>
-                </chart:ColumnSeries.AdornmentsInfo>
+            <chart:ColumnSeries Palette="FloraHues" Label="Bad" ItemsSource="{Binding Data}" XBindingPath="Date" YBindingPath="SumBadActions">
             </chart:ColumnSeries>
         </chart:SfChart>
-        <Image HorizontalAlignment="Left" Height="171" Margin="23,38,0,0" VerticalAlignment="Top" Width="149"/>
-        <TextBlock Text="{Binding FirstName}"  HorizontalAlignment="Left" Margin="23,232,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock Text="{Binding LastName}" HorizontalAlignment="Left" Margin="23,271,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock Text="{Binding Age}" HorizontalAlignment="Left" Margin="23,310,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock Text="{Binding Email}" HorizontalAlignment="Left" Margin="23,342,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock Text="{Binding JerseyNumber}" HorizontalAlignment="Left" Margin="70,384,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock Text="{Binding Adresse}" HorizontalAlignment="Left" Margin="123,310,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock Text="{Binding Hgth}" HorizontalAlignment="Left" Margin="123,342,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock Text="{Binding Weight}" HorizontalAlignment="Left" Margin="123,271,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <Label Content="Lastname :" HorizontalAlignment="Left" Margin="63,1,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="66"/>
+        <Label Content="Firstname :" HorizontalAlignment="Left" Margin="63,32,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="67"/>
+        <Label Content="Age :" HorizontalAlignment="Left" Margin="63,63,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="37"/>
+        <Label Content="Email :" HorizontalAlignment="Left" Margin="63,118,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="44"/>
+        <Label Content="Jersey number :" HorizontalAlignment="Left" Margin="63,144,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="93"/>
+        <Label Content="Adresse :" HorizontalAlignment="Left" Margin="63,92,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="58"/>
+        <Label Content="Height :" HorizontalAlignment="Left" Margin="63,170,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="52"/>
+        <Label Content="Weight :" HorizontalAlignment="Left" Margin="63,199,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="54"/>
+        <Image Source="{Binding PicturePath, FallbackValue={StaticResource UnknownUser}}" HorizontalAlignment="Left" Height="112" Margin="63,39,0,0" VerticalAlignment="Top" Width="150"/>
+        <TextBlock Text="{Binding LastName}" HorizontalAlignment="Left" Margin="139,6,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="103"/>
+        <TextBlock Text="{Binding FirstName}" HorizontalAlignment="Left" Margin="135,37,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="107"/>
+        <TextBlock Text="{Binding Age}" HorizontalAlignment="Left" Margin="105,68,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="137"/>
+        <TextBlock Text="{Binding Adresse}" HorizontalAlignment="Left" Margin="126,97,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="135" FontSize="11"/>
+        <TextBlock Text="{Binding Email}" HorizontalAlignment="Left" Margin="112,123,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="120"/>
+        <TextBlock Text="{Binding JerseyNumber}" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Top" Margin="161,147,0,0" Grid.Row="1" Height="16" Width="71"/>
+        <TextBlock  Text="{Binding Hght}" HorizontalAlignment="Left" Margin="120,175,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="112"/>
+        <TextBlock Text="{Binding Weight}" HorizontalAlignment="Left" Margin="122,204,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="68"/>
     </Grid>
 </f:UserControlBase>

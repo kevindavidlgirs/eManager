@@ -188,7 +188,7 @@ namespace prbd_1920_g04.Views
                 teamIsComplete.Content = "This match still has at least " + (11 - matchSelected.NumberOfPlayers()) + " places -  you have selected " + playerSelected + " players.";
             }
             categorie.Content = "Catégorie " + matchSelected.Category.Name + " players avalaible : " + (matchSelected.Category.Players.Count - matchSelected.NumberOfPlayers());
-            equipeAdverse.Content = "VS " + matchSelected.Adversary + ". Date of meeting : " + matchSelected.DateMatch.Day + " /" + matchSelected.DateMatch.Month;
+            equipeAdverse.Content = "Date of meeting : " + matchSelected.DateMatch.Day + " /" + matchSelected.DateMatch.Month;
         }
 
         private void resetAll()
@@ -208,7 +208,7 @@ namespace prbd_1920_g04.Views
             Remove = new RelayCommand(RemoveAction, CanRemoveOrCancelAction);
             App.Register<bool>(this, AppMessages.MSG_MATCH_IS_OVER, o => { ComboBoxMatchs(); resetAll(); comboboxMatchs.SelectedIndex = -1; });
             App.Register(this, AppMessages.MSG_MATCH_ADDED, () => { ComboBoxMatchs(); resetAll(); comboboxMatchs.SelectedIndex = -1; });
-            App.Register(this, AppMessages.MSG_PLAYER_ADDED, () => { if(matchSelected != null)CheckedListBoxPlayersAvalaible(matchSelected.Category); SetLabels(0); });
+            App.Register(this, AppMessages.MSG_PLAYER_ADDED, () => { if(matchSelected != null)CheckedListBoxPlayersAvalaible(matchSelected.Category); if (matchSelected != null) SetLabels(0); });
             InitializeComponent();
         }
     }

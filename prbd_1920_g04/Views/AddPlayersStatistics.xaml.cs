@@ -65,11 +65,12 @@ namespace prbd_1920_g04.Views {
             }
         }
 
-        private ICollection<Player> QualifiedPlayers(Match match) {
+        private ICollection<Player> QualifiedPlayers(Match match)
+        {
             return match.Teams;
         }
 
-        private bool statsExiste(Player p)
+        private bool StatsExiste(Player p)
         {
             foreach (var stats in p.StatsList)
             {
@@ -86,21 +87,22 @@ namespace prbd_1920_g04.Views {
 
         private void UpdateAction(Player p) {
             p.Stats.Match = Match;
-            if (!statsExiste(p))
+            p.Stats.Player = p;
+            if (!StatsExiste(p))
             {
                 Statistics s = new Statistics(p.Stats);
                 p.StatsList.Add(s);
             }
+        }
+        private bool CanSaveOrCancelAction(Player p)
+        {
+            return true;
         }
 
         private void TransfertAction() {
             App.NotifyColleagues(AppMessages.MSG_MATCH_ADDED); // Pour rafraichir la liste des joueurs !
             App.NotifyColleagues(AppMessages.MSG_REMOVE_STATS_PLAYERS_TAB, Match); // Nous supprimons automatiquement la vue de addPlayerStatisticsView
             App.NotifyColleagues(AppMessages.MSG_SHOW_MATCH, Match);
-        }
-
-        private bool CanSaveOrCancelAction(Player p) {
-            return true;
         }
 
         public AddPlayersStatistics(Match match) {

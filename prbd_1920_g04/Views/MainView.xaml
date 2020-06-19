@@ -9,28 +9,34 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="prbd_1920_g04.Views.MainView"
         mc:Ignorable="d"
         Title="E-Club Manager" 
-        Height="686.407" Width="960.017"
+        Height="752.407" Width="967.517"
          WindowStartupLocation="CenterScreen">
-    <Grid Margin="0,0,2,1">
+    <Grid Margin="0,0,2,1" Background="#FF363636">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" MinHeight="55"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <DockPanel HorizontalAlignment="Center" Height="20" LastChildFill="False" Margin="185,19,165,16" VerticalAlignment="Center" Width="600">
-            <Button Command="{Binding Browse}" Content="Browse" Height="20" VerticalAlignment="Top" Width="114"/>
-            <Button x:Name="btnCreateMatch" Command="{Binding NewMatch}" Content="Create match" Height="20" VerticalAlignment="Top" Width="120"/>
-            <Button x:Name="btnCreatePlayer" Command="{Binding NewPlayer}" Content="Create player" Height="20" VerticalAlignment="Top" Width="120"/>
-            <Button Command="{Binding AddPlayerToAMatch}" Content="Add player to a match" Height="20" VerticalAlignment="Top" Width="121"/>
-            <Button x:Name="btnAddScore" Command="{Binding AddResultToMatch}" Content="Add results" Height="20" VerticalAlignment="Top" Width="123"/>
+            <Button Command="{Binding Browse}" Content="Browse" Height="20" VerticalAlignment="Top" Width="114" Background="#FFC5D429" Foreground="White" BorderBrush="Black"/>
+            <Button x:Name="btnCreateMatch" Command="{Binding NewMatch}" Content="Create match" Height="20" VerticalAlignment="Top" Width="120" BorderBrush="Black" Background="#FF2DC4DC" Foreground="White"/>
+            <Button x:Name="btnCreatePlayer" Command="{Binding NewPlayer}" Content="Create player" Height="20" VerticalAlignment="Top" Width="120" Background="#FF2DC4DC" Foreground="White" BorderBrush="Black"/>
+            <Button Command="{Binding AddPlayerToAMatch}" Content="Add player to a match" Height="20" VerticalAlignment="Top" Width="121" Background="#FF2DDC7D" Foreground="White" BorderBrush="Black"/>
+            <Button x:Name="btnAddScore" Command="{Binding AddResultToMatch}" Content="Add results" Height="20" VerticalAlignment="Top" Width="123" Background="#FFE29393" Foreground="White" BorderBrush="Black"/>
         </DockPanel>
         <TabControl x:Name="tabControl" Margin="10,10,10,130" Grid.Row="1">
             <TabItem x:Name="matchsTab" Header="Matchs">
+                <TabItem.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </TabItem.Background>
                 <ContentControl>
                     <local:MatchsView/>
                 </ContentControl>
             </TabItem>
         </TabControl>
-        <ListView HorizontalAlignment="Left" Height="115" Margin="10,474,0,0" Grid.Row="1" VerticalAlignment="Top" Width="921">
+        <ListView HorizontalAlignment="Left" Height="101" Margin="10,540,0,0" Grid.Row="1" VerticalAlignment="Top" Width="931" Background="#FF4F5351" BorderBrush="#FF2DC4DC" Foreground="Black">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

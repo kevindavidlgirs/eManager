@@ -84,10 +84,6 @@ namespace prbd_1920_g04.Views {
             DisplayOtherMatchDetails = new RelayCommand<Match>(m => {
                 App.NotifyColleagues(AppMessages.MSG_SHOW_MATCH, m);
             });
-
-            if (SelectedMatch != null) {
-                //Console.WriteLine("Test Ok " + SelectedMatch.Adversary);
-            }
         }
     }
 }

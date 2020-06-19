@@ -33,7 +33,7 @@ namespace prbd_1920_g04.Model
             }
             foreach(var c in categories)
             { 
-                if (age >= c.MinAge && age <= c.MaxAge && !playerExiste 
+                if (!playerExiste  && age >= c.MinAge && age <= c.MaxAge 
                     && firstName.Length >= 3 && firstName.Length <= 20 
                     && LastName.Length >= 3 && LastName.Length <= 20 
                     && email.Length >= 8 && email.Length <= 40 
@@ -44,7 +44,7 @@ namespace prbd_1920_g04.Model
                 {
                     player = App.Model.CreatePlayer(firstName, lastname, email, password, age, adresse, height, weight, picturePath, jerseyNumber, fonction);
                     c.Players.Add(player);
-                    player.Categories.Add(c);
+                    player.Category = c;
                 }
             }
             App.Model.SaveChanges();
@@ -59,16 +59,6 @@ namespace prbd_1920_g04.Model
         public Match AddMatch(DateTime date, string place, string home, string adversary, string categorie) { 
             Match match = null;
             var cat = App.Model.Category.Find(categorie);
-
-            /* Pourquoi interdire la création de rencontres identiques à partir du moment où elles n'ont pas lieu au même moment.
-             * Dans la réalité ça se produit tout le temps : match aller / match retour.
-             * De plus cela supprime une fonctionnalité dans détail match.
-             * On en parle au tel si tu veux ?
-            var q = from m in App.Model.Matchs
-                    where m.Home.Equals(home) && m.Adversary.Equals(adversary)
-                    select m;
-            */
-
             if (cat != null && place.Length >= 2 && place.Length <= 20 && home.Length >= 2 && home.Length <= 10
                 && adversary.Length >= 2 && adversary.Length <= 10 && new ObservableCollection<Match>(App.Model.Matchs.Where(m => m.DateMatch.Equals(date))).Count == 0) {
                 match = App.Model.CreateMatch(date, place, home, adversary, cat);

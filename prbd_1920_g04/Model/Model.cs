@@ -21,8 +21,6 @@ namespace prbd_1920_g04.Model
         public DbSet<Member> Members { get; set; }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Secretary> Secretaries { get; set; }
-        public DbSet<Delegate> Delegates { get; set; }
-        public DbSet<Coach> Coaches { get; set; }
         public DbSet<Player> Players { get; set; }
         public DbSet<Match> Matchs { get; set; }
         public DbSet<Category> Category { get; set; }
@@ -41,21 +39,6 @@ namespace prbd_1920_g04.Model
             secretary.Fonction = fonction;
             Secretaries.Add(secretary);
             return secretary;
-        }
-
-        public Coach CreateCoach(string firstName, string lastName, string email, string password, int age, string adresse, string picturePath, Fonction fonction = Fonction.Coach)
-        {
-            var coach = Coaches.Create();
-            coach.FirstName = firstName;
-            coach.LastName = lastName;
-            coach.Email = email;
-            coach.Password = password;
-            coach.Age = age;
-            coach.Adresse = adresse;
-            coach.PicturePath = picturePath;
-            coach.Fonction = fonction;
-            Coaches.Add(coach);
-            return coach;
         }
 
         public Player CreatePlayer(string firstName, string lastName, string email, 
@@ -86,6 +69,7 @@ namespace prbd_1920_g04.Model
             match.Place = place;
             match.Home = home;
             match.Adversary = adversary;
+            match.HomeVsAdversary = home + " vs " + adversary;
             match.Category = category; 
             Matchs.Add(match);
             return match;

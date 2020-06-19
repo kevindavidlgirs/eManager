@@ -99,7 +99,6 @@ namespace prbd_1920_g04.Views
         {
             if(!LastNameAndFirstNameExists() && !JerseyNumberExiste() && Validate() && Secretary.Fonction.ToString().Equals("Secretary"))
             {
-                
                 Player.FirstName = firstName;
                 Player.LastName = lastName;
                 Player.Email = email;
@@ -191,20 +190,18 @@ namespace prbd_1920_g04.Views
             var plysList = new ObservableCollection<Player>(App.Model.Players);
             foreach (var p in plysList)
             {
-                foreach (var t in p.Categories)
-                {
-                    try
+                try
                     {
-                        if (t.MinAge <= Int32.Parse(ageTextBox.Text) && t.MaxAge >= Int32.Parse(ageTextBox.Text)
+                     if (p.Category.MinAge <= Int32.Parse(ageTextBox.Text) && p.Category.MaxAge >= Int32.Parse(ageTextBox.Text)
                                                 && p.JerseyNumber.Equals(Int32.Parse(jerseyNumberTextBox.Text)))
-                        {
-                            return true;
-                        }
+                     {
+                        return true;
+                     }
                     }catch(Exception ex)
                     {
                         Console.WriteLine(ex);
                     }
-                }
+                
             }
             return false;
         }

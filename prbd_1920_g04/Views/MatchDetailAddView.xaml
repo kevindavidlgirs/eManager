@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <BitmapImage x:Key="UnknownUser" UriSource="/images/ballonDeFoot.jpg"/>
+        <BitmapImage x:Key="Unknown" UriSource="/images/ballonDeFoot.jpg"/>
     </UserControl.Resources>
     <Grid>
         <f:ValidatedField Margin="-8,0,8,0" >
@@ -25,7 +25,7 @@
             <DatePicker SelectedDate="{Binding DateMatch}" HorizontalAlignment="Left" Margin="214,252,0,0" VerticalAlignment="Top" Width="144"/>
         </f:ValidatedField >
 
-        <Button Content="Save" Command="{Binding Save}"  HorizontalAlignment="Left" Margin="403,365,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Save" Command="{Binding Save}"  HorizontalAlignment="Left" Margin="403,365,0,0" VerticalAlignment="Top" Width="75" Background="#FF363636" Foreground="White"/>
         <ComboBox x:Name="comboBoxCategory" HorizontalAlignment="Left" Margin="367,322,0,0" VerticalAlignment="Top" Width="144" 
                   ItemsSource="{Binding Categories}"
                   DisplayMemberPath="Name"
@@ -36,11 +36,11 @@
         <Label Content="{x:Static p:Resources.CreateMatchView_Date}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="43" Height="32" Margin="151,252,0,0"/>
         <Label Content="{x:Static p:Resources.CreateMatchView_Place}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Width="64" Margin="458,253,0,0"/>
         <Label Content="{x:Static p:Resources.CreateMatchView_Division}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="73" Margin="294,321,0,0"/>
-        <Image Source="{Binding PicturePathHome, FallbackValue={StaticResource UnknownUser}, TargetNullValue={StaticResource UnknownUser}}" HorizontalAlignment="Left" Width="179" Margin="188,41,0,281"/>
-        <Image Source="{Binding PicturePathAdversary, FallbackValue={StaticResource UnknownUser}, TargetNullValue={StaticResource UnknownUser}}" HorizontalAlignment="Left" Width="171" Margin="539,41,0,281"/>
-        <Button Command="{Binding LoadImageHome}" Content="Load" HorizontalAlignment="Left" Margin="108,41,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Command="{Binding ClearImageHome}" Content="Clear" HorizontalAlignment="Left" Margin="108,121,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Command="{Binding LoadImageAdversary}" Content="Load" HorizontalAlignment="Left" Margin="715,41,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Command="{Binding ClearImageAdversary}" Content="Clear" HorizontalAlignment="Left" Margin="715,121,0,0" VerticalAlignment="Top" Width="75"/>
+        <Image Source="{Binding PicturePathHome, FallbackValue={StaticResource Unknown}, TargetNullValue={StaticResource Unknown}}" HorizontalAlignment="Left" Width="179" Margin="188,41,0,281"/>
+        <Image Source="{Binding PicturePathAdversary, FallbackValue={StaticResource Unknown}, TargetNullValue={StaticResource Unknown}}" HorizontalAlignment="Left" Width="171" Margin="539,41,0,281"/>
+        <Button Command="{Binding LoadImageHome}" Content="Load" HorizontalAlignment="Left" Margin="108,41,0,0" VerticalAlignment="Top" Width="75" Background="#FF363636" Foreground="White"/>
+        <Button Command="{Binding ClearImageHome}" Content="Clear" HorizontalAlignment="Left" Margin="108,121,0,0" VerticalAlignment="Top" Width="75" Background="#FF363636" Foreground="White"/>
+        <Button Command="{Binding LoadImageAdversary}" Content="Load" HorizontalAlignment="Left" Margin="715,41,0,0" VerticalAlignment="Top" Width="75" Background="#FF363636" Foreground="White"/>
+        <Button Command="{Binding ClearImageAdversary}" Content="Clear" HorizontalAlignment="Left" Margin="715,121,0,0" VerticalAlignment="Top" Width="75" Background="#FF363636" Foreground="White"/>
     </Grid>
 </f:UserControlBase>

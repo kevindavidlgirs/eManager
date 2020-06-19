@@ -224,6 +224,7 @@ namespace prbd_1920_g04.Views {
             Save = new RelayCommand(SaveAction, CanSaveOrCancelAction);
             InitializeComponent();
         }
+
     }
 }
 
