@@ -12,6 +12,11 @@ namespace prbd_1920_g04.Model
 {
     public class Secretary : Member {
 
+        public Player CreatePlayer(Player p)
+        {
+            return CreatePlayer(p.FirstName, p.LastName, p.Email, p.Password, p.Age, p.Adresse, p.Height, p.Weight, p.PicturePath, p.JerseyNumber);
+        }
+
         public Player CreatePlayer(string firstName, string lastname, string email, string password, int age, string adresse, int height, double weight, string picturePath, int jerseyNumber, Fonction fonction = Fonction.Player)
         {
             bool playerExiste = false;
@@ -51,9 +56,9 @@ namespace prbd_1920_g04.Model
             return player;
         }
 
-        public Player CreatePlayer(Player p)
+        public Match AddMatch(Match m, string cat)
         {
-            return CreatePlayer(p.FirstName, p.LastName, p.Email, p.Password, p.Age, p.Adresse, p.Height, p.Weight, p.PicturePath, p.JerseyNumber);
+            return AddMatch(m.DateMatch, m.Place, m.Home, m.Adversary, cat);
         }
 
         public Match AddMatch(DateTime date, string place, string home, string adversary, string categorie) { 
@@ -66,11 +71,6 @@ namespace prbd_1920_g04.Model
                 return match;
             }
             return match;
-        }
-
-        public Match AddMatch(Match m, string cat)
-        {
-            return AddMatch(m.DateMatch, m.Place, m.Home, m.Adversary, cat);
         }
 
         public Player AddPlayerInMatchs(int id, Match mtch)

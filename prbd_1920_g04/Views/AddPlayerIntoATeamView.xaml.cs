@@ -81,13 +81,13 @@ namespace prbd_1920_g04.Views
             }
             if (matchSelected.NumberOfPlayers() >= 11)
             {
-                matchSelected.teamIsComplete = true;
+                matchSelected.TeamIsCompete = true;
                 App.Model.SaveChanges();
             }
-            CheckedListBoxPlayersAvalaible(matchSelected.Category);
-            CheckedListBoxPlayersAdded(matchSelected.Category);
+            CheckedListBoxPlayersAvalaible();
+            CheckedListBoxPlayersAdded();
             SetLabels(0);
-            App.NotifyColleagues(AppMessages.MSG_ADD_PLAYER_TO_A_TEAM, new ObservableCollection<Match>(App.Model.Matchs.Where(m => (m.teamIsComplete && !m.IsOver))).Count > 0);
+            App.NotifyColleagues(AppMessages.MSG_ADD_PLAYER_TO_A_TEAM, new ObservableCollection<Match>(App.Model.Matchs.Where(m => (m.TeamIsCompete && !m.IsOver))).Count > 0);
         }
 
         private void RemoveAction()
@@ -99,13 +99,13 @@ namespace prbd_1920_g04.Views
             }
             if (matchSelected.NumberOfPlayers() < 11)
             {
-                matchSelected.teamIsComplete = false;
+                matchSelected.TeamIsCompete = false;
                 App.Model.SaveChanges();
             }
-            CheckedListBoxPlayersAdded(matchSelected.Category);
-            CheckedListBoxPlayersAvalaible(matchSelected.Category);
+            CheckedListBoxPlayersAdded();
+            CheckedListBoxPlayersAvalaible();
             SetLabels(0);
-            App.NotifyColleagues(AppMessages.MSG_REMOVE_PLAYER_TO_A_TEAM, new ObservableCollection<Match>(App.Model.Matchs.Where(m => (m.teamIsComplete && !m.IsOver))).Count > 0);
+            App.NotifyColleagues(AppMessages.MSG_REMOVE_PLAYER_TO_A_TEAM, new ObservableCollection<Match>(App.Model.Matchs.Where(m => (m.TeamIsCompete && !m.IsOver))).Count > 0);
         }
 
         private void ComboBoxMatchs()
@@ -113,7 +113,7 @@ namespace prbd_1920_g04.Views
             Matchs = new ObservableCollection<Match>(App.Model.Matchs.Where(m => (!m.IsOver)).OrderBy(m => m.DateMatch));
         }
 
-        private void CheckedListBoxPlayersAvalaible(Category t)
+        private void CheckedListBoxPlayersAvalaible()
         {
             var players = new ObservableCollection<Player>(App.Model.Players);
             PlayersAvalaible = new ObservableCollection<Player>();
@@ -125,11 +125,11 @@ namespace prbd_1920_g04.Views
                     PlayersAvalaible.Add(p);
                 }
             }
-            activeButtonSave = PlayersAvalaible.Count > 0 && !matchSelected.teamIsComplete;
+            activeButtonSave = PlayersAvalaible.Count > 0 && !matchSelected.TeamIsCompete;
             checkListBoxAddPlayer.SelectedItems.Clear();
         }
 
-        private void CheckedListBoxPlayersAdded(Category t)
+        private void CheckedListBoxPlayersAdded()
         {
             var players = new ObservableCollection<Player>(App.Model.Players);
             PlayersAdded = new ObservableCollection<Player>();
@@ -152,8 +152,8 @@ namespace prbd_1920_g04.Views
                 if (m.Equals((Match)comboboxMatchs.SelectedItem))
                 {
                     matchSelected = m;
-                    CheckedListBoxPlayersAvalaible(matchSelected.Category);
-                    CheckedListBoxPlayersAdded(matchSelected.Category);
+                    CheckedListBoxPlayersAvalaible();
+                    CheckedListBoxPlayersAdded();
                     SetLabels(0);
                     return;
                 }
@@ -208,7 +208,7 @@ namespace prbd_1920_g04.Views
             Remove = new RelayCommand(RemoveAction, CanRemoveOrCancelAction);
             App.Register<bool>(this, AppMessages.MSG_MATCH_IS_OVER, o => { ComboBoxMatchs(); resetAll(); comboboxMatchs.SelectedIndex = -1; });
             App.Register(this, AppMessages.MSG_MATCH_ADDED, () => { ComboBoxMatchs(); resetAll(); comboboxMatchs.SelectedIndex = -1; });
-            App.Register(this, AppMessages.MSG_PLAYER_ADDED, () => { if(matchSelected != null)CheckedListBoxPlayersAvalaible(matchSelected.Category); if (matchSelected != null) SetLabels(0); });
+            App.Register(this, AppMessages.MSG_PLAYER_ADDED, () => { if(matchSelected != null)CheckedListBoxPlayersAvalaible(); if (matchSelected != null) SetLabels(0); });
             InitializeComponent();
         }
     }

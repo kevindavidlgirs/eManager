@@ -18,9 +18,7 @@ namespace prbd_1920_g04.Model {
         public int GoalsHome { get; set; }
         public int GoalsAdversary { get; set; }
         public bool IsOver { get; set; }
-        public bool teamIsComplete { get; set; }
-        public virtual Category Category { get; set; }
-        public virtual ICollection<Player> Teams { get; set; } = new HashSet<Player>();
+        public bool TeamIsCompete { get; set; }
         public string PicturePathHome { get; set; }
         public string PicturePathAdversary { get; set; }
         [NotMapped]
@@ -39,6 +37,10 @@ namespace prbd_1920_g04.Model {
                 return PicturePathAdversary != null ? App.IMAGE_PATH + "\\" + PicturePathAdversary : null;
             }
         }
+
+        public virtual Category Category { get; set; }
+
+        public virtual ICollection<Player> Teams { get; set; } = new HashSet<Player>();
 
         public int NumberOfPlayers()
         {

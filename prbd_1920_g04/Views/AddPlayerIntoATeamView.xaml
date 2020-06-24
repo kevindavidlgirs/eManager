@@ -6,9 +6,8 @@
              xmlns:f="clr-namespace:PRBD_Framework;assembly=PRBD_Framework"
              xmlns:local="clr-namespace:prbd_1920_g04.Views"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="prbd_1920_g04.Views.AddPlayerIntoAMatchView"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Margin="50,33,-50,-33">
+             mc:Ignorable="d" Height="513" Width="920">
+    <Grid Margin="50,33,55,50">
         <ComboBox x:Name="comboboxMatchs" ItemsSource="{Binding Matchs}" DisplayMemberPath="HomeVsAdversary" SelectedValuePath="Home" SelectedValue="{Binding Mtchs}" SelectionChanged="ComboBox_SelectionChanged" HorizontalAlignment="Left" Margin="345,76,0,0" VerticalAlignment="Top" Width="120"/>
         <Label Content="Team :" HorizontalAlignment="Left" Margin="255,66,0,0" VerticalAlignment="Top" FontSize="20"/>
         <Button Command="{Binding Save}" Content="Add" HorizontalAlignment="Left" Margin="170,292,0,0" VerticalAlignment="Top" Width="76" Background="#FF363636" Foreground="White" BorderBrush="#FF999999"/>
@@ -16,7 +15,7 @@
         <Label Name="teamIsComplete" Content="" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.2,-0.051" Width="378"/>
         <Label Name="equipeAdverse" Content="Please select a team." HorizontalAlignment="Left" Margin="476,72,0,0" VerticalAlignment="Top" Height="26"/>
         <Label Name="categorie" Content="" HorizontalAlignment="Left" Margin="10,266,0,0" VerticalAlignment="Top" Height="26"/>
-        <xctk:CheckListBox x:Name="checkListBoxPlayerSelected" ItemsSource="{Binding PlayersAdded}" ItemSelectionChanged="CheckedListBox_ItemSelectionChanged" DisplayMemberPath="FirstName" HorizontalAlignment="Left" Height="100" Margin="417,161,0,0" VerticalAlignment="Top" Width="373" BorderBrush="#FF1C46C5"/>
+        <xctk:CheckListBox x:Name="checkListBoxPlayerSelected" ItemsSource="{Binding PlayersAdded}" ItemSelectionChanged="CheckedListBox_ItemSelectionChanged" DisplayMemberPath="FirstName" HorizontalAlignment="Left" Height="100" Margin="417,161,0,0" VerticalAlignment="Top" Width="373" BorderBrush="#FFABADB3"/>
         <Button Command="{Binding Remove}" Content="Remove" HorizontalAlignment="Left" Margin="574,292,0,0" VerticalAlignment="Top" Width="76" Background="#FF363636" Foreground="White" BorderBrush="#FF999999"/>
     </Grid>
 </f:UserControlBase>

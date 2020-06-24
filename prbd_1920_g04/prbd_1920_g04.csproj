@@ -137,7 +137,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Admin.cs" />
     <Compile Include="Model\Match.cs" />
     <Compile Include="Model\Member.cs" />
     <Compile Include="Model\Model.cs" />

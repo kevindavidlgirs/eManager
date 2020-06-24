@@ -19,7 +19,6 @@ namespace prbd_1920_g04.Model
 
         public int JerseyNumber { get; set; }
 
-
         [NotMapped]
         public string AbsolutePicturePath
         {
@@ -28,13 +27,18 @@ namespace prbd_1920_g04.Model
                 return PicturePath != null ? App.IMAGE_PATH + "\\" + PicturePath : null;
             }
         }
+
         public virtual Category Category { get; set; }
 
-        public virtual ICollection<Statistics> StatsList { get; set; } = new HashSet<Statistics>();
-        public virtual Statistics Stats { get; set; }
         public virtual ICollection<Match> Matchs { get; set; } = new HashSet<Match>();
 
+        //Trouver une autre solution !
         public Match MatchForCreatePlayersStatsView;
+        //Trouver une autre solution !
+
+        public virtual ICollection<Statistics> StatsList { get; set; } = new HashSet<Statistics>();
+
+        public virtual Statistics Stats { get; set; }
 
         public Statistics Statistics => GetStatistics();
 

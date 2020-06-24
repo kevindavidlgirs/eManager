@@ -21,9 +21,16 @@ namespace prbd_1920_g04.Model {
         public virtual Player Player { get; set; }
         public virtual Match Match { get; set; }
 
-        public Statistics()
+        public void copyAttr(Statistics s)
         {
+            StatisticsId = s.StatisticsId;
+            GoalsScored = s.GoalsScored;
+            GoalsConceced = s.GoalsConceced;
+            Assists = s.Assists;
+            Injuries = s.Injuries;
+            Fouls = s.Fouls;
         }
+
         public Statistics(Player p, Match m)
         {
             Player = p;
@@ -46,15 +53,8 @@ namespace prbd_1920_g04.Model {
             Player = s.Player;
             Match = s.Match;
         }
-
-        public void copyAttr(Statistics s)
+        public Statistics()
         {
-            StatisticsId = s.StatisticsId;
-            GoalsScored = s.GoalsScored;
-            GoalsConceced = s.GoalsConceced;
-            Assists = s.Assists;
-            Injuries = s.Injuries;
-            Fouls = s.Fouls;
         }
     }
 }

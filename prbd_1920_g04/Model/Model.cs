@@ -19,7 +19,6 @@ namespace prbd_1920_g04.Model
         //Déclarer DbSet<User> (User est une classe abstraite) et les autres permet d'indiquer à EF qu'il y a de l'héritage
         //https://authfix-le-gaulois.tech/heritage-entity-framework-core/
         public DbSet<Member> Members { get; set; }
-        public DbSet<Admin> Admins { get; set; }
         public DbSet<Secretary> Secretaries { get; set; }
         public DbSet<Player> Players { get; set; }
         public DbSet<Match> Matchs { get; set; }
@@ -95,11 +94,8 @@ namespace prbd_1920_g04.Model
             App.Model.CreateCategory("U15", 15, 16);
             App.Model.CreateCategory("U17", 17, 20);
             App.Model.CreateCategory("U21", 21, 50);
-            //App.Model.CreateTeam("A1", 21, 50);
-            //App.Model.CreateTeam("A2", 21, 50);
 
             App.Model.SaveChanges();
         }
-
     }
 }

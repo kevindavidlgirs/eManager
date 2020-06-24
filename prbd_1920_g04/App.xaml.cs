@@ -29,7 +29,8 @@ namespace prbd_1920_g04 {
         MSG_TEAM_COMPLET,
         MSG_ADD_STATS_TO_PLAYER,
         MSG_REMOVE_STATS_PLAYERS_TAB, 
-        MSG_VIEW_PLAYER
+        MSG_VIEW_PLAYER,
+        MSG_CONSOLE_MSG
     }
 
     public partial class App : ApplicationBase {
@@ -44,17 +45,19 @@ namespace prbd_1920_g04 {
         }
 
         private void TestDB() {
-
-            foreach (var match in App.Model.Matchs) {
-                match.DeleteCategorie();
+            if(App.Model.Matchs != null){
+                foreach (var match in App.Model.Matchs)
+                {
+                    match.DeleteCategorie();
+                }
+                App.Model.Matchs.RemoveRange(App.Model.Matchs);
+                App.Model.Stats.RemoveRange(App.Model.Stats);
+                App.Model.Members.RemoveRange(App.Model.Members);
+                App.Model.Category.RemoveRange(App.Model.Category);
+                App.Model.SaveChanges();
             }
-            App.Model.Matchs.RemoveRange(App.Model.Matchs);
-            App.Model.Stats.RemoveRange(App.Model.Stats);
-            App.Model.Members.RemoveRange(App.Model.Members);
-            App.Model.Category.RemoveRange(App.Model.Category);
-            App.Model.SaveChanges();
-            App.Model.CreateCategories(); 
 
+            App.Model.CreateCategories();
             var sec = App.Model.CreateSecretary("secretaire", "secretaire", "secretaire@gmail.com", "secretaire", 30, "Rue du document", "/path", Fonction.Secretary);
 
             //U17

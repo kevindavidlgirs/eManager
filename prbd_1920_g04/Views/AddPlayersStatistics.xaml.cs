@@ -100,6 +100,10 @@ namespace prbd_1920_g04.Views {
         }
 
         private void TransfertAction() {
+            foreach(Player p in Match.Teams)
+            {
+                p.Stats = new Statistics();
+            }
             App.NotifyColleagues(AppMessages.MSG_MATCH_ADDED); // Pour rafraichir la liste des joueurs !
             App.NotifyColleagues(AppMessages.MSG_REMOVE_STATS_PLAYERS_TAB, Match); // Nous supprimons automatiquement la vue de addPlayerStatisticsView
             App.NotifyColleagues(AppMessages.MSG_SHOW_MATCH, Match);
