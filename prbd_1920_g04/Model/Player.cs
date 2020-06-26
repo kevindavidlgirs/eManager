@@ -19,6 +19,8 @@ namespace prbd_1920_g04.Model
 
         public int JerseyNumber { get; set; }
 
+        public string PlayerRepresentation { get => this.ToString(); }
+
         [NotMapped]
         public string AbsolutePicturePath
         {
@@ -56,7 +58,7 @@ namespace prbd_1920_g04.Model
 
         public override string ToString()
         {
-            return $"<User: Name={LastName}, FirstName={FirstName}, Email={Email}, Age={Age}, Adresse={Adresse}, Role={Fonction.ToString()}>";
+            return "Name: " + LastName + ", Firstname: " + FirstName + ", Age: " + Age +", J.N: "+ JerseyNumber;
         }
         protected Player() { }
     }

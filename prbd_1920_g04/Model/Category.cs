@@ -21,5 +21,6 @@ namespace prbd_1920_g04.Model
         
         public virtual ICollection<Player> Players { get; set; } = new HashSet<Player>();
 
+        protected Category() { }
     }
 }

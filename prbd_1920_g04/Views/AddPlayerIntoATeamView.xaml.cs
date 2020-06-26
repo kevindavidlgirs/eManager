@@ -26,18 +26,7 @@ namespace prbd_1920_g04.Views
 
         private ObservableCollection<Match> matchs;
         public ObservableCollection<Match> Matchs { get => matchs; set => SetProperty(ref matchs, value); }
-
-        private string mtchs;
-        public string Mtchs
-        {
-            get { return mtchs; }
-            set
-            {
-                mtchs = value;
-                RaisePropertyChanged(nameof(Mtchs));
-            }
-        }
-
+      
         private Match matchSelected;
         public Match MatchSelected
         {
@@ -141,7 +130,7 @@ namespace prbd_1920_g04.Views
                     PlayersAdded.Add(p);
                 }
             }
-            activeButtonRemove = PlayersAdded.Count > 0;
+            activeButtonRemove = PlayersAdded.Count > 0 && !matchSelected.IsOver;
             checkListBoxPlayerSelected.SelectedItems.Clear();
         }
 
@@ -181,21 +170,21 @@ namespace prbd_1920_g04.Views
         {
             if (matchSelected != null && matchSelected.NumberOfPlayers() == 11)
             {
-                teamIsComplete.Content = "The match is complete !";
+                checkListLeft.Content = "The match is complete !";
             }
             else
             {
-                teamIsComplete.Content = "This match still has at least " + (11 - matchSelected.NumberOfPlayers()) + " places -  you have selected " + playerSelected + " players.";
+                checkListLeft.Content = "This match still has at least " + (11 - matchSelected.NumberOfPlayers()) + " places -  you have selected " + playerSelected + " players.";
             }
             categorie.Content = "Catégorie " + matchSelected.Category.Name + " players avalaible : " + (matchSelected.Category.Players.Count - matchSelected.NumberOfPlayers());
-            equipeAdverse.Content = "Date of meeting : " + matchSelected.DateMatch.Day + " /" + matchSelected.DateMatch.Month;
+            dateOfMeeting.Content = "Date of meeting : " + matchSelected.DateMatch.Day + " /" + matchSelected.DateMatch.Month;
         }
 
-        private void resetAll()
+        private void ResetAll()
         {
-            teamIsComplete.Content = "";
+            checkListLeft.Content = "";
             categorie.Content = "";
-            equipeAdverse.Content = "Please select a team.";
+            dateOfMeeting.Content = "Please select a team.";
             PlayersAvalaible = null; PlayersAdded = null; activeButtonSave = false; activeButtonRemove = false;
         }
 
@@ -206,8 +195,8 @@ namespace prbd_1920_g04.Views
             ComboBoxMatchs();
             Save = new RelayCommand(SaveAction, CanSaveOrCancelAction);
             Remove = new RelayCommand(RemoveAction, CanRemoveOrCancelAction);
-            App.Register<bool>(this, AppMessages.MSG_MATCH_IS_OVER, o => { ComboBoxMatchs(); resetAll(); comboboxMatchs.SelectedIndex = -1; });
-            App.Register(this, AppMessages.MSG_MATCH_ADDED, () => { ComboBoxMatchs(); resetAll(); comboboxMatchs.SelectedIndex = -1; });
+            App.Register<bool>(this, AppMessages.MSG_MATCH_IS_OVER, o => { ComboBoxMatchs(); ResetAll(); comboboxMatchs.SelectedIndex = -1; });
+            App.Register(this, AppMessages.MSG_MATCH_ADDED, () => { ComboBoxMatchs(); ResetAll(); comboboxMatchs.SelectedIndex = -1; });
             App.Register(this, AppMessages.MSG_PLAYER_ADDED, () => { if(matchSelected != null)CheckedListBoxPlayersAvalaible(); if (matchSelected != null) SetLabels(0); });
             InitializeComponent();
         }

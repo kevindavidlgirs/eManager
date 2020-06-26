@@ -101,6 +101,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\Message.cs" />
     <Compile Include="Model\Statistics.cs" />
     <Compile Include="Views\AddPlayerIntoATeamView.xaml.cs">
       <DependentUpon>AddPlayerIntoATeamView.xaml</DependentUpon>

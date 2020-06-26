@@ -68,7 +68,6 @@ namespace prbd_1920_g04.Model
             match.Place = place;
             match.Home = home;
             match.Adversary = adversary;
-            match.HomeVsAdversary = home + " vs " + adversary;
             match.Category = category; 
             Matchs.Add(match);
             return match;

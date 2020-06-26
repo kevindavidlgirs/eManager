@@ -63,8 +63,9 @@ namespace prbd_1920_g04.Views {
             DataContext = this;
             UpdateMatch = new RelayCommand<Match>((m) => { UpdateAction(m); });
             Refresh();
-            InitializeComponent();
+            App.Register<bool>(this, AppMessages.MSG_ADD_PLAYER_TO_A_TEAM, matchsAvalaible => { Refresh(); });
             App.Register<bool>(this, AppMessages.MSG_REMOVE_PLAYER_TO_A_TEAM, matchsAvalaible => { Refresh(); });
-        }
+            InitializeComponent();
+       }
     }
 }

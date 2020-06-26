@@ -6,8 +6,11 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Linq;
 using System.Windows.Documents;
+using System.Collections.ObjectModel;
 
 namespace prbd_1920_g04.Views {
+
+
     public partial class MainView : WindowBase {
 
         public ICommand Browse { get; set; }
@@ -15,6 +18,8 @@ namespace prbd_1920_g04.Views {
         public ICommand NewPlayer { get; set; }
         public ICommand AddPlayerToAMatch { get; set; }
         public ICommand AddResultToMatch { get; set; }
+
+        public ObservableCollection<string> ConsoleList { get; set; } = new ObservableCollection<string>();
 
         private string textHeaderTab;
         public string TextHeaderTab
@@ -42,10 +47,16 @@ namespace prbd_1920_g04.Views {
         public MainView() {
 
             InitializeComponent();
+
             DataContext = this;
             activeAddResultButton = false;
 
             App.CurrentUser = App.Model.Members.SingleOrDefault(s => s.Fonction == Fonction.Secretary);
+
+            App.Register<string>(this, AppMessages.MSG_CONSOLE_MSG, message =>
+            {
+                ConsoleList.Add(message);
+            });
 
             App.Register<Model.Match>(this, AppMessages.MSG_ADD_STATS_TO_PLAYER, (match) => {
                 foreach (TabItem t in tabControl.Items) {
@@ -55,6 +66,7 @@ namespace prbd_1920_g04.Views {
                             Header = "Stats: " + match.Home + " vs " + match.Adversary,
                             Content = new AddPlayersStatistics(match),
                         });
+                        ConsoleList.Add(new Message(true, "Adding statistics can only be done for one game at a time. Please finish the current tab, then the pending ones will be released").ToString());
                         Dispatcher.InvokeAsync(() => t.Focus());
                         return;
                     }
@@ -252,6 +264,7 @@ namespace prbd_1920_g04.Views {
                     };
                 }
             });
+
 
             //TODO: Peaufiner cette partie
             Browse = new RelayCommand(() => 

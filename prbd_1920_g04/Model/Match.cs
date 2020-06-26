@@ -13,7 +13,7 @@ namespace prbd_1920_g04.Model {
         public DateTime DateMatch { get; set; }
         public string Home { get; set; }
         public string Adversary { get; set; }
-        public string HomeVsAdversary { get; set; }
+        public string HomeVsAdversary { get => Home + " vs " + Adversary; }
         public string Place { get; set; }
         public int GoalsHome { get; set; }
         public int GoalsAdversary { get; set; }
