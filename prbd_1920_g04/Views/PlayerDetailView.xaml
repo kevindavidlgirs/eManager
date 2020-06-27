@@ -50,7 +50,7 @@
         <TextBlock Text="{Binding Adresse}" HorizontalAlignment="Left" Margin="126,97,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="135" FontSize="11"/>
         <TextBlock Text="{Binding Email}" HorizontalAlignment="Left" Margin="112,123,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="120"/>
         <TextBlock Text="{Binding JerseyNumber}" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Top" Margin="161,147,0,0" Grid.Row="1" Height="16" Width="71"/>
-        <TextBlock  Text="{Binding Hght}" HorizontalAlignment="Left" Margin="120,175,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="112"/>
+        <TextBlock Text="{Binding Hght}" HorizontalAlignment="Left" Margin="120,175,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="112"/>
         <TextBlock Text="{Binding Weight}" HorizontalAlignment="Left" Margin="122,204,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="68"/>
     </Grid>
 </f:UserControlBase>

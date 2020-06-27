@@ -96,7 +96,7 @@ namespace prbd_1920_g04.Views {
         }
         private bool CanSaveOrCancelAction(Player p)
         {
-            return p != null;
+            return true;
         }
 
         private void TransfertAction() {
