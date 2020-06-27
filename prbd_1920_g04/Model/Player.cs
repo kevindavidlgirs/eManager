@@ -53,7 +53,9 @@ namespace prbd_1920_g04.Model
                     return s;
                 }
             }
-            return new Statistics(this, MatchForCreatePlayersStatsView);
+            Statistics st = new Statistics(this, MatchForCreatePlayersStatsView);
+            StatsList.Add(st);
+            return st;
         }
 
         public override string ToString()

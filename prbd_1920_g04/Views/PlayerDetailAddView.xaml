@@ -13,40 +13,45 @@
         <BitmapImage x:Key="UnknownUser" UriSource="/images/ballonDeFoot.jpg"/>
     </UserControl.Resources>
     <Grid>
-        <f:ValidatedField >
-            <TextBox x:Name="firstNameTextBox" Text="{Binding FirstName}" HorizontalAlignment="Left" Height="23" Margin="146,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="198"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="29*"/>
+            <ColumnDefinition Width="63*"/>
+            <ColumnDefinition Width="68*"/>
+        </Grid.ColumnDefinitions>
+        <f:ValidatedField Grid.Column="1" >
+            <TextBox x:Name="firstNameTextBox" Text="{Binding FirstName}" HorizontalAlignment="Left" Height="23" Margin="0,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="198"/>
         </f:ValidatedField>
 
-        <f:ValidatedField>
-            <TextBox x:Name="lastNameTextBox" Text="{Binding LastName}" HorizontalAlignment="Left" Height="23" Margin="146,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="198"/>
+        <f:ValidatedField Grid.Column="1">
+            <TextBox x:Name="lastNameTextBox" Text="{Binding LastName}" HorizontalAlignment="Left" Height="23" Margin="0,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="198"/>
         </f:ValidatedField>
 
-        <f:ValidatedField>
-            <TextBox x:Name="ageTextBox" Text="{Binding Age}" HorizontalAlignment="Left" Height="23" Margin="146,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="198"/>
+        <f:ValidatedField Grid.Column="1">
+            <TextBox x:Name="ageTextBox" Text="{Binding Age}" HorizontalAlignment="Left" Height="23" Margin="0,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="198"/>
         </f:ValidatedField>
 
-        <f:ValidatedField>
-            <TextBox x:Name="emailTextBox" Text="{Binding Email}" HorizontalAlignment="Left" Height="23" Margin="146,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="198"/>
+        <f:ValidatedField Grid.Column="1">
+            <TextBox x:Name="emailTextBox" Text="{Binding Email}" HorizontalAlignment="Left" Height="23" Margin="0,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="198"/>
         </f:ValidatedField>
 
-        <f:ValidatedField>
-            <TextBox x:Name="adresseTextBox" Text="{Binding Adresse}" HorizontalAlignment="Left" Height="23" Margin="146,267,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="198"/>
+        <f:ValidatedField Grid.Column="1">
+            <TextBox x:Name="adresseTextBox" Text="{Binding Adresse}" HorizontalAlignment="Left" Height="23" Margin="0,267,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="198"/>
         </f:ValidatedField>
 
-        <f:ValidatedField>
-            <TextBox x:Name="heightTextBox" Text="{Binding Hght}" HorizontalAlignment="Left" Height="23" Margin="146,312,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="198"/>
+        <f:ValidatedField Grid.Column="1">
+            <TextBox x:Name="heightTextBox" Text="{Binding Hght}" HorizontalAlignment="Left" Height="23" Margin="0,312,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="198"/>
         </f:ValidatedField>
 
-        <f:ValidatedField>
-            <TextBox x:Name="passwordTextBox" Text="{Binding Password}" HorizontalAlignment="Left" Height="23" Margin="459,312,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195"/>
+        <f:ValidatedField Grid.Column="2">
+            <TextBox x:Name="passwordTextBox" Text="{Binding Password}" HorizontalAlignment="Left" Height="23" Margin="0,312,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195"/>
         </f:ValidatedField>
 
-        <f:ValidatedField>
-            <TextBox x:Name="jerseyNumberTextBox" Text="{Binding JerseyNumber}" HorizontalAlignment="Left" Height="23" Margin="459,267,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195"/>
+        <f:ValidatedField Grid.Column="2">
+            <TextBox x:Name="jerseyNumberTextBox" Text="{Binding JerseyNumber}" HorizontalAlignment="Left" Height="23" Margin="0,267,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195"/>
         </f:ValidatedField>
 
-        <f:ValidatedField>
-            <TextBox x:Name="weightTextBox" Text="{Binding Weight}" HorizontalAlignment="Left" Height="23" Margin="459,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195"/>
+        <f:ValidatedField Grid.Column="2">
+            <TextBox x:Name="weightTextBox" Text="{Binding Weight}" HorizontalAlignment="Left" Height="23" Margin="0,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195"/>
         </f:ValidatedField>
 
         <Label Content="{x:Static p:Resources.CreatePlayersView_Firstname}" HorizontalAlignment="Left" Margin="52,86,0,0" VerticalAlignment="Top"/>
@@ -55,12 +60,12 @@
         <Label Content="{x:Static p:Resources.CreatePlayersView_Email}" HorizontalAlignment="Left" Margin="52,219,0,0" VerticalAlignment="Top"/>
         <Label Content="{x:Static p:Resources.CreatePlayersView_Adresse}" HorizontalAlignment="Left" Margin="52,264,0,0" VerticalAlignment="Top"/>
         <Label Content="{x:Static p:Resources.CreatePlayersView_Height}" HorizontalAlignment="Left" Margin="52,309,0,0" VerticalAlignment="Top"/>
-        <Label Content="{x:Static p:Resources.CreatePlayersView_JerseyNumber}" HorizontalAlignment="Left" Margin="359,264,0,0" VerticalAlignment="Top"/>
-        <Label Content="{x:Static p:Resources.CreatePlayersView_Weight}" HorizontalAlignment="Left" Margin="388,219,0,0" VerticalAlignment="Top"/>
-        <Label Content="{x:Static p:Resources.CreatePlayersView_Password}" HorizontalAlignment="Left" Margin="377,312,0,0" VerticalAlignment="Top"/>
-        <Image Source="{Binding PicturePath, FallbackValue={StaticResource UnknownUser}, TargetNullValue={StaticResource UnknownUser}}" HorizontalAlignment="Left" Height="111" Margin="487,70,0,0" VerticalAlignment="Top" Width="139"/>
-        <Button Command="{Binding LoadImage}" Content="Load" HorizontalAlignment="Left" Margin="487,186,0,0" VerticalAlignment="Top" Width="64" Background="#FF363636" Foreground="White" BorderBrush="#FF999999"/>
-        <Button Command="{Binding ClearImage}" Content="Clear" HorizontalAlignment="Left" Margin="562,186,0,0" VerticalAlignment="Top" Width="64" Background="#FF363636" Foreground="White" BorderBrush="#FF999999"/>
-        <Button Command="{Binding Save}" Content="Save" HorizontalAlignment="Left" Margin="359,390,0,0" VerticalAlignment="Top" Width="75" Background="#FF363636" Foreground="White" BorderBrush="#FF999999"/>
+        <Label Content="{x:Static p:Resources.CreatePlayersView_JerseyNumber}" HorizontalAlignment="Left" Margin="214,264,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Label Content="{x:Static p:Resources.CreatePlayersView_Weight}" HorizontalAlignment="Left" Margin="243,219,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Label Content="{x:Static p:Resources.CreatePlayersView_Password}" HorizontalAlignment="Left" Margin="232,312,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Image Source="{Binding PicturePath, FallbackValue={StaticResource UnknownUser}, TargetNullValue={StaticResource UnknownUser}}" HorizontalAlignment="Left" Height="111" Margin="27,70,0,0" VerticalAlignment="Top" Width="139" Grid.Column="2"/>
+        <Button Command="{Binding LoadImage}" Content="Load" HorizontalAlignment="Left" Margin="27,186,0,0" VerticalAlignment="Top" Width="64" Background="#FF363636" Foreground="White" BorderBrush="#FF999999" Grid.Column="2"/>
+        <Button Command="{Binding ClearImage}" Content="Clear" HorizontalAlignment="Left" Margin="102,186,0,0" VerticalAlignment="Top" Width="64" Background="#FF363636" Foreground="White" BorderBrush="#FF999999" Grid.Column="2"/>
+        <Button Command="{Binding Save}" Content="Save" HorizontalAlignment="Left" Margin="214,390,0,0" VerticalAlignment="Top" Width="75" Background="#FF363636" Foreground="White" BorderBrush="#FF999999" Grid.Column="1"/>
     </Grid>
 </f:UserControlBase>

@@ -84,20 +84,6 @@ namespace prbd_1920_g04.Views {
                 };
                 tabControl.Items.Add(tab);
                 Dispatcher.InvokeAsync(() => tab.Focus());
-
-                tab.MouseDown += (o, e) => {
-                    if (e.ChangedButton == MouseButton.Middle &&
-                        e.ButtonState == MouseButtonState.Pressed) {
-                        tabControl.Items.Remove(o);
-                        (tab.Content as UserControlBase).Dispose();
-                    }
-                };
-                tab.PreviewKeyDown += (o, e) => {
-                    if (e.Key == Key.W && Keyboard.IsKeyDown(Key.LeftCtrl)) {
-                        tabControl.Items.Remove(o);
-                        (tab.Content as UserControlBase).Dispose();
-                    }
-                };
             });
 
             App.Register<Match>(this, AppMessages.MSG_REMOVE_STATS_PLAYERS_TAB, (match) => {
