@@ -28,7 +28,7 @@
             <RowDefinition Height="450"/>
         </Grid.RowDefinitions>
         <ListView x:Name="listView" 
-                  BorderBrush="Transparent" SelectionMode="Single" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="10">
+                  BorderBrush="Transparent" SelectionMode="Single" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Center" SelectedItem="{Binding SelectedMatch}">
             <ListView.Resources>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="Height" Value="50" />
@@ -53,7 +53,6 @@
                     <GridViewColumn Header="GoalsAdversary" Width="40" DisplayMemberBinding="{Binding GoalsAdversary}" />
                     <GridViewColumn Header="GoalsAdversary" Width="60" DisplayMemberBinding="{Binding Category.Name}" />
                     <GridViewColumn Header="GoalsAdversary" Width="160" DisplayMemberBinding="{Binding Place}" />
-
                     <GridViewColumn Header="Status"  Width="auto">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -63,7 +62,7 @@
                                             <Setter Property="Text" Value="Not started yet !" />
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding IsOver}" Value="true">
-                                                    <Setter Property="Text" Value="" />
+                                                    <Setter Property="Text" Value="Finished !" />
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>

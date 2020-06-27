@@ -224,6 +224,33 @@ namespace prbd_1920_g04.Views {
 
             });
 
+            App.Register<Model.Match>(this, AppMessages.MSG_CAN_SELECT_PLAYERS_FOR_MATCH, (match) => {
+                foreach (TabItem t in tabControl.Items) {
+                    if (t.Header.ToString().Equals("Select players : " + match.DateMatch.ToString("dd/MM/yyyy") +"-"+ match.Home +"vs"+match.Adversary)) {
+                        return;
+                    }
+                }
+                var tab = new TabItem() {
+                    Header = "Select players : " + match.DateMatch.ToString("dd/MM/yyyy") + "-" + match.Home + "vs" + match.Adversary,
+                    Content = new AddPlayerIntoAMatchView(match)
+                };
+                tabControl.Items.Add(tab);
+
+                tab.MouseDown += (o, e) => {
+                    if (e.ChangedButton == MouseButton.Middle &&
+                        e.ButtonState == MouseButtonState.Pressed) {
+                        tabControl.Items.Remove(o);
+                        (tab.Content as UserControlBase).Dispose();
+                    }
+                };
+                tab.PreviewKeyDown += (o, e) => {
+                    if (e.Key == Key.W && Keyboard.IsKeyDown(Key.LeftCtrl)) {
+                        tabControl.Items.Remove(o);
+                        (tab.Content as UserControlBase).Dispose();
+                    }
+                };
+            });
+            
             NewMatch = new RelayCommand(() =>
             {
                 {

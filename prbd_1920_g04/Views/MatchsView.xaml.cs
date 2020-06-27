@@ -18,6 +18,26 @@ namespace prbd_1920_g04.Views
         public ObservableCollection<Match> Matchs { get => matchs; set => SetProperty(ref matchs, value); }
         public ICommand DisplayMatchDetails { get; set; }
 
+        private Match selectedMatch;
+        public Match SelectedMatch {
+            get { return selectedMatch; }
+            set {
+                selectedMatch = value;
+                RaisePropertyChanged(nameof(SelectedMatch));
+                selectPlayerForMatch();
+            }
+        }
+
+        private void selectPlayerForMatch() {
+            if (SelectedMatch != null) {
+                if (SelectedMatch.Category.Players.Count > 0) {
+                    SelectedMatch.CanSelectPlayer = true;
+                    App.NotifyColleagues(AppMessages.MSG_CAN_SELECT_PLAYERS_FOR_MATCH, SelectedMatch);
+                }
+                Console.WriteLine(SelectedMatch.CanSelectPlayer);
+            }
+        }
+
         private void Refresh()
         {
             Matchs = new ObservableCollection<Match>(App.Model.Matchs.OrderBy(m => m.DateMatch));

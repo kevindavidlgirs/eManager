@@ -22,6 +22,7 @@ namespace prbd_1920_g04 {
         MSG_ADD_PLAYER_TO_A_TEAMS,
         MSG_REMOVE_PLAYER_TO_A_TEAM,
         MSG_ADD_PLAYER_TO_A_TEAM,
+        MSG_CAN_SELECT_PLAYERS_FOR_MATCH,
         MSG_TEAM_CHANGED,
         MSG_MATCH_SAVED,
         MSG_ADD_RESULT_TO_MATCH,
@@ -99,11 +100,11 @@ namespace prbd_1920_g04 {
             App.Model.SaveChanges();
 
         }
+
         public App()
         {
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjczMDQ4QDMxMzgyZTMxMmUzMEZRNWNvS3lMeU42UjcrS2MzNmo3bm0wUmJrOFNrbExSTVk2bDI2dUtJT289");
             TestDB();
         }
-
     }
 }
