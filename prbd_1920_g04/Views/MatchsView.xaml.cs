@@ -39,24 +39,24 @@ namespace prbd_1920_g04.Views
 
         private void SetCanSelectPlayer() {
             foreach (var match in App.Model.Matchs) {
-                if (match.Category.Players.Count > 0) {
+                if (match.Category.Players.Count >= 5) {
                     match.CanSelectPlayer = true;
                 }
             }
+            Refresh();
         }
 
 
         private void Refresh()
         {
             Matchs = new ObservableCollection<Match>(App.Model.Matchs.OrderBy(m => m.DateMatch));
-            SelectedMatch = null; // Pour ne pas automatiquement sélectionner de match à chaque mise à jour.
         }
 
         public MatchsView()
         {
             DataContext = this;
             SetCanSelectPlayer();
-            Refresh();
+            //Refresh();
             SelectedMatch = null;
 
             DisplayMatchDetails = new RelayCommand<Match>(m => {

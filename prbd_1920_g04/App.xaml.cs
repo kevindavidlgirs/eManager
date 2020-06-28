@@ -88,14 +88,14 @@ namespace prbd_1920_g04 {
             var player14 = sec.CreatePlayer("Dimitri", "Lavalée", "player@gmail.com", "FootBallplayer", 16, "Avenue du ballon", 175, 72.5, "/path", 2, Position.Defender);
             var player15 = sec.CreatePlayer("Moussa", "Sissako", "player@gmail.com", "FootBallplayer", 16, "Avenue du ballon", 175, 72.5, "/path", 3, Position.Defender);
             var player16 = sec.CreatePlayer("Noë", "Dussenne", "player@gmail.com", "FootBallplayer", 16, "Avenue du ballon", 175, 72.5, "/path", 4, Position.Defender);
-            var player17 = sec.CreatePlayer("Duje", "Cop", "player@gmail.com", "FootBallplayer", 16, "Avenue du ballon", 175, 72.5, "/path", 5, Position.Midfielder);
+           /* var player17 = sec.CreatePlayer("Duje", "Cop", "player@gmail.com", "FootBallplayer", 16, "Avenue du ballon", 175, 72.5, "/path", 5, Position.Midfielder);
             var player18 = sec.CreatePlayer("Gojko", "Cimirot", "player@gmail.com", "FootBallplayer", 16, "Avenue du ballon", 175, 72.5, "/path", 6, Position.Midfielder);
             var player19 = sec.CreatePlayer("Mehdi", "Carcela", "player@gmail.com", "FootBallplayer", 16, "Avenue du ballon", 175, 72.5, "/path", 7, Position.Midfielder);
             var player20 = sec.CreatePlayer("Denis", "Dragus", "player@gmail.com", "FootBallplayer", 16, "Avenue du ballon", 175, 72.5, "/path", 8, Position.Midfielder);
             var player21 = sec.CreatePlayer("John", "Nekadio", "player@gmail.com", "FootBallplayer", 16, "Avenue du ballon", 175, 72.5, "/path", 9, Position.Forward);
             var player22 = sec.CreatePlayer("Eden", "Hazard", "player@gmail.com", "FootBallplayer", 16, "Avenue du ballon", 175, 72.5, "/path", 10, Position.Forward);
             var player23 = sec.CreatePlayer("Roberto", "Carlos", "player@gmail.com", "FootBallplayer", 16, "Avenue du ballon", 175, 72.5, "/path", 11, Position.Forward);
-            var player24 = sec.CreatePlayer("Keylor", "Navas", "player@gmail.com", "FootBallplayer", 16, "Avenue du ballon", 175, 72.5, "/path", 12, Position.Forward);
+            var player24 = sec.CreatePlayer("Keylor", "Navas", "player@gmail.com", "FootBallplayer", 16, "Avenue du ballon", 175, 72.5, "/path", 12, Position.Forward);*/
 
             // Le secrétaire encode le match.
             var match1 = sec.AddMatch(new DateTime(2020, 04, 28), "Epfc Stadium", "EPFC", "SUPINFO", "U15");
