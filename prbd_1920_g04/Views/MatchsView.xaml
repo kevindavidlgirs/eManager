@@ -11,8 +11,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <f:UserControlBase.Resources>
-        <CollectionViewSource x:Key='src' 
-                      Source="{Binding Matchs}">
+        <CollectionViewSource x:Key='src' Source="{Binding Matchs}">
             <CollectionViewSource.GroupDescriptions>
                 <PropertyGroupDescription PropertyName="DateMatch.Year" />
             </CollectionViewSource.GroupDescriptions>
@@ -30,7 +29,7 @@
         </Grid.RowDefinitions>
         <ListView x:Name="listView" 
                   BorderBrush="Transparent" SelectionMode="Single" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Center" 
-                  SelectedItem="{Binding SelectedMatch}">
+                  SelectedItem="{Binding SelectedMatch}" IsSynchronizedWithCurrentItem="False">
             <ListView.Resources>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="Height" Value="50" />

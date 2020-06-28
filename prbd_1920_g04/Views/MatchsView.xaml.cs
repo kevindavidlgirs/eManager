@@ -31,6 +31,7 @@ namespace prbd_1920_g04.Views
         private void selectPlayerForMatch() {
             if (SelectedMatch != null) {
                 if (SelectedMatch.CanSelectPlayer) {
+                    Console.WriteLine(SelectedMatch.DateMatch);
                     App.NotifyColleagues(AppMessages.MSG_CAN_SELECT_PLAYERS_FOR_MATCH, SelectedMatch);
                 }
             }
@@ -48,6 +49,7 @@ namespace prbd_1920_g04.Views
         private void Refresh()
         {
             Matchs = new ObservableCollection<Match>(App.Model.Matchs.OrderBy(m => m.DateMatch));
+            SelectedMatch = null; // Pour ne pas automatiquement sélectionner de match à chaque mise à jour.
         }
 
         public MatchsView()
@@ -55,7 +57,7 @@ namespace prbd_1920_g04.Views
             DataContext = this;
             SetCanSelectPlayer();
             Refresh();
-
+            SelectedMatch = null;
 
             DisplayMatchDetails = new RelayCommand<Match>(m => {
                 App.NotifyColleagues(AppMessages.MSG_SHOW_MATCH, m);
