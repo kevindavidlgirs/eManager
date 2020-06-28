@@ -8,7 +8,7 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="prbd_1920_g04.Views.AddPlayerIntoAMatchView"
              mc:Ignorable="d" Height="513" Width="920">
     <Grid Margin="50,33,55,50">
-        <ComboBox x:Name="comboboxMatchs" ItemsSource="{Binding Matchs}" DisplayMemberPath="HomeVsAdversary" SelectionChanged="ComboBox_SelectionChanged" HorizontalAlignment="Left" Margin="351,89,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="comboboxMatchs" ItemsSource="{Binding Matchs}" DisplayMemberPath="HomeVsAdversary" SelectionChanged="ComboBox_SelectionChanged" HorizontalAlignment="Left" Margin="351,89,0,0" VerticalAlignment="Top" Width="120" SelectedItem="{Binding MatchSelected}"/>
         <Label Content="Team :" HorizontalAlignment="Left" Margin="261,79,0,0" VerticalAlignment="Top" FontSize="20"/>
         <Button Command="{Binding Save}" Content="Add" HorizontalAlignment="Left" Margin="176,305,0,0" VerticalAlignment="Top" Width="76" Background="#FF363636" Foreground="White" BorderBrush="#FF999999"/>
         <xctk:CheckListBox Name="checkListBoxAddPlayer" ItemsSource="{Binding PlayersAvalaible}" ItemSelectionChanged="CheckedListBox_ItemSelectionChanged" DisplayMemberPath="PlayerRepresentation" HorizontalAlignment="Left" Height="100" Margin="16,174,0,0" VerticalAlignment="Top" Width="373"/>

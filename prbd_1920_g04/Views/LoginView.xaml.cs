@@ -1,5 +1,7 @@
-﻿using PRBD_Framework;
+﻿using prbd_1920_g04.Model;
+using PRBD_Framework;
 using System;
+using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,8 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace prbd_1920_g04
-{
+namespace prbd_1920_g04.Views {
     public partial class LoginView : WindowBase {
         private string pseudo;
         public string Pseudo {
@@ -30,13 +31,13 @@ namespace prbd_1920_g04
 
         public override bool Validate() {
             ClearErrors();
-            var member = App.Model.Members.Find(Pseudo);
-            if (!ValidateLogin(member) || !ValidatePwd(member))
+            var secretary = App.Model.Members.Where(m => (m.FirstName == Pseudo && m.Fonction == Fonction.Secretary)).SingleOrDefault();
+            if (!ValidateLogin(secretary) || !ValidatePwd(secretary))
                 RaiseErrors();
             return !HasErrors;
         }
 
-        private bool ValidateLogin(Member member) {
+        private bool ValidateLogin(Member secretary) {
             if (string.IsNullOrEmpty(Pseudo)) {
                 AddError("Pseudo", Properties.Resources.Error_Required);
             }
@@ -45,7 +46,7 @@ namespace prbd_1920_g04
                     AddError("Pseudo", Properties.Resources.Error_LengthGreaterEqual3);
                 }
                 else {
-                    if (member == null) {
+                    if (secretary == null) {
                         AddError("Pseudo", Properties.Resources.Error_DoesNotExist);
                     }
                 }
@@ -64,8 +65,8 @@ namespace prbd_1920_g04
         }
         private void LoginAction() {
             if (Validate()) { // si aucune erreurs
-                var member = App.Model.Members.Find(Pseudo); // on recherche le membre 
-                App.CurrentUser = member; // le membre connecté devient le membre courant
+                var secretary = App.Model.Members.Where(m => (m.FirstName == Pseudo && m.Fonction == Fonction.Secretary)).Single(); // on recherche le membre 
+                App.CurrentUser = secretary; // le membre connecté devient le membre courant
                 ShowMainView(); // ouverture de la fenêtre principale
                 Close(); // fermeture de la fenêtre de login
             }
@@ -81,14 +82,14 @@ namespace prbd_1920_g04
         }
 
         public LoginView() {
-            InitializeComponent();
-
             DataContext = this;
             
             Login = new RelayCommand(LoginAction,
                 () => { return pseudo != null && password != null && !HasErrors; });
             
             Cancel = new RelayCommand(() => Close());
+
+            InitializeComponent();
         }
     }
 }

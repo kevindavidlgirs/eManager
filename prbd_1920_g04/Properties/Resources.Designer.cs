@@ -223,6 +223,15 @@ namespace prbd_1920_g04.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Not authorized !.
+        /// </summary>
+        public static string Error_DoesNotExist {
+            get {
+                return ResourceManager.GetString("Error_DoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à length must be &gt;= 10.
         /// </summary>
         public static string Error_LengthGreaterEqual10 {
@@ -363,6 +372,78 @@ namespace prbd_1920_g04.Properties {
         public static string Error_NumberInferiorEqual99 {
             get {
                 return ResourceManager.GetString("Error_NumberInferiorEqual99", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à required.
+        /// </summary>
+        public static string Error_Required {
+            get {
+                return ResourceManager.GetString("Error_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à wrong password.
+        /// </summary>
+        public static string Error_WrongPassword {
+            get {
+                return ResourceManager.GetString("Error_WrongPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Cancel.
+        /// </summary>
+        public static string LoginView_Cancel {
+            get {
+                return ResourceManager.GetString("LoginView_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Login.
+        /// </summary>
+        public static string LoginView_Login {
+            get {
+                return ResourceManager.GetString("LoginView_Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à If you don&apos;t have a Secretary login, please contact your administrator !.
+        /// </summary>
+        public static string LoginView_Message {
+            get {
+                return ResourceManager.GetString("LoginView_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Password:.
+        /// </summary>
+        public static string LoginView_Password {
+            get {
+                return ResourceManager.GetString("LoginView_Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Pseudo:.
+        /// </summary>
+        public static string LoginView_Pseudo {
+            get {
+                return ResourceManager.GetString("LoginView_Pseudo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à E-Club Manager.
+        /// </summary>
+        public static string LoginView_Title {
+            get {
+                return ResourceManager.GetString("LoginView_Title", resourceCulture);
             }
         }
     }

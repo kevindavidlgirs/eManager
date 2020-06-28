@@ -6,12 +6,12 @@
              xmlns:f="clr-namespace:PRBD_Framework;assembly=PRBD_Framework"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:prbd_1920_g04"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:chart="http://schemas.syncfusion.com/wpf" x:Class="prbd_1920_g04.Views.MatchsView"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <f:UserControlBase.Resources>
-        <CollectionViewSource x:Key='src' 
-                      Source="{Binding Matchs}">
+        <CollectionViewSource x:Key='src' Source="{Binding Matchs}">
             <CollectionViewSource.GroupDescriptions>
                 <PropertyGroupDescription PropertyName="DateMatch.Year" />
             </CollectionViewSource.GroupDescriptions>
@@ -28,7 +28,8 @@
             <RowDefinition Height="450"/>
         </Grid.RowDefinitions>
         <ListView x:Name="listView" 
-                  BorderBrush="Transparent" SelectionMode="Single" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="10">
+                  BorderBrush="Transparent" SelectionMode="Single" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Center" 
+                  SelectedItem="{Binding SelectedMatch}" IsSynchronizedWithCurrentItem="False">
             <ListView.Resources>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="Height" Value="50" />
@@ -53,7 +54,6 @@
                     <GridViewColumn Header="GoalsAdversary" Width="40" DisplayMemberBinding="{Binding GoalsAdversary}" />
                     <GridViewColumn Header="GoalsAdversary" Width="60" DisplayMemberBinding="{Binding Category.Name}" />
                     <GridViewColumn Header="GoalsAdversary" Width="160" DisplayMemberBinding="{Binding Place}" />
-
                     <GridViewColumn Header="Status"  Width="auto">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -63,12 +63,29 @@
                                             <Setter Property="Text" Value="Not started yet !" />
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding IsOver}" Value="true">
-                                                    <Setter Property="Text" Value="" />
+                                                    <Setter Property="Text" Value="Finished !" />
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="SelectP"  Width="30">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <fa:ImageAwesome>
+                                    <Image.Style>
+                                        <Style TargetType="{x:Type fa:ImageAwesome}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding CanSelectPlayer}" Value="true">
+                                                    <Setter Property="Icon" Value="Male" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Image.Style>
+                                </fa:ImageAwesome>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

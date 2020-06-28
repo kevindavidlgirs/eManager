@@ -136,7 +136,7 @@
   <data name="CreateMatchView_Place" xml:space="preserve">
     <value>Place :</value>
     <comment>MatchDetailAddView</comment>
-   </data>
+  </data>
   <data name="BrowseMatch_Status" xml:space="preserve">
     <value>Not kicked off</value>
   </data>
@@ -235,5 +235,32 @@
   </data>
   <data name="Error_NumberInferiorEqual99" xml:space="preserve">
     <value>number must be &lt;= 99</value>
+  </data>
+  <data name="LoginView_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="LoginView_Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="LoginView_Password" xml:space="preserve">
+    <value>Password:</value>
+  </data>
+  <data name="LoginView_Pseudo" xml:space="preserve">
+    <value>Pseudo:</value>
+  </data>
+  <data name="LoginView_Title" xml:space="preserve">
+    <value>E-Club Manager</value>
+  </data>
+  <data name="Error_DoesNotExist" xml:space="preserve">
+    <value>Not authorized !</value>
+  </data>
+  <data name="Error_Required" xml:space="preserve">
+    <value>required</value>
+  </data>
+  <data name="Error_WrongPassword" xml:space="preserve">
+    <value>wrong password</value>
+  </data>
+  <data name="LoginView_Message" xml:space="preserve">
+    <value>If you don't have a Secretary login, please contact your administrator !</value>
   </data>
 </root>

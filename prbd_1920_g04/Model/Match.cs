@@ -18,6 +18,7 @@ namespace prbd_1920_g04.Model {
         public int GoalsHome { get; set; }
         public int GoalsAdversary { get; set; }
         public bool IsOver { get; set; }
+        public bool CanSelectPlayer { get; set; }
         public bool TeamIsCompete { get; set; }
         public string PicturePathHome { get; set; }
         public string PicturePathAdversary { get; set; }

@@ -13,7 +13,6 @@ namespace prbd_1920_g04.Views
     public partial class AddPlayerIntoAMatchView : UserControlBase
     {
         public Secretary Secretary { get; set; }
-
         private ObservableCollection<Player> playersAvalaible;
         public ObservableCollection<Player> PlayersAvalaible { get => playersAvalaible; set => SetProperty(ref playersAvalaible, value); }
 
@@ -27,7 +26,11 @@ namespace prbd_1920_g04.Views
         public Match MatchSelected
         {
             get { return matchSelected; }
-            set { matchSelected = value; }
+            set { 
+                
+                matchSelected = value;
+                RaisePropertyChanged(nameof(MatchSelected));
+            }
         }
 
         private bool activeButtonSave;
@@ -65,9 +68,9 @@ namespace prbd_1920_g04.Views
                 Secretary.AddPlayerInMatchs(p.Id, matchSelected);
                 App.NotifyColleagues(AppMessages.MSG_CONSOLE_MSG, new Model.Message(false, p.FirstName + " " + p.LastName + " added in -> " + matchSelected.Home + ". Date match : " + matchSelected.DateMatch.ToString("dd/MM/yy")));
             }
-            if (matchSelected.NumberOfPlayers() >= 11)
+            if (MatchSelected.NumberOfPlayers() >= 11)
             {
-                matchSelected.TeamIsCompete = true;
+                MatchSelected.TeamIsCompete = true;
                 App.Model.SaveChanges();
             }
             CheckedListBoxPlayersAvalaible();
@@ -85,9 +88,9 @@ namespace prbd_1920_g04.Views
                 Secretary.RemovePlayerInMatchs(p.Id, matchSelected);
                 App.NotifyColleagues(AppMessages.MSG_CONSOLE_MSG, new Model.Message(false, p.FirstName + " " + p.LastName + " is removed from -> " + matchSelected.Home + ". Date match : "+ matchSelected.DateMatch.ToString("dd/MM/yy")));
             }
-            if (matchSelected.NumberOfPlayers() < 11)
+            if (MatchSelected.NumberOfPlayers() < 11)
             {
-                matchSelected.TeamIsCompete = false;
+                MatchSelected.TeamIsCompete = false;
                 App.Model.SaveChanges();
             }
             CheckedListBoxPlayersAdded();
@@ -109,13 +112,16 @@ namespace prbd_1920_g04.Views
             foreach(var p in players)
             {
    
-                if(matchSelected.Category.Players.Contains(p) && !matchSelected.Teams.Contains(p))
+                if(MatchSelected.Category.Players.Contains(p) && !MatchSelected.Teams.Contains(p))
                 {
                     PlayersAvalaible.Add(p);
                 }
             }
-            activeButtonSave = PlayersAvalaible.Count > 0 && !matchSelected.TeamIsCompete;
-            checkListBoxAddPlayer.SelectedItems.Clear();
+            activeButtonSave = PlayersAvalaible.Count > 0 && !MatchSelected.TeamIsCompete;
+
+            if (checkListBoxAddPlayer != null) {
+                checkListBoxAddPlayer.SelectedItems.Clear();
+            }
         }
 
         private void CheckedListBoxPlayersAdded()
@@ -125,22 +131,33 @@ namespace prbd_1920_g04.Views
             foreach (var p in players)
             {
 
-                if (matchSelected.Category.Players.Contains(p) && matchSelected.Teams.Contains(p))
+                if (MatchSelected.Category.Players.Contains(p) && MatchSelected.Teams.Contains(p))
                 {
                     PlayersAdded.Add(p);
                 }
             }
-            activeButtonRemove = PlayersAdded.Count > 0 && !matchSelected.IsOver;
-            checkListBoxPlayerSelected.SelectedItems.Clear();
+            activeButtonRemove = PlayersAdded.Count > 0 && !MatchSelected.IsOver;
+
+            if (checkListBoxPlayerSelected != null) {
+                checkListBoxPlayerSelected.SelectedItems.Clear();
+            }
+            
         }
 
         private void ComboBox_SelectionChanged(object sender, EventArgs e)
         {
+            if (MatchSelected != null) {
+                CheckedListBoxPlayersAvalaible();
+                CheckedListBoxPlayersAdded();
+                //SetLabels(0);
+                return;
+            }
+
             foreach (var m in Matchs)
             {
-                if (m.Equals((Match)comboboxMatchs.SelectedItem))
+                if (m.Equals((Match) comboboxMatchs.SelectedItem))
                 {
-                    matchSelected = m;
+                    MatchSelected = m;
                     CheckedListBoxPlayersAvalaible();
                     CheckedListBoxPlayersAdded();
                     SetLabels(0);
@@ -152,7 +169,7 @@ namespace prbd_1920_g04.Views
         private void CheckedListBox_ItemSelectionChanged(object sender, Xceed.Wpf.Toolkit.Primitives.ItemSelectionChangedEventArgs e)
         {
             SetLabels(checkListBoxAddPlayer.SelectedItems.Count);
-            if (checkListBoxAddPlayer.SelectedItems.Count > 11 || matchSelected.Teams.Count > 11 || (checkListBoxAddPlayer.SelectedItems.Count + matchSelected.Teams.Count) > 11)
+            if (checkListBoxAddPlayer.SelectedItems.Count > 11 || MatchSelected.Teams.Count > 11 || (checkListBoxAddPlayer.SelectedItems.Count + MatchSelected.Teams.Count) > 11)
             {
                 foreach (var p in checkListBoxAddPlayer.SelectedItems)
                 {
@@ -168,16 +185,18 @@ namespace prbd_1920_g04.Views
 
         private void SetLabels(int playerSelected)
         {
-            if (matchSelected != null && matchSelected.NumberOfPlayers() == 11)
+            if (MatchSelected != null && MatchSelected.NumberOfPlayers() == 11)
             {
                 checkListLeft.Content = "The match is complete !";
             }
             else
             {
-                checkListLeft.Content = "This match still has at least " + (11 - matchSelected.NumberOfPlayers()) + " places -  you have selected " + playerSelected + " players.";
+                //checkListLeft.Content = "5";
+                checkListLeft.Content = "This match still has at least " + (11 - MatchSelected.NumberOfPlayers()) + " places -  you have selected " + playerSelected + " players.";
             }
-            categorie.Content = "Catégorie " + matchSelected.Category.Name + " players avalaible : " + (matchSelected.Category.Players.Count - matchSelected.NumberOfPlayers());
-            dateOfMeeting.Content = "Date of meeting : " + matchSelected.DateMatch.Day + " /" + matchSelected.DateMatch.Month;
+
+            categorie.Content = "Catégorie " + MatchSelected.Category.Name + " players avalaible : " + (MatchSelected.Category.Players.Count - MatchSelected.NumberOfPlayers());
+            dateOfMeeting.Content = "Date of meeting : " + MatchSelected.DateMatch.Day + " /" + MatchSelected.DateMatch.Month;
         }
 
         private void ResetAll()
@@ -188,16 +207,17 @@ namespace prbd_1920_g04.Views
             PlayersAvalaible = null; PlayersAdded = null; activeButtonSave = false; activeButtonRemove = false;
         }
 
-        public AddPlayerIntoAMatchView()
+        public AddPlayerIntoAMatchView(Match match = null)
         {
             DataContext = this;
             Secretary = (Secretary)App.CurrentUser;
             ComboBoxMatchs();
+            MatchSelected = match;
             Save = new RelayCommand(SaveAction, CanSaveOrCancelAction);
             Remove = new RelayCommand(RemoveAction, CanRemoveOrCancelAction);
             App.Register<bool>(this, AppMessages.MSG_MATCH_IS_OVER, o => { ComboBoxMatchs(); ResetAll(); comboboxMatchs.SelectedIndex = -1; });
             App.Register(this, AppMessages.MSG_MATCH_ADDED, () => { ComboBoxMatchs(); ResetAll(); comboboxMatchs.SelectedIndex = -1; });
-            App.Register(this, AppMessages.MSG_PLAYER_ADDED, () => { if(matchSelected != null)CheckedListBoxPlayersAvalaible(); if (matchSelected != null) SetLabels(0); });
+            App.Register(this, AppMessages.MSG_PLAYER_ADDED, () => { if(MatchSelected != null)CheckedListBoxPlayersAvalaible(); if (MatchSelected != null) SetLabels(0); });
             InitializeComponent();
         }
     }

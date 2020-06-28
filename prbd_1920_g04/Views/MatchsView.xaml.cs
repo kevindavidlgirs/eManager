@@ -18,20 +18,54 @@ namespace prbd_1920_g04.Views
         public ObservableCollection<Match> Matchs { get => matchs; set => SetProperty(ref matchs, value); }
         public ICommand DisplayMatchDetails { get; set; }
 
+        private Match selectedMatch;
+        public Match SelectedMatch {
+            get { return selectedMatch; }
+            set {
+                selectedMatch = value;
+                RaisePropertyChanged(nameof(SelectedMatch));
+                selectPlayerForMatch();
+            }
+        }
+
+        private void selectPlayerForMatch() {
+            if (SelectedMatch != null) {
+                if (SelectedMatch.CanSelectPlayer) {
+                    Console.WriteLine(SelectedMatch.DateMatch);
+                    App.NotifyColleagues(AppMessages.MSG_CAN_SELECT_PLAYERS_FOR_MATCH, SelectedMatch);
+                }
+            }
+        }
+
+        private void SetCanSelectPlayer() {
+            foreach (var match in App.Model.Matchs) {
+                if (match.Category.Players.Count > 0) {
+                    match.CanSelectPlayer = true;
+                }
+            }
+        }
+
+
         private void Refresh()
         {
             Matchs = new ObservableCollection<Match>(App.Model.Matchs.OrderBy(m => m.DateMatch));
+            SelectedMatch = null; // Pour ne pas automatiquement sélectionner de match à chaque mise à jour.
         }
 
         public MatchsView()
         {
             DataContext = this;
+            SetCanSelectPlayer();
             Refresh();
+            SelectedMatch = null;
 
             DisplayMatchDetails = new RelayCommand<Match>(m => {
                 App.NotifyColleagues(AppMessages.MSG_SHOW_MATCH, m);
             });
+
+            App.Register(this, AppMessages.MSG_UPDATE_SELECT_PLAYERS_FOR_MATCH, () => { SetCanSelectPlayer(); });
             App.Register(this, AppMessages.MSG_MATCH_ADDED, () => { Refresh(); });
+
             InitializeComponent();
         }
     }

@@ -22,6 +22,9 @@ namespace prbd_1920_g04 {
         MSG_ADD_PLAYER_TO_A_TEAMS,
         MSG_REMOVE_PLAYER_TO_A_TEAM,
         MSG_ADD_PLAYER_TO_A_TEAM,
+        MSG_CAN_SELECT_PLAYERS_FOR_MATCH,
+        MSG_UPDATE_SELECT_PLAYERS_FOR_MATCH,
+        MSG_REMOVE_SELECT_PLAYERS_TAB,
         MSG_TEAM_CHANGED,
         MSG_MATCH_SAVED,
         MSG_ADD_RESULT_TO_MATCH,
@@ -88,7 +91,7 @@ namespace prbd_1920_g04 {
             var player24 = sec.CreatePlayer("Keylor", "Navas", "player@gmail.com", "FootBallplayer", 16, "Avenue du ballon", 175, 72.5, "/path", 12);
 
             // Le secrétaire encode le match.
-            var match1 = sec.AddMatch(new DateTime(2020, 04, 28), "Epfc Stadium", "EPFC", "SUPINFO", "U8");
+            var match1 = sec.AddMatch(new DateTime(2020, 04, 28), "Epfc Stadium", "EPFC", "SUPINFO", "U15");
             var match2 = sec.AddMatch(new DateTime(2020, 05, 05), "Epfc Stadium", "EPFC", "HE2B", "U9");
             var match3 = sec.AddMatch(new DateTime(2020, 07, 13), "Epfc Stadium", "EPFC", "EPHEC", "U11");
             var match4 = sec.AddMatch(new DateTime(2020, 03, 18), "Epfc Stadium", "EPFC", "ESMO", "U17");
@@ -99,11 +102,16 @@ namespace prbd_1920_g04 {
             App.Model.SaveChanges();
 
         }
+
         public App()
         {
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjczMDQ4QDMxMzgyZTMxMmUzMEZRNWNvS3lMeU42UjcrS2MzNmo3bm0wUmJrOFNrbExSTVk2bDI2dUtJT289");
             TestDB();
+            ColdStart();
         }
 
+        private void ColdStart() {
+            App.Model.Members.Find(110);
+        }
     }
 }
