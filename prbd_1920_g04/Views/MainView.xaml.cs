@@ -50,8 +50,6 @@ namespace prbd_1920_g04.Views {
 
             DataContext = this;
             activeAddResultButton = false;
-            ConsoleList.Add("                                                                                 *************** WELCOME ***************");
-
 
             App.CurrentUser = App.Model.Members.SingleOrDefault(s => s.Fonction == Fonction.Secretary);
 
@@ -307,7 +305,6 @@ namespace prbd_1920_g04.Views {
                     (tab.Content as UserControlBase).Dispose();
                 }
             };
-
         }
     }
 }

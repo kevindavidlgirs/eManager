@@ -148,7 +148,7 @@ namespace prbd_1920_g04.Views {
                 Matchs = new ObservableCollection<Model.Match>(App.Model.Matchs);
                 App.NotifyColleagues(AppMessages.MSG_MATCH_ADDED);
                 App.NotifyColleagues(AppMessages.MSG_MATCH_SAVED, Home + " vs " + Adversary);
-                Console.WriteLine("Count of Matchs : " + Matchs.Count);
+                App.NotifyColleagues(AppMessages.MSG_CONSOLE_MSG, new Model.Message(false, "You have added a match, you are at : " + Matchs.Count + " matchs available."));
             }
         }
 
