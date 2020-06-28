@@ -14,11 +14,13 @@ namespace prbd_1920_g04.Model
 
         public Player CreatePlayer(Player p)
         {
-            return CreatePlayer(p.FirstName, p.LastName, p.Email, p.Password, p.Age, p.Adresse, p.Height, p.Weight, p.PicturePath, p.JerseyNumber);
+            return CreatePlayer(p.FirstName, p.LastName, p.Email, p.Password, p.Age, p.Adresse, p.Height, p.Weight, p.PicturePath, p.JerseyNumber,p.Position);
         }
 
-        public Player CreatePlayer(string firstName, string lastname, string email, string password, int age, string adresse, int height, double weight, string picturePath, int jerseyNumber, Fonction fonction = Fonction.Player)
-        {
+        public Player CreatePlayer(string firstName, string lastname, string email, string password, 
+            int age, string adresse, int height, double weight, string picturePath, int jerseyNumber, 
+             Position position, Fonction fonction = Fonction.Player) {
+
             bool playerExiste = false;
             var categories = App.Model.Category;
             Player player = null;
@@ -47,7 +49,7 @@ namespace prbd_1920_g04.Model
                     && (jerseyNumber > 0 && jerseyNumber < 100)
                     && (height >= 165 && height <= 210) && (weight >= 60 && weight <= 110))
                 {
-                    player = App.Model.CreatePlayer(firstName, lastname, email, password, age, adresse, height, weight, picturePath, jerseyNumber, fonction);
+                    player = App.Model.CreatePlayer(firstName, lastname, email, password, age, adresse, height, weight, picturePath, jerseyNumber, position, fonction);
                     c.Players.Add(player);
                     player.Category = c;
                 }

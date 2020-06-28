@@ -4,13 +4,6 @@ using System.Linq;
 
 namespace prbd_1920_g04.Model
 {
-    public enum Position {
-        GoalKeeper,
-        Defender,
-        Midfielder,
-        Forward
-    }
-
     public class Player : Member
     {
         public int Height { get; set; }
@@ -42,6 +35,8 @@ namespace prbd_1920_g04.Model
 
         public virtual Statistics Stats { get; set; }
 
+        public Position Position { get; set; }
+
         public Statistics Statistics => GetStatistics();
 
         private Statistics GetStatistics()
@@ -57,6 +52,7 @@ namespace prbd_1920_g04.Model
             StatsList.Add(st);
             return st;
         }
+
 
         public override string ToString()
         {

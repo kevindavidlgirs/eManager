@@ -6,11 +6,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:f="clr-namespace:PRBD_Framework;assembly=PRBD_Framework"
              xmlns:p="clr-namespace:prbd_1920_g04.Properties"
-             xmlns:local="clr-namespace:prbd_1920_g04.Views"
+             xmlns:local="clr-namespace:prbd_1920_g04"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <BitmapImage x:Key="UnknownUser" UriSource="/images/ballonDeFoot.jpg"/>
+        <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues"
+                        ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:Position"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -53,7 +60,12 @@
         <f:ValidatedField Grid.Column="2">
             <TextBox x:Name="weightTextBox" Text="{Binding Weight}" HorizontalAlignment="Left" Height="23" Margin="0,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195"/>
         </f:ValidatedField>
-
+ 
+        <ComboBox x:Name="comboBoxPosition" Grid.Column="1" HorizontalAlignment="Left" Margin="0,360,0,0" VerticalAlignment="Top" Width="120"
+                  ItemsSource="{Binding Source={StaticResource dataFromEnum}}"
+                  SelectedItem="{Binding Position}"/>
+        
+        
         <Label Content="{x:Static p:Resources.CreatePlayersView_Firstname}" HorizontalAlignment="Left" Margin="52,86,0,0" VerticalAlignment="Top"/>
         <Label Content="{x:Static p:Resources.CreatePlayersView_Lastname}" HorizontalAlignment="Left" Margin="52,130,0,0" VerticalAlignment="Top"/>
         <Label Content="{x:Static p:Resources.CreatePlayersView_Age}" HorizontalAlignment="Left" Margin="52,175,0,0" VerticalAlignment="Top"/>
