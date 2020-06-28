@@ -79,5 +79,6 @@
         <Button Command="{Binding LoadImage}" Content="Load" HorizontalAlignment="Left" Margin="27,186,0,0" VerticalAlignment="Top" Width="64" Background="#FF363636" Foreground="White" BorderBrush="#FF999999" Grid.Column="2"/>
         <Button Command="{Binding ClearImage}" Content="Clear" HorizontalAlignment="Left" Margin="102,186,0,0" VerticalAlignment="Top" Width="64" Background="#FF363636" Foreground="White" BorderBrush="#FF999999" Grid.Column="2"/>
         <Button Command="{Binding Save}" Content="Save" HorizontalAlignment="Left" Margin="214,390,0,0" VerticalAlignment="Top" Width="75" Background="#FF363636" Foreground="White" BorderBrush="#FF999999" Grid.Column="1"/>
+        <Label Content="{x:Static p:Resources.CreatePlayersView_Position}" HorizontalAlignment="Left" Margin="52,356,0,0" VerticalAlignment="Top"/>
     </Grid>
 </f:UserControlBase>
