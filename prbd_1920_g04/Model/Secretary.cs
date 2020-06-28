@@ -80,7 +80,6 @@ namespace prbd_1920_g04.Model
             if(!match.Teams.Contains(player) && match.Teams.Count < 11 && !match.IsOver)
             {
                 match.Teams.Add(player);
-                Console.WriteLine("Player : "+ player.FirstName +" "+ player.LastName + " added in -> " + match.Home);
                 return player;
             }
             return player;
@@ -93,7 +92,6 @@ namespace prbd_1920_g04.Model
             if (match.Teams.Contains(player) && !match.IsOver)
             {
                 match.Teams.Remove(player);
-                Console.WriteLine("Player : " + player.FirstName + " " + player.LastName + " is removed from -> " + match.Home);
                 return player;
             }
             return player;

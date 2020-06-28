@@ -20,6 +20,7 @@ namespace prbd_1920_g04.Views {
         public ICommand AddResultToMatch { get; set; }
 
         public ObservableCollection<string> ConsoleList { get; set; } = new ObservableCollection<string>();
+        private System.Collections.Generic.List<TabItem> TabItemsList { get; set; } = new System.Collections.Generic.List<TabItem>();
 
         private string textHeaderTab;
         public string TextHeaderTab
@@ -42,7 +43,6 @@ namespace prbd_1920_g04.Views {
         {
             return activeAddResultButton;
         }
-        private System.Collections.Generic.List<TabItem> TabItemsList { get; set; } = new System.Collections.Generic.List<TabItem>();
 
         public MainView() {
 
@@ -50,12 +50,16 @@ namespace prbd_1920_g04.Views {
 
             DataContext = this;
             activeAddResultButton = false;
+            ConsoleList.Add("                                                                                 *************** WELCOME ***************");
+
 
             App.CurrentUser = App.Model.Members.SingleOrDefault(s => s.Fonction == Fonction.Secretary);
 
-            App.Register<string>(this, AppMessages.MSG_CONSOLE_MSG, message =>
+            App.Register<Message>(this, AppMessages.MSG_CONSOLE_MSG, message =>
             {
-                ConsoleList.Add(message);
+                ConsoleList.Add(message.ToString());
+                ConsoleLV.ScrollIntoView(message.ToString());
+
             });
 
             App.Register<Model.Match>(this, AppMessages.MSG_ADD_STATS_TO_PLAYER, (match) => {
@@ -66,7 +70,9 @@ namespace prbd_1920_g04.Views {
                             Header = "Stats: " + match.Home + " vs " + match.Adversary,
                             Content = new AddPlayersStatistics(match),
                         });
-                        ConsoleList.Add(new Message(true, "Adding statistics can only be done for one game at a time. Please finish the current tab, then the pending ones will be released").ToString());
+                        Message m = new Message(true, "Adding statistics can only be done for one game at a time. Please finish the current tab, then the pending ones will be released.");
+                        ConsoleList.Add(m.ToString());
+                        ConsoleLV.ScrollIntoView(m.ToString());
                         Dispatcher.InvokeAsync(() => t.Focus());
                         return;
                     }
@@ -96,6 +102,9 @@ namespace prbd_1920_g04.Views {
                         {
                             tabControl.Items.Add(t1);
                             TabItemsList.Remove(t1);
+                            Message m = new Message(false, "A new tab to adding player statistics is now available. Waiting : " + TabItemsList.Count + ".");
+                            ConsoleList.Add(m.ToString());
+                            ConsoleLV.ScrollIntoView(m.ToString());
                             return;
                         }
                         return;
@@ -106,7 +115,7 @@ namespace prbd_1920_g04.Views {
             App.Register<Model.Match>(this, AppMessages.MSG_SHOW_MATCH, (match) => {
                 foreach (TabItem t in tabControl.Items)
                 {
-                    if (t != null && t.Header.ToString().Equals(match.DateMatch.ToString("dd/MM/yyyy") + " : " + match.Home + " vs "+ match.Adversary))
+                    if (t != null && t.Header.ToString().Equals(match.DateMatch.ToString("dd/mm/yyyy") + " : " + match.Home + " vs "+ match.Adversary))
                     {
                         Dispatcher.InvokeAsync(() => t.Focus());
                         return;
@@ -119,22 +128,7 @@ namespace prbd_1920_g04.Views {
                 };
                 tabControl.Items.Add(tab);
                 Dispatcher.InvokeAsync(() => tab.Focus());
-
-                tab.MouseDown += (o, e) => {
-                    if (e.ChangedButton == MouseButton.Middle &&
-                        e.ButtonState == MouseButtonState.Pressed)
-                    {
-                        tabControl.Items.Remove(o);
-                        (tab.Content as UserControlBase).Dispose();
-                    }
-                };
-                tab.PreviewKeyDown += (o, e) => {
-                    if (e.Key == Key.W && Keyboard.IsKeyDown(Key.LeftCtrl))
-                    {
-                        tabControl.Items.Remove(o);
-                        (tab.Content as UserControlBase).Dispose();
-                    }
-                };
+                EventsMouse(tab);
             });
 
             App.Register<bool>(this, AppMessages.MSG_ADD_PLAYER_TO_A_TEAM, activeButton => {
@@ -191,23 +185,7 @@ namespace prbd_1920_g04.Views {
                 
                 tabControl.Items.Add(tab);
                 Dispatcher.InvokeAsync(() => tab.Focus());
-
-                tab.MouseDown += (o, e) => {
-                    if (e.ChangedButton == MouseButton.Middle &&
-                        e.ButtonState == MouseButtonState.Pressed)
-                    {
-                        tabControl.Items.Remove(o);
-                        (tab.Content as UserControlBase).Dispose();
-                    }
-                };
-                tab.PreviewKeyDown += (o, e) => {
-                    if (e.Key == Key.W && Keyboard.IsKeyDown(Key.LeftCtrl))
-                    {
-                        tabControl.Items.Remove(o);
-                        (tab.Content as UserControlBase).Dispose();
-                    }
-                };
-
+                EventsMouse(tab);
             });
 
             NewMatch = new RelayCommand(() =>
@@ -216,7 +194,7 @@ namespace prbd_1920_g04.Views {
                     var match = App.Model.Matchs.Create();
                     foreach (TabItem t in tabControl.Items)
                     {
-                        if (t.Header.ToString().Equals("<create match>") || t.Header.ToString().Equals(textHeaderTab))
+                        if (t.Header.ToString().Equals("<Create match>") || t.Header.ToString().Equals(textHeaderTab))
                         {
                             Dispatcher.InvokeAsync(() => t.Focus());
                             return;
@@ -224,30 +202,13 @@ namespace prbd_1920_g04.Views {
                     }
                     var tab = new TabItem()
                     {
-                        Header = "<create match>",
+                        Header = "<Create match>",
                         Content = new MatchDetailAddView()
                     };
 
                     tabControl.Items.Add(tab);
                     Dispatcher.InvokeAsync(() => tab.Focus());
-
-                    tab.MouseDown += (o, e) =>
-                    {
-                        if (e.ChangedButton == MouseButton.Middle &&
-                            e.ButtonState == MouseButtonState.Pressed)
-                        {
-                            tabControl.Items.Remove(o);
-                            (tab.Content as UserControlBase).Dispose();
-                        }
-                    };
-                    tab.PreviewKeyDown += (o, e) =>
-                    {
-                        if (e.Key == Key.W && Keyboard.IsKeyDown(Key.LeftCtrl))
-                        {
-                            tabControl.Items.Remove(o);
-                            (tab.Content as UserControlBase).Dispose();
-                        }
-                    };
+                    EventsMouse(tab);
                 }
             });
 
@@ -269,7 +230,7 @@ namespace prbd_1920_g04.Views {
             {
                 foreach (TabItem t in tabControl.Items)
                 {
-                    if (t.Header.ToString().Equals("<create players>"))
+                    if (t.Header.ToString().Equals("<Create players>"))
                     {
                         Dispatcher.InvokeAsync(() => t.Focus());
                         return;
@@ -278,26 +239,12 @@ namespace prbd_1920_g04.Views {
                 var player = App.Model.Players.Create();
                 var tab = new TabItem()
                 {
-                    Header = "<create players>",
+                    Header = "<Create players>",
                     Content = new PlayerDetailAddView()
                 };
                 tabControl.Items.Add(tab);
                 Dispatcher.InvokeAsync(() => tab.Focus());
-                tab.MouseDown += (o, e) => {
-                    if (e.ChangedButton == MouseButton.Middle &&
-                        e.ButtonState == MouseButtonState.Pressed)
-                    {
-                        tabControl.Items.Remove(o);
-                        (tab.Content as UserControlBase).Dispose();
-                    }
-                };
-                tab.PreviewKeyDown += (o, e) => {
-                    if (e.Key == Key.W && Keyboard.IsKeyDown(Key.LeftCtrl))
-                    {
-                        tabControl.Items.Remove(o);
-                        (tab.Content as UserControlBase).Dispose();
-                    }
-                };
+                EventsMouse(tab);
             });
 
             AddPlayerToAMatch = new RelayCommand(() => 
@@ -317,22 +264,7 @@ namespace prbd_1920_g04.Views {
                 };
                 tabControl.Items.Add(tab);
                 Dispatcher.InvokeAsync(() => tab.Focus());
-
-                tab.MouseDown += (o, e) => {
-                    if (e.ChangedButton == MouseButton.Middle &&
-                        e.ButtonState == MouseButtonState.Pressed)
-                    {
-                        tabControl.Items.Remove(o);
-                        (tab.Content as UserControlBase).Dispose();
-                    }
-                };
-                tab.PreviewKeyDown += (o, e) => {
-                    if (e.Key == Key.W && Keyboard.IsKeyDown(Key.LeftCtrl))
-                    {
-                        tabControl.Items.Remove(o);
-                        (tab.Content as UserControlBase).Dispose();
-                    }
-                };
+                EventsMouse(tab);
             });
 
             AddResultToMatch = new RelayCommand(() =>
@@ -352,25 +284,30 @@ namespace prbd_1920_g04.Views {
                 };
                 tabControl.Items.Add(tab);
                 Dispatcher.InvokeAsync(() => tab.Focus());
-
-                tab.MouseDown += (o, e) =>
-                {
-                    if (e.ChangedButton == MouseButton.Middle &&
-                        e.ButtonState == MouseButtonState.Pressed)
-                    {
-                        tabControl.Items.Remove(o);
-                        (tab.Content as UserControlBase).Dispose();
-                    }
-                };
-                tab.PreviewKeyDown += (o, e) =>
-                {
-                    if (e.Key == Key.W && Keyboard.IsKeyDown(Key.LeftCtrl))
-                    {
-                        tabControl.Items.Remove(o);
-                        (tab.Content as UserControlBase).Dispose();
-                    }
-                };
+                EventsMouse(tab);                
             }, CanSaveOrCancelAction);
+        }
+
+        private void EventsMouse(TabItem tab)
+        {
+            tab.MouseDown += (o, e) =>
+            {
+                if (e.ChangedButton == MouseButton.Middle &&
+                    e.ButtonState == MouseButtonState.Pressed)
+                {
+                    tabControl.Items.Remove(o);
+                    (tab.Content as UserControlBase).Dispose();
+                }
+            };
+            tab.PreviewKeyDown += (o, e) =>
+            {
+                if (e.Key == Key.W && Keyboard.IsKeyDown(Key.LeftCtrl))
+                {
+                    tabControl.Items.Remove(o);
+                    (tab.Content as UserControlBase).Dispose();
+                }
+            };
+
         }
     }
 }

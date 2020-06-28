@@ -3,11 +3,7 @@ using PRBD_Framework;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Forms;
 using System.Windows.Input;
-using Xceed.Wpf.Toolkit;
 
 namespace prbd_1920_g04.Views
 {
@@ -67,6 +63,7 @@ namespace prbd_1920_g04.Views
             {
                 Player p = (Player)player;
                 Secretary.AddPlayerInMatchs(p.Id, matchSelected);
+                App.NotifyColleagues(AppMessages.MSG_CONSOLE_MSG, new Model.Message(false, p.FirstName + " " + p.LastName + " added in -> " + matchSelected.Home + ". Date match : " + matchSelected.DateMatch.ToString("dd/MM/yy")));
             }
             if (matchSelected.NumberOfPlayers() >= 11)
             {
@@ -76,6 +73,7 @@ namespace prbd_1920_g04.Views
             CheckedListBoxPlayersAvalaible();
             CheckedListBoxPlayersAdded();
             SetLabels(0);
+            //Messages pour l'activation du bouton "addResult"
             App.NotifyColleagues(AppMessages.MSG_ADD_PLAYER_TO_A_TEAM, new ObservableCollection<Match>(App.Model.Matchs.Where(m => (m.TeamIsCompete && !m.IsOver))).Count > 0);
         }
 
@@ -85,6 +83,7 @@ namespace prbd_1920_g04.Views
             {
                 Player p = (Player)player;
                 Secretary.RemovePlayerInMatchs(p.Id, matchSelected);
+                App.NotifyColleagues(AppMessages.MSG_CONSOLE_MSG, new Model.Message(false, p.FirstName + " " + p.LastName + " is removed from -> " + matchSelected.Home + ". Date match : "+ matchSelected.DateMatch.ToString("dd/MM/yy")));
             }
             if (matchSelected.NumberOfPlayers() < 11)
             {
@@ -94,6 +93,7 @@ namespace prbd_1920_g04.Views
             CheckedListBoxPlayersAdded();
             CheckedListBoxPlayersAvalaible();
             SetLabels(0);
+            //Messages pour l'activation du bouton "addResult"
             App.NotifyColleagues(AppMessages.MSG_REMOVE_PLAYER_TO_A_TEAM, new ObservableCollection<Match>(App.Model.Matchs.Where(m => (m.TeamIsCompete && !m.IsOver))).Count > 0);
         }
 
