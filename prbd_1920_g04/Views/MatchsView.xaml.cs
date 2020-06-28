@@ -24,14 +24,13 @@ namespace prbd_1920_g04.Views
             set {
                 selectedMatch = value;
                 RaisePropertyChanged(nameof(SelectedMatch));
-                selectPlayerForMatch();
+                SelectPlayerForMatch();
             }
         }
 
-        private void selectPlayerForMatch() {
+        private void SelectPlayerForMatch() {
             if (SelectedMatch != null) {
                 if (SelectedMatch.CanSelectPlayer) {
-                    Console.WriteLine(SelectedMatch.DateMatch);
                     App.NotifyColleagues(AppMessages.MSG_CAN_SELECT_PLAYERS_FOR_MATCH, SelectedMatch);
                 }
             }

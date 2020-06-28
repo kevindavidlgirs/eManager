@@ -109,8 +109,8 @@
     </Compile>
     <Compile Include="Model\Message.cs" />
     <Compile Include="Model\Statistics.cs" />
-    <Compile Include="Views\AddPlayerIntoATeamView.xaml.cs">
-      <DependentUpon>AddPlayerIntoATeamView.xaml</DependentUpon>
+    <Compile Include="Views\AddPlayerIntoAMatchView.xaml.cs">
+      <DependentUpon>AddPlayerIntoAMatchView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AddPlayersStatistics.xaml.cs">
       <DependentUpon>AddPlayersStatistics.xaml</DependentUpon>
@@ -187,7 +187,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\AddPlayerIntoATeamView.xaml">
+    <Page Include="Views\AddPlayerIntoAMatchView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

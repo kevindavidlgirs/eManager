@@ -263,7 +263,9 @@ namespace prbd_1920_g04.Views
             }else if(jerseyNumber > 99)
             {
                 AddError("JerseyNumber", Properties.Resources.Error_NumberInferiorEqual99);
-            }else if (JerseyNumberExiste())
+            }
+            
+            if (JerseyNumberExiste())
             {
                 AddError("JerseyNumber", Properties.Resources.Error_CombinationAgeAndJerseyNumber);
             }
@@ -314,7 +316,6 @@ namespace prbd_1920_g04.Views
             LoadImage = new RelayCommand(LoadImageAction);
             imageHelper = new ImageHelper(App.IMAGE_PATH, Player.PicturePath);
             var Players = new ObservableCollection<Player>(App.Model.Players);
-            Console.WriteLine("Vous êtes à : " + Players.Count() + " joueurs.");
             InitializeComponent();
         }
 

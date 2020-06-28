@@ -149,7 +149,7 @@ namespace prbd_1920_g04.Views
             if (MatchSelected != null) {
                 CheckedListBoxPlayersAvalaible();
                 CheckedListBoxPlayersAdded();
-                //SetLabels(0);
+                SetLabels(0);
                 return;
             }
 
@@ -211,7 +211,6 @@ namespace prbd_1920_g04.Views
         {
             DataContext = this;
             Secretary = (Secretary)App.CurrentUser;
-            ComboBoxMatchs();
             MatchSelected = match;
             Save = new RelayCommand(SaveAction, CanSaveOrCancelAction);
             Remove = new RelayCommand(RemoveAction, CanRemoveOrCancelAction);
@@ -219,6 +218,9 @@ namespace prbd_1920_g04.Views
             App.Register(this, AppMessages.MSG_MATCH_ADDED, () => { ComboBoxMatchs(); ResetAll(); comboboxMatchs.SelectedIndex = -1; });
             App.Register(this, AppMessages.MSG_PLAYER_ADDED, () => { if(MatchSelected != null)CheckedListBoxPlayersAvalaible(); if (MatchSelected != null) SetLabels(0); });
             InitializeComponent();
+            if (match != null)
+                SetLabels(0);
+            ComboBoxMatchs();
         }
     }
 }

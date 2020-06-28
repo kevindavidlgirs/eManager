@@ -135,7 +135,7 @@ namespace prbd_1920_g04.Views {
                 };
                 tabControl.Items.Add(tab);
                 Dispatcher.InvokeAsync(() => tab.Focus());
-                EventsMouse(tab);
+                MouseEvents(tab);
             });
 
             App.Register<bool>(this, AppMessages.MSG_ADD_PLAYER_TO_A_TEAM, activeButton => {
@@ -192,18 +192,19 @@ namespace prbd_1920_g04.Views {
                 
                 tabControl.Items.Add(tab);
                 Dispatcher.InvokeAsync(() => tab.Focus());
-                EventsMouse(tab);
+                MouseEvents(tab);
             });
 
             App.Register<Model.Match>(this, AppMessages.MSG_CAN_SELECT_PLAYERS_FOR_MATCH, (match) => {
                 foreach (TabItem t in tabControl.Items) {
-                    if (t.Header.ToString().Equals("Select players : " + match.DateMatch.ToString("dd/MM/yyyy") +"-"+ match.Home +"vs"+match.Adversary)) {
+                    if (t.Header.ToString().Equals("<Add player into a teams>")) {
+                        Dispatcher.InvokeAsync(() => t.Focus());
                         return;
                     }
                 }
 
                 var tab = new TabItem() {
-                    Header = "Select players : " + match.DateMatch.ToString("dd/MM/yyyy") + "-" + match.Home + "vs" + match.Adversary,
+                    Header = "<Add player into a teams>",
                     Content = new AddPlayerIntoAMatchView(match)
                 };
                 tabControl.Items.Add(tab);
@@ -243,7 +244,7 @@ namespace prbd_1920_g04.Views {
 
                     tabControl.Items.Add(tab);
                     Dispatcher.InvokeAsync(() => tab.Focus());
-                    EventsMouse(tab);
+                    MouseEvents(tab);
                 }
             });
 
@@ -279,7 +280,7 @@ namespace prbd_1920_g04.Views {
                 };
                 tabControl.Items.Add(tab);
                 Dispatcher.InvokeAsync(() => tab.Focus());
-                EventsMouse(tab);
+                MouseEvents(tab);
             });
 
             AddPlayerToAMatch = new RelayCommand(() => 
@@ -299,7 +300,7 @@ namespace prbd_1920_g04.Views {
                 };
                 tabControl.Items.Add(tab);
                 Dispatcher.InvokeAsync(() => tab.Focus());
-                EventsMouse(tab);
+                MouseEvents(tab);
             });
 
             AddResultToMatch = new RelayCommand(() =>
@@ -319,11 +320,11 @@ namespace prbd_1920_g04.Views {
                 };
                 tabControl.Items.Add(tab);
                 Dispatcher.InvokeAsync(() => tab.Focus());
-                EventsMouse(tab);                
+                MouseEvents(tab);                
             }, CanSaveOrCancelAction);
         }
 
-        private void EventsMouse(TabItem tab)
+        private void MouseEvents(TabItem tab)
         {
             tab.MouseDown += (o, e) =>
             {
