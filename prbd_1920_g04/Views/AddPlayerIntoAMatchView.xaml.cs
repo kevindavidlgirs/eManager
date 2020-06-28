@@ -68,7 +68,7 @@ namespace prbd_1920_g04.Views
                 Secretary.AddPlayerInMatchs(p.Id, matchSelected);
                 App.NotifyColleagues(AppMessages.MSG_CONSOLE_MSG, new Model.Message(false, p.FirstName + " " + p.LastName + " added in -> " + matchSelected.Home + ". Date match : " + matchSelected.DateMatch.ToString("dd/MM/yy")));
             }
-            if (MatchSelected.NumberOfPlayers() >= 11)
+            if (MatchSelected.NumberOfPlayers() >= 5)
             {
                 MatchSelected.TeamIsCompete = true;
                 App.Model.SaveChanges();
@@ -88,7 +88,7 @@ namespace prbd_1920_g04.Views
                 Secretary.RemovePlayerInMatchs(p.Id, matchSelected);
                 App.NotifyColleagues(AppMessages.MSG_CONSOLE_MSG, new Model.Message(false, p.FirstName + " " + p.LastName + " is removed from -> " + matchSelected.Home + ". Date match : "+ matchSelected.DateMatch.ToString("dd/MM/yy")));
             }
-            if (MatchSelected.NumberOfPlayers() < 11)
+            if (MatchSelected.NumberOfPlayers() < 5)
             {
                 MatchSelected.TeamIsCompete = false;
                 App.Model.SaveChanges();
@@ -169,7 +169,7 @@ namespace prbd_1920_g04.Views
         private void CheckedListBox_ItemSelectionChanged(object sender, Xceed.Wpf.Toolkit.Primitives.ItemSelectionChangedEventArgs e)
         {
             SetLabels(checkListBoxAddPlayer.SelectedItems.Count);
-            if (checkListBoxAddPlayer.SelectedItems.Count > 11 || MatchSelected.Teams.Count > 11 || (checkListBoxAddPlayer.SelectedItems.Count + MatchSelected.Teams.Count) > 11)
+            if (checkListBoxAddPlayer.SelectedItems.Count > 5 || MatchSelected.Teams.Count > 5 || (checkListBoxAddPlayer.SelectedItems.Count + MatchSelected.Teams.Count) > 5)
             {
                 foreach (var p in checkListBoxAddPlayer.SelectedItems)
                 {
@@ -185,14 +185,14 @@ namespace prbd_1920_g04.Views
 
         private void SetLabels(int playerSelected)
         {
-            if (MatchSelected != null && MatchSelected.NumberOfPlayers() == 11)
+            if (MatchSelected != null && MatchSelected.NumberOfPlayers() == 5)
             {
                 checkListLeft.Content = "The match is complete !";
             }
             else
             {
                 //checkListLeft.Content = "5";
-                checkListLeft.Content = "This match still has at least " + (11 - MatchSelected.NumberOfPlayers()) + " places -  you have selected " + playerSelected + " players.";
+                checkListLeft.Content = "This match still has at least " + (5 - MatchSelected.NumberOfPlayers()) + " places -  you have selected " + playerSelected + " players.";
             }
 
             categorie.Content = "Catégorie " + MatchSelected.Category.Name + " players avalaible : " + (MatchSelected.Category.Players.Count - MatchSelected.NumberOfPlayers());

@@ -83,6 +83,19 @@ namespace prbd_1920_g04.Views
             get => jerseyNumber;
             set => SetProperty<int>(ref jerseyNumber, value, () => Validate());
         }
+
+        private Position position;
+        public Position Position {
+            get {
+                return position;
+            }
+
+            set {
+                position = value;
+                RaisePropertyChanged(nameof(Position));
+            }
+        }
+
         public string PicturePath
         {
             get { return Player.AbsolutePicturePath; }
@@ -109,6 +122,7 @@ namespace prbd_1920_g04.Views
                 Player.Weight = weight;
                 Player.PicturePath = PicturePath;
                 Player.JerseyNumber = jerseyNumber;
+                Player.Position = Position;
                 Player.Fonction = Fonction.Player;
                 Secretary.CreatePlayer(Player);
                 Player = App.Model.Players.Create();
@@ -125,6 +139,7 @@ namespace prbd_1920_g04.Views
                 weightTextBox.Text = "0";
 
                 App.NotifyColleagues(AppMessages.MSG_PLAYER_ADDED);
+                App.NotifyColleagues(AppMessages.MSG_UPDATE_SELECT_PLAYERS_FOR_MATCH);
                 App.NotifyColleagues(AppMessages.MSG_CONSOLE_MSG, new Model.Message(false, "You have added a player, you are at : " + new ObservableCollection<Player>(App.Model.Players).Count() + " players available."));
             }
         }
@@ -318,6 +333,5 @@ namespace prbd_1920_g04.Views
             var Players = new ObservableCollection<Player>(App.Model.Players);
             InitializeComponent();
         }
-
     } 
 }

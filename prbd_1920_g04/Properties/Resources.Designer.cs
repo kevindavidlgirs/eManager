@@ -187,6 +187,15 @@ namespace prbd_1920_g04.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Position:.
+        /// </summary>
+        public static string CreatePlayersView_Position {
+            get {
+                return ResourceManager.GetString("CreatePlayersView_Position", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Weight :.
         /// </summary>
         public static string CreatePlayersView_Weight {

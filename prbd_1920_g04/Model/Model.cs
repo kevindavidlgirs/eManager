@@ -36,7 +36,7 @@ namespace prbd_1920_g04.Model
 
         public Player CreatePlayer(string firstName, string lastName, string email, 
                                    string password, int age, string adresse,
-                                   int height, double weight, string picturePath, int jerseyNumber,
+                                   int height, double weight, string picturePath, int jerseyNumber, Position position,
                                    Fonction fonction = Fonction.Player){
             var player = Players.Create();
             var statistics = Stats.Create();
@@ -50,6 +50,7 @@ namespace prbd_1920_g04.Model
             player.Weight = weight;
             player.PicturePath = picturePath;
             player.JerseyNumber = jerseyNumber;
+            player.Position = position;
             player.Fonction = fonction;
             player.Stats = statistics;
             Players.Add(player);
