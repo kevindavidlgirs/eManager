@@ -106,12 +106,15 @@ namespace prbd_1920_g04.Views {
                     if (t.Header.ToString().Equals("Stats: " + match.Home + " vs " + match.Adversary))
                     {
                         tabControl.Items.Remove(t);
-                        foreach (TabItem t1 in TabItemsList)
-                        {
-                            tabControl.Items.Add(t1);
-                            TabItemsList.Remove(t1);
-                            return;
-                        }
+                        return;
+                    }
+                }
+            });
+
+            App.Register<Match>(this, AppMessages.MSG_REMOVE_SELECT_PLAYERS_TAB, (match) => {
+                foreach (TabItem t in tabControl.Items) {
+                    if (t.Header.ToString().Equals("Select players : " + match.DateMatch.ToString("dd/MM/yyyy") + "-" + match.Home + "vs" + match.Adversary)) {
+                        tabControl.Items.Remove(t);
                         return;
                     }
                 }
@@ -230,6 +233,7 @@ namespace prbd_1920_g04.Views {
                         return;
                     }
                 }
+
                 var tab = new TabItem() {
                     Header = "Select players : " + match.DateMatch.ToString("dd/MM/yyyy") + "-" + match.Home + "vs" + match.Adversary,
                     Content = new AddPlayerIntoAMatchView(match)

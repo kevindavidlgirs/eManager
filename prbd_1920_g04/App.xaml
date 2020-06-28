@@ -18,6 +18,7 @@
                 </Setter>
             </Style>
             <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+            <FontFamily x:Key="FontAwesome">/Fonts/fontawesome-webfont.ttf#fontAwesome</FontFamily>
         </ResourceDictionary>
     </Application.Resources>
 </f:ApplicationBase>

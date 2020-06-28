@@ -125,6 +125,7 @@ namespace prbd_1920_g04.Views
                 weightTextBox.Text = "0";
 
                 App.NotifyColleagues(AppMessages.MSG_PLAYER_ADDED);
+                App.NotifyColleagues(AppMessages.MSG_UPDATE_SELECT_PLAYERS_FOR_MATCH);
                 Console.WriteLine("Vous avez ajoutez un joueur, vous êtes à : " + new ObservableCollection<Player>(App.Model.Players).Count() + " joueurs.");
             }
         }

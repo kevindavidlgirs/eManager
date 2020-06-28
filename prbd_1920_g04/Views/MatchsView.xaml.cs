@@ -30,13 +30,20 @@ namespace prbd_1920_g04.Views
 
         private void selectPlayerForMatch() {
             if (SelectedMatch != null) {
-                if (SelectedMatch.Category.Players.Count > 0) {
-                    SelectedMatch.CanSelectPlayer = true;
+                if (SelectedMatch.CanSelectPlayer) {
                     App.NotifyColleagues(AppMessages.MSG_CAN_SELECT_PLAYERS_FOR_MATCH, SelectedMatch);
                 }
-                Console.WriteLine(SelectedMatch.CanSelectPlayer);
             }
         }
+
+        private void SetCanSelectPlayer() {
+            foreach (var match in App.Model.Matchs) {
+                if (match.Category.Players.Count > 0) {
+                    match.CanSelectPlayer = true;
+                }
+            }
+        }
+
 
         private void Refresh()
         {
@@ -46,12 +53,17 @@ namespace prbd_1920_g04.Views
         public MatchsView()
         {
             DataContext = this;
+            SetCanSelectPlayer();
             Refresh();
+
 
             DisplayMatchDetails = new RelayCommand<Match>(m => {
                 App.NotifyColleagues(AppMessages.MSG_SHOW_MATCH, m);
             });
+
+            App.Register(this, AppMessages.MSG_UPDATE_SELECT_PLAYERS_FOR_MATCH, () => { SetCanSelectPlayer(); });
             App.Register(this, AppMessages.MSG_MATCH_ADDED, () => { Refresh(); });
+
             InitializeComponent();
         }
     }
