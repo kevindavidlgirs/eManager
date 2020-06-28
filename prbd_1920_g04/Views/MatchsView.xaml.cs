@@ -38,7 +38,7 @@ namespace prbd_1920_g04.Views
 
         private void SetCanSelectPlayer() {
             foreach (var match in App.Model.Matchs) {
-                if (match.Category.Players.Count >= 5) {
+                if (match.Category.Players.Count >= 5 && !match.IsOver) {
                     match.CanSelectPlayer = true;
                 }
             }
@@ -48,6 +48,7 @@ namespace prbd_1920_g04.Views
 
         private void Refresh()
         {
+            SelectedMatch = null;
             Matchs = new ObservableCollection<Match>(App.Model.Matchs.OrderBy(m => m.DateMatch));
         }
 
