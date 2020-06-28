@@ -55,7 +55,7 @@ namespace prbd_1920_g04.Views
         }
         public string PicturePath
         {
-            get { return Player.AbsolutePicturePath; }
+            get { return Player.PicturePath; }
         }
 
         private void CreateStats()
@@ -69,7 +69,6 @@ namespace prbd_1920_g04.Views
         {
             DataContext = this;
             Player = p;
-            Console.WriteLine(Player.PicturePath+"  "+Player.AbsolutePicturePath);
             Data = new List<Statistics>();
             CreateStats();
             InitializeComponent();

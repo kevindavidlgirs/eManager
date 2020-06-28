@@ -36,7 +36,7 @@
                 </ContentControl>
             </TabItem>
         </TabControl>
-        <ListView ItemsSource="{Binding Path=ConsoleList}" HorizontalAlignment="Left" Height="101" Margin="10,540,0,0" Grid.Row="1" VerticalAlignment="Top" Width="931" Background="#FF4F5351" BorderBrush="#FF2DC4DC" Foreground="Black">
+        <ListView ItemsSource="{Binding Path=ConsoleList}" HorizontalAlignment="Left" Height="101" Margin="10,540,0,0" Grid.Row="1" VerticalAlignment="Top" Width="931" Background="#FF4F5351" BorderBrush="#FF2DC4DC" Foreground="White">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

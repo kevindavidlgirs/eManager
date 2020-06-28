@@ -12,35 +12,41 @@
         <BitmapImage x:Key="Unknown" UriSource="/images/ballonDeFoot.jpg"/>
     </UserControl.Resources>
     <Grid>
-        <f:ValidatedField Margin="-8,0,8,0" >
-            <TextBox x:Name="homeTextBox" Text="{Binding Home}" HorizontalAlignment="Left" Height="23" Margin="214,184,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="144"/>
-        </f:ValidatedField >
-        <f:ValidatedField Margin="-8,0,8,0" >
-            <TextBox x:Name="adversaryTextBox" Text="{Binding Adversary}" HorizontalAlignment="Left" Height="23" Margin="527,184,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="144" RenderTransformOrigin="0.729,1.565"/>
-        </f:ValidatedField >
-        <f:ValidatedField Margin="-8,0,8,0" >
-            <TextBox x:Name="placeTextBox" Text="{Binding Place}" HorizontalAlignment="Left" Height="23" Margin="527,253,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="144"/>
-        </f:ValidatedField >
-        <f:ValidatedField Margin="0,2,0,-2" >
-            <DatePicker SelectedDate="{Binding DateMatch}" HorizontalAlignment="Left" Margin="214,252,0,0" VerticalAlignment="Top" Width="144"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="9*"/>
+            <ColumnDefinition Width="18*"/>
+            <ColumnDefinition Width="13*"/>
+        </Grid.ColumnDefinitions>
+        <f:ValidatedField Grid.Column="1">
+            <TextBox x:Name="homeTextBox" Text="{Binding Home}" HorizontalAlignment="Left" Height="23" Margin="0,200,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="144"/>
         </f:ValidatedField >
 
-        <Button Content="Save" Command="{Binding Save}"  HorizontalAlignment="Left" Margin="403,365,0,0" VerticalAlignment="Top" Width="75" Background="#FF363636" Foreground="White"/>
-        <ComboBox x:Name="comboBoxCategory" HorizontalAlignment="Left" Margin="367,322,0,0" VerticalAlignment="Top" Width="144" 
+        <f:ValidatedField Grid.Column="2">
+            <TextBox x:Name="adversaryTextBox" Text="{Binding Adversary}" HorizontalAlignment="Left" Height="23" Margin="0,200,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="144" RenderTransformOrigin="0.729,1.565"/>
+        </f:ValidatedField >
+        <f:ValidatedField Grid.Column="2" >
+            <TextBox x:Name="placeTextBox" Text="{Binding Place}" HorizontalAlignment="Left" Height="23" Margin="0,258,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="145"/>
+        </f:ValidatedField >
+        <f:ValidatedField Grid.Column="1">
+            <DatePicker SelectedDate="{Binding DateMatch}" HorizontalAlignment="Left" Margin="0,258,0,0" VerticalAlignment="Top" Width="144"/>
+        </f:ValidatedField >
+
+        <Button Content="Save" Command="{Binding Save}"  HorizontalAlignment="Left" Margin="223,375,0,0" VerticalAlignment="Top" Width="75" Background="#FF363636" Foreground="White" Grid.Column="1" Height="20"/>
+        <ComboBox x:Name="comboBoxCategory" HorizontalAlignment="Left" Margin="187,332,0,0" VerticalAlignment="Top" Width="144" 
                   ItemsSource="{Binding Categories}"
                   DisplayMemberPath="Name"
                   SelectedValuePath="Name"
-                  SelectedValue="{Binding Category}"/>
-        <Label Content="{x:Static p:Resources.CreateMatchView_Home}" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="27" Width="83" Margin="126,184,0,0" RenderTransformOrigin="0.578,1.37"/>
-        <Label Content="{x:Static p:Resources.CreateMatchView_Adversary}" HorizontalAlignment="Left" VerticalAlignment="Top"   Height="27" Width="83" Margin="439,180,0,0"/>
-        <Label Content="{x:Static p:Resources.CreateMatchView_Date}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="43" Height="32" Margin="151,252,0,0"/>
-        <Label Content="{x:Static p:Resources.CreateMatchView_Place}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Width="64" Margin="458,253,0,0"/>
-        <Label Content="{x:Static p:Resources.CreateMatchView_Division}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="73" Margin="294,321,0,0"/>
-        <Image Source="{Binding PicturePathHome, FallbackValue={StaticResource Unknown}, TargetNullValue={StaticResource Unknown}}" HorizontalAlignment="Left" Width="179" Margin="188,41,0,281"/>
-        <Image Source="{Binding PicturePathAdversary, FallbackValue={StaticResource Unknown}, TargetNullValue={StaticResource Unknown}}" HorizontalAlignment="Left" Width="171" Margin="539,41,0,281"/>
-        <Button Command="{Binding LoadImageHome}" Content="Load" HorizontalAlignment="Left" Margin="108,41,0,0" VerticalAlignment="Top" Width="75" Background="#FF363636" Foreground="White"/>
-        <Button Command="{Binding ClearImageHome}" Content="Clear" HorizontalAlignment="Left" Margin="108,121,0,0" VerticalAlignment="Top" Width="75" Background="#FF363636" Foreground="White"/>
-        <Button Command="{Binding LoadImageAdversary}" Content="Load" HorizontalAlignment="Left" Margin="715,41,0,0" VerticalAlignment="Top" Width="75" Background="#FF363636" Foreground="White"/>
-        <Button Command="{Binding ClearImageAdversary}" Content="Clear" HorizontalAlignment="Left" Margin="715,121,0,0" VerticalAlignment="Top" Width="75" Background="#FF363636" Foreground="White"/>
+                  SelectedValue="{Binding Category}" Grid.Column="1" Height="22"/>
+        <Label Content="{x:Static p:Resources.CreateMatchView_Home}" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="27" Width="90" Margin="90,198,0,0" RenderTransformOrigin="0.578,1.37"/>
+        <Label Content="{x:Static p:Resources.CreateMatchView_Adversary}" HorizontalAlignment="Left" VerticalAlignment="Top"   Height="27" Width="70" Margin="285,198,0,0" Grid.Column="1"/>
+        <Label Content="{x:Static p:Resources.CreateMatchView_Date}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="43" Height="32" Margin="137,257,0,0"/>
+        <Label Content="{x:Static p:Resources.CreateMatchView_Place}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Width="45" Margin="310,257,0,0" Grid.Column="1"/>
+        <Label Content="{x:Static p:Resources.CreateMatchView_Division}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="57" Margin="130,331,0,0" Grid.Column="1"/>
+        <Image Source="{Binding PicturePathHome, FallbackValue={StaticResource Unknown}, TargetNullValue={StaticResource Unknown}}" HorizontalAlignment="Left" Width="137" Margin="3,41,0,281" Grid.Column="1"/>
+        <Image Source="{Binding PicturePathAdversary, FallbackValue={StaticResource Unknown}, TargetNullValue={StaticResource Unknown}}" HorizontalAlignment="Left" Width="140" Margin="0,41,0,281" Grid.Column="2"/>
+        <Button Command="{Binding LoadImageHome}" Content="Load" HorizontalAlignment="Left" Margin="100,55,0,0" VerticalAlignment="Top" Width="75" Background="#FF363636" Foreground="White" Grid.Column="0"/>
+        <Button Command="{Binding ClearImageHome}" Content="Clear" HorizontalAlignment="Left" Margin="100,135,0,0" VerticalAlignment="Top" Width="75" Background="#FF363636" Foreground="White" Grid.Column="0"/>
+        <Button Command="{Binding LoadImageAdversary}" Content="Load" HorizontalAlignment="Left" Margin="145,55,0,0" VerticalAlignment="Top" Width="75" Background="#FF363636" Foreground="White" Grid.Column="2"/>
+        <Button Command="{Binding ClearImageAdversary}" Content="Clear" HorizontalAlignment="Left" Margin="145,135,0,0" VerticalAlignment="Top" Width="75" Background="#FF363636" Foreground="White" Grid.Column="2"/>
     </Grid>
 </f:UserControlBase>
