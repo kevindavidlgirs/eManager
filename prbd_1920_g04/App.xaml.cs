@@ -107,6 +107,11 @@ namespace prbd_1920_g04 {
         {
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjczMDQ4QDMxMzgyZTMxMmUzMEZRNWNvS3lMeU42UjcrS2MzNmo3bm0wUmJrOFNrbExSTVk2bDI2dUtJT289");
             TestDB();
+            ColdStart();
+        }
+
+        private void ColdStart() {
+            App.Model.Members.Find(110);
         }
     }
 }
