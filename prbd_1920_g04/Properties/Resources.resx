@@ -46,7 +46,7 @@
     
     mimetype: application/x-microsoft.net.object.binary.base64
     value   : The object must be serialized with 
-            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
@@ -60,6 +60,7 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -68,9 +69,10 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="name" use="required" type="xsd:string" />
               <xsd:attribute name="type" type="xsd:string" />
               <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
@@ -85,9 +87,10 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -109,9 +112,158 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CreateMatchView_Adversary" xml:space="preserve">
+    <value>Visit team :</value>
+    <comment>MatchDetailAddView</comment>
+  </data>
+  <data name="CreateMatchView_Date" xml:space="preserve">
+    <value>Date :</value>
+    <comment>MatchDetailAddView</comment>
+  </data>
+  <data name="CreateMatchView_Division" xml:space="preserve">
+    <value>Division :</value>
+    <comment>MatchDetailAddView</comment>
+  </data>
+  <data name="CreateMatchView_Home" xml:space="preserve">
+    <value>Home team :</value>
+    <comment>MatchDetailAddView</comment>
+  </data>
+  <data name="CreateMatchView_Place" xml:space="preserve">
+    <value>Place :</value>
+    <comment>MatchDetailAddView</comment>
+  </data>
+  <data name="BrowseMatch_Status" xml:space="preserve">
+    <value>Not kicked off</value>
+  </data>
+  <data name="CreatePlayersView_Adresse" xml:space="preserve">
+    <value>Adresse :</value>
+    <comment>PlayerDetailAddView</comment>
+  </data>
+  <data name="CreatePlayersView_Age" xml:space="preserve">
+    <value>Age : </value>
+    <comment>PlayerDetailAddView</comment>
+  </data>
+  <data name="CreatePlayersView_Email" xml:space="preserve">
+    <value>Email :</value>
+    <comment>PlayerDetailAddView</comment>
+  </data>
+  <data name="CreatePlayersView_Firstname" xml:space="preserve">
+    <value>Firstname :</value>
+    <comment>PlayerDetailAddView</comment>
+  </data>
+  <data name="CreatePlayersView_Height" xml:space="preserve">
+    <value>Height :</value>
+    <comment>PlayerDetailAddView</comment>
+  </data>
+  <data name="CreatePlayersView_JerseyNumber" xml:space="preserve">
+    <value>JerseyNumber :</value>
+    <comment>PlayerDetailAddView</comment>
+  </data>
+  <data name="CreatePlayersView_Lastname" xml:space="preserve">
+    <value>Lastname : </value>
+    <comment>PlayerDetailAddView</comment>
+  </data>
+  <data name="CreatePlayersView_Password" xml:space="preserve">
+    <value>Password :</value>
+    <comment>PlayerDetailAddView</comment>
+  </data>
+  <data name="CreatePlayersView_Weight" xml:space="preserve">
+    <value>Weight :</value>
+    <comment>PlayerDetailAddView</comment>
+  </data>
+  <data name="Error_CombinationAgeAndJerseyNumber" xml:space="preserve">
+    <value>A player of this age category already owns this jersey</value>
+    <comment>PlayerDetailAddView</comment>
+  </data>
+  <data name="Error_CombinationFirstAndLastName" xml:space="preserve">
+    <value>the combination of first and last name already exists</value>
+    <comment>PlayerDetailAddView</comment>
+  </data>
+  <data name="Error_DateMatchExiste" xml:space="preserve">
+    <value>This date match existe, please select other</value>
+    <comment>MatchDetailAddView</comment>
+  </data>
+  <data name="Error_LengthGreaterEqual10" xml:space="preserve">
+    <value>length must be &gt;= 10</value>
+  </data>
+  <data name="Error_LengthGreaterEqual2" xml:space="preserve">
+    <value>number must be &gt;= 2</value>
+  </data>
+  <data name="Error_LengthGreaterEqual3" xml:space="preserve">
+    <value>length must be &gt;= 3</value>
+  </data>
+  <data name="Error_LengthGreaterEqual8" xml:space="preserve">
+    <value>length must be &gt;= 8</value>
+  </data>
+  <data name="Error_LengthInferiorEqual10" xml:space="preserve">
+    <value>length must be &lt;= 10</value>
+  </data>
+  <data name="Error_LengthInferiorEqual100" xml:space="preserve">
+    <value>length must be &lt;= 100</value>
+  </data>
+  <data name="Error_LengthInferiorEqual20" xml:space="preserve">
+    <value>length must be &lt;= 20</value>
+  </data>
+  <data name="Error_LengthInferiorEqual40" xml:space="preserve">
+    <value>length must be &lt;= 40</value>
+  </data>
+  <data name="Error_NumberGreaterEqual1" xml:space="preserve">
+    <value>number must be &gt;= 1</value>
+  </data>
+  <data name="Error_NumberGreaterEqual165" xml:space="preserve">
+    <value>number must be &gt;= 165</value>
+  </data>
+  <data name="Error_NumberGreaterEqual60" xml:space="preserve">
+    <value>number must be &gt;= 60</value>
+  </data>
+  <data name="Error_NumberGreaterEqual7" xml:space="preserve">
+    <value>number must be &gt;= 7</value>
+  </data>
+  <data name="Error_NumberInferiorEqual110" xml:space="preserve">
+    <value>number must be &lt;= 110</value>
+  </data>
+  <data name="Error_NumberInferiorEqual210" xml:space="preserve">
+    <value>number must be &lt;= 210</value>
+  </data>
+  <data name="Error_NumberInferiorEqual50" xml:space="preserve">
+    <value>number must be &lt;= 50</value>
+  </data>
+  <data name="Error_NumberInferiorEqual99" xml:space="preserve">
+    <value>number must be &lt;= 99</value>
+  </data>
+  <data name="LoginView_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="LoginView_Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="LoginView_Password" xml:space="preserve">
+    <value>Password:</value>
+  </data>
+  <data name="LoginView_Pseudo" xml:space="preserve">
+    <value>Pseudo:</value>
+  </data>
+  <data name="LoginView_Title" xml:space="preserve">
+    <value>E-Club Manager</value>
+  </data>
+  <data name="Error_DoesNotExist" xml:space="preserve">
+    <value>Not authorized !</value>
+  </data>
+  <data name="Error_Required" xml:space="preserve">
+    <value>required</value>
+  </data>
+  <data name="Error_WrongPassword" xml:space="preserve">
+    <value>wrong password</value>
+  </data>
+  <data name="LoginView_Message" xml:space="preserve">
+    <value>If you don't have a Secretary login, please contact your administrator ! Code d'accès : secretaire, secretaire (temporaire ;)</value>
+  </data>
+  <data name="CreatePlayersView_Position" xml:space="preserve">
+    <value>Position:</value>
+  </data>
 </root>

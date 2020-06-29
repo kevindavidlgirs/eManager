@@ -15,24 +15,39 @@ namespace prbd_1920_g04.Views {
     /// Logique d'interaction pour UserControl1.xaml
     /// </summary>
     public partial class MatchDetailListView : UserControlBase {
+        public ICommand DisplayOtherMatchDetails { get; set; }
         public static readonly DependencyProperty MatchListProperty = DependencyProperty.Register("Match", typeof(Match), typeof(MatchDetailListView));
         public Match Match {
             get => (Match)GetValue(MatchListProperty);
             set => SetValue(MatchListProperty, value);
         }
 
+        private Match selectedMatch;
+        public Match SelectedMatch {
+            get {
+                return selectedMatch;
+            }
+
+            set {
+                selectedMatch = value;
+                RaisePropertyChanged(nameof(SelectedMatch));
+            }
+        }
+
         private ObservableCollection<Match> listMatchs;
         public ObservableCollection<Match> ListMatchs {
             get {
 
-                //listMatchs = new ObservableCollection<Match>(App.Model.Matchs.Where(m => m.Home.Equals(Match.Home) && m.Adversary.Equals(Match.Adversary)).OrderBy(m => m.DateMatch));
-                listMatchs = new ObservableCollection<Model.Match>(App.Model.Matchs.OrderBy(m => m.DateMatch));
+                if (listMatchs == null) {
+                    listMatchs = new ObservableCollection<Match>(ListOfSameMatches(Match));
+                }
+               
                 return listMatchs;
             }
             set {
                 listMatchs = value;
-                RaisePropertyChanged(nameof(listMatchs));
-                RaisePropertyChanged(nameof(listMatchsView));
+                //RaisePropertyChanged(nameof(listMatchs));
+                RaisePropertyChanged(nameof(ListMatchsView));
             }
         }
 
@@ -44,13 +59,34 @@ namespace prbd_1920_g04.Views {
             }
         }
 
+        private static ICollection<Match> ListOfSameMatches(Match match) {
+            var query = (from m in App.Model.Matchs
+                             where m.Home.Equals(match.Home) && 
+                             m.Adversary.Equals(match.Adversary) &&
+                             match.DateMatch != m.DateMatch
+                             orderby m.DateMatch descending
+                         select m);
+            return query.ToList();
+        }
+
 
         public MatchDetailListView() {
             InitializeComponent();
             DataContext = this;
             if (DesignerProperties.GetIsInDesignMode(this)) return;
-            ListMatchs = new ObservableCollection<Match>(App.Model.Matchs.OrderBy(m => m.DateMatch));
-           
+
+            if (Match != null) {
+                ListMatchs = new ObservableCollection<Match>(ListOfSameMatches(Match));
+            }
+
+            RaisePropertyChanged(nameof(ListMatchsView));
+
+            DisplayOtherMatchDetails = new RelayCommand<Match>(m => {
+                App.NotifyColleagues(AppMessages.MSG_SHOW_MATCH, m);
+            });
+            if (SelectedMatch != null) {
+                Console.WriteLine(SelectedMatch.Adversary);
+            }
         }
     }
 }

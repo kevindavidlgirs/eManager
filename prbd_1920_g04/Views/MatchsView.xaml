@@ -1,4 +1,4 @@
-﻿<f:UserControlBase x:Class="prbd_1920_g04.Views.MatchsView"
+﻿<f:UserControlBase
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,41 +6,100 @@
              xmlns:f="clr-namespace:PRBD_Framework;assembly=PRBD_Framework"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:prbd_1920_g04"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:chart="http://schemas.syncfusion.com/wpf" x:Class="prbd_1920_g04.Views.MatchsView"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <f:UserControlBase.Resources>
+        <CollectionViewSource x:Key='src' Source="{Binding Matchs}">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="DateMatch.Year" />
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+        <Style x:Key="myHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="Visibility" Value="Collapsed" />
+        </Style>
+    </f:UserControlBase.Resources>
     <Grid ShowGridLines="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="450"/>
         </Grid.RowDefinitions>
         <ListView x:Name="listView" 
-                  ItemsSource="{Binding Matchs}" 
-                  Grid.Row="2" BorderBrush="Transparent" SelectionMode="Single" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                  BorderBrush="Transparent" SelectionMode="Single" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Center" 
+                  SelectedItem="{Binding SelectedMatch}" IsSynchronizedWithCurrentItem="False">
+            <ListView.Resources>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="Height" Value="50" />
+                    <Setter Property="FontSize" Value="20" />
+                </Style>
+            </ListView.Resources>
+            <ListView.ItemsSource>
+                <Binding Source="{StaticResource src}"/>
+            </ListView.ItemsSource>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
                     <i:InvokeCommandAction Command="{Binding DisplayMatchDetails}" 
-                                           CommandParameter="{Binding ElementName=listView, Path=SelectedItem}"/>
+                                           CommandParameter="{Binding SelectedItem, ElementName=listView}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <TextBlock FontSize="25" FontWeight="Bold" Height="60" Width="60" TextAlignment="Center" VerticalAlignment="Center" Text="{Binding DateMatch,StringFormat=d/M}" />
-                        <TextBlock FontSize="25" FontWeight="Bold" Height="60" Width="80" TextAlignment="Center" VerticalAlignment="Center" Text="{Binding Home}" />
-                        <TextBlock FontSize="25" FontWeight="Bold" Height="60" Width="40" TextAlignment="Center"  VerticalAlignment="Center" Text="VS" />
-                        <TextBlock FontSize="25" FontWeight="Bold" Height="60" Width="80" TextAlignment="Center" VerticalAlignment="Center" Text="{Binding Adversary}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+            <ListView.View>
+                <GridView ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}">
+                    <GridViewColumn Header="Date" Width="60" DisplayMemberBinding="{Binding DateMatch, StringFormat=d/M}" />
+                    <GridViewColumn Header="Home" Width="60" DisplayMemberBinding="{Binding Home}" />
+                    <GridViewColumn Header="Adversary" Width="auto" DisplayMemberBinding="{Binding Adversary}" />
+                    <GridViewColumn Header="GoalsHome" Width="40" DisplayMemberBinding="{Binding GoalsHome}" />
+                    <GridViewColumn Header="GoalsAdversary" Width="40" DisplayMemberBinding="{Binding GoalsAdversary}" />
+                    <GridViewColumn Header="GoalsAdversary" Width="60" DisplayMemberBinding="{Binding Category.Name}" />
+                    <GridViewColumn Header="GoalsAdversary" Width="160" DisplayMemberBinding="{Binding Place}" />
+                    <GridViewColumn Header="Status"  Width="auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <TextBlock.Style>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Setter Property="Text" Value="Not started yet !" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsOver}" Value="true">
+                                                    <Setter Property="Text" Value="Finished !" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="SelectP"  Width="30">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <fa:ImageAwesome>
+                                    <Image.Style>
+                                        <Style TargetType="{x:Type fa:ImageAwesome}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding CanSelectPlayer}" Value="true">
+                                                    <Setter Property="Icon" Value="Male" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Image.Style>
+                                </fa:ImageAwesome>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock FontSize="25" FontWeight="Bold" HorizontalAlignment="Left" Height="30" Width="60" TextAlignment="Left" VerticalAlignment="Center" Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListView.GroupStyle>
         </ListView>
-        <DockPanel HorizontalAlignment="Center" Height="20" LastChildFill="False" Margin="20,10,0,0" VerticalAlignment="Center">
-            <Button Content="Browse" Height="20" VerticalAlignment="Top" Width="120"/>
-            <Button x:Name="btnCreateMatch" Command="{Binding NewMatch}" Content="Create match" Height="20" VerticalAlignment="Top" Width="120"/>
-            <Button x:Name="btnCreatePlayer" Command="{Binding NewPlayer}" Content="Create player" Height="20" VerticalAlignment="Top" Width="120"/>
-            <Button x:Name="btnAddScore" Command="{Binding AddResultToMatch}" Content="Add results" Height="20" VerticalAlignment="Top" Width="120"/>
-            <Button Command="{Binding AddPlayerToAMatch}" Content="Add player to a match" Height="20" VerticalAlignment="Top" Width="120"/>
-        </DockPanel>
     </Grid>
 </f:UserControlBase>

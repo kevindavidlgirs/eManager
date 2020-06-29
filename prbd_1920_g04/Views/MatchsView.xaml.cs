@@ -5,38 +5,79 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
+using prbd_1920_g04.Model;
+using System.Windows.Data;
+using System.Globalization;
 
 namespace prbd_1920_g04.Views
 {
-    public partial class MatchsView : UserControlBase {
+    public partial class MatchsView : UserControlBase
+    {
 
-        private ObservableCollection<Model.Match> matchs;
-        public ObservableCollection<Model.Match> Matchs { get => matchs; set => SetProperty(ref matchs, value); }        
+        private ObservableCollection<Match> matchs;
+        public ObservableCollection<Match> Matchs { get => matchs; set => SetProperty(ref matchs, value); }
         public ICommand DisplayMatchDetails { get; set; }
-        public ICommand NewMatch { get; set; }
-        public ICommand NewPlayer { get; set; }
-        public ICommand AddPlayerToAMatch { get; set; }
-        public ICommand AddResultToMatch { get; set; }
-        public MatchsView() {
 
+        private Match selectedMatch;
+        public Match SelectedMatch {
+            get { return selectedMatch; }
+            set {
+                selectedMatch = value;
+                RaisePropertyChanged(nameof(SelectedMatch));
+                SelectPlayerForMatch();
+            }
+        }
+
+        private void SelectPlayerForMatch() {
+            if (SelectedMatch != null) {
+                if (SelectedMatch.CanSelectPlayer) {
+                    App.NotifyColleagues(AppMessages.MSG_CAN_SELECT_PLAYERS_FOR_MATCH, SelectedMatch);
+                }
+            }
+        }
+
+        private void SetCanSelectPlayer() {
+            foreach (var match in App.Model.Matchs) {
+                if (match.Category.Players.Count >= 5 && !match.IsOver) {
+                    match.CanSelectPlayer = true;
+                }
+            }
+            Refresh();
+        }
+
+
+        private void Refresh()
+        {
+            SelectedMatch = null;
+            Matchs = new ObservableCollection<Match>(App.Model.Matchs.OrderBy(m => m.DateMatch));
+        }
+
+        public MatchsView()
+        {
             DataContext = this;
+            SetCanSelectPlayer();
+            //Refresh();
+            SelectedMatch = null;
 
-            DisplayMatchDetails = new RelayCommand<Model.Match>(m => {
+            DisplayMatchDetails = new RelayCommand<Match>(m => {
                 App.NotifyColleagues(AppMessages.MSG_SHOW_MATCH, m);
             });
 
-            NewMatch = new RelayCommand(() => { App.NotifyColleagues(AppMessages.MSG_NEW_MATCH); });
-            NewPlayer = new RelayCommand(() => { App.NotifyColleagues(AppMessages.MSG_NEW_PLAYER); });
-            AddPlayerToAMatch = new RelayCommand(() => { App.NotifyColleagues(AppMessages.MSG_ADD_PLAYER_TO_A_TEAM); });
-            AddResultToMatch = new RelayCommand(() => { App.NotifyColleagues(AppMessages.MSG_ADD_RESULT_TO_MATCH); });
+            App.Register(this, AppMessages.MSG_UPDATE_SELECT_PLAYERS_FOR_MATCH, () => { SetCanSelectPlayer(); });
+            App.Register(this, AppMessages.MSG_MATCH_ADDED, () => { Refresh(); });
 
-            App.Register<Model.Match>(this, AppMessages.MSG_MATCH_CHANGED, match =>{ Refresh(); }); 
-            Refresh();
             InitializeComponent();
         }
+    }
 
-        private void Refresh() {
-            Matchs = new ObservableCollection<Model.Match>(App.Model.Matchs.OrderBy(m => m.DateMatch));
+    public class ToUpperValueConverter : IValueConverter {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
+            var str = value as string;
+            return string.IsNullOrEmpty(str) ? string.Empty : str.ToUpper();
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
+            return null;
         }
     }
 }
