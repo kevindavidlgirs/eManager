@@ -421,7 +421,7 @@ namespace prbd_1920_g04.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à If you don&apos;t have a Secretary login, please contact your administrator !.
+        ///   Recherche une chaîne localisée semblable à If you don&apos;t have a Secretary login, please contact your administrator ! Code d&apos;accès : secretaire, secretaire (temporaire ;).
         /// </summary>
         public static string LoginView_Message {
             get {

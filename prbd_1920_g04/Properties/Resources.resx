@@ -261,7 +261,7 @@
     <value>wrong password</value>
   </data>
   <data name="LoginView_Message" xml:space="preserve">
-    <value>If you don't have a Secretary login, please contact your administrator !</value>
+    <value>If you don't have a Secretary login, please contact your administrator ! Code d'accès : secretaire, secretaire (temporaire ;)</value>
   </data>
   <data name="CreatePlayersView_Position" xml:space="preserve">
     <value>Position:</value>

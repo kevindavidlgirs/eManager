@@ -24,7 +24,10 @@ namespace prbd_1920_g04.Views {
     public partial class AddPlayersStatistics : UserControlBase {
         public Match Match { get; set; }
 
+        private Dictionary<Player, int> TestToRemoveGoals = new Dictionary<Player, int>();
         private int GoalsAvailable { get; set; }
+
+        private int GoalsAvailableForLimitation { get; set; }
 
         private ObservableCollection<Player> listOfPlayers;
         public ObservableCollection<Player> ListOfPlayers { get => listOfPlayers; set => SetProperty(ref listOfPlayers, value); }
@@ -88,8 +91,49 @@ namespace prbd_1920_g04.Views {
         }
 
         private void UpdateAction(Player p) {
-            if (GoalsAvailable >= p.Stats.GoalsScored) {
-                GoalsAvailable -= p.Stats.GoalsScored;
+            if (GoalsAvailable > p.Stats.GoalsScored) {
+                if (TestToRemoveGoals.ContainsKey(p))
+                {
+                    GoalsAvailable += TestToRemoveGoals[p] - p.Stats.GoalsScored;
+                    TestToRemoveGoals[p] = p.Stats.GoalsScored;
+                }
+                else
+                {
+                    GoalsAvailable -= p.Stats.GoalsScored;
+                    TestToRemoveGoals[p] = p.Stats.GoalsScored;
+                }
+                p.Stats.Match = Match;
+                p.Stats.Player = p;
+                if (!StatsExiste(p))
+                {
+                    Statistics s = new Statistics(p.Stats);
+                    p.StatsList.Add(s);
+                }
+                SetLabel();
+            }else if(GoalsAvailable < p.Stats.GoalsScored && TestToRemoveGoals.ContainsKey(p) && (p.Stats.GoalsScored + (GoalsAvailableForLimitation - GoalsAvailable)) <= GoalsAvailableForLimitation)
+            {
+                GoalsAvailable += TestToRemoveGoals[p] - p.Stats.GoalsScored;
+                TestToRemoveGoals[p] = p.Stats.GoalsScored;
+                p.Stats.Match = Match;
+                p.Stats.Player = p;
+                if (!StatsExiste(p))
+                {
+                    Statistics s = new Statistics(p.Stats);
+                    p.StatsList.Add(s);
+                }
+                SetLabel();
+            }else if (GoalsAvailable == p.Stats.GoalsScored)
+            {
+                if (TestToRemoveGoals.ContainsKey(p))
+                {
+                    GoalsAvailable += TestToRemoveGoals[p] - p.Stats.GoalsScored;
+                    TestToRemoveGoals[p] = p.Stats.GoalsScored;
+                }
+                else
+                {
+                    GoalsAvailable -= p.Stats.GoalsScored;
+                    TestToRemoveGoals[p] = p.Stats.GoalsScored;
+                }
                 p.Stats.Match = Match;
                 p.Stats.Player = p;
                 if (!StatsExiste(p))
@@ -99,15 +143,17 @@ namespace prbd_1920_g04.Views {
                 }
                 SetLabel();
             }
+            else
+            {
+                App.NotifyColleagues(AppMessages.MSG_CONSOLE_MSG, new Message(true, "You are trying to add more goals than availabe."));
+            }
         }
+
         private bool CanSaveOrCancelAction(Player p)
         {
-            if(p != null)
-            {
-                return p.Stats.GoalsScored <= GoalsAvailable;
-            }
-            return false;
+            return true;
         }
+
         private bool CanTransferOrCancelAction()
         {
             return GoalsAvailable == 0;
@@ -134,6 +180,7 @@ namespace prbd_1920_g04.Views {
             DataContext = this;
             Match = match;
             GoalsAvailable = match.GoalsHome;
+            GoalsAvailableForLimitation = match.GoalsHome; 
             ListOfPlayers = new ObservableCollection<Player>(QualifiedPlayers(match));
             UpdateStats = new RelayCommand<Player>((p) => {UpdateAction(p); }, (p) => CanSaveOrCancelAction(p));
             GoToMatch = new RelayCommand(TransfertAction, CanTransferOrCancelAction);
