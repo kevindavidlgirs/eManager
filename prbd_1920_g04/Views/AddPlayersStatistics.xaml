@@ -14,12 +14,11 @@
             <ColumnDefinition Width="21*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="80"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
-        <ScrollViewer  Grid.Row="2" VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2">
+        <ScrollViewer  Grid.Row="1" VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2">
             <ItemsControl x:Name="MyItemsControl" 
                   ItemsSource="{Binding ListOfPlayers}" 
                   Grid.Row="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Center">
@@ -31,7 +30,7 @@
                             <TextBlock FontSize="18" FontWeight="Bold" Height="30" Width="30" TextAlignment="Right"
                                        Margin="5,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" Text="[" />
                             <Image HorizontalAlignment="Center" Height="25" Width="25" VerticalAlignment="Center" Source="/images/goals.png"/>
-                            <TextBox Grid.Column="1" Text="{Binding Stats.GoalsScored, UpdateSourceTrigger=PropertyChanged}" Height="20" Width="30" VerticalAlignment="Center" />
+                            <TextBox x:Name="Goal" Grid.Column="1" Text="{Binding Stats.GoalsScored, UpdateSourceTrigger=PropertyChanged}" Height="20" Width="30" VerticalAlignment="Center" />
                             <TextBlock FontSize="18" FontWeight="Bold" Height="30" Width="10" TextAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" Text="]" />
                             <TextBlock FontSize="18" FontWeight="Bold" Height="30" Width="10" TextAlignment="Right" Margin="5,0,0,0" VerticalAlignment="Center" Text="[" />
                             <Image HorizontalAlignment="Center" Height="25" Width="25" VerticalAlignment="Center" Source="/images/GoalsConceced.png"/>
@@ -56,6 +55,7 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
-        <Button x:Name="btnTransert" Content="Finish" Command="{Binding GoToMatch}" Margin="16,10,14,0" Grid.Row="3" VerticalAlignment="Top" RenderTransformOrigin="-0.6,1" Grid.Column="1" Height="20"  Background="#FF363636" Foreground="White" BorderBrush="#FF999999"/>
+        <Button x:Name="btnTransert" Content="Finish" Command="{Binding GoToMatch}" Margin="16,10,14,0" Grid.Row="2" VerticalAlignment="Top" RenderTransformOrigin="-0.6,1" Grid.Column="1" Height="20"  Background="#FF363636" Foreground="White" BorderBrush="#FF999999"/>
+        <Label x:Name="goalsAvailableLabel" Content="" Margin="500,24,10,0" VerticalAlignment="Top"/>
     </Grid>
 </f:UserControlBase>

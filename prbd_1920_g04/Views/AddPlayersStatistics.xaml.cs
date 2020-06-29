@@ -24,6 +24,8 @@ namespace prbd_1920_g04.Views {
     public partial class AddPlayersStatistics : UserControlBase {
         public Match Match { get; set; }
 
+        private int GoalsAvailable { get; set; }
+
         private ObservableCollection<Player> listOfPlayers;
         public ObservableCollection<Player> ListOfPlayers { get => listOfPlayers; set => SetProperty(ref listOfPlayers, value); }
         public ICommand UpdateStats { get; set; }
@@ -86,19 +88,30 @@ namespace prbd_1920_g04.Views {
         }
 
         private void UpdateAction(Player p) {
-            p.Stats.Match = Match;
-            p.Stats.Player = p;
-            if (!StatsExiste(p))
-            {
-                Statistics s = new Statistics(p.Stats);
-                p.StatsList.Add(s);
+            if (GoalsAvailable >= p.Stats.GoalsScored) {
+                GoalsAvailable -= p.Stats.GoalsScored;
+                p.Stats.Match = Match;
+                p.Stats.Player = p;
+                if (!StatsExiste(p))
+                {
+                    Statistics s = new Statistics(p.Stats);
+                    p.StatsList.Add(s);
+                }
+                SetLabel();
             }
         }
         private bool CanSaveOrCancelAction(Player p)
         {
-            return true;
+            if(p != null)
+            {
+                return p.Stats.GoalsScored <= GoalsAvailable;
+            }
+            return false;
         }
-
+        private bool CanTransferOrCancelAction()
+        {
+            return GoalsAvailable == 0;
+        }
         private void TransfertAction() {
             foreach(Player p in Match.Teams)
             {
@@ -112,13 +125,21 @@ namespace prbd_1920_g04.Views {
             App.NotifyColleagues(AppMessages.MSG_SHOW_MATCH, Match);
         }
 
+        private void SetLabel()
+        {
+            goalsAvailableLabel.Content = "You can assign " + GoalsAvailable + " goals.";
+        }
+
         public AddPlayersStatistics(Match match) {
             DataContext = this;
             Match = match;
+            GoalsAvailable = match.GoalsHome;
             ListOfPlayers = new ObservableCollection<Player>(QualifiedPlayers(match));
-            UpdateStats = new RelayCommand<Player>((p) => { UpdateAction(p); }, (p) => CanSaveOrCancelAction(p));
-            GoToMatch = new RelayCommand(TransfertAction);
+            UpdateStats = new RelayCommand<Player>((p) => {UpdateAction(p); }, (p) => CanSaveOrCancelAction(p));
+            GoToMatch = new RelayCommand(TransfertAction, CanTransferOrCancelAction);
             InitializeComponent();
+            SetLabel();
+
         }
     }
 }
