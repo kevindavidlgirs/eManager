@@ -194,7 +194,6 @@ namespace prbd_1920_g04.Views {
         public MatchDetailView(Model.Match match) {
             DataContext = this;
             Match = match;
-            Console.WriteLine(Match.DateMatch.Year);
             getNumberOfHomeVictories();
             getNumberOfAdversaryVictories();
             getNumberOfHomeDefeats();

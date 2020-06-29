@@ -29,7 +29,6 @@ namespace prbd_1920_g04.Views
             set { 
                 
                 matchSelected = value;
-                RaisePropertyChanged(nameof(MatchSelected));
             }
         }
 
