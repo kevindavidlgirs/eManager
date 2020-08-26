@@ -50,5 +50,6 @@
             <Label Content="Players Stats" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
             <local:PlayersStatisticsView Match="{Binding Match, ElementName=win}"/>
         </StackPanel>
+        <Label Content="   Click on a row of a datagrid to display other data" Grid.Column="1" HorizontalAlignment="Left" Height="100" Margin="10,202,0,-72" Grid.Row="3" VerticalAlignment="Top" Grid.ColumnSpan="3" Width="300"/>
     </Grid>
 </f:UserControlBase>
