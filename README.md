@@ -39,5 +39,5 @@ https://visualstudio.microsoft.com/fr/
 * **Kevin David L. Girs** - [kevindavidlgirs](https://github.com/kevindavidlgirs)
 * **Hervé Mbilo**
 
-##Info
+## Info
 Projet de groupe pour un bachelier en informatique de gestion donné à l'EPFC (Bruxelles-Capitale)
