@@ -40,4 +40,5 @@ https://visualstudio.microsoft.com/fr/
 * **Hervé Mbilo**
 
 ## Info
-Projet de groupe pour un bachelier en informatique de gestion donné à l'EPFC (Bruxelles-Capitale)
+- Projet de groupe pour un bachelier en informatique de gestion donné à l'EPFC (Bruxelles-Capitale) https://www.epfc.eu/
+- Le framework PRBD a été créé par les professeurs de l'EPFC
